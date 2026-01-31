@@ -13,6 +13,7 @@ export default function Hero() {
   const textCenterRef = useRef<HTMLSpanElement>(null);
   const textRightRef = useRef<HTMLSpanElement>(null);
   const subContentRef = useRef<HTMLDivElement>(null);
+  const gradientBgRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -51,6 +52,18 @@ export default function Hero() {
           duration: 0.4
         }, 0);
 
+      // Separate Background transition starting from 50% scroll for '스르륵' smooth fade
+      gsap.to(gradientBgRef.current, {
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "center top", // Start when hero's center reaches viewport top
+          end: "bottom top",
+          scrub: true,
+        },
+        opacity: 0,
+        ease: "none"
+      });
+
     }, containerRef);
 
     return () => ctx.revert();
@@ -58,6 +71,7 @@ export default function Hero() {
 
   return (
     <section className={styles.section} ref={containerRef}>
+      <div className={styles.gradientBg} ref={gradientBgRef} />
       <video
         autoPlay
         loop

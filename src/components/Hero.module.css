@@ -6,21 +6,29 @@
   position: relative;
   overflow: hidden;
   padding-top: 60px;
-  /* Reduced from 100px */
-  background-color: #fff;
+  background-color: #ffffff;
   color: #000;
 }
 
-.videoBackground {
+.gradientBg {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  z-index: -2;
-  opacity: 1;
-  /* Made fully visible */
+  background:
+    radial-gradient(circle at 85% 30%, rgba(99, 102, 241, 0.3) 0%, transparent 60%),
+    radial-gradient(circle at 75% 70%, rgba(139, 92, 246, 0.3) 0%, transparent 60%),
+    radial-gradient(circle at 95% 50%, rgba(167, 139, 250, 0.2) 0%, transparent 70%);
+  /* Smoothly fade out the bottom to transition into white */
+  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  z-index: 0;
+}
+
+.videoBackground {
+  display: none;
+  /* Hide video as we are using a gradient background now */
 }
 
 .overlay {
@@ -29,7 +37,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 1) 90%);
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 100%);
   z-index: -1;
 }
 
