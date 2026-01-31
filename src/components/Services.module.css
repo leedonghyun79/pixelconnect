@@ -1,0 +1,93 @@
+.section {
+  padding: 150px 0;
+  background: #fff;
+}
+
+.intro {
+  margin-bottom: 100px;
+  text-align: left;
+  /* Editorial alignment */
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #999;
+  margin-bottom: 40px;
+}
+
+.recommendGroup {
+  margin-top: 20px;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.card {
+  padding: 60px 0;
+  border-top: 1px solid var(--line-color);
+  background: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.4s ease;
+}
+
+.card:last-child {
+  border-bottom: 1px solid var(--line-color);
+}
+
+.card:hover {
+  padding-left: 20px;
+}
+
+.icon {
+  display: none;
+  /* Hide icons for a more minimalist text-based look */
+}
+
+.serviceTitle {
+  font-size: 4rem;
+  font-weight: 800;
+  color: #000;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+.serviceDesc {
+  color: #444;
+  font-size: 1rem;
+  max-width: 400px;
+  text-align: right;
+  line-height: 1.4;
+}
+
+.badge {
+  background: transparent;
+  padding: 6px 14px;
+  font-size: 0.7rem;
+  color: #666;
+  border: 1px solid #eee;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+@media (max-width: 768px) {
+  .serviceTitle {
+    font-size: 2rem;
+  }
+
+  .card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .serviceDesc {
+    text-align: left;
+  }
+}

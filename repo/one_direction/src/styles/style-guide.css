@@ -1,0 +1,304 @@
+a[href^='tel'] {
+  text-decoration: none; /* Remove underline. */
+  /* Additional css `propery: value;` pairs here */
+}
+a[href^='mailto'] {
+  color: inherit;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2')
+    format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Medium.woff2')
+    format('woff2');
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-SemiBold.woff2')
+    format('woff2');
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: ONED;
+  src: url(assets/fonts/ONED-Bold.woff);
+  font-weight: 600;
+}
+
+:root {
+  --o-g00: #ffffff;
+  --o-g01: #f6f6f6;
+  --o-g02: #e2e2e2;
+  --o-g03: #afafaf;
+  --o-g04: #757575;
+  --o-g05: #545454;
+  --o-g06: #333333;
+  --o-g07: #1b1b1b;
+  --o-g08: #090909;
+  --o-g09: #000000;
+  --dim: #ffffff3b;
+  --o-pri: #dffe41;
+  --o-sec: #f6ffeb;
+  --thumb: 4/5;
+  --video: 16/9;
+  --zindex_header: 10;
+  --height_header: 8rem;
+  --cardBorderRad: 1.4rem;
+  --en: ONED, Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,
+    'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR',
+    'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    sans-serif;
+  --kr: pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,
+    'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR',
+    'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: pretendard, sans-serif;
+  font-weight: 500;
+  letter-spacing: unset;
+}
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  /* font-size: 100%; */
+  font: inherit;
+  vertical-align: baseline;
+  font-family: pretendard, sans-serif;
+  font-weight: 500;
+  box-sizing: border-box;
+  word-break: keep-all;
+  user-select: none;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  box-sizing: border-box;
+  display: flex;
+  user-select: none;
+  color: var(--o-sec);
+}
+img {
+  display: block;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+  user-select: none;
+}
+
+ul {
+  list-style: none;
+}
+html {
+  /* font-size: 0.833vw; */
+  overflow-x: hidden;
+  /* font-size: clamp(8px, calc(10 / 1440 * 100vw), 16px); */
+  font-size: calc(10 / 1440 * 100vw);
+}
+body {
+  background-color: var(--o-g09);
+  -ms-overflow-style: none;
+}
+::selection {
+  color: var(--o-g09);
+  background-color: var(--o-pri);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+input[type='date' i] {
+  width: 100%;
+  outline: none;
+  border: none;
+  padding: 0;
+  color: var(--o-sec);
+  background: var(--o-g09);
+  border-bottom: 1px solid var(--o-sec);
+}
+::-webkit-calendar-picker-indicator {
+  background-color: var(--o-sec);
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+::-moz-selection {
+  background: var(--o-sec);
+  color: var(--o-g09);
+}
+::selection {
+  background: var(--o-sec);
+  color: var(--o-g09);
+}
+/* font guide */
+address {
+  width: 100%;
+  font-family: pretendard, sans-serif;
+  letter-spacing: -0.01rem;
+  font-size: 1rem;
+  line-height: 1;
+  font-weight: 500;
+  padding: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--o-sec);
+}
+input[type='text'],
+input[type='email'],
+input[type='tel'],
+select,
+input[type='date'] {
+  box-sizing: border-box;
+  width: 100%;
+  height: 6.4rem;
+  outline: none;
+  border: none;
+  color: var(--o-g09);
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 500;
+  font-size: 1.6rem;
+  line-height: 1.2;
+  background-color: var(--o-sec);
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s;
+  -webkit-text-fill-color: var(--o-g09) !important;
+}
+textarea {
+  box-sizing: border-box;
+  width: 100%;
+  height: 12vh;
+  outline: none;
+  border: none;
+  resize: none;
+  color: var(--o-g09);
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 500;
+  font-size: 1.6rem;
+  line-height: 1.2;
+  background-color: var(--o-sec);
+}
+
+body:not(.home, .page-id-787) header > div svg.up {
+  display: none;
+}
+.page-id-787 header > div a {
+  display: none;
+}

@@ -1,0 +1,121 @@
+.section {
+  padding: 150px 0;
+  background: #fff;
+}
+
+.header {
+  text-align: left;
+  margin-bottom: 100px;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 40px;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #999;
+  margin-bottom: 20px;
+}
+
+.subtitle {
+  color: #444;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.card {
+  padding: 80px 40px;
+  border-top: 1px solid var(--line-color);
+  background: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+
+.card:last-child {
+  border-bottom: 1px solid var(--line-color);
+}
+
+.card:hover {
+  background: #fcfcfc;
+}
+
+.imagePlaceholder {
+  display: none;
+  /* Editorial list style usually doesn't show small thumbs like this */
+}
+
+.imageContent {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.projectTitle {
+  font-size: 4.5rem;
+  font-weight: 800;
+  color: #000;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.projectDesc {
+  color: #444;
+  font-size: 1rem;
+  max-width: 400px;
+  text-align: right;
+  line-height: 1.4;
+}
+
+.tags {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+  justify-content: flex-end;
+}
+
+.tag {
+  background: transparent;
+  padding: 4px 0;
+  font-size: 0.75rem;
+  color: #000;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-bottom: 1px solid #000;
+}
+
+@media (max-width: 768px) {
+  .projectTitle {
+    font-size: 2.5rem;
+  }
+
+  .imageContent {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+  }
+
+  .projectDesc {
+    text-align: left;
+    max-width: 100%;
+  }
+
+  .tags {
+    justify-content: flex-start;
+  }
+}

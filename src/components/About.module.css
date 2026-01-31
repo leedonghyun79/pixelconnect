@@ -1,0 +1,166 @@
+.section {
+  padding: 150px 0;
+  background: #fff;
+}
+
+.header {
+  text-align: left;
+  margin-bottom: 150px;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 40px;
+}
+
+.title {
+  font-size: 6rem;
+  font-weight: 800;
+  color: #000;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin-bottom: 40px;
+}
+
+.description {
+  color: #444;
+  line-height: 1.5;
+  font-size: 1.5rem;
+  max-width: 800px;
+  margin-bottom: 50px;
+}
+
+.missionBox {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #000;
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  display: inline-block;
+}
+
+.valuesGrid {
+  display: flex;
+  flex-direction: column;
+  max-width: 1400px;
+  margin: 0 auto 150px;
+  padding: 0 40px;
+}
+
+.valueCard {
+  padding: 40px 0;
+  border-top: 1px solid var(--line-color);
+  background: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #000;
+  font-size: 2rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.valueCard:last-child {
+  border-bottom: 1px solid var(--line-color);
+}
+
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 80px;
+  max-width: 1400px;
+  margin: 0 auto 150px;
+  padding: 0 40px;
+}
+
+.teamCard {
+  text-align: left;
+  border-top: 1px solid var(--line-color);
+  padding-top: 40px;
+}
+
+.teamImg {
+  display: none;
+}
+
+.teamName {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #000;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.teamRole {
+  color: #666;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.teamDesc {
+  color: #444;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 1400px;
+  margin: 150px auto 0;
+  padding: 0 40px;
+  border-top: 1px solid var(--line-color);
+}
+
+.statItem {
+  padding: 60px 0;
+  border-right: 1px solid var(--line-color);
+  text-align: center;
+}
+
+.statItem:last-child {
+  border-right: none;
+}
+
+.statNumber {
+  display: block;
+  font-size: 3rem;
+  font-weight: 900;
+  color: #000;
+  margin-bottom: 10px;
+  letter-spacing: -0.05em;
+}
+
+.statLabel {
+  color: #666;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 3rem;
+  }
+
+  .description {
+    font-size: 1.1rem;
+  }
+
+  .valueCard {
+    font-size: 1.25rem;
+  }
+
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .statItem:nth-child(2) {
+    border-right: none;
+  }
+}

@@ -1,0 +1,124 @@
+.section {
+  padding: 150px 0;
+  background: #fff;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.content {
+  margin-bottom: 100px;
+}
+
+.title {
+  font-size: 6rem;
+  font-weight: 800;
+  color: #000;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin-bottom: 40px;
+}
+
+.desc {
+  color: #444;
+  font-size: 1.25rem;
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+.process {
+  margin-top: 60px;
+  display: flex;
+  gap: 40px;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stepNumber {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #999;
+  text-transform: uppercase;
+}
+
+.stepText {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #000;
+}
+
+.formWrapper {
+  margin-top: 100px;
+}
+
+.inputGroup {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 60px;
+}
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  padding: 20px 0;
+  color: #000;
+  font-size: 1.25rem;
+  transition: border-color 0.3s ease;
+  appearance: none;
+}
+
+.select {
+  cursor: pointer;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+  outline: none;
+  border-color: #000;
+}
+
+.textarea {
+  height: 200px;
+  margin-bottom: 60px;
+  resize: none;
+}
+
+.submitBtn {
+  float: right;
+  padding: 20px 80px;
+  background: #000;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: background 0.3s ease;
+}
+
+.submitBtn:hover {
+  background: #333;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 3rem;
+  }
+
+  .inputGroup {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
