@@ -14,12 +14,10 @@
 }
 
 .cursor.hovered {
-  transform: translate(-50%, -50%) scale(4);
-  background-color: #6366f1;
-  /* Vibrant Indigo */
-  mix-blend-mode: normal;
-  /* Turn off difference to show the color clearly */
-  opacity: 0.4;
+  transform: translate(-50%, -50%) scale(8);
+  background-color: white;
+  mix-blend-mode: difference;
+  opacity: 1;
 }
 
 @media (max-width: 768px) {
