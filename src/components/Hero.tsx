@@ -14,6 +14,8 @@ export default function Hero() {
   const textRightRef = useRef<HTMLSpanElement>(null);
   const subContentRef = useRef<HTMLDivElement>(null);
   const gradientBgRef = useRef<HTMLDivElement>(null);
+  const scrollLettersRef = useRef<HTMLSpanElement[]>([]);
+  const scrollIndicatorRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -49,20 +51,23 @@ export default function Hero() {
         .to(subContentRef.current, {
           opacity: 0,
           y: -50,
+          duration: 0.3
+        }, 0)
+        .to(scrollLettersRef.current, {
+          scale: 0,
+          opacity: 0,
+          stagger: 0.03,
+          duration: 0.3
+        }, 0.05)
+        .to(`.${styles.scrollLine}`, {
+          scaleX: 0,
+          opacity: 0,
+          duration: 0.2
+        }, 0.1)
+        .to(gradientBgRef.current, {
+          opacity: 0,
           duration: 0.4
-        }, 0);
-
-      // Separate Background transition starting from 50% scroll for '스르륵' smooth fade
-      gsap.to(gradientBgRef.current, {
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "center top", // Start when hero's center reaches viewport top
-          end: "bottom top",
-          scrub: true,
-        },
-        opacity: 0,
-        ease: "none"
-      });
+        }, 0.1);
 
     }, containerRef);
 
@@ -72,15 +77,20 @@ export default function Hero() {
   return (
     <section className={styles.section} ref={containerRef}>
       <div className={styles.gradientBg} ref={gradientBgRef} />
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className={styles.videoBackground}
-      >
-        <source src="https://player.vimeo.com/external/394747443.sd.mp4?s=bc653b64c8f94d9b4b097871e466380ccea20302&profile_id=165&oauth2_token_id=57447761" type="video/mp4" />
-      </video>
+      <div className={styles.scrollIndicator} ref={scrollIndicatorRef}>
+        <div className={styles.scrollText}>
+          {['S', 'C', 'R', 'O', 'L', 'L'].map((char, i) => (
+            <span
+              key={i}
+              className={styles.scrollLetter}
+              ref={el => { if (el) scrollLettersRef.current[i] = el; }}
+            >
+              {char}
+            </span>
+          ))}
+        </div>
+        <div className={styles.scrollLine} />
+      </div>
       <div className={styles.overlay} />
       <div className={styles.container}>
         <div className={styles.revealerText} style={{ flexDirection: 'column', gap: '0' }}>
@@ -94,15 +104,6 @@ export default function Hero() {
             탄탄한 설계와 스토리로 비즈니스의 본질을 담습니다.<br />
             예산에 맞는 최적의 기술 선택을 제안합니다.
           </p>
-
-          <div className={styles.actions} style={{ justifyContent: 'flex-start' }}>
-            <Link href="/contact" className={styles.primaryBtn}>
-              새 프로젝트 시작하기
-            </Link>
-            <Link href="/projects" className={styles.secondaryBtn}>
-              포트폴리오 보기
-            </Link>
-          </div>
         </div>
       </div>
     </section>

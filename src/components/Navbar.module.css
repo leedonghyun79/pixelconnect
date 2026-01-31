@@ -61,7 +61,3 @@
   border: 1px solid #000;
   transition: all 0.3s ease;
 }
-
-.btn:hover {
-  opacity: 0.7;
-}

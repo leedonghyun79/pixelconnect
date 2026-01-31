@@ -28,7 +28,6 @@
 
 .videoBackground {
   display: none;
-  /* Hide video as we are using a gradient background now */
 }
 
 .overlay {
@@ -57,7 +56,6 @@
   flex-direction: column;
   line-height: 0.85;
   margin-bottom: 20px;
-  /* Tightened from 60px previously */
 }
 
 .bigText {
@@ -97,34 +95,6 @@
   margin-left: 0;
 }
 
-.primaryBtn {
-  padding: 18px 48px;
-  background: #000;
-  color: #fff;
-  font-weight: 700;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  transition: background 0.3s ease;
-}
-
-.secondaryBtn {
-  padding: 18px 48px;
-  background: transparent;
-  color: #000;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  font-weight: 700;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  transition: all 0.3s ease;
-}
-
-.primaryBtn:hover,
-.secondaryBtn:hover {
-  opacity: 0.7;
-}
-
 @media (max-width: 768px) {
   .bigText {
     font-size: 12vw;
@@ -140,10 +110,36 @@
     flex-direction: column;
     width: 100%;
   }
+}
 
-  .primaryBtn,
-  .secondaryBtn {
-    width: 100%;
-    text-align: center;
-  }
+.scrollIndicator {
+  position: absolute;
+  right: 40px;
+  top: 70%;
+  transform: translateY(-50%) rotate(90deg);
+  transform-origin: right center;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  z-index: 10;
+}
+
+.scrollText {
+  display: flex;
+  gap: 8px;
+}
+
+.scrollLetter {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #000;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.scrollLine {
+  width: 60px;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.2);
+  position: relative;
 }
