@@ -1,34 +1,41 @@
 'use client';
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
 import styles from './FAQ.module.css';
 
 const faqs = [
   {
-    category: "견적/비용",
-    items: [
-      { q: "견적은 어떻게 산정되나요?", a: "기획의 깊이, 페이지 수, 구현 기능의 난이도를 종합하여 합리적으로 산정합니다. 무료 상담 후 24시간 이내에 항목별로 상세히 정리된 견적서를 보내드립니다." },
-      { q: "결제는 어떻게 하나요?", a: "프로젝트 단계별로(계약금·중도금·잔금) 분할 납부하실 수 있습니다. 장기적인 파트너십을 원하시는 경우 월 구독 형태의 유지보수 통합 모델도 선택 가능합니다." }
-    ]
+    q: '제작 기간은 얼마나 걸리나요?',
+    a: '플랜에 따라 영업일 기준 1주~4주입니다. 급한 건은 별도 협의도 가능합니다.',
   },
   {
-    category: "일정/프로세스",
-    items: [
-      { q: "제작 기간은 얼마나 걸리나요?", a: "일반적인 기업 웹사이트는 4~8주, 다국어 또는 고도화된 기능이 포함된 사이트는 8~12주 정도 소요됩니다. 퀄리티를 유지하면서도 일정에 차질이 없도록 주간 보고를 통해 진척 상황을 투명하게 공유합니다." },
-      { q: "급하게 필요한데 가능한가요?", a: "네, 가능합니다. 일정에 맞춰 우선 순위가 높은 핵심 기능을 먼저 런칭하고, 이후 순차적으로 업데이트하는 MVP 제작 방식을 제안해드립니다. 상담 시 일정을 말씀해주시면 최대한 조율해보겠습니다." }
-    ]
+    q: '자료 준비를 어떻게 해야 하나요?',
+    a: '사이트맵 작성 후 이미지·텍스트를 전달해주시면 됩니다. 자료 준비 가이드를 별도로 제공해드립니다.',
   },
   {
-    category: "유지보수",
-    items: [
-      { q: "제작 후에도 관리가 되나요?", a: "네, 당연합니다. 제작 완료 후에도 1개월간 긴급 오류 수정 및 가벼운 텍스트 변경은 무상으로 지원하며, 월 리포트가 포함된 정기 유지보수 계약을 통해 안정적인 운영을 도와드립니다." },
-      { q: "직접 수정할 수 있나요?", a: "네, 직접 관리하실 수 있도록 사용하기 쉬운 관리자 페이지(CMS)를 구축해드립니다. 텍스트, 이미지 교체 및 게시물 등록 방법이 담긴 맞춤형 매뉴얼과 영상 가이드를 함께 제공합니다." }
-    ]
-  }
+    q: '수정 횟수에 제한이 있나요?',
+    a: '무제한 수정이 가능합니다. 최종 확정 전까지 자유롭게 요청해주세요.',
+  },
+  {
+    q: '제작 외 추가 비용이 있나요?',
+    a: '호스팅·도메인 비용은 별도이며, 제작비 외 추가 비용은 발생하지 않습니다.',
+  },
+  {
+    q: '유지보수는 어떻게 받을 수 있나요?',
+    a: '플랜별 무상 기간 내 카카오톡·이메일로 요청해주시면 빠르게 처리해드립니다.',
+  },
+  {
+    q: '무상 기간 이후에도 관리가 가능한가요?',
+    a: '네, 유지보수 계약을 별도로 협의하실 수 있습니다.',
+  },
+  {
+    q: '제작 후 직접 수정할 수 있나요?',
+    a: '운영 가이드북을 제공해드리며, 아임웹 관리자 교육도 포함되어 있습니다.',
+  },
 ];
 
 export default function FAQ() {
   const [openItems, setOpenItems] = useState<number[]>([]);
+  const sectionRef = useRef<HTMLElement>(null);
 
   const toggleItem = (index: number) => {
     setOpenItems(prev =>
@@ -36,55 +43,50 @@ export default function FAQ() {
     );
   };
 
-  const allItems = faqs.flatMap(cat => cat.items);
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.05 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section id="faq" className={styles.section}>
+    <section id="faq" ref={sectionRef} className={`${styles.section} fade-up`}>
       <div className={styles.container}>
-        <motion.h2
-          className={styles.title}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          Frequently Asked Questions
-        </motion.h2>
+        <div className={styles.header}>
+          <div className="section-eyebrow" style={{ justifyContent: 'center' }}>FAQ</div>
+          <h2 className="section-title" style={{ textAlign: 'center' }}>자주 묻는 질문</h2>
+        </div>
 
-        {faqs.map((category, catIndex) => (
-          <div key={catIndex} className={styles.category}>
-            <span className={styles.categoryTitle}>{category.category}</span>
-            <div>
-              {category.items.map((item, itemIndex) => {
-                const globalIndex = catIndex * 100 + itemIndex;
-                const isOpen = openItems.includes(globalIndex);
-                return (
-                  <motion.div
-                    key={itemIndex}
-                    className={styles.item}
-                    onClick={() => toggleItem(globalIndex)}
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                  >
-                    <div className={styles.question}>
-                      {item.q}
-                      <span style={{ fontSize: '1.5rem', fontWeight: 300 }}>{isOpen ? '−' : '+'}</span>
-                    </div>
-                    {isOpen && (
-                      <motion.div
-                        className={styles.answer}
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                      >
-                        {item.a}
-                      </motion.div>
-                    )}
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
-        ))}
+        <div className={styles.list}>
+          {faqs.map((item, i) => {
+            const isOpen = openItems.includes(i);
+            return (
+              <div
+                key={i}
+                className={styles.item}
+                onClick={() => toggleItem(i)}
+              >
+                <div className={styles.question}>
+                  <span className={styles.questionText}>{item.q}</span>
+                  <span className={styles.toggle}>{isOpen ? '−' : '+'}</span>
+                </div>
+                {isOpen && (
+                  <div className={styles.answer}>{item.a}</div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        <div className={styles.bottomCta}>
+          더 궁금한 점이 있으신가요?
+          <a href="#contact" className={styles.bottomCtaLink}>문의하기 →</a>
+        </div>
       </div>
     </section>
   );

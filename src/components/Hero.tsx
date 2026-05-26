@@ -1,109 +1,88 @@
 'use client';
-import { useLayoutEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useEffect, useRef } from 'react';
 import styles from './Hero.module.css';
-import Link from 'next/link';
 
-gsap.registerPlugin(ScrollTrigger);
+const stats = [
+  { num: 'N+', label: '누적 프로젝트' },
+  { num: 'N%', label: '고객 재의뢰율' },
+  { num: 'N시간', label: '평균 응답 속도' },
+  { num: 'N%', label: '고객 만족도' },
+];
 
 export default function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const textLeftRef = useRef<HTMLSpanElement>(null);
-  const textCenterRef = useRef<HTMLSpanElement>(null);
-  const textRightRef = useRef<HTMLSpanElement>(null);
-  const subContentRef = useRef<HTMLDivElement>(null);
-  const gradientBgRef = useRef<HTMLDivElement>(null);
-  const scrollLettersRef = useRef<HTMLSpanElement[]>([]);
-  const scrollIndicatorRef = useRef<HTMLDivElement>(null);
+  const itemRefs = useRef<(HTMLElement | null)[]>([]);
 
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      // Intro Animation
-      const tl = gsap.timeline();
-
-      tl.fromTo(
-        [textLeftRef.current, textCenterRef.current, textRightRef.current],
-        { y: 100, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.5, ease: "power4.out", stagger: 0.1 }
-      )
-        .fromTo(
-          subContentRef.current,
-          { y: 20, opacity: 0 },
-          { y: 0, opacity: 1, duration: 1, ease: "power2.out" },
-          "-=1"
-        );
-
-      // Merged Scroll Animation for better control
-      const mainTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1,
-        },
-        defaults: { ease: "none" }
-      });
-
-      mainTl.to(textLeftRef.current, { xPercent: -20 }, 0)
-        .to(textCenterRef.current, { xPercent: 10 }, 0)
-        .to(textRightRef.current, { xPercent: 20 }, 0)
-        .to(subContentRef.current, {
-          opacity: 0,
-          y: -50,
-          duration: 0.3
-        }, 0)
-        .to(scrollLettersRef.current, {
-          scale: 0,
-          opacity: 0,
-          stagger: 0.03,
-          duration: 0.3
-        }, 0.05)
-        .to(`.${styles.scrollLine}`, {
-          scaleX: 0,
-          opacity: 0,
-          duration: 0.2
-        }, 0.1)
-        .to(gradientBgRef.current, {
-          opacity: 0,
-          duration: 0.4
-        }, 0.1);
-
-    }, containerRef);
-
-    return () => ctx.revert();
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        }
+      }),
+      { threshold: 0.1 }
+    );
+    itemRefs.current.forEach(el => {
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <section className={styles.section} ref={containerRef}>
-      <div className={styles.gradientBg} ref={gradientBgRef} />
-      <div className={styles.scrollIndicator} ref={scrollIndicatorRef}>
-        <div className={styles.scrollText}>
-          {['S', 'C', 'R', 'O', 'L', 'L'].map((char, i) => (
-            <span
-              key={i}
-              className={styles.scrollLetter}
-              ref={el => { if (el) scrollLettersRef.current[i] = el; }}
-            >
-              {char}
-            </span>
-          ))}
-        </div>
-        <div className={styles.scrollLine} />
-      </div>
-      <div className={styles.overlay} />
+    <section className={styles.section} id="hero">
       <div className={styles.container}>
-        <div className={styles.revealerText} style={{ flexDirection: 'column', gap: '0' }}>
-          <span className={styles.bigText} ref={textLeftRef} style={{ fontSize: 'clamp(3rem, 10vw, 7.5rem)', lineHeight: 0.9 }}>STRATEGIC</span>
-          <span className={styles.bigText} ref={textCenterRef} style={{ fontSize: 'clamp(3rem, 10vw, 7.5rem)', lineHeight: 0.9 }}>REFINED</span>
-          <span className={`${styles.bigText} ${styles.bigTextGradient}`} ref={textRightRef} style={{ fontSize: 'clamp(3rem, 10vw, 7.5rem)', lineHeight: 0.9 }}>IMPACTFUL</span>
-        </div>
+        <div className={styles.grid}>
+          {/* Main Text */}
+          <div className={styles.textSide}>
+            <div 
+              ref={el => { itemRefs.current[0] = el; }} 
+              className={`${styles.eyebrow} fade-up fade-delay-1`}
+            >
+              WEBSITE · MAINTENANCE · GROWTH
+            </div>
 
-        <div ref={subContentRef} style={{ textAlign: 'left' }}>
-          <p className={styles.subText} style={{ fontWeight: 500 }}>
-            탄탄한 설계와 스토리로 비즈니스의 본질을 담습니다.<br />
-            예산에 맞는 최적의 기술 선택을 제안합니다.
-          </p>
+            <h1 
+              ref={el => { itemRefs.current[1] = el; }} 
+              className={`${styles.headline} fade-up fade-delay-2`}
+            >
+              만들고 끝나는 <br />
+              홈페이지는 <em>없습니다</em><span className={styles.accent}>.</span>
+            </h1>
+
+            <p 
+              ref={el => { itemRefs.current[2] = el; }} 
+              className={`${styles.sub} fade-up fade-delay-3`}
+            >
+              제작부터 운영까지, 브랜드의 성장을 함께 책임집니다.<br />
+              납품 후에도 끊기지 않는 파트너를 만나보세요.
+            </p>
+
+            <div 
+              ref={el => { itemRefs.current[3] = el; }} 
+              className={`${styles.ctaRow} fade-up fade-delay-4`}
+            >
+              <a href="/contact" className="btn btn-primary">
+                무료 상담 신청 →
+              </a>
+              <a href="/portfolio" className="btn btn-secondary">
+                포트폴리오 보기
+              </a>
+            </div>
+          </div>
+
+          {/* Stats Grid at bottom */}
+          <div 
+            ref={el => { itemRefs.current[4] = el; }} 
+            className={`${styles.cardSide} fade-up fade-delay-5`}
+          >
+            <div className={styles.statsGrid}>
+              {stats.map((stat, i) => (
+                <div key={i} className={styles.statCard}>
+                  <span className={styles.statNum}>{stat.num}</span>
+                  <span className={styles.statLabel}>{stat.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

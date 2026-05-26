@@ -1,73 +1,88 @@
 'use client';
-import { motion } from 'framer-motion';
+import { useRef, useEffect } from 'react';
 import styles from './Contact.module.css';
 
 export default function Contact() {
-  return (
-    <section id="contact" className={styles.section}>
-      <div className={styles.container}>
-        <div className={styles.content}>
-          <motion.h2
-            className={styles.title}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            Contact <br /> Us
-          </motion.h2>
-          <motion.p
-            className={styles.desc}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
-            함께 더 좋은 가치를 만들고 싶습니다. <br />
-            프로젝트에 대해 고민 중이시라면 편하게 이야기해주세요.
-          </motion.p>
+  const sectionRef = useRef<HTMLElement>(null);
 
-          <div className={styles.process}>
-            <div className={styles.step}>
-              <span className={styles.stepNumber}>01. Contact</span>
-              <span className={styles.stepText}>24시간 이내 회신</span>
-            </div>
-            <div className={styles.step}>
-              <span className={styles.stepNumber}>02. Consulting</span>
-              <span className={styles.stepText}>상세 분석 및 제안</span>
-            </div>
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section id="contact" ref={sectionRef} className={`${styles.section} fade-up`}>
+      <div className={styles.glow} />
+
+      <div className={styles.container}>
+        {/* CTA Block */}
+        <div className={styles.ctaBlock}>
+          <div className="section-label">Free Consultation</div>
+          <h2 className={styles.ctaTitle}>
+            <span className={styles.outlined}>READY TO</span>
+            <br />
+            <span className={styles.solid}>BUILD?</span>
+          </h2>
+          <a href="mailto:hello@pixelconnect.co.kr" className={styles.ctaBtn}>
+            무료 상담 신청하기 →
+          </a>
+          <a href="mailto:hello@pixelconnect.co.kr" className={styles.ctaEmail}>
+            hello@pixelconnect.co.kr
+          </a>
+          <div className={styles.microCopy}>
+            평균 응답 시간 2시간 이내 · 상담은 무료입니다
+          </div>
+          <div className={styles.steps}>
+            {['24시간 이내 회신', '무료 상담 진행', '맞춤 견적 제공'].map((s, i) => (
+              <div key={i} className={styles.step}>
+                <span className={styles.stepNum}>0{i + 1}.</span>
+                <span>{s}</span>
+              </div>
+            ))}
           </div>
         </div>
 
-        <motion.div
-          className={styles.formWrapper}
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-        >
-          <form className={styles.form}>
-            <div className={styles.inputGroup}>
+        {/* Form */}
+        <div className={styles.formWrap}>
+          <form className={styles.form} onSubmit={e => e.preventDefault()}>
+            <div className={styles.row}>
               <input type="text" placeholder="이름" className={styles.input} />
               <input type="email" placeholder="이메일" className={styles.input} />
             </div>
-            <div className={styles.inputGroup}>
+            <div className={styles.row}>
               <select className={styles.select}>
                 <option value="">필요한 서비스 선택</option>
                 <option value="web">웹사이트 제작</option>
                 <option value="ecommerce">쇼핑몰 구축</option>
-                <option value="maintenance">안심 유지보수</option>
+                <option value="landing">랜딩페이지</option>
+                <option value="maintenance">유지보수 & 운영</option>
               </select>
               <select className={styles.select}>
                 <option value="">예산 범위 선택</option>
-                <option value="300">300만원대~</option>
-                <option value="500">500만원대~</option>
-                <option value="1000">1000만원대 이상</option>
+                <option value="300">300만원대 (스타터)</option>
+                <option value="500">500만원대 (프로)</option>
+                <option value="1000">1,000만원 이상 (프리미엄)</option>
               </select>
             </div>
-            <textarea placeholder="프로젝트에 대해 설명해주세요" className={styles.textarea}></textarea>
-            <button type="submit" className={styles.submitBtn}>Submit Request</button>
+            <textarea
+              placeholder="프로젝트에 대해 자유롭게 설명해주세요"
+              className={styles.textarea}
+              rows={5}
+            />
+            <button type="submit" className={styles.submitBtn}>
+              무료 상담 신청하기 →
+            </button>
           </form>
-        </motion.div>
+          <p className={styles.formNote}>
+            * 상담 신청 시 웹 제작 전략 가이드 PDF를 무료로 드립니다
+          </p>
+        </div>
       </div>
     </section>
   );

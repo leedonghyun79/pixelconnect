@@ -1,166 +1,146 @@
 .section {
-  padding: 150px 0;
-  background: #fff;
+  padding: 8rem 0;
+  background: #060608;
 }
 
-.header {
-  text-align: left;
-  margin-bottom: 150px;
+.container {
   max-width: 1400px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 40px;
+  margin: 0 auto;
+  padding: 0 48px;
 }
 
-.title {
-  font-size: 6rem;
-  font-weight: 800;
-  color: #000;
-  line-height: 1;
-  letter-spacing: -0.04em;
-  margin-bottom: 40px;
+/* Top Grid: Mission + Desc */
+.topGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  margin-bottom: 6rem;
+  align-items: start;
 }
 
-.description {
-  color: #444;
-  line-height: 1.5;
-  font-size: 1.5rem;
-  max-width: 800px;
-  margin-bottom: 50px;
+.missionBlock {}
+
+.missionTitle {
+  margin-top: 0.8rem;
+}
+
+.descBlock {
+  padding-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.desc {
+  font-family: var(--font-noto, 'Noto Sans KR', sans-serif);
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: #888890;
+  font-weight: 300;
 }
 
 .missionBox {
-  font-size: 0.75rem;
+  font-family: var(--font-space-mono, 'Space Mono', monospace);
+  font-size: 0.68rem;
+  color: #c8ff00;
+  border: 1px solid rgba(200, 255, 0, 0.25);
+  padding: 0.8rem 1.2rem;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: #000;
-  border: 1px solid #ddd;
-  padding: 10px 20px;
+  letter-spacing: 0.1em;
+  margin-top: 0.5rem;
   display: inline-block;
 }
 
+/* Values */
 .valuesGrid {
-  display: flex;
-  flex-direction: column;
-  max-width: 1400px;
-  margin: 0 auto 150px;
-  padding: 0 40px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.05);
+  margin-bottom: 1px;
 }
 
 .valueCard {
-  padding: 40px 0;
-  border-top: 1px solid var(--line-color);
-  background: transparent;
+  padding: 2.5rem 2rem;
+  background: #0e0e10;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: #000;
-  font-size: 2rem;
-  font-weight: 800;
-  text-transform: uppercase;
+  flex-direction: column;
+  gap: 0.6rem;
+  transition: background 0.3s;
 }
+.valueCard:hover { background: rgba(200, 255, 0, 0.025); }
 
-.valueCard:last-child {
-  border-bottom: 1px solid var(--line-color);
-}
-
-.teamGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 80px;
-  max-width: 1400px;
-  margin: 0 auto 150px;
-  padding: 0 40px;
-}
-
-.teamCard {
-  text-align: left;
-  border-top: 1px solid var(--line-color);
-  padding-top: 40px;
-}
-
-.teamImg {
-  display: none;
-}
-
-.teamName {
-  display: block;
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: #000;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-}
-
-.teamRole {
-  color: #666;
-  font-size: 0.75rem;
-  text-transform: uppercase;
+.valueNum {
+  font-family: var(--font-space-mono, 'Space Mono', monospace);
+  font-size: 0.6rem;
+  color: #666672;
   letter-spacing: 0.1em;
-  margin-bottom: 20px;
-  display: block;
 }
 
-.teamDesc {
-  color: #444;
-  font-size: 0.9rem;
-  line-height: 1.6;
+.valueName {
+  font-family: var(--font-syne, 'Syne', sans-serif);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #f0ede8;
+  letter-spacing: -0.02em;
 }
 
+.valueDesc {
+  font-family: var(--font-noto, 'Noto Sans KR', sans-serif);
+  font-size: 0.8rem;
+  color: #666672;
+  font-weight: 300;
+}
+
+/* Stats */
 .statsGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  max-width: 1400px;
-  margin: 150px auto 0;
-  padding: 0 40px;
-  border-top: 1px solid var(--line-color);
+  gap: 1px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-top: none;
 }
 
 .statItem {
-  padding: 60px 0;
-  border-right: 1px solid var(--line-color);
-  text-align: center;
+  padding: 3rem 2rem;
+  background: #060608;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-right: 1px solid rgba(255,255,255,0.05);
 }
+.statItem:last-child { border-right: none; }
 
-.statItem:last-child {
-  border-right: none;
-}
-
-.statNumber {
-  display: block;
-  font-size: 3rem;
-  font-weight: 900;
-  color: #000;
-  margin-bottom: 10px;
-  letter-spacing: -0.05em;
+.statNum {
+  font-family: var(--font-syne, 'Syne', sans-serif);
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  font-weight: 800;
+  color: #c8ff00;
+  letter-spacing: -0.04em;
+  line-height: 1;
 }
 
 .statLabel {
-  color: #666;
-  font-size: 0.7rem;
+  font-family: var(--font-space-mono, 'Space Mono', monospace);
+  font-size: 0.62rem;
+  color: #666672;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  font-weight: 700;
 }
 
-@media (max-width: 768px) {
-  .title {
-    font-size: 3rem;
-  }
+@media (max-width: 1100px) {
+  .topGrid { grid-template-columns: 1fr; gap: 2rem; }
+  .descBlock { padding-top: 0; }
+  .valuesGrid { grid-template-columns: repeat(2, 1fr); }
+  .statsGrid { grid-template-columns: repeat(2, 1fr); }
+  .statItem { border-bottom: 1px solid rgba(255,255,255,0.05); }
+}
 
-  .description {
-    font-size: 1.1rem;
-  }
-
-  .valueCard {
-    font-size: 1.25rem;
-  }
-
-  .statsGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .statItem:nth-child(2) {
-    border-right: none;
-  }
+@media (max-width: 600px) {
+  .section { padding: 5rem 0; }
+  .container { padding: 0 24px; }
+  .valuesGrid { grid-template-columns: 1fr; }
+  .statsGrid { grid-template-columns: 1fr 1fr; }
 }
