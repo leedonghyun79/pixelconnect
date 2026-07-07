@@ -36,7 +36,7 @@ export default function Contact() {
             hello@pixelconnect.co.kr
           </a>
           <div className={styles.microCopy}>
-            평균 응답 시간 2시간 이내 · 상담은 무료입니다
+            평균 응답 시간 1시간 이내 · 상담은 무료입니다
           </div>
           <div className={styles.steps}>
             {['24시간 이내 회신', '무료 상담 진행', '맞춤 견적 제공'].map((s, i) => (

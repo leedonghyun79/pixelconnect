@@ -30,15 +30,28 @@ export const metadata: Metadata = {
     description: '제작부터 운영까지, 브랜드의 성장을 함께 책임집니다.',
     url: 'https://pixelconnect.co.kr',
     locale: 'ko_KR',
-    images: [{ url: '/logo.png', width: 1200, height: 630, alt: '픽셀커넥트' }],
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: '픽셀커넥트 — 만들고 끝나는 홈페이지는 없습니다',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: '픽셀커넥트 | 만들고 끝나는 홈페이지는 없습니다',
     description: '제작부터 운영까지, 브랜드의 성장을 함께 책임집니다.',
-    images: ['/logo.png'],
+    images: ['/og-image.png'],
   },
-  icons: { icon: '/favicon.ico' },
+  icons: {
+    icon: [
+      { url: '/images/ccde06b3bcb05.png', type: 'image/png' },
+    ],
+    shortcut: '/images/ccde06b3bcb05.png',
+    apple: '/images/ccde06b3bcb05.png',
+  },
 }
 
 const jsonLd = {

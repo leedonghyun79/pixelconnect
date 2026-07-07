@@ -16,9 +16,9 @@ const diffs = [
     highlight: false,
   },
   {
-    num: '03 · Maintenance',
-    title: '납품 후에도 끊기지 않는 관리',
-    desc: '수정·오류·업데이트를 빠르게 처리합니다. 홈페이지가 살아있는 동안 함께합니다.',
+    num: '03 · Care',
+    title: '밀착 소통, 빠른 피드백',
+    desc: '진행 중 궁금한 점은 언제든 물어보세요. 당일 피드백을 원칙으로, 답답함 없는 진행을 보장합니다.',
     highlight: true,
   },
 ];

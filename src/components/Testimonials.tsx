@@ -5,26 +5,32 @@ import styles from './Testimonials.module.css';
 const reviews = [
   {
     stars: 5,
-    tags: ['인테리어'],
+    tags: ['인테리어 업종'],
     highlight: '납품 후에도 계속 도와주셔서 너무 감사해요',
     body: '다른 곳에서는 납품 후 연락이 안 됐는데, 픽셀커넥트는 작은 수정도 빠르게 처리해주세요. 진짜 파트너라는 느낌이 듭니다.',
-    name: '인테리어 대표 김○○님',
+    name: '김○○ 대표님',
+    role: '인테리어 전문점 운영',
+    initial: '김',
     date: '2025.04',
   },
   {
     stars: 5,
-    tags: ['마케팅'],
+    tags: ['마케팅 업종'],
     highlight: '처음 안내받은 견적 그대로 진행됐어요',
     body: '다른 업체에서는 추가 비용이 계속 붙었는데, 여기는 처음 견적이 최종이라는 게 너무 좋았습니다.',
-    name: '마케팅 대표 이○○님',
+    name: '이○○ 대표님',
+    role: '디지털 마케팅 에이전시 운영',
+    initial: '이',
     date: '2025.03',
   },
   {
     stars: 5,
-    tags: ['병원'],
+    tags: ['의료 업종'],
     highlight: '자료 준비도 같이 도와주셔서 편했어요',
     body: '뭘 준비해야 할지 막막했는데 가이드를 주시고 함께 정리해주셔서 수월하게 진행할 수 있었습니다.',
-    name: '병원 원장 박○○님',
+    name: '박○○ 원장님',
+    role: '피부과 의원 운영',
+    initial: '박',
     date: '2025.02',
   },
 ];
@@ -69,8 +75,10 @@ export default function Testimonials() {
               <p className={styles.highlight}>&ldquo;{review.highlight}&rdquo;</p>
               <p className={styles.body}>{review.body}</p>
               <div className={styles.author}>
+                <div className={styles.avatar}>{review.initial}</div>
                 <div>
                   <span className={styles.name}>{review.name}</span>
+                  <span className={styles.role}>{review.role}</span>
                   <span className={styles.meta}>{review.date}</span>
                 </div>
               </div>

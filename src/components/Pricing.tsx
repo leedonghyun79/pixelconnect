@@ -4,53 +4,54 @@ import styles from './Pricing.module.css';
 
 const plans = [
   {
+    label: '안심 환불 보장 적용',
     tier: 'BASIC',
-    name: '랜딩 페이지',
-    target: '포트폴리오, 홍보, 광고, 이벤트',
+    name: '스타터 플랜',
+    price: '1,000,000',
     popular: false,
     features: [
-      { text: '메인 1장 · 섹션 7개', highlight: false },
-      { text: '수정 무제한', highlight: false },
-      { text: '반응형 (모바일 최적화)', highlight: false },
-      { text: 'SEO 기본 설정', highlight: false },
-      { text: '런칭 후 1개월 무상 관리', highlight: true },
+      { text: '1:1 맞춤 브랜딩 기획 및 디자인 설계', highlight: false },
+      { text: '3개월 안심 환불 보장제 전격 적용', highlight: true },
+      { text: '카카오톡·전화·문자 바로가기 연동', highlight: false },
+      { text: '도메인 + SSL보안 + 클라우드 1년 제공', highlight: false },
     ],
-    duration: '영업일 1주',
-    cta: '상담 신청',
+    duration: '영업일 1~2주',
+    cta: '자세히보기',
   },
   {
+    label: '대기업/입찰 최적화',
     tier: 'STANDARD',
-    name: '스탠다드 페이지',
-    target: '브랜딩, 중소기업, 기관·협회',
+    name: '시그니처 플랜',
+    price: '2,000,000',
     popular: true,
-    popLabel: '81% 고객 선택',
+    popLabel: 'RECOMMENDED',
     features: [
-      { text: '메인 1장 · 서브 4장', highlight: false },
-      { text: '수정 무제한', highlight: false },
-      { text: '반응형 (모바일 최적화)', highlight: false },
-      { text: 'SEO 최적화', highlight: false },
-      { text: '런칭 후 3개월 무상 관리', highlight: true },
-      { text: '운영 가이드 제공', highlight: false },
-      { text: '마케팅 컨설팅', highlight: false },
+      { text: '1:1 맞춤 브랜딩 기획 및 디자인 설계', highlight: false },
+      { text: '3개월 안심 환불 보장제 전격 적용', highlight: true },
+      { text: '카카오톡·전화·문자 바로가기 연동', highlight: false },
+      { text: '도메인 + SSL보안 + 클라우드 1년 제공', highlight: false },
+      { text: '관리자 전용 페이지 추가 구축', highlight: false },
+      { text: '외부 서비스 데이터 연동 추가 (API/폼)', highlight: false },
     ],
-    duration: '영업일 2주',
-    cta: '상담 신청',
+    duration: '영업일 2~3주',
+    cta: '자세히보기',
   },
   {
+    label: '대형 프로젝트/플랫폼',
     tier: 'PREMIUM',
-    name: '프리미엄 페이지',
-    target: '10장 이상 대규모 웹사이트',
+    name: '맞춤 개발 플랜',
+    price: '7,000,000',
     popular: false,
     features: [
-      { text: '메인 1장 · 서브 9장+', highlight: false },
-      { text: '수정 무제한', highlight: false },
-      { text: '반응형 (모바일 최적화)', highlight: false },
-      { text: 'SEO 최적화', highlight: false },
-      { text: '런칭 후 6개월 무상 관리', highlight: true },
-      { text: '전담 담당자 배정', highlight: false },
+      { text: '시그니처 플랜 혜택 모두 포함', highlight: false },
+      { text: 'Full-Stack 웹 앱 독자 아키텍처 설계', highlight: false },
+      { text: '고성능 인터렉티브 동적 웹 모듈 개발', highlight: false },
+      { text: '데이터베이스 연동 & API/회원 시스템 구축', highlight: true },
+      { text: '관리자 전용 대시보드 & 전환 분석 연동', highlight: false },
+      { text: '1:1 전담 개발자 PM 배치 & 상세 유지보수', highlight: false },
     ],
-    duration: '영업일 4주',
-    cta: '상담 신청',
+    duration: '영업일 4~8주',
+    cta: '자세히보기',
   },
 ];
 
@@ -89,21 +90,34 @@ export default function Pricing() {
                 <div className={styles.popBadge}>{plan.popLabel}</div>
               )}
 
-              <span className={styles.tier}>{plan.tier}</span>
-              <h3 className={styles.planName}>{plan.name}</h3>
-              <p className={styles.target}>{plan.target}</p>
+              {/* Plan label */}
+              <span className={styles.planLabel}>{plan.label}</span>
 
+              {/* Plan name */}
+              <h3 className={styles.planName}>{plan.name}</h3>
+
+              {/* Price */}
+              <div className={styles.priceRow}>
+                <span className={styles.pricePrefix}>시작가</span>
+                <span className={styles.price}>{plan.price}</span>
+                <span className={styles.priceUnit}>원 ~</span>
+              </div>
+
+              <div className={styles.divider} />
+
+              {/* Features */}
               <ul className={styles.features}>
                 {plan.features.map((f, fi) => (
                   <li key={fi} className={styles.feature}>
-                    <span className={styles.check}>✓</span>
-                    <span className={f.highlight ? styles.maintenanceHighlight : ''}>
+                    <span className={`${styles.check} ${plan.popular ? styles.checkPop : ''}`}>✓</span>
+                    <span className={f.highlight ? styles.featureHighlight : ''}>
                       {f.text}
                     </span>
                   </li>
                 ))}
               </ul>
 
+              {/* Meta */}
               <div className={styles.meta}>
                 <div className={styles.metaItem}>
                   <span className={styles.metaLabel}>제작 기간</span>
@@ -111,15 +125,24 @@ export default function Pricing() {
                 </div>
               </div>
 
+              {/* CTA */}
               <a
                 href="/contact"
                 className={`${styles.planCta} ${plan.popular ? styles.planCtaPop : ''}`}
               >
-                {plan.cta} →
+                {plan.cta}
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </a>
             </div>
           ))}
         </div>
+
+        {/* Bottom note */}
+        <p className={styles.note}>
+          * 모든 플랜은 무료 상담 후 정확한 견적을 안내드립니다. 추가 비용 없이 처음 견적이 최종 금액입니다.
+        </p>
       </div>
     </section>
   );

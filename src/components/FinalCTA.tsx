@@ -1,6 +1,9 @@
 'use client';
 import { useEffect, useRef } from 'react';
+import dynamic from 'next/dynamic';
 import styles from './FinalCTA.module.css';
+
+const FlowWave3D = dynamic(() => import('./FlowWave3D'), { ssr: false });
 
 export default function FinalCTA() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -18,6 +21,15 @@ export default function FinalCTA() {
 
   return (
     <section ref={sectionRef} className={`${styles.section} fade-up`} id="contact">
+
+      {/* 3D 흐르는 배경 */}
+      <div className={styles.canvasWrap} aria-hidden="true">
+        <FlowWave3D className={styles.canvas} />
+      </div>
+
+      {/* 하단 그라디언트 페이드 */}
+      <div className={styles.fade} aria-hidden="true" />
+
       <div className={styles.container}>
         <div className={`section-eyebrow section-eyebrow-white`} style={{ justifyContent: 'center' }}>
           GET STARTED

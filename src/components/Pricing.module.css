@@ -1,5 +1,5 @@
 .section {
-  background: var(--navy-pale);
+  background: var(--white);
   padding: 100px 0;
 }
 
@@ -19,20 +19,23 @@
   color: var(--navy-muted);
   line-height: 1.7;
   margin-top: 8px;
+  max-width: 480px;
 }
 
+/* ── Grid ─────────────────────────────────────────────────── */
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 24px;
+  align-items: start;
 }
 
-/* Card */
+/* ── Card ─────────────────────────────────────────────────── */
 .card {
   background: var(--white);
   border: 1px solid var(--border-default);
   border-radius: var(--radius-lg);
-  padding: 36px 28px;
+  padding: 36px 32px 32px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -40,15 +43,21 @@
 }
 
 .card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
 }
 
-/* Recommended card */
+/* Recommended card — red border style (ref image) */
 .cardPop {
   border: 2px solid var(--navy);
+  box-shadow: 0 0 0 0 transparent;
 }
 
+.cardPop:hover {
+  box-shadow: 0 8px 32px rgba(13, 13, 62, 0.12);
+}
+
+/* ── Recommended Badge ────────────────────────────────────── */
 .popBadge {
   position: absolute;
   top: -14px;
@@ -56,74 +65,115 @@
   transform: translateX(-50%);
   background: var(--navy);
   color: #fff;
-  font-size: 0.72rem;
-  font-weight: 600;
-  padding: 5px 16px;
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 5px 18px;
   border-radius: var(--radius-pill);
   white-space: nowrap;
+  text-transform: uppercase;
 }
 
-/* Tier info */
-.tier {
+/* ── Plan Label (안심 환불 보장 적용 등) ─────────────────── */
+.planLabel {
   font-family: var(--font-display);
   font-size: 0.72rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--navy-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
   display: block;
-  margin-bottom: 4px;
 }
 
+/* ── Plan Name ────────────────────────────────────────────── */
 .planName {
   font-size: 20px;
   font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 8px;
+  margin-bottom: 20px;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
 }
 
-.target {
+/* ── Price Row ────────────────────────────────────────────── */
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 24px;
+}
+
+.pricePrefix {
+  font-size: 12px;
+  color: var(--navy-muted);
+  font-weight: 400;
+  flex-shrink: 0;
+}
+
+.price {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.priceUnit {
   font-size: 13px;
   color: var(--navy-muted);
-  margin-bottom: 24px;
-  line-height: 1.6;
+  font-weight: 400;
 }
 
-/* Features */
+/* ── Divider ──────────────────────────────────────────────── */
+.divider {
+  height: 1px;
+  background: var(--border-default);
+  margin-bottom: 20px;
+}
+
+/* ── Features ─────────────────────────────────────────────── */
 .features {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 11px;
   margin-bottom: 24px;
   flex: 1;
 }
 
 .feature {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   font-size: 13px;
-  color: var(--navy-muted);
-  line-height: 1.5;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  align-items: flex-start;
 }
 
 .check {
-  color: var(--navy);
+  color: var(--navy-muted);
   font-weight: 700;
   flex-shrink: 0;
+  font-size: 12px;
+  margin-top: 1px;
 }
 
-/* Maintenance highlight */
-.maintenanceHighlight {
+.checkPop {
+  color: var(--navy);
+}
+
+.featureHighlight {
   font-weight: 600;
   color: var(--navy);
 }
 
-/* Meta info */
+/* ── Meta ─────────────────────────────────────────────────── */
 .meta {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 16px 0;
+  gap: 8px;
+  padding: 14px 0;
   margin-bottom: 20px;
   border-top: 1px solid var(--border-default);
   border-bottom: 1px solid var(--border-default);
@@ -132,7 +182,7 @@
 .metaItem {
   display: flex;
   justify-content: space-between;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .metaLabel {
@@ -141,29 +191,33 @@
 
 .metaVal {
   color: var(--text-primary);
-  font-weight: 500;
+  font-weight: 600;
 }
 
-/* CTA */
+/* ── CTA Button ───────────────────────────────────────────── */
 .planCta {
-  display: block;
-  text-align: center;
-  padding: 12px 24px;
-  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 20px;
+  border-radius: var(--radius-md);
   font-size: 14px;
   font-weight: 600;
   text-decoration: none;
   transition: all 0.25s ease;
-  border: 1.5px solid var(--navy-light);
-  color: var(--navy);
+  border: 1.5px solid var(--border-hover);
+  color: var(--text-primary);
   background: transparent;
+  gap: 8px;
 }
 
 .planCta:hover {
   background: var(--navy-pale);
   border-color: var(--navy);
+  color: var(--navy);
 }
 
+/* Popular CTA — filled navy (ref image: filled red → navy) */
 .planCtaPop {
   background: var(--navy);
   color: #fff;
@@ -172,10 +226,30 @@
 
 .planCtaPop:hover {
   background: var(--navy-light);
+  border-color: var(--navy-light);
+}
+
+/* ── Bottom Note ──────────────────────────────────────────── */
+.note {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 32px;
+  line-height: 1.6;
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .grid { gap: 16px; }
+  .price { font-size: 1.7rem; }
 }
 
 @media (max-width: 900px) {
   .section { padding: 72px 0; }
   .container { padding: 0 24px; }
-  .grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+  .grid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin: 0 auto;
+  }
 }

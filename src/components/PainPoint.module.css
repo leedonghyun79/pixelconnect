@@ -53,9 +53,12 @@
 .cardIcon {
   width: 48px;
   height: 48px;
-  margin-bottom: 16px;
-  display: block;
-  object-fit: contain;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: var(--navy);
+  opacity: 0.75;
 }
 
 .cardTitle {

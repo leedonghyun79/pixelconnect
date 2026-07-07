@@ -3,10 +3,10 @@ import { useEffect, useRef } from 'react';
 import styles from './Maintenance.module.css';
 
 const items = [
-  { title: '텍스트·이미지 수정', desc: '빠른 대응으로 원하는 내용으로 즉시 업데이트' },
-  { title: '기능 오류 처리', desc: '사이트에 문제가 생기면 즉시 확인하고 처리' },
-  { title: '추가 요청 유연 반영', desc: '운영 중 새로운 요청도 유연하게 반영' },
-  { title: '정기 점검', desc: '주기적으로 사이트 상태를 점검해 건강하게 유지' },
+  { title: '월간 리포트 제공', desc: '매월 사이트 방문자·성과 데이터를 정리해 리포트로 공유합니다.' },
+  { title: '1시간 이내 응답 보장', desc: '문의 접수 후 평균 1시간 이내 답변, 긴급 오류는 즉시 처리합니다.' },
+  { title: '추가 요청 유연 반영', desc: '운영 중 발생하는 새로운 요구사항도 별도 비용 없이 유연하게 대응합니다.' },
+  { title: '정기 보안·성능 점검', desc: '주기적으로 사이트 속도·보안·링크 상태를 점검해 건강하게 유지합니다.' },
 ];
 
 export default function Maintenance() {
