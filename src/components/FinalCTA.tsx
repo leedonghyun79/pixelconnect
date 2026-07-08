@@ -6,13 +6,19 @@ import styles from './FinalCTA.module.css';
 const FlowWave3D = dynamic(() => import('./FlowWave3D'), { ssr: false });
 
 export default function FinalCTA() {
-  const sectionRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const el = sectionRef.current;
+    const el = containerRef.current;
     if (!el) return;
     const observer = new IntersectionObserver(
-      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      entries => entries.forEach(e => { 
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        } else {
+          e.target.classList.remove('visible');
+        }
+      }),
       { threshold: 0.1 }
     );
     observer.observe(el);
@@ -20,7 +26,7 @@ export default function FinalCTA() {
   }, []);
 
   return (
-    <section ref={sectionRef} className={`${styles.section} fade-up`} id="contact">
+    <section className={styles.section} id="contact">
 
       {/* 3D 흐르는 배경 */}
       <div className={styles.canvasWrap} aria-hidden="true">
@@ -30,7 +36,7 @@ export default function FinalCTA() {
       {/* 하단 그라디언트 페이드 */}
       <div className={styles.fade} aria-hidden="true" />
 
-      <div className={styles.container}>
+      <div ref={containerRef} className={`${styles.container} fade-up`}>
         <div className={`section-eyebrow section-eyebrow-white`} style={{ justifyContent: 'center' }}>
           GET STARTED
         </div>

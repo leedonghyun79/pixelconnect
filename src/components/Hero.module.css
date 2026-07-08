@@ -3,15 +3,20 @@
    ════════════════════════════════════════════════════════════ */
 
 .section {
-  position: relative;
+  position: sticky;
+  top: 0;
   width: 100%;
-  min-height: 100vh;
-  background-color: #FAFAFA; /* 밝은 배경 */
+  height: 100vh;
+  /* 스티키 고정을 위해 고정 높이 사용 */
+  background-color: #FAFAFA;
+  /* 밝은 배경 */
   overflow: hidden;
   display: flex;
   align-items: center;
   font-family: 'Poppins', 'Pretendard', sans-serif;
-  color: #0D0D3E; /* 딥네이비 기본 컬러 */
+  color: #0D0D3E;
+  /* 딥네이비 기본 컬러 */
+  z-index: 0;
 }
 
 /* ── Canvas Background ─────────────────────────── */
@@ -22,7 +27,8 @@
   width: 100%;
   height: 100%;
   z-index: 0;
-  pointer-events: none; /* 클릭 방해 방지 */
+  pointer-events: none;
+  /* 클릭 방해 방지 */
 }
 
 .waveCanvas {
@@ -51,7 +57,8 @@
 /* ── Text Side ─────────────────────────────────────────────── */
 .textSide {
   flex: 1;
-  max-width: 700px; /* 텍스트 너비 제한 */
+  max-width: 700px;
+  /* 텍스트 너비 제한 */
 }
 
 /* Badge */
@@ -113,7 +120,8 @@
   color: #fff;
   font-weight: 600;
   font-size: 1rem;
-  border-radius: 4px; /* 에이전시 느낌의 각진 버튼 */
+  border-radius: 4px;
+  /* 에이전시 느낌의 각진 버튼 */
   text-decoration: none;
   transition: all 0.3s ease;
   box-shadow: 0 8px 24px rgba(13, 13, 62, 0.15);
@@ -186,28 +194,74 @@
 }
 
 @keyframes scrollDownDrop {
-  0% { transform: translateY(-100%); }
-  50% { transform: translateY(0); }
-  100% { transform: translateY(100%); }
+  0% {
+    transform: translateY(-100%);
+  }
+
+  50% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+/* ── Hero Stats ─────────────────────────────────────────────── */
+.heroStats {
+  display: flex;
+  gap: 32px;
+  margin-top: 48px;
+  padding-top: 32px;
+  flex-wrap: wrap;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.statNum {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -0.02em;
+}
+
+.statLabel {
+  font-size: 0.8rem;
+  color: rgba(13, 13, 62, 0.6);
+  font-weight: 500;
 }
 
 /* ── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 1024px) {
-  .container { padding: calc(var(--nav-height, 80px) + 40px) 40px 60px; }
-  .scrollDown { left: 40px; }
+  .container {
+    padding: calc(var(--nav-height, 80px) + 40px) 40px 60px;
+  }
+
+  .scrollDown {
+    left: 40px;
+  }
 }
 
 @media (max-width: 768px) {
   .container {
     padding: calc(var(--nav-height, 64px) + 20px) 24px 60px;
   }
+
   .headline {
     font-size: clamp(2.5rem, 8vw, 3.5rem);
   }
+
   .sub {
     font-size: 0.95rem;
   }
+
   .scrollDown {
-    display: none; /* 모바일에서는 공간 확보를 위해 숨김 */
+    display: none;
+    /* 모바일에서는 공간 확보를 위해 숨김 */
   }
 }

@@ -20,12 +20,12 @@ export default function FlowWave3D({ className }: { className?: string }) {
       ctx.scale(dpr, dpr);
     };
 
-    // 3D 웨이브 높이 함수
+    // 3D 웨이브 높이 함수 (더 극적인 굴곡)
     const waveAt = (u: number, v: number, t: number): number =>
-      Math.sin(u * Math.PI * 3.2 + t * 0.65 + v * 1.4) * 0.38 +
-      Math.sin(u * Math.PI * 1.7 - t * 0.50 + v * 2.3) * 0.22 +
-      Math.sin(u * Math.PI * 5.1 + t * 0.90 - v * 0.7) * 0.10 +
-      Math.sin(v * Math.PI * 1.8 + t * 0.38)            * 0.14;
+      Math.sin(u * Math.PI * 4.5 + t * 0.8 + v * 2.0) * 0.45 +
+      Math.sin(u * Math.PI * 2.5 - t * 0.6 + v * 3.5) * 0.25 +
+      Math.sin(u * Math.PI * 6.0 + t * 1.2 - v * 1.5) * 0.15 +
+      Math.sin(v * Math.PI * 2.2 + t * 0.5)           * 0.15;
 
     const ROWS = 55;  // 깊이 분할 (앞→뒤)
     const COLS = 120; // 가로 분할
@@ -45,9 +45,9 @@ export default function FlowWave3D({ className }: { className?: string }) {
         const v0 = row       / ROWS;
         const v1 = (row + 1) / ROWS;
 
-        // 원근 스케일 (뒤=작음, 앞=큼)
-        const scale0 = 0.25 + v0 * 0.75;
-        const scale1 = 0.25 + v1 * 0.75;
+        // 원근 스케일 (뒤=작음, 앞=큼) - 더 강한 원근감
+        const scale0 = 0.15 + v0 * 0.85;
+        const scale1 = 0.15 + v1 * 0.85;
 
         // 이 행의 기준 Y
         const baseY0 = horizonY + (frontY - horizonY) * v0;
@@ -74,11 +74,11 @@ export default function FlowWave3D({ className }: { className?: string }) {
           const avgW = (w00 + w10 + w01 + w11) * 0.25;
           const norm = (avgW + 1) * 0.5;    // 0~1
 
-          // 색상: 음수=짙은 네이비, 양수=파랑/보라 하이라이트
-          const r = Math.floor(4  + norm * 28);
-          const g = Math.floor(6  + norm * 38);
-          const b = Math.floor(28 + norm * 140);
-          const a = (0.18 + v1 * 0.55) * (0.5 + norm * 0.5);
+          // 색상: 다크 베이스 + 네온 글로우(Cyan/Purple)
+          const r = Math.floor(5 + norm * 45);
+          const g = Math.floor(5 + norm * 20);
+          const b = Math.floor(25 + norm * 90);
+          const a = (0.2 + v1 * 0.6) * (0.4 + norm * 0.6);
 
           ctx.beginPath();
           ctx.moveTo(x00, y00);
@@ -90,7 +90,7 @@ export default function FlowWave3D({ className }: { className?: string }) {
           ctx.fill();
         }
 
-        // 각 행에 라인 오버레이 (윤곽선 느낌)
+        // 각 행에 가로 라인 오버레이 (밝은 네온 라인)
         ctx.beginPath();
         for (let col = 0; col <= COLS; col++) {
           const u = col / COLS;
@@ -99,13 +99,32 @@ export default function FlowWave3D({ className }: { className?: string }) {
           const y = baseY1 + w * amplitude * scale1;
           col === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
         }
-        const lineAlpha = 0.04 + v1 * 0.16;
-        ctx.strokeStyle = `rgba(80,140,255,${lineAlpha})`;
-        ctx.lineWidth   = 0.4 + v1 * 0.8;
+        
+        // 원근에 따른 선명도 조절
+        const lineNorm = (waveAt(0.5, v1, time) + 1) * 0.5; // 밝기 팩터
+        const alpha = 0.1 + v1 * 0.5;
+        
+        // 형광 블루/퍼플 혼합
+        const strokeR = Math.floor(64 + lineNorm * 120);
+        const strokeG = Math.floor(112 + lineNorm * 80);
+        const strokeB = 255;
+
+        ctx.strokeStyle = `rgba(${strokeR}, ${strokeG}, ${strokeB}, ${alpha})`;
+        ctx.lineWidth = 0.5 + v1 * 1.5;
+        
+        // 글로우 효과
+        if (v1 > 0.5) {
+          ctx.shadowColor = `rgba(${strokeR}, ${strokeG}, ${strokeB}, ${alpha})`;
+          ctx.shadowBlur = 8 * v1;
+        } else {
+          ctx.shadowBlur = 0;
+        }
+        
         ctx.stroke();
+        ctx.shadowBlur = 0; // 초기화
       }
 
-      time += 0.007;
+      time += 0.008;
       raf = requestAnimationFrame(draw);
     };
 

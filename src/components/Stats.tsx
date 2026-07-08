@@ -60,7 +60,13 @@ export default function Stats() {
     const el = headerRef.current;
     if (!el) return;
     const observer = new IntersectionObserver(
-      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      entries => entries.forEach(e => { 
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        } else {
+          e.target.classList.remove('visible');
+        }
+      }),
       { threshold: 0.1 }
     );
     observer.observe(el);
@@ -71,7 +77,6 @@ export default function Stats() {
     <section className={styles.section} id="stats">
       <div className={styles.container}>
         <div ref={headerRef} className={`${styles.header} fade-up`}>
-          <div className="section-eyebrow" style={{ justifyContent: 'center' }}>NUMBERS</div>
           <h2 className="section-title" style={{ textAlign: 'center' }}>숫자로 증명합니다</h2>
         </div>
 

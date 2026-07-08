@@ -35,7 +35,7 @@ const faqs = [
 
 export default function FAQ() {
   const [openItems, setOpenItems] = useState<number[]>([]);
-  const sectionRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const toggleItem = (index: number) => {
     setOpenItems(prev =>
@@ -44,10 +44,16 @@ export default function FAQ() {
   };
 
   useEffect(() => {
-    const el = sectionRef.current;
+    const el = containerRef.current;
     if (!el) return;
     const observer = new IntersectionObserver(
-      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      entries => entries.forEach(e => { 
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        } else {
+          e.target.classList.remove('visible');
+        }
+      }),
       { threshold: 0.05 }
     );
     observer.observe(el);
@@ -55,8 +61,8 @@ export default function FAQ() {
   }, []);
 
   return (
-    <section id="faq" ref={sectionRef} className={`${styles.section} fade-up`}>
-      <div className={styles.container}>
+    <section id="faq" className={styles.section}>
+      <div ref={containerRef} className={`${styles.container} fade-up`}>
         <div className={styles.header}>
           <div className="section-eyebrow" style={{ justifyContent: 'center' }}>FAQ</div>
           <h2 className="section-title" style={{ textAlign: 'center' }}>자주 묻는 질문</h2>

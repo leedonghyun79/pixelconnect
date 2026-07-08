@@ -19,7 +19,7 @@ export default function Footer() {
           {/* Logo + Business Info */}
           <div className={styles.logoCol}>
             <Link href="/" className={styles.logo}>
-              <span className={styles.logoSymbol}>P</span>
+              <img src="/images/logo.png" alt="" className={styles.logoImage} />
               PIXEL CONNECT
             </Link>
             <div className={styles.bizInfo}>

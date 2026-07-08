@@ -31,7 +31,7 @@ const steps = [
     num: '05',
     title: '유지보수',
     desc: '런칭 후에도 수정·오류·업데이트를 지속적으로 지원합니다.',
-    highlight: true,
+    highlight: false,
   },
 ];
 
@@ -40,7 +40,13 @@ export default function Process() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      entries => entries.forEach(e => { 
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        } else {
+          e.target.classList.remove('visible');
+        }
+      }),
       { threshold: 0.1 }
     );
     itemRefs.current.forEach(el => { if (el) observer.observe(el); });

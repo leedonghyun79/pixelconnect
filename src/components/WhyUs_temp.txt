@@ -3,10 +3,10 @@ import { useEffect, useRef } from 'react';
 import styles from './Maintenance.module.css';
 
 const items = [
-  { title: '월간 리포트 제공', desc: '매월 사이트 방문자·성과 데이터를 정리해 리포트로 공유합니다.' },
-  { title: '1시간 이내 응답 보장', desc: '문의 접수 후 평균 1시간 이내 답변, 긴급 오류는 즉시 처리합니다.' },
-  { title: '추가 요청 유연 반영', desc: '운영 중 발생하는 새로운 요구사항도 별도 비용 없이 유연하게 대응합니다.' },
-  { title: '정기 보안·성능 점검', desc: '주기적으로 사이트 속도·보안·링크 상태를 점검해 건강하게 유지합니다.' },
+  { title: '?�간 리포???�공', desc: '매월 ?�이??방문?�·성�??�이?��? ?�리??리포?�로 공유?�니??' },
+  { title: '1?�간 ?�내 ?�답 보장', desc: '문의 ?�수 ???�균 1?�간 ?�내 ?��?, 긴급 ?�류??즉시 처리?�니??' },
+  { title: '추�? ?�청 ?�연 반영', desc: '?�영 �?발생?�는 ?�로???�구?�항??별도 비용 ?�이 ?�연?�게 ?�?�합?�다.' },
+  { title: '?�기 보안·?�능 ?��?', desc: '주기?�으�??�이???�도·보안·링크 ?�태�??��???건강?�게 ?��??�니??' },
 ];
 
 export default function Maintenance() {
@@ -18,13 +18,12 @@ export default function Maintenance() {
     const observer = new IntersectionObserver(
       entries => entries.forEach(e => { 
         if (e.isIntersecting) {
-          // 전역 fade-up 클래스용
+          // ?�역 fade-up ?�래?�용
           if (e.target.id === 'maintenance') e.target.classList.add('visible');
-          // 개별 아이템용 커스텀 애니메이션 클래스 추가
+          // 개별 ?�이?�용 커스?� ?�니메이???�래??추�?
           else e.target.classList.add(styles.visible);
         } else {
-          // 뷰포트에서 벗어나면 클래스 제거하여 재진입 시 다시 애니메이션 트리거
-          if (e.target.id === 'maintenance') e.target.classList.remove('visible');
+          // 뷰포?�에??벗어?�면 ?�래???�거?�여 ?�진?????�시 ?�니메이???�리�?          if (e.target.id === 'maintenance') e.target.classList.remove('visible');
           else e.target.classList.remove(styles.visible);
         }
       }),
@@ -32,7 +31,7 @@ export default function Maintenance() {
     );
     observer.observe(el);
 
-    // 개별 아이템들도 관찰하여 순차적 애니메이션 되도록 처리
+    // 개별 ?�이?�들??관찰하???�차???�니메이???�도�?처리
     const animItems = el.querySelectorAll(`.${styles.item}`);
     animItems.forEach(item => observer.observe(item));
 
@@ -41,7 +40,7 @@ export default function Maintenance() {
 
   return (
     <section ref={sectionRef} className={`${styles.section}`} id="maintenance">
-      {/* 동적 배경 효과 */}
+      {/* ?�적 배경 ?�과 */}
       <div className={styles.bgBlob} />
       <div className={styles.bgBlob2} />
 
@@ -51,11 +50,10 @@ export default function Maintenance() {
           <div className={styles.left}>
             <div className={`section-eyebrow section-eyebrow-white`}>MAINTENANCE</div>
             <h2 className={styles.title}>
-              제작은 시작,<br />관리가 본질입니다
-            </h2>
+              ?�작?� ?�작,<br />관리�? 본질?�니??            </h2>
             <p className={styles.sub}>
-              대부분의 업체는 납품과 함께 관계가 끝납니다.<br />
-              저희는 그때부터 진짜 파트너십이 시작된다고 생각합니다.
+              ?�부분의 ?�체???�품�??�께 관계�? ?�납?�다.<br />
+              ?�?�는 그때부??진짜 ?�트?�십???�작?�다�??�각?�니??
             </p>
           </div>
 
@@ -84,3 +82,4 @@ export default function Maintenance() {
     </section>
   );
 }
+

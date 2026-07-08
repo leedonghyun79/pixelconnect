@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useRef } from 'react';
 import styles from './WhyUs.module.css';
+import mStyles from './Maintenance.module.css';
 
 const diffs = [
   {
@@ -19,28 +20,57 @@ const diffs = [
     num: '03 · Care',
     title: '밀착 소통, 빠른 피드백',
     desc: '진행 중 궁금한 점은 언제든 물어보세요. 당일 피드백을 원칙으로, 답답함 없는 진행을 보장합니다.',
-    highlight: true,
+    highlight: false,
   },
+];
+
+const maintenanceItems = [
+  { title: '월간 리포트 제공', desc: '매월 사이트 방문자·성과 데이터를 정리해 리포트로 공유합니다.' },
+  { title: '1시간 이내 응답 보장', desc: '문의 접수 후 평균 1시간 이내 답변, 긴급 오류는 즉시 처리합니다.' },
+  { title: '추가 요청 유연 반영', desc: '운영 중 발생하는 새로운 요구사항도 별도 비용 없이 유연하게 대응합니다.' },
+  { title: '정기 보안·성능 점검', desc: '주기적으로 사이트 속도·보안·링크 상태를 점검해 건강하게 유지합니다.' },
 ];
 
 export default function WhyUs() {
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      entries => entries.forEach(e => { 
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          if (e.target.classList.contains(mStyles.item)) {
+             e.target.classList.add(mStyles.visible);
+          }
+        } else {
+          e.target.classList.remove('visible');
+          if (e.target.classList.contains(mStyles.item)) {
+             e.target.classList.remove(mStyles.visible);
+          }
+        }
+      }),
       { threshold: 0.1 }
     );
     itemRefs.current.forEach(el => { if (el) observer.observe(el); });
+
+    if (sectionRef.current) {
+       const mItems = sectionRef.current.querySelectorAll(`.${mStyles.item}`);
+       mItems.forEach(item => observer.observe(item));
+    }
+
     return () => observer.disconnect();
   }, []);
 
   return (
-    <section className={styles.section} id="services">
+    <section ref={sectionRef} className={styles.section} id="services">
+      {/* Maintenance Blobs */}
+      <div className={mStyles.bgBlob} />
+      <div className={mStyles.bgBlob2} />
+
       <div className={styles.container}>
         <div className={styles.header}>
-          <div className="section-eyebrow section-eyebrow-white">WHY US</div>
-          <h2 className="section-title" style={{ color: '#fff' }}>저희가 다른 이유</h2>
+          <h2 className="section-title" style={{ color: '#fff' }}>픽셀커넥트가 다른 이유</h2>
           <p className={styles.sub}>
             세심한 접근과 책임감으로 기대 이상의 결과를 만듭니다.
           </p>
@@ -62,6 +92,46 @@ export default function WhyUs() {
               )}
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* Maintenance Block appended directly */}
+      <div className={mStyles.maintenanceBlock}>
+        <div className={mStyles.container}>
+          <div className={mStyles.grid}>
+            {/* Left: Text */}
+            <div className={mStyles.left}>
+              <div className={`section-eyebrow section-eyebrow-white`}>MAINTENANCE</div>
+              <h2 className={mStyles.title}>
+                제작은 시작,<br />관리가 본질입니다
+              </h2>
+              <p className={mStyles.sub}>
+                대부분의 업체는 납품과 함께 관계가 끝납니다.<br />
+                저희는 그때부터 진짜 파트너십이 시작된다고 생각합니다.
+              </p>
+            </div>
+
+            {/* Right: Service Items */}
+            <div className={mStyles.right}>
+              {maintenanceItems.map((item, i) => (
+                <div
+                  key={i}
+                  className={mStyles.item}
+                  style={{ animationDelay: `${i * 0.15}s` }}
+                >
+                  <div className={mStyles.checkIcon}>
+                    <svg width="24" height="24" viewBox="0 0 20 20" fill="none">
+                      <path d="M6 10l3 3 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className={mStyles.itemTitle}>{item.title}</h4>
+                    <p className={mStyles.itemDesc}>{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

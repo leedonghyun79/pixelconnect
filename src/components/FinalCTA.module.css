@@ -1,7 +1,10 @@
 .section {
   position: relative;
-  background: #05051a;
-  padding: 120px 0;
+  background: var(--navy-deep);
+  padding: 120px 0 180px; /* 푸터와 여유 공간 확보 */
+  border-radius: 48px 48px 0 0;
+  margin-top: -48px;
+  z-index: 7;
   overflow: hidden;
 }
 
@@ -27,7 +30,7 @@
   z-index: 1;
   pointer-events: none;
   background:
-    linear-gradient(to bottom, #05051a 0%, transparent 25%, transparent 75%, #05051a 100%);
+    linear-gradient(to bottom, var(--navy-deep) 0%, transparent 25%, transparent 75%, var(--navy-deep) 100%);
 }
 
 /* ── 콘텐츠 ─────────────────────────────────────────────── */
@@ -64,7 +67,7 @@
 }
 
 @media (max-width: 768px) {
-  .section    { padding: 80px 0; }
+  .section    { padding: 80px 0 120px; }
   .container  { padding: 0 24px; }
   .ctaRow     { flex-direction: column; align-items: center; }
 }

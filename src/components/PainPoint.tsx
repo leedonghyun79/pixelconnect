@@ -62,7 +62,13 @@ export default function PainPoint() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      entries => entries.forEach(e => { 
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        } else {
+          e.target.classList.remove('visible');
+        }
+      }),
       { threshold: 0.1 }
     );
     itemRefs.current.forEach(el => { if (el) observer.observe(el); });
@@ -72,9 +78,12 @@ export default function PainPoint() {
 
   return (
     <section className={styles.section} id="pain">
+      {/* 동적 배경 효과 */}
+      <div className={styles.bgBlob} />
+      <div className={styles.bgBlob2} />
+      
       <div className={styles.container}>
         <div className={styles.header}>
-          <div className="section-eyebrow">PAIN POINT</div>
           <h2 className="section-title">혹시 이런 경험, 있으신가요?</h2>
           <p className={styles.sub}>
             많은 대표님들이 홈페이지 제작 과정에서 같은 어려움을 겪습니다.
@@ -89,8 +98,12 @@ export default function PainPoint() {
               className={`${styles.card} fade-up`}
               style={{ transitionDelay: `${i * 0.1}s` }}
             >
-              <div className={styles.cardNum}>{p.num}</div>
-              <div className={styles.cardIcon}>{p.icon}</div>
+              <div className={styles.cardHeader}>
+                <div className={styles.cardNum}>{p.num}</div>
+                <div className={styles.cardIconWrap}>
+                  <div className={styles.cardIcon}>{p.icon}</div>
+                </div>
+              </div>
               <h3 className={styles.cardTitle}>{p.title}</h3>
               <p className={styles.cardDesc}>{p.desc}</p>
             </div>

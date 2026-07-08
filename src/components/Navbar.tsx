@@ -38,7 +38,7 @@ export default function Navbar() {
     <nav className={`${styles.nav} ${scrolled ? styles.navScrolled : ''}`}>
       <div className={styles.inner}>
         <Link href="/" className={styles.logo}>
-          <span className={styles.logoSymbol}>P</span>
+          <img src="/images/logo.png" alt="" className={styles.logoImage} />
           PIXEL CONNECT
         </Link>
 

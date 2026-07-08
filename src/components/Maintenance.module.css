@@ -1,12 +1,53 @@
-.section {
-  background: var(--navy-deep);
-  padding: 100px 0;
+.maintenanceBlock {
+  padding-top: 250px;
+  padding-bottom: 80px;
+  position: relative;
+  z-index: 1;
+}
+
+/* 동적 다크 네온 배경 (Floating Blobs) */
+.bgBlob {
+  position: absolute;
+  top: 10%;
+  left: -10%;
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(circle, rgba(64, 112, 244, 0.08) 0%, rgba(13, 13, 62, 0) 70%);
+  border-radius: 50%;
+  animation: floatBlob 20s ease-in-out infinite alternate;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.bgBlob2 {
+  position: absolute;
+  bottom: -20%;
+  right: -10%;
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, rgba(140, 64, 244, 0.06) 0%, rgba(13, 13, 62, 0) 70%);
+  border-radius: 50%;
+  animation: floatBlob2 18s ease-in-out infinite alternate;
+  z-index: 0;
+  pointer-events: none;
+}
+
+@keyframes floatBlob {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(80px, -40px) scale(1.1); }
+}
+
+@keyframes floatBlob2 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-80px, 40px) scale(1.15); }
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 48px;
+  position: relative;
+  z-index: 1;
 }
 
 .grid {
@@ -23,29 +64,43 @@
 }
 
 .title {
-  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
   font-weight: 700;
-  line-height: 1.3;
-  letter-spacing: -0.02em;
+  line-height: 1.25;
+  letter-spacing: -0.04em;
   color: #fff;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
 .sub {
-  font-size: 15px;
-  color: rgba(255, 255, 255, 0.6);
-  line-height: 1.75;
-  margin-bottom: 32px;
+  font-family: 'Pretendard', sans-serif;
+  font-size: 1.15rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.7;
+  margin-bottom: 48px;
 }
 
+/* 입체적인 Quote 블록 */
 .quote {
-  font-size: 16px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.95);
   font-style: italic;
-  border-left: 3px solid rgba(255, 255, 255, 0.2);
-  padding-left: 20px;
-  line-height: 1.7;
+  padding-left: 24px;
+  line-height: 1.6;
+  position: relative;
+}
+
+.quote::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, #4070F4, #8C40F4);
+  border-radius: 4px;
+  box-shadow: 0 0 15px rgba(64, 112, 244, 0.4);
 }
 
 /* Right */
@@ -55,44 +110,128 @@
   gap: 24px;
 }
 
+/* 인터랙티브 글래스모피즘 카드 */
 .item {
   display: flex;
-  gap: 16px;
-  padding: 20px 24px;
-  background: rgba(255, 255, 255, 0.04);
+  gap: 24px;
+  padding: 32px 36px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: var(--radius-md);
-  transition: background 0.3s ease, border-color 0.3s ease;
+  border-radius: 20px;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  opacity: 0; /* 초기 숨김 상태 */
+  transform: translateY(40px);
+}
+
+.item.visible {
+  /* 등장 시 호버와 동일한 액션을 보여준 뒤 자리잡음 */
+  animation: popEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes popEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  40% {
+    opacity: 1;
+    transform: translateX(-16px); /* 호버 액션처럼 튀어나옴 */
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: -10px 15px 40px rgba(0, 0, 0, 0.25);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0); /* 제자리로 */
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.06);
+    box-shadow: none;
+  }
+}
+
+.item::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0) 100%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
 }
 
 .item:hover {
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateX(-16px); /* 역동적으로 좌측 텍스트를 향해 나옴 */
+  box-shadow: -10px 15px 40px rgba(0, 0, 0, 0.25);
+}
+
+.item:hover::before {
+  opacity: 1;
 }
 
 .checkIcon {
   flex-shrink: 0;
-  margin-top: 2px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.5);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.item.visible .checkIcon {
+  animation: iconPop 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  /* 부모 item의 animationDelay를 상속받도록 처리 */
+  animation-delay: inherit;
+}
+
+@keyframes iconPop {
+  0% { transform: scale(1); background: rgba(255, 255, 255, 0.04); color: rgba(255, 255, 255, 0.5); }
+  40% { 
+    background: rgba(64, 112, 244, 0.2);
+    color: #4070F4;
+    transform: scale(1.15);
+    box-shadow: 0 0 20px rgba(64, 112, 244, 0.3);
+  }
+  100% { transform: scale(1); background: rgba(255, 255, 255, 0.04); color: rgba(255, 255, 255, 0.5); }
+}
+
+.item:hover .checkIcon {
+  background: rgba(64, 112, 244, 0.2);
+  color: #4070F4;
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(64, 112, 244, 0.3);
 }
 
 .itemTitle {
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 1.35rem;
+  font-weight: 700;
   color: #fff;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
 }
 
 .itemDesc {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.5);
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.65);
   line-height: 1.6;
 }
 
 @media (max-width: 900px) {
-  .section { padding: 72px 0; }
+  .maintenanceBlock { padding-top: 150px; }
   .container { padding: 0 24px; }
   .grid {
     grid-template-columns: 1fr;
-    gap: 48px;
+    gap: 64px;
+  }
+  .item:hover {
+    transform: translateY(-8px); /* 모바일에서는 위로 올라오게 수정 */
   }
 }

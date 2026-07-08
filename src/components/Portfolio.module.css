@@ -1,6 +1,15 @@
 .section {
   background: var(--white);
   padding: 100px 0;
+  border-radius: 48px 48px 0 0;
+  margin-top: -48px;
+  position: relative;
+  z-index: 3;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
 }
 
 .container {
@@ -20,50 +29,26 @@
   margin-top: 8px;
 }
 
-/* Filter Tabs */
-.filters {
+/* Portfolio Track */
+.trackWrap {
+  width: 100%;
+  overflow: hidden;
+  /* 컨테이너의 왼쪽 여백과 동일한 시작점을 갖도록 설정 */
+  /* max-width: 1200px 기준 좌우 여백 */
+}
+
+.track {
   display: flex;
-  gap: 8px;
-  margin-bottom: 40px;
-  flex-wrap: wrap;
-}
-
-.filterBtn {
-  font-size: 0.82rem;
-  font-weight: 500;
-  padding: 8px 20px;
-  border-radius: var(--radius-pill);
-  color: var(--navy-muted);
-  background: var(--navy-pale);
-  border: 1px solid transparent;
-  transition: all 0.25s ease;
-  cursor: pointer;
-}
-
-.filterBtn:hover {
-  color: var(--navy);
-  border-color: var(--navy-light);
-}
-
-.filterActive {
-  background: var(--navy);
-  color: #fff;
-}
-
-.filterActive:hover {
-  background: var(--navy-light);
-  color: #fff;
-}
-
-/* Portfolio Grid */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-bottom: 48px;
+  width: max-content;
+  gap: 32px;
+  padding: 0 48px;
+  padding-left: max(48px, calc((100vw - 1200px) / 2 + 48px));
+  margin-bottom: 60px;
 }
 
 .card {
+  width: 400px;
+  flex-shrink: 0;
   border-radius: var(--radius-md);
   overflow: hidden;
   background: var(--white);
@@ -182,9 +167,17 @@
 @media (max-width: 900px) {
   .section { padding: 72px 0; }
   .container { padding: 0 24px; }
-  .grid { grid-template-columns: 1fr 1fr; }
+  .track {
+    padding-left: max(24px, calc((100vw - 1200px) / 2 + 24px));
+    padding-right: 24px;
+  }
+  .card {
+    width: 320px;
+  }
 }
 
 @media (max-width: 600px) {
-  .grid { grid-template-columns: 1fr; }
+  .card {
+    width: 280px;
+  }
 }

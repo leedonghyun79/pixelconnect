@@ -28,25 +28,19 @@
 .logo {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-family: var(--font-display);
+  gap: 15px;
+  font-family: sans-serif;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 18px;
   color: rgba(255, 255, 255, 0.7);
 }
 
-.logoSymbol {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
+.logoImage {
   height: 24px;
-  background: var(--navy);
-  color: var(--white);
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 0.75rem;
-  border-radius: 5px;
+  width: auto;
+  object-fit: contain;
+  /* 만약 로고가 검은색이라면 푸터의 어두운 배경에 맞게 흰색으로 반전 */
+  filter: brightness(0) invert(1);
 }
 
 .bizInfo {

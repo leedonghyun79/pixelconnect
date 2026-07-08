@@ -3,13 +3,19 @@ import { useRef, useEffect } from 'react';
 import styles from './Contact.module.css';
 
 export default function Contact() {
-  const sectionRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const el = sectionRef.current;
+    const el = containerRef.current;
     if (!el) return;
     const observer = new IntersectionObserver(
-      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      entries => entries.forEach(e => { 
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        } else {
+          e.target.classList.remove('visible');
+        }
+      }),
       { threshold: 0.1 }
     );
     observer.observe(el);
@@ -17,10 +23,10 @@ export default function Contact() {
   }, []);
 
   return (
-    <section id="contact" ref={sectionRef} className={`${styles.section} fade-up`}>
+    <section id="contact" className={styles.section}>
       <div className={styles.glow} />
 
-      <div className={styles.container}>
+      <div ref={containerRef} className={`${styles.container} fade-up`}>
         {/* CTA Block */}
         <div className={styles.ctaBlock}>
           <div className="section-label">Free Consultation</div>

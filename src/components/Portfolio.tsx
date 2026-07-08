@@ -1,8 +1,10 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './Portfolio.module.css';
 
-const filters = ['전체', '쇼핑몰', '기업 홈페이지', '병원·클리닉', '교육', '기타'];
+gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
@@ -48,24 +50,43 @@ interface PortfolioProps {
 }
 
 export default function Portfolio({ hideHeader = false }: PortfolioProps) {
-  const [active, setActive] = useState('전체');
-  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-  const filtered = active === '전체'
-    ? projects
-    : projects.filter(p => p.cat === active);
+  const sectionRef = useRef<HTMLElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
-      { threshold: 0.1 }
-    );
-    itemRefs.current.forEach(el => { if (el) observer.observe(el); });
-    return () => observer.disconnect();
-  }, [filtered]);
+    // hideHeader가 true이면 (보통 포트폴리오 페이지 내부) 가로 스크롤 적용 안 함
+    if (hideHeader) return;
+
+    const section = sectionRef.current;
+    const track = trackRef.current;
+    if (!section || !track) return;
+
+    const getScrollAmount = () => {
+      const trackWidth = track.scrollWidth;
+      // 화면 오른쪽 끝까지 가도록 여백 계산
+      return -(trackWidth - window.innerWidth + 48);
+    };
+
+    const tween = gsap.to(track, {
+      x: getScrollAmount,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: section,
+        start: 'center center',
+        end: () => `+=${track.scrollWidth}`, // 트랙 너비만큼 스크롤
+        pin: true,
+        scrub: 1, // 부드러운 스크러빙
+        invalidateOnRefresh: true, // 창 크기 변경 시 재계산
+      }
+    });
+
+    return () => {
+      tween.kill();
+    };
+  }, [hideHeader]);
 
   return (
-    <section className={styles.section} id="portfolio">
+    <section ref={sectionRef} className={`${styles.section} ${hideHeader ? styles.noPin : ''}`} id="portfolio">
       <div className={styles.container}>
         {!hideHeader && (
           <div className={styles.header}>
@@ -77,29 +98,16 @@ export default function Portfolio({ hideHeader = false }: PortfolioProps) {
           </div>
         )}
 
-        {/* Filter tabs */}
-        <div className={styles.filters}>
-          {filters.map(f => (
-            <button
-              key={f}
-              onClick={() => setActive(f)}
-              className={`${styles.filterBtn} ${active === f ? styles.filterActive : ''}`}
-            >
-              {f}
-            </button>
-          ))}
-        </div>
+      </div>
 
-        {/* Project cards */}
-        <div className={styles.grid}>
-          {filtered.map((p, i) => (
+      {/* Horizontal Scroll Track (컨테이너 밖으로 빼서 풀 블리드 구현) */}
+      <div className={styles.trackWrap}>
+        <div ref={trackRef} className={styles.track}>
+          {projects.map((p, i) => (
             <div
               key={`${p.title}-${i}`}
-              ref={el => { itemRefs.current[i] = el; }}
-              className={`${styles.card} fade-up`}
-              style={{ transitionDelay: `${i * 0.08}s` }}
+              className={styles.card}
             >
-              {/* Thumbnail placeholder */}
               <div className={styles.thumb}>
                 <div className={styles.thumbInner}>
                   <span className={styles.thumbPlaceholder}>🖥️</span>
@@ -123,7 +131,9 @@ export default function Portfolio({ hideHeader = false }: PortfolioProps) {
             </div>
           ))}
         </div>
+      </div>
 
+      <div className={styles.container}>
         <div className={styles.viewAll}>
           <a href="/portfolio" className={styles.viewAllLink}>전체 프로젝트 보기 →</a>
         </div>
