@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import PageHero from '@/components/PageHero';
 import Portfolio from '@/components/Portfolio';
 import Stats from '@/components/Stats';
-import FinalCTA from '@/components/FinalCTA';
 
 export const metadata: Metadata = {
   title: '포트폴리오 | 픽셀커넥트',
@@ -25,8 +24,6 @@ export default function PortfolioPage() {
       {/* Stats */}
       <Stats />
 
-      {/* CTA */}
-      <FinalCTA />
     </main>
   );
 }

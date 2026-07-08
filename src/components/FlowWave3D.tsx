@@ -12,6 +12,21 @@ export default function FlowWave3D({ className }: { className?: string }) {
 
     let raf: number;
     let time = 0;
+    let isVisible = false;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) {
+          draw();
+        } else {
+          cancelAnimationFrame(raf);
+        }
+      },
+      { threshold: 0 }
+    );
+
+    observer.observe(canvas);
 
     const resize = () => {
       const dpr = window.devicePixelRatio || 1;
@@ -27,8 +42,8 @@ export default function FlowWave3D({ className }: { className?: string }) {
       Math.sin(u * Math.PI * 6.0 + t * 1.2 - v * 1.5) * 0.15 +
       Math.sin(v * Math.PI * 2.2 + t * 0.5)           * 0.15;
 
-    const ROWS = 55;  // 깊이 분할 (앞→뒤)
-    const COLS = 120; // 가로 분할
+    const ROWS = 35;
+    const COLS = 60;
 
     const draw = () => {
       const W = canvas.offsetWidth;
@@ -112,27 +127,22 @@ export default function FlowWave3D({ className }: { className?: string }) {
         ctx.strokeStyle = `rgba(${strokeR}, ${strokeG}, ${strokeB}, ${alpha})`;
         ctx.lineWidth = 0.5 + v1 * 1.5;
         
-        // 글로우 효과
-        if (v1 > 0.5) {
-          ctx.shadowColor = `rgba(${strokeR}, ${strokeG}, ${strokeB}, ${alpha})`;
-          ctx.shadowBlur = 8 * v1;
-        } else {
-          ctx.shadowBlur = 0;
-        }
-        
+        // 글로우 효과 (성능을 위해 shadowBlur 대신 strokeOpacity 조절)
         ctx.stroke();
-        ctx.shadowBlur = 0; // 초기화
       }
 
       time += 0.008;
-      raf = requestAnimationFrame(draw);
+      if (isVisible) {
+        raf = requestAnimationFrame(draw);
+      }
     };
 
     resize();
     window.addEventListener('resize', resize);
-    draw();
+    // draw() is started by the IntersectionObserver when visible
 
     return () => {
+      observer.disconnect();
       cancelAnimationFrame(raf);
       window.removeEventListener('resize', resize);
     };

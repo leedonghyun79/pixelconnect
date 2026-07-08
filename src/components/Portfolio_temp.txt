@@ -1,0 +1,170 @@
+'use client';
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import styles from './Portfolio.module.css';
+
+gsap.registerPlugin(ScrollTrigger);
+
+const projects = [
+  {
+    cat: '?¼í•‘ëª?,
+    title: 'ë¹„ìë¥´í…Œ ?¼í•‘ëª?,
+    tags: ['?¸í…Œë¦¬ì–´', '?¼í•‘ëª?],
+    result: '?œì‘ ??ë¬¸ì˜ 3ë°?ì¦ê?',
+  },
+  {
+    cat: 'ê¸°ì—… ?ˆí˜?´ì?',
+    title: 'B2B SaaS ê¸°ì—… ?¬ì´??,
+    tags: ['ê¸°ì—…', 'B2B'],
+    result: 'ë¸Œëœ???¸ì????¥ìƒ',
+  },
+  {
+    cat: 'ë³‘ì›Â·?´ë¦¬??,
+    title: 'ê°•ë‚¨ ?¼ë?ê³??´ë¦¬??,
+    tags: ['ë³‘ì›', '?´ë¦¬??],
+    result: '?¨ë¼???ˆì•½ 200% ì¦ê?',
+  },
+  {
+    cat: 'êµìœ¡',
+    title: 'êµìœ¡ ?Œë«???œë”©',
+    tags: ['êµìœ¡', '?œë”©?˜ì´ì§€'],
+    result: 'ê´‘ê³  ?„í™˜??3ë°?,
+  },
+  {
+    cat: '?¼í•‘ëª?,
+    title: 'ë·°í‹° ë¸Œëœ??LUMI',
+    tags: ['ë·°í‹°', '?¼í•‘ëª?],
+    result: '?„í™˜??3.2%??.1%',
+  },
+  {
+    cat: 'ê¸°ì—… ?ˆí˜?´ì?',
+    title: 'ë²•ë¥  ?¬ë¬´???¹ì‚¬?´íŠ¸',
+    tags: ['ë²•ë¥ ', 'ê¸°ì—…'],
+    result: '??ë¬¸ì˜ 3ë°?ì¦ê?',
+  },
+];
+
+interface PortfolioProps {
+  hideHeader?: boolean;
+}
+
+export default function Portfolio({ hideHeader = false }: PortfolioProps) {
+  const sectionRef = useRef<HTMLElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // hideHeaderê°€ true?´ë©´ (ë³´í†µ ?¬íŠ¸?´ë¦¬???˜ì´ì§€ ?´ë?) ê°€ë¡??¤í¬ë¡??ìš© ????    if (hideHeader) return;
+
+    const section = sectionRef.current;
+    const track = trackRef.current;
+    if (!section || !track) return;
+
+    const getScrollAmount = () => {
+      const trackWidth = track.scrollWidth;
+      // ?”ë©´ ?¤ë¥¸ìª??ê¹Œì§€ ê°€?„ë¡ ?¬ë°± ê³„ì‚°
+      return -(trackWidth - window.innerWidth + 48);
+    };
+
+    const tween = gsap.to(track, {
+      x: getScrollAmount,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: section,
+        start: 'center center',
+        end: () => `+=${track.scrollWidth}`, // ?¸ë™ ?ˆë¹„ë§Œí¼ ?¤í¬ë¡?        pin: true,
+        scrub: 1, // ë¶€?œëŸ¬???¤í¬?¬ë¹™
+        invalidateOnRefresh: true, // ì°??¬ê¸° ë³€ê²????¬ê³„??      }
+    });
+
+    return () => {
+      tween.kill();
+    };
+  }, [hideHeader]);
+
+  return (
+    <section ref={sectionRef} className={`${styles.section} ${!hideHeader ? styles.overlap : ''} ${hideHeader ? styles.noPin : ''}`} id="portfolio">
+      <div className={styles.container}>
+        {!hideHeader && (
+          <div className={styles.header}>
+            <div className="section-eyebrow">OUR WORK</div>
+            <h2 className="section-title">ê²°ê³¼ë¬¼ë¡œ ë§í•©?ˆë‹¤</h2>
+            <p className={styles.sub}>
+              ?¤ì–‘???…ì¢…??ë¸Œëœ?œì? ?¨ê»˜ ë§Œë“  ?ˆí˜?´ì??…ë‹ˆ??
+            </p>
+          </div>
+        )}
+
+      </div>
+
+      {hideHeader ? (
+        <div className={styles.container}>
+          <div className={styles.grid}>
+            {projects.map((p, i) => (
+              <div key={`${p.title}-${i}`} className={styles.card}>
+                <div className={styles.thumb}>
+                  <div className={styles.thumbInner}>
+                    <span className={styles.thumbPlaceholder}>?–¥ï¸?/span>
+                  </div>
+                  <div className={styles.thumbOverlay}>
+                    <a href="#contact" className={styles.thumbCta}>?ì„¸??ë³´ê¸° ??/a>
+                  </div>
+                </div>
+
+                <div className={styles.cardBody}>
+                  <div className={styles.tags}>
+                    {p.tags.map((t, ti) => (
+                      <span key={ti} className={styles.tag}>{t}</span>
+                    ))}
+                  </div>
+                  <h3 className={styles.cardTitle}>{p.title}</h3>
+                  {p.result && (
+                    <p className={styles.cardResult}>{p.result}</p>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div className={styles.trackWrap}>
+          <div ref={trackRef} className={styles.track}>
+            {projects.map((p, i) => (
+              <div key={`${p.title}-${i}`} className={styles.card}>
+                <div className={styles.thumb}>
+                  <div className={styles.thumbInner}>
+                    <span className={styles.thumbPlaceholder}>?–¥ï¸?/span>
+                  </div>
+                  <div className={styles.thumbOverlay}>
+                    <a href="#contact" className={styles.thumbCta}>?ì„¸??ë³´ê¸° ??/a>
+                  </div>
+                </div>
+
+                <div className={styles.cardBody}>
+                  <div className={styles.tags}>
+                    {p.tags.map((t, ti) => (
+                      <span key={ti} className={styles.tag}>{t}</span>
+                    ))}
+                  </div>
+                  <h3 className={styles.cardTitle}>{p.title}</h3>
+                  {p.result && (
+                    <p className={styles.cardResult}>{p.result}</p>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {!hideHeader && (
+        <div className={styles.container}>
+          <div className={styles.viewAll}>
+            <a href="/portfolio" className={styles.viewAllLink}>?„ì²´ ?„ë¡œ?íŠ¸ ë³´ê¸° ??/a>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}
+

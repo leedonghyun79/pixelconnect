@@ -20,7 +20,7 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 0;
 }
 
@@ -68,18 +68,18 @@
   .section { padding: 72px 0; }
   .container { padding: 0 24px; }
   .grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 32px 0;
   }
   .num { font-size: 36px; }
   
-  .statItem:nth-child(2)::after {
+  .statItem::after {
     display: none;
   }
 }
 
 @media (max-width: 480px) {
-  .grid { grid-template-columns: 1fr 1fr; }
+  .grid { grid-template-columns: 1fr; }
   .num { font-size: 28px; }
   .statItem { padding: 20px 12px; }
 }

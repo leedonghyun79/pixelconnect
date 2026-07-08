@@ -5,7 +5,11 @@ import styles from './FinalCTA.module.css';
 
 const FlowWave3D = dynamic(() => import('./FlowWave3D'), { ssr: false });
 
-export default function FinalCTA() {
+interface FinalCTAProps {
+  hide3D?: boolean;
+}
+
+export default function FinalCTA({ hide3D = false }: FinalCTAProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -28,10 +32,12 @@ export default function FinalCTA() {
   return (
     <section className={styles.section} id="contact">
 
-      {/* 3D 흐르는 배경 */}
-      <div className={styles.canvasWrap} aria-hidden="true">
-        <FlowWave3D className={styles.canvas} />
-      </div>
+      {/* 3D 배경 (hide3D가 true면 렌더링 안함) */}
+      {!hide3D && (
+        <div className={styles.canvasWrap} aria-hidden="true">
+          <FlowWave3D className={styles.canvas} />
+        </div>
+      )}
 
       {/* 하단 그라디언트 페이드 */}
       <div className={styles.fade} aria-hidden="true" />

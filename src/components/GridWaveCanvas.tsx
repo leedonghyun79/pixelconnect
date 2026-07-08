@@ -89,18 +89,21 @@ export default function GridWaveCanvas({ className }: { className?: string }) {
           const worldX = x * spacing - gridWidth / 2;
           const worldZ = z * spacing - gridDepth / 2;
           
-          // Y축 회전 (카메라의 좌우 흔들림)
-          const rotatedX = worldX * Math.cos(activeX * 0.3) - worldZ * Math.sin(activeX * 0.3);
-          const rotatedZ = worldX * Math.sin(activeX * 0.3) + worldZ * Math.cos(activeX * 0.3);
+          // Y축 회전 (좌우 흔들림) 제거 - 어지러움 유발 방지
+          const rotatedX = worldX;
+          const rotatedZ = worldZ;
 
           // 중심으로부터의 거리
           const distFromCenter = Math.sqrt(rotatedX * rotatedX + rotatedZ * rotatedZ);
           
-          // 파장이 너무 짧아 원경에서 꼬불꼬불하게 겹치는 현상을 방지하기 위해 파장 길이를 대폭 늘림 (0.003)
-          const wavePhase = distFromCenter * 0.003 - time * 0.015;
-          // 마우스와 자동 스웨이가 파도의 출렁임에도 영향을 줌
-          const mouseWaveOffset = Math.sin(worldX * 0.002 + activeX) * Math.cos(worldZ * 0.002 + activeY) * 50;
-          const worldY = Math.sin(wavePhase) * 60 + mouseWaveOffset;
+          // 파도를 잔잔하고 넓게 치도록 수정
+          const wavePhase = worldX * 0.005 + worldZ * 0.005 - time * 0.02;
+          
+          // 마우스에 반응하는 가벼운 추가 파동
+          const mouseWaveOffset = Math.sin(worldX * 0.002 + activeX) * Math.cos(worldZ * 0.002 + activeY) * 30;
+          
+          // 최종 파동 높이 계산
+          const worldY = Math.sin(wavePhase) * 40 + Math.cos(distFromCenter * 0.002 - time * 0.01) * 30 + mouseWaveOffset;
 
           // 원근 투영 (Perspective Projection)
           const zPos = rotatedZ + cameraZ;
@@ -147,6 +150,9 @@ export default function GridWaveCanvas({ className }: { className?: string }) {
             ctx.moveTo(p.px, p.py);
             hasStart = true;
           } else {
+            // 부드러운 곡선 처리를 위해 베지어 곡선(quadraticCurveTo) 사용 시도 대신 lineJoin을 round로 변경
+            ctx.lineJoin = 'round';
+            ctx.lineCap = 'round';
             ctx.lineTo(p.px, p.py);
           }
         }
@@ -182,6 +188,8 @@ export default function GridWaveCanvas({ className }: { className?: string }) {
             ctx.moveTo(p.px, p.py);
             hasStart = true;
           } else {
+            ctx.lineJoin = 'round';
+            ctx.lineCap = 'round';
             ctx.lineTo(p.px, p.py);
           }
         }
@@ -197,7 +205,7 @@ export default function GridWaveCanvas({ className }: { className?: string }) {
         }
       }
 
-      time += 1;
+      time += 0.3; // 파동 속도를 천천히 하기 위해 기존 1에서 0.3으로 대폭 감소
       rafId = requestAnimationFrame(draw);
     };
 

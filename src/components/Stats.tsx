@@ -5,7 +5,6 @@ import styles from './Stats.module.css';
 const stats = [
   { target: 50, suffix: '+', label: '누적 프로젝트', desc: '다양한 업종 경험' },
   { target: 92, suffix: '%', label: '고객 재의뢰율', desc: '한 번의 인연이 계속됩니다' },
-  { target: 1, suffix: '시간↓', label: '평균 응답 속도', desc: '1시간 이내 빠른 답변' },
   { target: 98, suffix: '%', label: '고객 만족도', desc: '결과물에 대한 자신감' },
 ];
 

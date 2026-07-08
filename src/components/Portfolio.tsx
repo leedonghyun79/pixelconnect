@@ -1,10 +1,12 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './Portfolio.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const filters = ['전체', '쇼핑몰', '기업 홈페이지', '병원·클리닉', '교육', '기타'];
 
 const projects = [
   {
@@ -50,43 +52,56 @@ interface PortfolioProps {
 }
 
 export default function Portfolio({ hideHeader = false }: PortfolioProps) {
+  const [active, setActive] = useState('전체');
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const filtered = active === '전체'
+    ? projects
+    : projects.filter(p => p.cat === active);
 
   useEffect(() => {
-    // hideHeader가 true이면 (보통 포트폴리오 페이지 내부) 가로 스크롤 적용 안 함
-    if (hideHeader) return;
+    if (hideHeader) {
+      const observer = new IntersectionObserver(
+        entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+        { threshold: 0.1 }
+      );
+      // Trim refs array to current filtered length and observe valid elements
+      itemRefs.current = itemRefs.current.slice(0, filtered.length);
+      itemRefs.current.forEach(el => { if (el) observer.observe(el); });
+      return () => observer.disconnect();
+    } else {
+      const section = sectionRef.current;
+      const track = trackRef.current;
+      if (!section || !track) return;
 
-    const section = sectionRef.current;
-    const track = trackRef.current;
-    if (!section || !track) return;
+      const getScrollAmount = () => {
+        const trackWidth = track.scrollWidth;
+        return -(trackWidth - window.innerWidth + 48);
+      };
 
-    const getScrollAmount = () => {
-      const trackWidth = track.scrollWidth;
-      // 화면 오른쪽 끝까지 가도록 여백 계산
-      return -(trackWidth - window.innerWidth + 48);
-    };
+      const tween = gsap.to(track, {
+        x: getScrollAmount,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          start: 'center center',
+          end: () => `+=${track.scrollWidth}`,
+          pin: true,
+          scrub: 1,
+          invalidateOnRefresh: true,
+        }
+      });
 
-    const tween = gsap.to(track, {
-      x: getScrollAmount,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: section,
-        start: 'center center',
-        end: () => `+=${track.scrollWidth}`, // 트랙 너비만큼 스크롤
-        pin: true,
-        scrub: 1, // 부드러운 스크러빙
-        invalidateOnRefresh: true, // 창 크기 변경 시 재계산
-      }
-    });
-
-    return () => {
-      tween.kill();
-    };
-  }, [hideHeader]);
+      return () => {
+        tween.kill();
+      };
+    }
+  }, [hideHeader, filtered]);
 
   return (
-    <section ref={sectionRef} className={`${styles.section} ${hideHeader ? styles.noPin : ''}`} id="portfolio">
+    <section ref={sectionRef} className={`${styles.section} ${!hideHeader ? styles.overlap : ''} ${hideHeader ? styles.noPin : ''}`} id="portfolio">
       <div className={styles.container}>
         {!hideHeader && (
           <div className={styles.header}>
@@ -98,46 +113,93 @@ export default function Portfolio({ hideHeader = false }: PortfolioProps) {
           </div>
         )}
 
+        {hideHeader && (
+          <div className={styles.filters}>
+            {filters.map(f => (
+              <button
+                key={f}
+                onClick={() => setActive(f)}
+                className={`${styles.filterBtn} ${active === f ? styles.filterActive : ''}`}
+              >
+                {f}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
-      {/* Horizontal Scroll Track (컨테이너 밖으로 빼서 풀 블리드 구현) */}
-      <div className={styles.trackWrap}>
-        <div ref={trackRef} className={styles.track}>
-          {projects.map((p, i) => (
-            <div
-              key={`${p.title}-${i}`}
-              className={styles.card}
-            >
-              <div className={styles.thumb}>
-                <div className={styles.thumbInner}>
-                  <span className={styles.thumbPlaceholder}>🖥️</span>
+      {hideHeader ? (
+        <div className={styles.container}>
+          <div className={styles.grid}>
+            {filtered.map((p, i) => (
+              <div 
+                key={`${p.title}-${i}`} 
+                ref={el => { itemRefs.current[i] = el; }}
+                className={`${styles.card} fade-up`}
+                style={{ transitionDelay: `${i * 0.08}s` }}
+              >
+                <div className={styles.thumb}>
+                  <div className={styles.thumbInner}>
+                    <span className={styles.thumbPlaceholder}>🖥️</span>
+                  </div>
+                  <div className={styles.thumbOverlay}>
+                    <a href="#contact" className={styles.thumbCta}>자세히 보기 →</a>
+                  </div>
                 </div>
-                <div className={styles.thumbOverlay}>
-                  <a href="#contact" className={styles.thumbCta}>자세히 보기 →</a>
+
+                <div className={styles.cardBody}>
+                  <div className={styles.tags}>
+                    {p.tags.map((t, ti) => (
+                      <span key={ti} className={styles.tag}>{t}</span>
+                    ))}
+                  </div>
+                  <h3 className={styles.cardTitle}>{p.title}</h3>
+                  {p.result && (
+                    <p className={styles.cardResult}>{p.result}</p>
+                  )}
                 </div>
               </div>
-
-              <div className={styles.cardBody}>
-                <div className={styles.tags}>
-                  {p.tags.map((t, ti) => (
-                    <span key={ti} className={styles.tag}>{t}</span>
-                  ))}
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div className={styles.trackWrap}>
+          <div ref={trackRef} className={styles.track}>
+            {projects.map((p, i) => (
+              <div key={`${p.title}-${i}`} className={styles.card}>
+                <div className={styles.thumb}>
+                  <div className={styles.thumbInner}>
+                    <span className={styles.thumbPlaceholder}>🖥️</span>
+                  </div>
+                  <div className={styles.thumbOverlay}>
+                    <a href="#contact" className={styles.thumbCta}>자세히 보기 →</a>
+                  </div>
                 </div>
-                <h3 className={styles.cardTitle}>{p.title}</h3>
-                {p.result && (
-                  <p className={styles.cardResult}>{p.result}</p>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
 
-      <div className={styles.container}>
-        <div className={styles.viewAll}>
-          <a href="/portfolio" className={styles.viewAllLink}>전체 프로젝트 보기 →</a>
+                <div className={styles.cardBody}>
+                  <div className={styles.tags}>
+                    {p.tags.map((t, ti) => (
+                      <span key={ti} className={styles.tag}>{t}</span>
+                    ))}
+                  </div>
+                  <h3 className={styles.cardTitle}>{p.title}</h3>
+                  {p.result && (
+                    <p className={styles.cardResult}>{p.result}</p>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
+
+      {!hideHeader && (
+        <div className={styles.container}>
+          <div className={styles.viewAll}>
+            <a href="/portfolio" className={styles.viewAllLink}>전체 프로젝트 보기 →</a>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

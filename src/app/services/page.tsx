@@ -1,11 +1,5 @@
 import type { Metadata } from 'next';
 import PageHero from '@/components/PageHero';
-import WhyUs from '@/components/WhyUs';
-import Maintenance from '@/components/Maintenance';
-import Process from '@/components/Process';
-import Pricing from '@/components/Pricing';
-import FAQ from '@/components/FAQ';
-import FinalCTA from '@/components/FinalCTA';
 
 export const metadata: Metadata = {
   title: '서비스 | 픽셀커넥트',
@@ -25,23 +19,6 @@ export default function ServicesPage() {
       {/* 서비스 상세 항목 */}
       <ServiceDetail />
 
-      {/* Why Us */}
-      <WhyUs />
-
-      {/* Maintenance */}
-      <Maintenance />
-
-      {/* Process */}
-      <Process />
-
-      {/* Pricing */}
-      <Pricing />
-
-      {/* FAQ */}
-      <FAQ />
-
-      {/* CTA */}
-      <FinalCTA />
     </main>
   );
 }
@@ -76,7 +53,7 @@ function ServiceDetail() {
   ];
 
   return (
-    <section style={{ background: 'var(--navy-pale)', padding: '80px 0' }}>
+    <section style={{ background: '#fff', padding: '0 0 160px' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 48px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 20 }}>
           {services.map((s, i) => (

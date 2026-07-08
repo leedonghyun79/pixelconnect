@@ -192,9 +192,9 @@ h1, h2, h3, h4, h5, h6 {
 .fade-up {
   opacity: 0;
   transform: translateY(60px);
-  /* opacity는 부드럽게, transform은 스프링(바운스) 효과 적용 */
-  transition: opacity 0.6s var(--ease-out),
-              transform 0.8s var(--ease-spring);
+  /* 전체적으로 부드럽고 우아한 느낌(ease-out)으로 통일 */
+  transition: opacity 0.8s var(--ease-out),
+              transform 1s var(--ease-out);
 }
 
 .fade-up.visible {
