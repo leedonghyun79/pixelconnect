@@ -1,7 +1,6 @@
 import Hero from '@/components/Hero';
 import PainPoint from '@/components/PainPoint';
 import WhyUs from '@/components/WhyUs';
-import Stats from '@/components/Stats';
 import Portfolio from '@/components/Portfolio';
 import Process from '@/components/Process';
 import Testimonials from '@/components/Testimonials';

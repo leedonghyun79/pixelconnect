@@ -84,7 +84,7 @@ export default function RibbonCanvas({ className }: Props) {
 
           const y = cy + yOffset + wave * H * 0.40;
 
-          si === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+          if (si === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
         }
 
         ctx.stroke();
@@ -107,7 +107,7 @@ export default function RibbonCanvas({ className }: Props) {
             Math.sin(nx * Math.PI * 2.2 - time * 0.55) * 0.30 +
             Math.sin(nx * Math.PI * 1.1 + time * 0.30) * 0.04;
           const y = cy + yOff + wave * H * 0.40;
-          si === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+          if (si === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
         }
         ctx.stroke();
       }

@@ -19,6 +19,7 @@ export default function Footer() {
           {/* Logo + Business Info */}
           <div className={styles.logoCol}>
             <Link href="/" className={styles.logo}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/images/logo.png" alt="" className={styles.logoImage} />
               PIXEL CONNECT
             </Link>

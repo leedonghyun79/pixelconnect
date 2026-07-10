@@ -40,8 +40,6 @@ export default function DiagonalBeamsCanvas({ className }: { className?: string 
       ctx.fillRect(0, 0, W, H);
 
       const angle = Math.PI / 4; // 45도
-      const cosA = Math.cos(angle);
-      const sinA = Math.sin(angle);
       
       // 대각선 길이에 맞춰 빔이 화면을 덮도록 설정
       const diagonal = Math.sqrt(W * W + H * H);

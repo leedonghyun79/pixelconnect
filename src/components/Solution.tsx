@@ -81,13 +81,13 @@ export default function Solution() {
         <div className={styles.compBanner}>
           <div className={styles.compItem}>
             <span className={styles.compBad}>❌</span>
-            <span className={styles.compText}>"우리는 잘 만든다"</span>
+            <span className={styles.compText}>&quot;우리는 잘 만든다&quot;</span>
             <span className={styles.compSub}>모든 에이전시가 하는 말</span>
           </div>
           <div className={styles.compArrow}>VS</div>
           <div className={styles.compItem}>
             <span className={styles.compGood}>✅</span>
-            <span className={styles.compTextAccent}>"우리는 매출을 만든다"</span>
+            <span className={styles.compTextAccent}>&quot;우리는 매출을 만든다&quot;</span>
             <span className={styles.compSub}>픽셀커넥트만의 차별화</span>
           </div>
         </div>

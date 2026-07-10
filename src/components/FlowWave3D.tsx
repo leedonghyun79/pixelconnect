@@ -112,7 +112,7 @@ export default function FlowWave3D({ className }: { className?: string }) {
           const w = waveAt(u, v1, time);
           const x = W * 0.5 + (u - 0.5) * W * scale1 * 1.3;
           const y = baseY1 + w * amplitude * scale1;
-          col === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+          if (col === 0) { ctx.moveTo(x, y); } else { ctx.lineTo(x, y); }
         }
         
         // 원근에 따른 선명도 조절

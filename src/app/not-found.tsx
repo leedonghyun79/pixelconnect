@@ -12,6 +12,7 @@ const NotFound: NextPage = () => {
           justifyContent: "center",
         }}
       >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img width={400} src="/images/404Image.jpg" alt="not found image" />
       </div>
       <div
