@@ -1,6 +1,14 @@
 .section {
-  background: var(--white);
-  padding: 100px 0;
+  background: var(--navy-deep);
+  background-image: 
+    linear-gradient(rgba(7, 7, 31, 0.7), rgba(7, 7, 31, 0.85)),
+    url('/images/pricing_bg.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 120px 0;
+  position: relative;
+  overflow: hidden;
 }
 
 .container {

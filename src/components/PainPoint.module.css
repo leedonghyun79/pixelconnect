@@ -5,43 +5,6 @@
   overflow: hidden;
 }
 
-/* 동적 배경 (Floating Blobs) */
-.bgBlob {
-  position: absolute;
-  top: 10%;
-  right: -5%;
-  width: 50vw;
-  height: 50vw;
-  background: radial-gradient(circle, rgba(13,13,62,0.03) 0%, rgba(250,250,250,0) 70%);
-  border-radius: 50%;
-  animation: floatBlob 15s ease-in-out infinite alternate;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.bgBlob2 {
-  position: absolute;
-  bottom: 10%;
-  left: -10%;
-  width: 40vw;
-  height: 40vw;
-  background: radial-gradient(circle, rgba(13,13,62,0.02) 0%, rgba(250,250,250,0) 70%);
-  border-radius: 50%;
-  animation: floatBlob2 18s ease-in-out infinite alternate;
-  z-index: 0;
-  pointer-events: none;
-}
-
-@keyframes floatBlob {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(-50px, 50px) scale(1.1); }
-}
-
-@keyframes floatBlob2 {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(50px, -50px) scale(1.2); }
-}
-
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -137,19 +100,15 @@
 }
 
 .cardIcon {
-  width: 32px;
-  height: 32px;
-  color: #0D0D3E;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.5s ease;
 }
 
 .card:hover .cardIconWrap {
-  background: #0D0D3E;
+  background: rgba(74, 58, 255, 0.1);
   transform: scale(1.1) rotate(-5deg);
-}
-
-.card:hover .cardIcon {
-  color: #FFFFFF;
 }
 
 .cardTitle {

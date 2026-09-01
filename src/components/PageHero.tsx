@@ -4,7 +4,7 @@ import styles from './PageHero.module.css';
 interface PageHeroProps {
   eyebrow: string;
   title: string;
-  sub: string;
+  sub: React.ReactNode;
   breadcrumb: string;
   variant?: 'white' | 'pale' | 'navy';
 }

@@ -77,26 +77,64 @@
 }
 
 .dot {
-  width: 10px;
-  height: 10px;
+  position: relative;
+  z-index: 2;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid rgba(13, 13, 62, 0.2);
+  background: var(--navy-pale);
+  box-shadow: 0 0 0 6px var(--navy-pale); /* Creates visual gap */
+  flex-shrink: 0;
+  transition: border-color 0.4s ease;
+}
+
+.step.active .dot {
+  border-color: var(--navy);
+}
+
+.dot::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: var(--navy);
-  flex-shrink: 0;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition-delay: 0.1s;
+}
+
+.step.active .dot::after {
+  transform: translate(-50%, -50%) scale(1);
 }
 
 .stepHighlight .dot {
-  background: #fff;
-  box-shadow: 0 0 0 4px var(--navy);
+  border-color: var(--navy);
 }
 
 .line {
   position: absolute;
-  top: 24px;
-  bottom: -50px;
+  top: 15px;
+  bottom: -63px;
   left: 50%;
   transform: translateX(-50%);
-  width: 1px;
-  background: rgba(13, 13, 62, 0.15);
+  width: 2px;
+  background: rgba(13, 13, 62, 0.1);
+  z-index: 1;
+}
+
+.lineFill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--navy);
+  transform-origin: top;
+  will-change: transform;
 }
 
 /* Step Content */

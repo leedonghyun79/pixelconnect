@@ -57,9 +57,7 @@ export default function Portfolio({ hideHeader = false }: PortfolioProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const filtered = active === '전체'
-    ? projects
-    : projects.filter(p => p.cat === active);
+  const filtered = projects;
 
   useEffect(() => {
     if (hideHeader) {
@@ -113,19 +111,6 @@ export default function Portfolio({ hideHeader = false }: PortfolioProps) {
           </div>
         )}
 
-        {hideHeader && (
-          <div className={styles.filters}>
-            {filters.map(f => (
-              <button
-                key={f}
-                onClick={() => setActive(f)}
-                className={`${styles.filterBtn} ${active === f ? styles.filterActive : ''}`}
-              >
-                {f}
-              </button>
-            ))}
-          </div>
-        )}
       </div>
 
       {hideHeader ? (

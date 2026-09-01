@@ -5,17 +5,15 @@ import styles from './Hero.module.css';
 
 const GridWaveCanvas = dynamic(() => import('./GridWaveCanvas'), { ssr: false });
 
-const stats = [
-  { target: 50, suffix: '+', label: '누적 프로젝트' },
-  { target: 92, suffix: '%', label: '고객 재의뢰율' },
-  { target: 98, suffix: '%', label: '고객 만족도' },
+const strengths = [
+  { highlight: 'All-in-One', label: '기획부터 개발까지 한 번에' },
+  { highlight: '1:1 전담', label: '대표가 직접 디렉팅' },
+  { highlight: '맞춤형', label: '플랫폼 무관 최적 제안' },
 ];
 
-function useCounter(target: number, duration: number) {
-  const [count, setCount] = useState(0);
+function StatItem({ stat, index }: { stat: typeof strengths[0], index: number }) {
   const ref = useRef<HTMLDivElement>(null);
-  const started = useRef(false);
-
+  
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -23,34 +21,17 @@ function useCounter(target: number, duration: number) {
       entries => {
         if (entries[0].isIntersecting) {
           entries[0].target.classList.add('visible');
-          if (!started.current) {
-            started.current = true;
-            const startTime = performance.now();
-            const tick = (now: number) => {
-              const elapsed = now - startTime;
-              const progress = Math.min(elapsed / duration, 1);
-              const eased = 1 - Math.pow(1 - progress, 3);
-              setCount(Math.round(target * eased));
-              if (progress < 1) requestAnimationFrame(tick);
-            };
-            requestAnimationFrame(tick);
-          }
         }
       },
       { threshold: 0.1 }
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, [target, duration]);
+  }, []);
 
-  return { count, ref };
-}
-
-function StatItem({ stat, index }: { stat: typeof stats[0], index: number }) {
-  const { count, ref } = useCounter(stat.target, 1800);
   return (
     <div ref={ref} className={`${styles.statItem} fade-up fade-delay-${4 + index}`}>
-      <span className={styles.statNum}>{count}{stat.suffix}</span>
+      <span className={styles.statNum}>{stat.highlight}</span>
       <span className={styles.statLabel}>{stat.label}</span>
     </div>
   );
@@ -87,9 +68,8 @@ export default function Hero() {
               ref={el => { itemRefs.current[1] = el; }}
               className={`${styles.headline} fade-up fade-delay-2`}
             >
-              We Build<br />
-              <strong className={styles.navyText}>Digital Products</strong><br />
-              That Matter.
+              내 비즈니스처럼 진심으로 고민하고<br />
+              책임질 <strong className={styles.navyText}>진짜 파트너</strong>를 찾으셨나요?
             </h1>
 
             <p
@@ -97,8 +77,8 @@ export default function Hero() {
               className={`${styles.sub} fade-up fade-delay-3`}
             >
               제작으로 끝나는 것이 아닌, 비즈니스의 진짜 성장을 만듭니다.<br />
-              최신 기술과 트렌드로 당신의 브랜드에 맞는 홈페이지를, 대표가<br />
-              직접 설계하고 개발합니다.
+              최신 기술과 트렌드로 당신의 브랜드에 맞는 홈페이지를,<br />
+              대표가 직접 설계하고 개발합니다.
             </p>
 
             <div
@@ -106,15 +86,15 @@ export default function Hero() {
               className={`${styles.ctaRow} fade-up fade-delay-4`}
             >
               <a href="/contact" className={styles.btnPrimary}>
-                Start a Project
+                프로젝트 문의
               </a>
               <a href="/portfolio" className={styles.btnSecondary}>
-                View Our Work
+                작업물 둘러보기
               </a>
             </div>
 
             <div className={styles.heroStats}>
-              {stats.map((s, i) => (
+              {strengths.map((s, i) => (
                 <StatItem key={i} stat={s} index={i} />
               ))}
             </div>

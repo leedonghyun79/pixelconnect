@@ -13,8 +13,13 @@ export default function PortfolioPage() {
     <main>
       <PageHero
         eyebrow="OUR WORK"
-        title="결과물로 말합니다"
-        sub="다양한 업종의 브랜드와 함께 만든 홈페이지입니다. 업종별로 필터링하여 관련 프로젝트를 확인해보세요."
+        title="포트폴리오"
+        sub={
+          <>
+            다양한 업종의 브랜드와 함께 만든 홈페이지입니다.<br />
+            픽셀커넥트의 성공적인 프로젝트 결과물을 확인해보세요.
+          </>
+        }
         breadcrumb="포트폴리오"
       />
 

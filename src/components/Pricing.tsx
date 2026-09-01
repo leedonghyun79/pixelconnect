@@ -75,9 +75,9 @@ export default function Pricing() {
     <section className={styles.section} id="pricing">
       <div className={styles.container}>
         <div className={styles.header}>
-          <div className="section-eyebrow" style={{ justifyContent: 'center' }}>PRICING</div>
-          <h2 className="section-title" style={{ textAlign: 'center' }}>어떤 서비스가 필요하신가요?</h2>
-          <p className={styles.sub} style={{ textAlign: 'center', margin: '8px auto 0' }}>
+          <div className="section-eyebrow section-eyebrow-white" style={{ justifyContent: 'center' }}>PRICING</div>
+          <h2 className="section-title" style={{ textAlign: 'center', color: '#ffffff' }}>어떤 서비스가 필요하신가요?</h2>
+          <p className={styles.sub} style={{ textAlign: 'center', margin: '8px auto 0', color: 'rgba(255, 255, 255, 0.7)' }}>
             합리적인 비용으로 브랜드에 꼭 맞는 홈페이지를 만듭니다.
           </p>
         </div>

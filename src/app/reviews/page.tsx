@@ -15,7 +15,12 @@ export default function ReviewsPage() {
       <PageHero
         eyebrow="REVIEWS"
         title="함께한 대표님들의 이야기"
-        sub="결과물보다 관계가 먼저입니다. 실제로 함께 작업한 대표님들의 솔직한 후기를 확인해보세요."
+        sub={
+          <>
+            결과물보다 관계가 먼저입니다.<br />
+            실제로 함께 작업한 대표님들의 솔직한 후기를 확인해보세요.
+          </>
+        }
         breadcrumb="고객후기"
       />
 

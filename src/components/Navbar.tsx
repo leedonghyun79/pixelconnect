@@ -6,7 +6,6 @@ import styles from './Navbar.module.css';
 
 const navLinks = [
   { href: '/services', label: '서비스' },
-  { href: '/template', label: '템플릿', disabled: true },
   { href: '/portfolio', label: '포트폴리오' },
   { href: '/column', label: '칼럼' },
   { href: '/reviews', label: '고객후기' },

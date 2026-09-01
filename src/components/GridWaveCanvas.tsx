@@ -13,6 +13,8 @@ export default function GridWaveCanvas({ className }: { className?: string }) {
     let rafId: number;
     let time = 0;
     
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     // 마우스 상호작용
     let mouseX = 0;
     let mouseY = 0;
@@ -76,7 +78,7 @@ export default function GridWaveCanvas({ className }: { className?: string }) {
       const cameraY = 150; 
       const cameraZ = 150;   
       const centerX = width / 2;
-      const centerY = height / 2 - 50; // 지평선(멀리 있는 선들이 수렴하는 곳)을 화면 약간 위쪽으로 설정
+      const centerY = height / 2 + 100; // 소실점을 화면 중앙-아래로 이동시켜 시각적 안정감 부여
 
       // 점들을 저장할 배열 (선 연결을 위해)
       const points: ({ x: number, y: number, z: number, px: number, py: number, scale: number } | null)[][] = [];
@@ -159,10 +161,10 @@ export default function GridWaveCanvas({ className }: { className?: string }) {
 
         if (validPoints > 0) {
           rowAvgScale /= validPoints;
-          // 원경에서 선이 뭉쳐서 회색 띠처럼 보이는 것을 방지하기 위해 최소 투명도를 0으로 완전히 페이드아웃
-          const alpha = Math.min(0.35, Math.max(0, rowAvgScale * 0.4 - 0.15));
+          const alpha = Math.min(0.4, Math.max(0, rowAvgScale * 0.5 - 0.15));
           if (alpha > 0) {
-            ctx.strokeStyle = `rgba(180, 180, 185, ${alpha})`;
+            ctx.strokeStyle = `rgba(120, 120, 135, ${alpha})`;
+            ctx.lineWidth = 1.0;
             ctx.stroke();
           }
         }
@@ -196,17 +198,19 @@ export default function GridWaveCanvas({ className }: { className?: string }) {
         
         if (validPoints > 0) {
           colAvgScale /= validPoints;
-          // 세로줄 역시 원경에서 완전히 사라지도록 투명도 하한을 0으로 설정
-          const alpha = Math.min(0.2, Math.max(0, colAvgScale * 0.3 - 0.15));
+          const alpha = Math.min(0.25, Math.max(0, colAvgScale * 0.35 - 0.15));
           if (alpha > 0) {
-            ctx.strokeStyle = `rgba(180, 180, 185, ${alpha})`;
+            ctx.strokeStyle = `rgba(120, 120, 135, ${alpha})`;
+            ctx.lineWidth = 1.0;
             ctx.stroke();
           }
         }
       }
 
-      time += 0.3; // 파동 속도를 천천히 하기 위해 기존 1에서 0.3으로 대폭 감소
-      rafId = requestAnimationFrame(draw);
+      if (!prefersReducedMotion) {
+        time += 0.3; // 파동 속도를 천천히 하기 위해 기존 1에서 0.3으로 대폭 감소
+        rafId = requestAnimationFrame(draw);
+      }
     };
 
     resize();

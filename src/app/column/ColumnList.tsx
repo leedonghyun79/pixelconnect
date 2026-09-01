@@ -87,15 +87,15 @@ export default function ColumnList() {
         <div className={styles.grid}>
           {filtered.map((article, i) => (
             <article key={i} className={styles.card}>
-              <div className={styles.cardTop}>
-                <span className={styles.cat}>{article.cat}</span>
-                <span className={styles.readTime}>{article.readTime} 읽기</span>
+              <div className={styles.thumb}>
+                <div className={styles.thumbInner} />
               </div>
-              <h3 className={styles.cardTitle}>{article.title}</h3>
-              <p className={styles.excerpt}>{article.excerpt}</p>
-              <div className={styles.cardBottom}>
-                <span className={styles.date}>{article.date}</span>
-                <span className={styles.arrow}>↗</span>
+              <div className={styles.cardBody}>
+                <h3 className={styles.cardTitle}>{article.title}</h3>
+                <div className={styles.cardMeta}>
+                  <span className={styles.cat}>{article.cat}</span>
+                  <span className={styles.date}>{article.date}</span>
+                </div>
               </div>
             </article>
           ))}

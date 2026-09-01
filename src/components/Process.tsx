@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './Process.module.css';
 
 const steps = [
@@ -36,21 +36,29 @@ const steps = [
 ];
 
 export default function Process() {
-  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => entries.forEach(e => { 
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-        } else {
-          e.target.classList.remove('visible');
-        }
-      }),
-      { threshold: 0.1 }
-    );
-    itemRefs.current.forEach(el => { if (el) observer.observe(el); });
-    return () => observer.disconnect();
+    const handleScroll = () => {
+      if (!timelineRef.current) return;
+      const rect = timelineRef.current.getBoundingClientRect();
+      
+      const triggerPoint = window.innerHeight * 0.55; // 55% from top
+      const startPos = rect.top;
+      const totalHeight = rect.height;
+      const scrolled = triggerPoint - startPos;
+      
+      let p = scrolled / totalHeight;
+      if (p < 0) p = 0;
+      if (p > 1) p = 1;
+      
+      setScrollProgress(p);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
@@ -64,28 +72,41 @@ export default function Process() {
           </p>
         </div>
 
-        <div className={styles.timeline}>
-          {steps.map((step, i) => (
-            <div
-              key={i}
-              ref={el => { itemRefs.current[i] = el; }}
-              className={`${styles.step} ${step.highlight ? styles.stepHighlight : ''} fade-up`}
-              style={{ transitionDelay: `${i * 0.1}s` }}
-            >
-              <div className={styles.stepNum}>{step.num}</div>
-              <div className={styles.connector}>
-                <div className={styles.dot} />
-                {i < steps.length - 1 && <div className={styles.line} />}
+        <div className={styles.timeline} ref={timelineRef}>
+          {steps.map((step, i) => {
+            const start = i / (steps.length - 1);
+            const end = (i + 1) / (steps.length - 1);
+            
+            let lineProgress = (scrollProgress - start) / (end - start);
+            if (lineProgress < 0) lineProgress = 0;
+            if (lineProgress > 1) lineProgress = 1;
+            
+            const isActive = scrollProgress >= start - 0.02;
+
+            return (
+              <div
+                key={i}
+                className={`${styles.step} ${isActive ? styles.active : ''} ${step.highlight ? styles.stepHighlight : ''}`}
+              >
+                <div className={styles.stepNum}>{step.num}</div>
+                <div className={styles.connector}>
+                  <div className={styles.dot} />
+                  {i < steps.length - 1 && (
+                    <div className={styles.line}>
+                      <div className={styles.lineFill} style={{ transform: `scaleY(${lineProgress})` }} />
+                    </div>
+                  )}
+                </div>
+                <div className={styles.stepContent}>
+                  <h3 className={styles.stepTitle}>
+                    {step.title}
+                    {step.highlight && <span className={styles.highlightBadge}>⭐ 차별점</span>}
+                  </h3>
+                  <p className={styles.stepDesc}>{step.desc}</p>
+                </div>
               </div>
-              <div className={styles.stepContent}>
-                <h3 className={styles.stepTitle}>
-                  {step.title}
-                  {step.highlight && <span className={styles.highlightBadge}>⭐ 차별점</span>}
-                </h3>
-                <p className={styles.stepDesc}>{step.desc}</p>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

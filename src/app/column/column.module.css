@@ -47,80 +47,65 @@
 }
 
 .card {
-  background: var(--navy-pale);
-  border-radius: 16px;
-  padding: 28px 24px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  gap: 16px;
   cursor: pointer;
 }
 
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(13, 13, 62, 0.08);
+.thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--navy-pale);
 }
 
-.cardTop {
+.thumbInner {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #E8E8F4 0%, #D8D8EE 100%);
+  transition: transform 0.4s ease;
+}
+
+.card:hover .thumbInner {
+  transform: scale(1.03);
+}
+
+.cardBody {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.cat {
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: var(--navy);
-  background: var(--white);
-  padding: 3px 10px;
-  border-radius: 100px;
-}
-
-.readTime {
-  font-size: 0.72rem;
-  color: var(--text-muted);
+  flex-direction: column;
+  gap: 8px;
 }
 
 .cardTitle {
-  font-size: 17px;
-  font-weight: 700;
+  font-size: 18px;
+  font-weight: 600;
   color: var(--text-primary);
-  line-height: 1.45;
+  line-height: 1.4;
+  transition: color 0.2s ease;
 }
 
-.excerpt {
-  font-size: 13px;
-  color: var(--navy-muted);
-  line-height: 1.7;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+.card:hover .cardTitle {
+  color: var(--navy);
 }
 
-.cardBottom {
+.cardMeta {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-top: auto;
-  padding-top: 12px;
-  border-top: 1px solid var(--border-default);
+  gap: 12px;
+}
+
+.cat {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy);
 }
 
 .date {
-  font-size: 0.75rem;
+  font-size: 14px;
   color: var(--text-muted);
-}
-
-.arrow {
-  font-size: 1.1rem;
-  color: var(--navy);
-  transition: transform 0.2s ease;
-}
-
-.card:hover .arrow {
-  transform: translate(2px, -2px);
 }
 
 .empty {

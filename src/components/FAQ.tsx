@@ -74,16 +74,18 @@ export default function FAQ() {
             return (
               <div
                 key={i}
-                className={styles.item}
+                className={`${styles.item} ${isOpen ? styles.open : ''}`}
                 onClick={() => toggleItem(i)}
               >
                 <div className={styles.question}>
                   <span className={styles.questionText}>{item.q}</span>
-                  <span className={styles.toggle}>{isOpen ? '−' : '+'}</span>
+                  <span className={styles.toggle}>+</span>
                 </div>
-                {isOpen && (
-                  <div className={styles.answer}>{item.a}</div>
-                )}
+                <div className={`${styles.answerWrapper} ${isOpen ? styles.open : ''}`}>
+                  <div className={styles.answerInner}>
+                    <div className={styles.answerContent}>{item.a}</div>
+                  </div>
+                </div>
               </div>
             );
           })}

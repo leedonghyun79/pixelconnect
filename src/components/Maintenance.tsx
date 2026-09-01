@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import styles from './Maintenance.module.css';
 
 const items = [
-  { title: '월간 리포트 제공', desc: '매월 사이트 방문자·성과 데이터를 정리해 리포트로 공유합니다.' },
+  { title: '맞춤형 운영 매뉴얼 제공', desc: '직접 텍스트나 이미지를 쉽게 수정하실 수 있도록 전용 가이드를 제공합니다.' },
   { title: '1시간 이내 응답 보장', desc: '문의 접수 후 평균 1시간 이내 답변, 긴급 오류는 즉시 처리합니다.' },
   { title: '추가 요청 유연 반영', desc: '운영 중 발생하는 새로운 요구사항도 별도 비용 없이 유연하게 대응합니다.' },
   { title: '정기 보안·성능 점검', desc: '주기적으로 사이트 속도·보안·링크 상태를 점검해 건강하게 유지합니다.' },
