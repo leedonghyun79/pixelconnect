@@ -97,9 +97,9 @@ export default function PainPoint() {
     <section className={styles.section} id="pain">
       <div className={styles.container}>
         <div className={styles.header}>
-          <h2 className="section-title">혹시 이런 경험, 있으신가요?</h2>
+          <h2 className="section-title">혹시, 이런 경험 있으신가요?</h2>
           <p className={styles.sub}>
-            많은 대표님들이 홈페이지 제작 과정에서 같은 어려움을 겪습니다.
+            웹사이트 외주, 한 번쯤은 데어보셨을 겁니다.
           </p>
         </div>
 
@@ -128,10 +128,13 @@ export default function PainPoint() {
           className={`${styles.bridge} fade-up`}
         >
           <p className={styles.bridgeText}>
-            이런 고민이 있으셨다면, 잘 찾아오셨습니다.
+            이런 고민, 한 번쯤 해보셨다면 잘 오셨습니다.
           </p>
           <p className={styles.bridgeSub}>
-            <span className={styles.bridgeAccent}>픽셀 커넥트</span>는 이 문제들을 하나하나 해결하기 위해 만들어졌습니다.
+            그래서 <span className={styles.bridgeAccent}>픽셀커넥트</span>는, 만드는 데서 끝내지 않기로 했습니다.
+          </p>
+          <p className={styles.bridgeSubEm}>
+            대표님께 필요한 건 예쁜 결과물에서 멈추지 않고, 성과로 이어지는 사이트일 테니까요.
           </p>
         </div>
       </div>

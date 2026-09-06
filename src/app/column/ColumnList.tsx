@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import Link from 'next/link';
 import styles from './column.module.css';
 
 const categories = ['전체', '홈페이지 기획', '전환율 최적화', '유지보수', '디자인 트렌드', '마케팅'];
@@ -83,21 +84,22 @@ export default function ColumnList() {
           ))}
         </div>
 
-        {/* Articles */}
         <div className={styles.grid}>
           {filtered.map((article, i) => (
-            <article key={i} className={styles.card}>
-              <div className={styles.thumb}>
-                <div className={styles.thumbInner} />
-              </div>
-              <div className={styles.cardBody}>
-                <h3 className={styles.cardTitle}>{article.title}</h3>
-                <div className={styles.cardMeta}>
-                  <span className={styles.cat}>{article.cat}</span>
-                  <span className={styles.date}>{article.date}</span>
+            <a key={i} href={`/column/${i + 1}`} style={{ textDecoration: 'none' }}>
+              <article className={styles.card}>
+                <div className={styles.thumb}>
+                  <div className={styles.thumbInner} />
                 </div>
-              </div>
-            </article>
+                <div className={styles.cardBody}>
+                  <h3 className={styles.cardTitle}>{article.title}</h3>
+                  <div className={styles.cardMeta}>
+                    <span className={styles.cat}>{article.cat}</span>
+                    <span className={styles.date}>{article.date}</span>
+                  </div>
+                </div>
+              </article>
+            </a>
           ))}
         </div>
 
