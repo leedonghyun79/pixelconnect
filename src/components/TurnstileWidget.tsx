@@ -12,7 +12,7 @@ declare global {
 }
 
 const SITE_KEY =
-  process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '0x4AAAAAAAEqmPPcZmOGSJOfz';
+  process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '0x4AAAAAAEqmPPcZm0GSJOfz';
 const SCRIPT_SRC = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
 
 interface Props {
