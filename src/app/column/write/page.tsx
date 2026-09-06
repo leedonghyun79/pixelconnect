@@ -1,5 +1,5 @@
 'use client';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import styles from './write.module.css';
@@ -14,8 +14,10 @@ export default function ColumnWritePage() {
     title: '',
     category: '',
     content: '',
+    thumbnail: '', // 대표 이미지 (직접 지정). 비어 있으면 본문 첫 이미지 사용
   });
   const [autoThumbnail, setAutoThumbnail] = useState<string>('');
+  const thumbInputRef = useRef<HTMLInputElement>(null);
 
   // 에디터 content에서 첫 번째 이미지 src 자동 추출
   const extractFirstImage = useCallback((html: string) => {
@@ -30,6 +32,22 @@ export default function ColumnWritePage() {
     },
     [extractFirstImage]
   );
+
+  // 대표 이미지 직접 추가/변경
+  const handleThumbFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = '';
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () =>
+      setFormData((prev) => ({ ...prev, thumbnail: reader.result as string }));
+    reader.readAsDataURL(file);
+  };
+  const removeThumb = () => setFormData((prev) => ({ ...prev, thumbnail: '' }));
+
+  // 실제 사용될 대표 이미지: 직접 지정 > 본문 첫 이미지
+  const usingContentImage = !formData.thumbnail && !!autoThumbnail;
+  const effectiveThumbnail = formData.thumbnail || autoThumbnail;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -79,18 +97,50 @@ export default function ColumnWritePage() {
             </select>
           </div>
 
-          {/* 자동 썸네일 미리보기 */}
+          {/* 대표 이미지 */}
           <div className={styles.field}>
-            <label className={styles.label}>썸네일 미리보기</label>
+            <label className={styles.label}>대표 이미지</label>
             <div className={styles.thumbnailPreview}>
-              {autoThumbnail ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={autoThumbnail} alt="썸네일 미리보기" className={styles.thumbnailImg} />
+              {effectiveThumbnail ? (
+                <>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={effectiveThumbnail} alt="대표 이미지" className={styles.thumbnailImg} />
+                  {usingContentImage && (
+                    <span className={styles.thumbBadge}>본문 첫 이미지</span>
+                  )}
+                </>
               ) : (
                 <div className={styles.thumbnailEmpty}>
                   <span className={styles.thumbnailIcon}>🖼️</span>
-                  <p>본문에 이미지를 삽입하면<br />첫 번째 이미지가 자동으로 썸네일이 됩니다</p>
+                  <p>대표 이미지를 추가하세요<br />추가하지 않으면 본문 첫 번째 이미지가 대표 이미지로 사용됩니다</p>
                 </div>
+              )}
+            </div>
+
+            <input
+              ref={thumbInputRef}
+              type="file"
+              accept="image/*"
+              hidden
+              onChange={handleThumbFile}
+            />
+            <div className={styles.thumbActions}>
+              <button
+                type="button"
+                className={styles.thumbBtn}
+                onClick={() => thumbInputRef.current?.click()}
+              >
+                {formData.thumbnail ? '대표 이미지 변경' : '대표 이미지 추가'}
+              </button>
+              {formData.thumbnail && (
+                <button type="button" className={styles.thumbBtnGhost} onClick={removeThumb}>
+                  제거
+                </button>
+              )}
+              {usingContentImage && (
+                <span className={styles.thumbHint}>
+                  현재 본문 첫 번째 이미지가 대표 이미지로 사용됩니다
+                </span>
               )}
             </div>
           </div>
