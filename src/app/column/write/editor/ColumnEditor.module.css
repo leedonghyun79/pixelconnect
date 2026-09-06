@@ -79,28 +79,13 @@
   margin: 32px 0;
 }
 
-.prose code {
+/* 인라인 코드만 — 코드 블록(.hljs)은 CodeBlockView가 자체 스타일 담당 */
+.prose code:not(.hljs) {
   background: #f1f1f6;
   border-radius: 4px;
   padding: 2px 5px;
   font-size: 0.9em;
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-}
-
-.prose pre {
-  background: #1a1a2e;
-  color: #f2f2f7;
-  border-radius: 10px;
-  padding: 16px 18px;
-  overflow-x: auto;
-  margin: 0 0 20px;
-}
-
-.prose pre code {
-  background: none;
-  padding: 0;
-  color: inherit;
-  font-size: 13px;
 }
 
 .prose a {
