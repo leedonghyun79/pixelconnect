@@ -4,6 +4,10 @@ compatibility_date = "2026-07-10"
 compatibility_flags = ["nodejs_compat"]
 workers_dev = true
 
+[vars]
+# connectivity(admin) 공개 칼럼 API — /column, /column/[id] 가 여기서 fetch
+CONNECTIVITY_API_URL = "https://admin.pixelconnect.co.kr"
+
 [assets]
 directory = ".open-next/assets"
 binding = "ASSETS"
