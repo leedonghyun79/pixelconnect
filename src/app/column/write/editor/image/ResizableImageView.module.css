@@ -1,0 +1,46 @@
+.wrapper {
+  margin: 20px 0;
+}
+
+.imgBox {
+  position: relative;
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.img {
+  border-radius: 4px;
+  transition: outline 0.15s ease;
+}
+
+.img:hover {
+  outline: 2px solid rgba(45, 45, 201, 0.35);
+}
+
+.selected {
+  outline: 2px solid var(--navy, #2d2dc9);
+}
+
+.selected:hover {
+  outline: 2px solid var(--navy, #2d2dc9);
+}
+
+/* 우측 하단 리사이즈 핸들 */
+.handle {
+  position: absolute;
+  right: -7px;
+  bottom: -7px;
+  width: 14px;
+  height: 14px;
+  background: var(--navy, #2d2dc9);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  cursor: nwse-resize;
+  z-index: 20;
+}
+
+.handleActive {
+  transform: scale(1.15);
+}

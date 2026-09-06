@@ -1,45 +1,21 @@
 'use client';
-import { useState, useMemo, useRef, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
-import 'react-quill-new/dist/quill.snow.css';
 import styles from './write.module.css';
-import ImageToolbar from './ImageToolbar';
 
-const FONT_SIZES = ['10px', '12px', '14px', '16px', '18px', '20px', '24px', '28px', '32px', '36px', '48px'];
-
-const ReactQuill = dynamic(
-  async () => {
-    const { default: RQ } = await import('react-quill-new');
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const { default: ImageResize } = await import('quill-image-resize-module-react') as any;
-    // font-size를 인라인 style로 직접 적용하는 어트리뷰터
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const SizeStyle = RQ.Quill.import('attributors/style/size') as any;
-    SizeStyle.whitelist = FONT_SIZES;
-    RQ.Quill.register(SizeStyle, true);
-    RQ.Quill.register('modules/imageResize', ImageResize);
-    return RQ;
-  },
-  {
-    ssr: false,
-    loading: () => <div className={styles.quillLoading}>에디터를 불러오는 중입니다...</div>
-  }
-  // next/dynamic이 반환하는 타입에는 ref가 빠져 있어 forwardRef 대상이 아닌 걸로 추론됨
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-) as any;
+const ColumnEditor = dynamic(() => import('./editor/ColumnEditor'), {
+  ssr: false,
+  loading: () => <div className={styles.editorLoading}>에디터를 불러오는 중입니다...</div>,
+});
 
 export default function ColumnWritePage() {
   const [formData, setFormData] = useState({
     title: '',
     category: '',
-    content: ''
+    content: '',
   });
-  const quillRef = useRef<any>(null); // eslint-disable-line @typescript-eslint/no-explicit-any
-  const editorWrapperRef = useRef<HTMLDivElement>(null);
-  const [selectedImage, setSelectedImage] = useState<HTMLImageElement | null>(null);
   const [autoThumbnail, setAutoThumbnail] = useState<string>('');
-  const quillInstance = quillRef.current?.getEditor();
 
   // 에디터 content에서 첫 번째 이미지 src 자동 추출
   const extractFirstImage = useCallback((html: string) => {
@@ -47,32 +23,13 @@ export default function ColumnWritePage() {
     setAutoThumbnail(match ? match[1] : '');
   }, []);
 
-  const handleSelectionChange = useCallback((range: any) => { // eslint-disable-line @typescript-eslint/no-explicit-any
-    if (!range || !quillRef.current) { setSelectedImage(null); return; }
-    const quill = quillRef.current.getEditor();
-    const [blot] = quill.getLeaf(range.index);
-    if (blot?.domNode?.tagName === 'IMG') {
-      setSelectedImage(blot.domNode as HTMLImageElement);
-    } else {
-      setSelectedImage(null);
-    }
-  }, []);
-
-  const modules = useMemo(() => ({
-    toolbar: [
-      [{ size: FONT_SIZES }],
-      [{ header: [1, 2, 3, false] }],
-      ['bold', 'italic', 'underline', 'strike'],
-      [{ color: [] }, { background: [] }],
-      [{ list: 'ordered' }, { list: 'bullet' }],
-      [{ align: [] }],
-      ['link', 'image'],
-      ['clean'],
-    ],
-    imageResize: {
-      modules: ['Resize', 'DisplaySize'], // Toolbar는 커스텀으로 대체
+  const handleContentChange = useCallback(
+    (html: string) => {
+      setFormData((prev) => ({ ...prev, content: html }));
+      extractFirstImage(html);
     },
-  }), []);
+    [extractFirstImage]
+  );
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -92,22 +49,22 @@ export default function ColumnWritePage() {
           {/* Title */}
           <div className={styles.field}>
             <label htmlFor="title" className={styles.label}>제목</label>
-            <input 
-              type="text" 
-              id="title" 
-              className={styles.input} 
+            <input
+              type="text"
+              id="title"
+              className={styles.input}
               placeholder="칼럼 제목을 입력하세요"
               value={formData.title}
               onChange={e => setFormData({...formData, title: e.target.value})}
-              required 
+              required
             />
           </div>
 
           {/* Category */}
           <div className={styles.field}>
             <label htmlFor="category" className={styles.label}>카테고리</label>
-            <select 
-              id="category" 
+            <select
+              id="category"
               className={styles.select}
               value={formData.category}
               onChange={e => setFormData({...formData, category: e.target.value})}
@@ -127,6 +84,7 @@ export default function ColumnWritePage() {
             <label className={styles.label}>썸네일 미리보기</label>
             <div className={styles.thumbnailPreview}>
               {autoThumbnail ? (
+                // eslint-disable-next-line @next/next/no-img-element
                 <img src={autoThumbnail} alt="썸네일 미리보기" className={styles.thumbnailImg} />
               ) : (
                 <div className={styles.thumbnailEmpty}>
@@ -140,28 +98,11 @@ export default function ColumnWritePage() {
           {/* Editor */}
           <div className={styles.field}>
             <label className={styles.label}>본문 내용</label>
-            <div className={styles.editorWrapper} ref={editorWrapperRef} style={{ position: 'relative' }}>
-              {selectedImage && quillInstance && (
-                <ImageToolbar
-                  image={selectedImage}
-                  quillInstance={quillInstance}
-                  onClose={() => setSelectedImage(null)}
-                  wrapperRef={editorWrapperRef}
-                />
-              )}
-              <ReactQuill
-                ref={quillRef}
-                theme="snow"
-                value={formData.content}
-                onChange={(value: string) => {
-                  setFormData({...formData, content: value});
-                  extractFirstImage(value);
-                }}
-                onChangeSelection={handleSelectionChange}
-                modules={modules}
-                placeholder="여기에 칼럼 내용을 작성해주세요..."
-              />
-            </div>
+            <ColumnEditor
+              value={formData.content}
+              onChange={handleContentChange}
+              placeholder="여기에 칼럼 내용을 작성해주세요..."
+            />
           </div>
 
           {/* Actions */}

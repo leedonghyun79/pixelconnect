@@ -1,0 +1,213 @@
+'use client';
+import { useRef } from 'react';
+import type { Editor } from '@tiptap/react';
+import { useEditorState } from '@tiptap/react';
+import {
+  Bold, Italic, Underline, Strikethrough, Code, Code2,
+  List, ListOrdered, Quote, Minus, Link as LinkIcon, Unlink,
+  AlignLeft, AlignCenter, AlignRight, AlignJustify,
+  Image as ImageIcon, RemoveFormatting, Type,
+} from 'lucide-react';
+import { FONT_SIZES } from './extensions';
+import styles from './Toolbar.module.css';
+
+interface Props {
+  editor: Editor;
+}
+
+export default function Toolbar({ editor }: Props) {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const state = useEditorState({
+    editor,
+    selector: ({ editor: e }) => ({
+      bold: e.isActive('bold'),
+      italic: e.isActive('italic'),
+      underline: e.isActive('underline'),
+      strike: e.isActive('strike'),
+      code: e.isActive('code'),
+      codeBlock: e.isActive('codeBlock'),
+      bulletList: e.isActive('bulletList'),
+      orderedList: e.isActive('orderedList'),
+      blockquote: e.isActive('blockquote'),
+      link: e.isActive('link'),
+      h2: e.isActive('heading', { level: 2 }),
+      h3: e.isActive('heading', { level: 3 }),
+      alignLeft: e.isActive({ textAlign: 'left' }),
+      alignCenter: e.isActive({ textAlign: 'center' }),
+      alignRight: e.isActive({ textAlign: 'right' }),
+      alignJustify: e.isActive({ textAlign: 'justify' }),
+      fontSize: (e.getAttributes('textStyle').fontSize as string | undefined) ?? '',
+      color: (e.getAttributes('textStyle').color as string | undefined) ?? '#1a1a2e',
+      bg: (e.getAttributes('textStyle').backgroundColor as string | undefined) ?? '#ffffff',
+    }),
+  });
+
+  const chain = () => editor.chain().focus();
+
+  const setBlock = (value: string) => {
+    if (value === 'p') chain().setParagraph().run();
+    else if (value === 'h2') chain().toggleHeading({ level: 2 }).run();
+    else if (value === 'h3') chain().toggleHeading({ level: 3 }).run();
+  };
+
+  const setSize = (value: string) => {
+    if (!value) chain().unsetFontSize().run();
+    else chain().setFontSize(value).run();
+  };
+
+  const applyLink = () => {
+    const prev = editor.getAttributes('link').href as string | undefined;
+    const url = window.prompt('링크 URL', prev ?? 'https://');
+    if (url === null) return;
+    if (url === '') {
+      chain().extendMarkRange('link').unsetLink().run();
+      return;
+    }
+    chain().extendMarkRange('link').setLink({ href: url }).run();
+  };
+
+  const pickImage = () => fileInputRef.current?.click();
+  const onImageFile = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    const file = ev.target.files?.[0];
+    ev.target.value = '';
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      chain().setImage({ src: reader.result as string }).run();
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const blockValue = state.h2 ? 'h2' : state.h3 ? 'h3' : 'p';
+
+  return (
+    <div className={styles.toolbar}>
+      <select
+        className={styles.select}
+        value={blockValue}
+        onChange={(e) => setBlock(e.target.value)}
+        title="문단 형식"
+      >
+        <option value="p">본문</option>
+        <option value="h2">제목 1</option>
+        <option value="h3">제목 2</option>
+      </select>
+
+      <select
+        className={styles.select}
+        value={state.fontSize}
+        onChange={(e) => setSize(e.target.value)}
+        title="글자 크기"
+      >
+        <option value="">크기</option>
+        {FONT_SIZES.map((s) => (
+          <option key={s} value={s}>{s.replace('px', '')}</option>
+        ))}
+      </select>
+
+      <span className={styles.sep} />
+
+      <button type="button" className={btn(state.bold)} onClick={() => chain().toggleBold().run()} title="굵게">
+        <Bold size={16} />
+      </button>
+      <button type="button" className={btn(state.italic)} onClick={() => chain().toggleItalic().run()} title="기울임">
+        <Italic size={16} />
+      </button>
+      <button type="button" className={btn(state.underline)} onClick={() => chain().toggleUnderline().run()} title="밑줄">
+        <Underline size={16} />
+      </button>
+      <button type="button" className={btn(state.strike)} onClick={() => chain().toggleStrike().run()} title="취소선">
+        <Strikethrough size={16} />
+      </button>
+
+      <span className={styles.sep} />
+
+      <label className={styles.colorBtn} title="글자색">
+        <Type size={16} />
+        <span className={styles.colorBar} style={{ background: state.color }} />
+        <input
+          type="color"
+          value={state.color}
+          onChange={(e) => chain().setColor(e.target.value).run()}
+        />
+      </label>
+      <label className={styles.colorBtn} title="배경색">
+        <span className={styles.bgSwatch} style={{ background: state.bg }} />
+        <input
+          type="color"
+          value={state.bg}
+          onChange={(e) => chain().setBackgroundColor(e.target.value).run()}
+        />
+      </label>
+
+      <span className={styles.sep} />
+
+      <button type="button" className={btn(state.bulletList)} onClick={() => chain().toggleBulletList().run()} title="글머리 기호">
+        <List size={16} />
+      </button>
+      <button type="button" className={btn(state.orderedList)} onClick={() => chain().toggleOrderedList().run()} title="번호 매기기">
+        <ListOrdered size={16} />
+      </button>
+
+      <span className={styles.sep} />
+
+      <button type="button" className={btn(state.alignLeft)} onClick={() => chain().setTextAlign('left').run()} title="왼쪽 정렬">
+        <AlignLeft size={16} />
+      </button>
+      <button type="button" className={btn(state.alignCenter)} onClick={() => chain().setTextAlign('center').run()} title="가운데 정렬">
+        <AlignCenter size={16} />
+      </button>
+      <button type="button" className={btn(state.alignRight)} onClick={() => chain().setTextAlign('right').run()} title="오른쪽 정렬">
+        <AlignRight size={16} />
+      </button>
+      <button type="button" className={btn(state.alignJustify)} onClick={() => chain().setTextAlign('justify').run()} title="양쪽 정렬">
+        <AlignJustify size={16} />
+      </button>
+
+      <span className={styles.sep} />
+
+      <button type="button" className={btn(state.blockquote)} onClick={() => chain().toggleBlockquote().run()} title="인용문">
+        <Quote size={16} />
+      </button>
+      <button type="button" className={btn(false)} onClick={() => chain().setHorizontalRule().run()} title="구분선">
+        <Minus size={16} />
+      </button>
+      <button type="button" className={btn(state.code)} onClick={() => chain().toggleCode().run()} title="인라인 코드">
+        <Code size={16} />
+      </button>
+      <button type="button" className={btn(state.codeBlock)} onClick={() => chain().toggleCodeBlock().run()} title="코드 블록">
+        <Code2 size={16} />
+      </button>
+
+      <span className={styles.sep} />
+
+      <button type="button" className={btn(state.link)} onClick={applyLink} title="링크">
+        <LinkIcon size={16} />
+      </button>
+      <button type="button" className={btn(false)} onClick={() => chain().unsetLink().run()} title="링크 제거">
+        <Unlink size={16} />
+      </button>
+      <button type="button" className={btn(false)} onClick={pickImage} title="이미지">
+        <ImageIcon size={16} />
+      </button>
+
+      <span className={styles.sep} />
+
+      <button
+        type="button"
+        className={btn(false)}
+        onClick={() => chain().unsetAllMarks().clearNodes().run()}
+        title="서식 지우기"
+      >
+        <RemoveFormatting size={16} />
+      </button>
+
+      <input ref={fileInputRef} type="file" accept="image/*" hidden onChange={onImageFile} />
+    </div>
+  );
+
+  function btn(active: boolean) {
+    return `${styles.btn} ${active ? styles.active : ''}`;
+  }
+}
