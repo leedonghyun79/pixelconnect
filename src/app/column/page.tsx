@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
-import { desc } from 'drizzle-orm';
 import PageHero from '@/components/PageHero';
-import { db } from '@/db';
-import { columns } from '@/db/schema';
+import { fetchColumns } from '@/lib/columns';
 import ColumnList, { type ColumnCard } from './ColumnList';
 import FinalCTA from '@/components/FinalCTA';
 
@@ -11,26 +9,14 @@ export const metadata: Metadata = {
   description: '홈페이지 제작, 전환율 최적화, 유지보수 운영 노하우를 담은 픽셀커넥트의 칼럼입니다.',
 };
 
-export const revalidate = 60;
-
 export default async function ColumnPage() {
-  const rows = await db
-    .select({
-      id: columns.id,
-      title: columns.title,
-      category: columns.category,
-      thumbnail: columns.thumbnail,
-      publishedAt: columns.publishedAt,
-    })
-    .from(columns)
-    .orderBy(desc(columns.publishedAt));
-
+  const rows = await fetchColumns();
   const articles: ColumnCard[] = rows.map((r) => ({
     id: r.id,
     title: r.title,
     category: r.category,
     thumbnail: r.thumbnail,
-    publishedAt: r.publishedAt.toISOString(),
+    publishedAt: r.publishedAt,
   }));
 
   return (

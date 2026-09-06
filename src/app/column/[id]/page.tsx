@@ -1,21 +1,13 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { eq } from 'drizzle-orm';
-import { db } from '@/db';
-import { columns } from '@/db/schema';
+import { fetchColumn } from '@/lib/columns';
 import HighlightCode from './HighlightCode';
 import styles from './detail.module.css';
 
-export const revalidate = 60;
-
-function fmtDate(d: Date) {
+function fmtDate(iso: string) {
+  const d = new Date(iso);
   return `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
-}
-
-async function getColumn(id: string) {
-  const [row] = await db.select().from(columns).where(eq(columns.id, id));
-  return row ?? null;
 }
 
 export async function generateMetadata({
@@ -24,7 +16,7 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
   const { id } = await params;
-  const col = await getColumn(id);
+  const col = await fetchColumn(id);
   if (!col) return { title: '칼럼을 찾을 수 없습니다 | 픽셀커넥트' };
   return {
     title: `${col.title} | 픽셀커넥트`,
@@ -39,7 +31,7 @@ export default async function ColumnDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const col = await getColumn(id);
+  const col = await fetchColumn(id);
   if (!col) notFound();
 
   return (
