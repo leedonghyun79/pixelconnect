@@ -87,7 +87,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body>
+      {/* 브라우저 확장(ColorZilla 등)이 <body>에 주입하는 속성으로 인한
+          하이드레이션 경고 억제 — 이 요소 자신의 속성/텍스트에만 적용되며
+          자식 요소의 실제 불일치는 그대로 보고됨 */}
+      <body suppressHydrationWarning>
         <SmoothScroll>
           <Navbar />
           {children}
