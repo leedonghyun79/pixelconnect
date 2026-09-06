@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import styles from './Navbar.module.css';
 
-const navLinks = [
+const navLinks: { href: string; label: string; disabled?: boolean }[] = [
   { href: '/services', label: '서비스' },
   { href: '/portfolio', label: '포트폴리오' },
   { href: '/column', label: '칼럼' },
