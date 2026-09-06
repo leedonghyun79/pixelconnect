@@ -1,0 +1,12 @@
+.host {
+  border: 1px solid var(--border-default);
+  border-top: none;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.host :global(.cm-editor) {
+  min-height: 400px;
+}

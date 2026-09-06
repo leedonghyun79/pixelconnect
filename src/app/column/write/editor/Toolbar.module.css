@@ -14,6 +14,23 @@
   z-index: 30;
 }
 
+.group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px;
+  transition: opacity 0.12s ease;
+}
+
+.groupDisabled {
+  opacity: 0.38;
+  pointer-events: none;
+}
+
+.spacer {
+  margin-left: auto;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;

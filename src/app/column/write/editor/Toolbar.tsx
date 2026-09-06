@@ -6,17 +6,20 @@ import {
   Bold, Italic, Underline, Strikethrough, Code, Code2,
   List, ListOrdered, Quote, Minus, Link as LinkIcon, Unlink,
   AlignLeft, AlignCenter, AlignRight, AlignJustify,
-  Image as ImageIcon, RemoveFormatting, Type,
+  Image as ImageIcon, RemoveFormatting, Type, FileCode2,
 } from 'lucide-react';
 import { FONT_SIZES } from './extensions';
 import styles from './Toolbar.module.css';
 
 interface Props {
   editor: Editor;
+  mode: 'wysiwyg' | 'source';
+  onToggleSource: () => void;
 }
 
-export default function Toolbar({ editor }: Props) {
+export default function Toolbar({ editor, mode, onToggleSource }: Props) {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const sourceMode = mode === 'source';
 
   const state = useEditorState({
     editor,
@@ -83,6 +86,10 @@ export default function Toolbar({ editor }: Props) {
 
   return (
     <div className={styles.toolbar}>
+      <div
+        className={`${styles.group} ${sourceMode ? styles.groupDisabled : ''}`}
+        aria-hidden={sourceMode}
+      >
       <select
         className={styles.select}
         value={blockValue}
@@ -204,6 +211,18 @@ export default function Toolbar({ editor }: Props) {
       </button>
 
       <input ref={fileInputRef} type="file" accept="image/*" hidden onChange={onImageFile} />
+      </div>
+
+      <span className={styles.spacer} />
+
+      <button
+        type="button"
+        className={btn(sourceMode)}
+        onClick={onToggleSource}
+        title={sourceMode ? 'WYSIWYG 편집기로 전환' : 'HTML 소스 편집'}
+      >
+        <FileCode2 size={16} />
+      </button>
     </div>
   );
 
