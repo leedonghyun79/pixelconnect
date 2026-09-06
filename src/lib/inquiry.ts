@@ -1,6 +1,8 @@
 // 상담 폼 제출을 connectivity 공개 API 로 보낸다. (클라이언트에서 호출 → NEXT_PUBLIC_ 필요)
 
-const API = (process.env.NEXT_PUBLIC_CONNECTIVITY_API_URL || '').replace(/\/$/, '');
+const API = (
+  process.env.NEXT_PUBLIC_CONNECTIVITY_API_URL || 'https://admin.pixelconnect.co.kr'
+).replace(/\/$/, '');
 
 export interface InquiryPayload {
   name: string;
