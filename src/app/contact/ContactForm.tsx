@@ -1,7 +1,54 @@
 'use client';
+import { useCallback, useState } from 'react';
 import styles from './contact.module.css';
+import TurnstileWidget from '@/components/TurnstileWidget';
+import { submitInquiry } from '@/lib/inquiry';
+
+type Status = 'idle' | 'sending' | 'ok' | 'error';
 
 export default function ContactForm() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [service, setService] = useState('');
+  const [message, setMessage] = useState('');
+  const [company, setCompany] = useState(''); // 허니팟
+  const [token, setToken] = useState('');
+  const [status, setStatus] = useState<Status>('idle');
+  const [errorMsg, setErrorMsg] = useState('');
+
+  const onToken = useCallback((t: string) => setToken(t), []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrorMsg('');
+
+    if (!name.trim() || !email.trim() || !message.trim()) {
+      setStatus('error');
+      setErrorMsg('이름, 이메일, 프로젝트 설명을 입력해주세요.');
+      return;
+    }
+    if (!token) {
+      setStatus('error');
+      setErrorMsg('잠시 후 다시 시도해주세요. (봇 확인 로딩 중)');
+      return;
+    }
+
+    setStatus('sending');
+    const res = await submitInquiry({
+      name, email, phone, service, message, company, turnstileToken: token,
+    });
+
+    if (res.ok) {
+      setStatus('ok');
+      setName(''); setEmail(''); setPhone(''); setService(''); setMessage('');
+      setToken('');
+    } else {
+      setStatus('error');
+      setErrorMsg(res.error || '문의 전송에 실패했습니다.');
+    }
+  };
+
   return (
     <section className={styles.section}>
       <div className={styles.container}>
@@ -47,25 +94,49 @@ export default function ContactForm() {
 
           {/* Right: Form */}
           <div className={styles.formWrap}>
-            <form className={styles.form} onSubmit={e => e.preventDefault()}>
+            <form className={styles.form} onSubmit={handleSubmit}>
+              {/* 허니팟: 사람 눈에 안 보임 */}
+              <input
+                type="text"
+                name="company"
+                tabIndex={-1}
+                autoComplete="off"
+                value={company}
+                onChange={(e) => setCompany(e.target.value)}
+                style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
+                aria-hidden="true"
+              />
+
               <div className={styles.row}>
                 <div className={styles.field}>
                   <label className={styles.label}>이름 *</label>
-                  <input type="text" placeholder="홍길동" className={styles.input} />
+                  <input
+                    type="text" placeholder="홍길동" className={styles.input}
+                    value={name} onChange={(e) => setName(e.target.value)}
+                  />
                 </div>
                 <div className={styles.field}>
                   <label className={styles.label}>이메일 *</label>
-                  <input type="email" placeholder="example@email.com" className={styles.input} />
+                  <input
+                    type="email" placeholder="example@email.com" className={styles.input}
+                    value={email} onChange={(e) => setEmail(e.target.value)}
+                  />
                 </div>
               </div>
               <div className={styles.row}>
                 <div className={styles.field}>
                   <label className={styles.label}>연락처</label>
-                  <input type="tel" placeholder="010-0000-0000" className={styles.input} />
+                  <input
+                    type="tel" placeholder="010-0000-0000" className={styles.input}
+                    value={phone} onChange={(e) => setPhone(e.target.value)}
+                  />
                 </div>
                 <div className={styles.field}>
                   <label className={styles.label}>필요한 서비스</label>
-                  <select className={styles.select}>
+                  <select
+                    className={styles.select}
+                    value={service} onChange={(e) => setService(e.target.value)}
+                  >
                     <option value="">선택해주세요</option>
                     <option value="web">웹사이트 제작</option>
                     <option value="shop">쇼핑몰 구축</option>
@@ -81,14 +152,29 @@ export default function ContactForm() {
                   placeholder="프로젝트에 대해 자유롭게 설명해주세요. 참고 사이트, 원하는 기능, 예산 등 어떤 내용이든 괜찮습니다."
                   className={styles.textarea}
                   rows={6}
+                  value={message} onChange={(e) => setMessage(e.target.value)}
                 />
               </div>
-              <button type="submit" className={styles.submitBtn}>
-                무료 상담 신청하기 →
+
+              <TurnstileWidget onToken={onToken} />
+
+              <button type="submit" className={styles.submitBtn} disabled={status === 'sending'}>
+                {status === 'sending' ? '전송 중...' : '무료 상담 신청하기 →'}
               </button>
-              <p className={styles.note}>
-                * 상담은 무료이며, 영업일 기준 24시간 이내 회신드립니다.
-              </p>
+
+              {status === 'ok' && (
+                <p className={styles.note} style={{ color: '#1a7f37' }}>
+                  문의가 접수되었습니다. 영업일 기준 24시간 이내 회신드립니다.
+                </p>
+              )}
+              {status === 'error' && (
+                <p className={styles.note} style={{ color: '#c0392b' }}>{errorMsg}</p>
+              )}
+              {status !== 'ok' && status !== 'error' && (
+                <p className={styles.note}>
+                  * 상담은 무료이며, 영업일 기준 24시간 이내 회신드립니다.
+                </p>
+              )}
             </form>
           </div>
         </div>
