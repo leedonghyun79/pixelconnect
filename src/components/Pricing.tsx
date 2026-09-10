@@ -15,7 +15,7 @@ const plans = [
       { text: '템플릿 기반 커스텀', highlight: false },
       { text: '기본 SEO 세팅', highlight: false },
     ],
-    duration: '영업일 1~2주',
+    duration: '작업일 1~2주',
     cta: '문의하기',
   },
   {
@@ -32,7 +32,7 @@ const plans = [
       { text: 'GA4 연동', highlight: false },
       { text: '알림톡/카톡 연동 옵션', highlight: false },
     ],
-    duration: '영업일 2~3주',
+    duration: '작업일 2~3주',
     cta: '문의하기',
   },
   {

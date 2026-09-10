@@ -51,13 +51,15 @@
   position: relative;
   box-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.55);
   /* 호버만 담당 — 지연 없이 즉시 반응 */
-  transition: transform 0.18s ease, border-color 0.18s ease;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
   will-change: transform;
 }
 
+/* 호버 = 살짝 뜨고 표면이 한 단계 밝아짐 (오렌지 보더 X) */
 .card:hover {
   transform: translateY(-4px);
-  border-color: var(--accent);
+  background: #1E1E63;
+  border-color: rgba(255, 255, 255, 0.16);
 }
 
 /* Highlighted card (Maintenance) — 유일한 액센트 포인트 */
@@ -68,7 +70,7 @@
 
 .cardHighlight:hover {
   border-color: var(--accent);
-  box-shadow: 0 32px 60px -20px rgba(255, 107, 53, 0.5);
+  box-shadow: 0 32px 60px -20px rgba(255, 101, 63, 0.5);
 }
 
 .cardHighlight .num {

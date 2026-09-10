@@ -156,13 +156,13 @@
   /* 에이전시 느낌의 각진 버튼 */
   text-decoration: none;
   transition: all 0.3s ease;
-  box-shadow: 0 10px 28px -6px rgba(255, 107, 53, 0.5);
+  box-shadow: 0 10px 28px -6px rgba(255, 101, 63, 0.5);
 }
 
 .btnPrimary:hover {
   background-color: var(--accent-hover);
   transform: translateY(-2px);
-  box-shadow: 0 16px 38px -6px rgba(255, 107, 53, 0.65);
+  box-shadow: 0 16px 38px -6px rgba(255, 101, 63, 0.65);
 }
 
 .btnSecondary {

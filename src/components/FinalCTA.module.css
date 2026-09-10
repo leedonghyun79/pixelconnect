@@ -28,14 +28,14 @@
   opacity: 0.85;
 }
 
-/* 상하 에지 페이드 */
+/* 상하 에지 페이드 — 하단은 일찍 완전 불투명하게(웨이브 밝은 선이 경계에 비치는 것 방지) */
 .fade {
   position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
   background:
-    linear-gradient(to bottom, var(--navy) 0%, transparent 25%, transparent 75%, var(--navy) 100%);
+    linear-gradient(to bottom, var(--navy) 0%, transparent 25%, transparent 68%, var(--navy) 88%);
 }
 
 /* ── 콘텐츠 ─────────────────────────────────────────────── */

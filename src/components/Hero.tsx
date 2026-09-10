@@ -1,7 +1,11 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './Hero.module.css';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const GridWaveCanvas = dynamic(() => import('./GridWaveCanvas'), { ssr: false });
 
@@ -43,6 +47,7 @@ function StatItem({ stat, index }: { stat: typeof strengths[0], index: number })
 
 export default function Hero() {
   const itemRefs = useRef<(HTMLElement | null)[]>([]);
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -55,8 +60,37 @@ export default function Hero() {
     return () => observer.disconnect();
   }, []);
 
+  // 다음 섹션으로 넘어갈 때 히어로가 스크롤에 따라 서서히 블러 + 페이드
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const anim = gsap.fromTo(
+      section,
+      { filter: 'blur(0px)', opacity: 1 },
+      {
+        filter: 'blur(9px)',
+        opacity: 0.5,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        },
+      }
+    );
+
+    return () => {
+      anim.scrollTrigger?.kill();
+      anim.kill();
+      gsap.set(section, { clearProps: 'filter,opacity' });
+    };
+  }, []);
+
   return (
-    <section className={styles.section} id="hero">
+    <section ref={sectionRef} className={styles.section} id="hero">
 
       {/* ── 배경 3D 점/선 그리드 캔버스 ─────────────── */}
       <div className={styles.canvasWrap} aria-hidden="true">

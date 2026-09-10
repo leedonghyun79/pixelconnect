@@ -29,7 +29,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-  align-items: start;
+  align-items: stretch;
 }
 
 /* ── Card ─────────────────────────────────────────────────── */
@@ -41,22 +41,23 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
+  border-color: var(--border-hover);
 }
 
-/* Recommended card — 단일 액센트 강조 */
+/* Recommended card — 단일 액센트 강조 (보더 하나만) */
 .cardPop {
   border: 2px solid var(--accent);
-  box-shadow: 0 0 0 4px var(--accent-soft);
 }
 
 .cardPop:hover {
-  box-shadow: 0 8px 32px rgba(255, 107, 53, 0.18);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-lg);
 }
 
 /* ── Recommended Badge ────────────────────────────────────── */
@@ -161,13 +162,14 @@
   margin-top: 1px;
 }
 
+/* 추천 카드 체크·강조도 일반(스타터)과 동일하게 */
 .checkPop {
-  color: var(--accent);
+  color: var(--navy-muted);
 }
 
 .featureHighlight {
-  font-weight: 600;
-  color: var(--accent);
+  font-weight: 400;
+  color: var(--text-secondary);
 }
 
 /* ── Meta ─────────────────────────────────────────────────── */

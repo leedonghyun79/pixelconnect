@@ -1,7 +1,9 @@
 .footer {
-  background: var(--navy-deep);
-  border-top: 0.5px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+  background: var(--navy);
   padding: 48px 0;
+  /* FinalCTA 하단과의 서브픽셀 틈(흰 줄) 제거 */
+  margin-top: -1px;
 }
 
 .container {

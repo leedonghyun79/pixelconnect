@@ -12,7 +12,7 @@
   left: -12%;
   width: 60vw;
   height: 60vw;
-  background: radial-gradient(circle, rgba(255, 107, 53, 0.06) 0%, rgba(13, 13, 62, 0) 70%);
+  background: radial-gradient(circle, rgba(255, 101, 63, 0.06) 0%, rgba(13, 13, 62, 0) 70%);
   border-radius: 50%;
   animation: floatBlob 20s ease-in-out infinite alternate;
   z-index: 0;
@@ -91,7 +91,7 @@
   height: 100%;
   background: var(--accent);
   border-radius: 4px;
-  box-shadow: 0 0 15px rgba(255, 107, 53, 0.45);
+  box-shadow: 0 0 15px rgba(255, 101, 63, 0.45);
 }
 
 /* Right — 2×2 카드 그리드 */

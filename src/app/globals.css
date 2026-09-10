@@ -5,6 +5,13 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Pretendard+Variable&display=swap');
 
+/*
+  컬러 팔레트 참조: https://colorhunt.co/palette/1e104e452e5aff653fffc85c
+    #1E104E rgb(30,16,78)   · 딥 퍼플 네이비
+    #452E5A rgb(69,46,90)   · 뮤트 퍼플
+    #FF653F rgb(255,101,63) · 액센트 오렌지  → --accent
+    #FFC85C rgb(255,200,92) · 웜 옐로 (보조 강조용, 현재 미사용)
+*/
 :root {
   /* Brand Colors */
   --navy: #0D0D3E;
@@ -16,9 +23,9 @@
   --white-off: #FAFAFA;
 
   /* Accent — 단일 액센트(웜 오렌지). CTA·강조에만 사용 */
-  --accent: #FF6B35;
-  --accent-hover: #E85520;
-  --accent-soft: rgba(255, 107, 53, 0.12);
+  --accent: #FF653F;
+  --accent-hover: #E85433;
+  --accent-soft: rgba(255, 101, 63, 0.12);
 
   /* 다크 섹션(#0D0D3E) 위 카드면 — 배경보다 한 단계 밝게 */
   --surface-dark: #191947;
@@ -162,20 +169,8 @@ h1, h2, h3, h4, h5, h6 {
   gap: 8px;
 }
 
-.section-eyebrow::before {
-  content: "";
-  width: 24px;
-  height: 1.5px;
-  background: var(--navy-muted);
-  flex-shrink: 0;
-}
-
 .section-eyebrow-white {
   color: rgba(255, 255, 255, 0.5);
-}
-
-.section-eyebrow-white::before {
-  background: rgba(255, 255, 255, 0.3);
 }
 
 .section-title {
@@ -247,7 +242,6 @@ h1, h2, h3, h4, h5, h6 {
 .btn-primary:hover {
   background: var(--navy-light);
   transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
 }
 
 .btn-secondary {
@@ -274,13 +268,11 @@ h1, h2, h3, h4, h5, h6 {
 .btn-accent {
   background: var(--accent);
   color: #fff;
-  box-shadow: 0 10px 30px -8px rgba(255, 107, 53, 0.55);
 }
 
 .btn-accent:hover {
   background: var(--accent-hover);
   transform: translateY(-1px);
-  box-shadow: 0 16px 40px -8px rgba(255, 107, 53, 0.7);
 }
 
 .btn-ghost-white {
