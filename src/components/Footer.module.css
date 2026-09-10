@@ -1,7 +1,7 @@
 .footer {
   background: var(--navy-deep);
-  border-top: 0.5px solid var(--border-default);
-  padding: 80px 0 32px;
+  border-top: 0.5px solid rgba(255, 255, 255, 0.06);
+  padding: 48px 0;
 }
 
 .container {
@@ -10,122 +10,111 @@
   padding: 0 48px;
 }
 
-.top {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 48px;
-  padding-bottom: 48px;
-  border-bottom: 0.5px solid rgba(255, 255, 255, 0.06);
+.inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
 }
 
-/* Logo column */
-.logoCol {
+/* Left */
+.left {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  font-family: sans-serif;
-  font-weight: 700;
-  font-size: 18px;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.logoImage {
-  height: 24px;
-  width: auto;
-  object-fit: contain;
-  /* 만약 로고가 검은색이라면 푸터의 어두운 배경에 맞게 흰색으로 반전 */
-  filter: brightness(0) invert(1);
+  gap: 20px;
 }
 
 .bizInfo {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 
 .bizInfo p {
-  font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.35);
-  line-height: 1.6;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.65;
 }
 
-/* Menu column */
-.menuCol {
+.company {
+  color: rgba(255, 255, 255, 0.75) !important;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin-bottom: 2px;
+}
+
+.copyright {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* Right */
+.right {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: flex-end;
+  gap: 14px;
 }
 
-.menuTitle {
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.5);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 4px;
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 20px;
 }
 
 .menuLink {
   font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.55);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .menuLink:hover {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.9);
 }
 
-/* Contact column */
-.contactCol {
+.legal {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   gap: 10px;
 }
 
-.contactItem {
-  font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.45);
-}
-
-.social {
+.legalItem {
   display: flex;
-  gap: 16px;
-  margin-top: 8px;
+  align-items: center;
+  gap: 10px;
 }
 
-.socialLink {
+.legalLink {
   font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.4);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
-.socialLink:hover {
-  color: rgba(255, 255, 255, 0.8);
+.legalLink:hover {
+  color: rgba(255, 255, 255, 0.75);
 }
 
-/* Bottom */
-.bottom {
-  padding-top: 24px;
-  text-align: center;
-}
-
-.bottom p {
+.divider {
+  color: rgba(255, 255, 255, 0.2);
   font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.3);
 }
 
 @media (max-width: 768px) {
-  .container { padding: 0 24px; }
-  .top {
-    grid-template-columns: 1fr;
-    gap: 32px;
+  .container {
+    padding: 0 24px;
+  }
+  .inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
+  }
+  .right {
+    align-items: flex-start;
+  }
+  .menu {
+    justify-content: flex-start;
   }
 }

@@ -1,4 +1,3 @@
-'use client';
 import Link from 'next/link';
 import styles from './Footer.module.css';
 
@@ -10,50 +9,45 @@ const menuLinks = [
   { href: '/contact', label: '문의' },
 ];
 
+const legalLinks = [
+  { href: '/terms', label: '이용약관' },
+  { href: '/privacy', label: '개인정보처리방침' },
+];
+
 export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
-        {/* Top row */}
-        <div className={styles.top}>
-          {/* Logo + Business Info */}
-          <div className={styles.logoCol}>
-            <Link href="/" className={styles.logo}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/logo.png" alt="" className={styles.logoImage} />
-              PIXEL CONNECT
-            </Link>
+        <div className={styles.inner}>
+          {/* Left: 사업자 정보 + 저작권 */}
+          <div className={styles.left}>
             <div className={styles.bizInfo}>
-              <p>PIXEL CONNECT(픽셀 커넥트)</p>
+              <p className={styles.company}>PIXEL CONNECT(픽셀 커넥트)</p>
               <p>사업자등록번호: 516-73-00625</p>
               <p>주소: 경기도 부천시 원미구 상동로 79, 4층 404-39호(상동, 부천상동수석프라자)</p>
               <p>이메일 : ceo@pixelconnect.co.kr</p>
             </div>
+            <p className={styles.copyright}>Copyright ⓒ 2025 픽셀커넥트 All rights reserved.</p>
           </div>
 
-          {/* Menu Links */}
-          <div className={styles.menuCol}>
-            <span className={styles.menuTitle}>Menu</span>
-            {menuLinks.map(item => (
-              <Link key={item.href} href={item.href} className={styles.menuLink}>{item.label}</Link>
-            ))}
-          </div>
-
-          {/* Contact */}
-          <div className={styles.contactCol}>
-            <span className={styles.menuTitle}>Contact</span>
-            <span className={styles.contactItem}>ceo@pixelconnect.co.kr</span>
-            <span className={styles.contactItem}>010-0000-0000</span>
-            <div className={styles.social}>
-              <Link href="#" className={styles.socialLink}>Instagram</Link>
-              <Link href="#" className={styles.socialLink}>KakaoTalk</Link>
+          {/* Right: 메뉴(나란히) + 약관 */}
+          <div className={styles.right}>
+            <nav className={styles.menu}>
+              {menuLinks.map(item => (
+                <Link key={item.href} href={item.href} className={styles.menuLink}>
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+            <div className={styles.legal}>
+              {legalLinks.map((item, i) => (
+                <span key={item.href} className={styles.legalItem}>
+                  {i > 0 && <span className={styles.divider}>|</span>}
+                  <Link href={item.href} className={styles.legalLink}>{item.label}</Link>
+                </span>
+              ))}
             </div>
           </div>
-        </div>
-
-        {/* Bottom */}
-        <div className={styles.bottom}>
-          <p>Copyright © 2025 Pixel Connect</p>
         </div>
       </div>
     </footer>
