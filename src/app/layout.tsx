@@ -54,10 +54,19 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/images/favicon.png', type: 'image/png' },
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/images/icon_196.png', type: 'image/png', sizes: '196x196' },
+      { url: '/images/icon_152.png', type: 'image/png', sizes: '152x152' },
     ],
-    shortcut: '/images/favicon.png',
-    apple: '/images/favicon.png',
+    shortcut: '/favicon.ico',
+    apple: '/images/icon_152.png',
+    other: [
+      {
+        rel: 'apple-touch-icon-precomposed',
+        url: '/images/icon_152.png',
+        sizes: '152x152',
+      },
+    ],
   },
 }
 
@@ -69,7 +78,7 @@ const jsonLd = {
       '@type': 'Organization',
       name: '픽셀커넥트',
       url: 'https://pixelconnect.co.kr',
-      logo: 'https://pixelconnect.co.kr/logo.png',
+      logo: 'https://pixelconnect.co.kr/images/logo.png',
       address: {
         '@type': 'PostalAddress',
         addressLocality: '부천',
