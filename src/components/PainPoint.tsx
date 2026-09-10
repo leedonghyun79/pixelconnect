@@ -19,7 +19,7 @@ const pains = [
         src="https://cdn.lordicon.com/zpxybbhl.json"
         trigger="loop"
         delay="1000"
-        colors="primary:#0d0d3e,secondary:#4a3aff"
+        colors="primary:#0d0d3e,secondary:#ff6b35"
         style={{ width: '40px', height: '40px' }}
       ></lord-icon>
     ),
@@ -34,7 +34,7 @@ const pains = [
         src="https://cdn.lordicon.com/qhviklyi.json"
         trigger="loop"
         delay="1500"
-        colors="primary:#0d0d3e,secondary:#4a3aff"
+        colors="primary:#0d0d3e,secondary:#ff6b35"
         style={{ width: '40px', height: '40px' }}
       ></lord-icon>
     ),
@@ -49,7 +49,7 @@ const pains = [
         src="https://cdn.lordicon.com/msoeawqm.json"
         trigger="loop"
         delay="2000"
-        colors="primary:#0d0d3e,secondary:#4a3aff"
+        colors="primary:#0d0d3e,secondary:#ff6b35"
         style={{ width: '40px', height: '40px' }}
       ></lord-icon>
     ),
@@ -64,7 +64,7 @@ const pains = [
         src="https://cdn.lordicon.com/usownftb.json"
         trigger="loop"
         delay="2500"
-        colors="primary:#0d0d3e,secondary:#4a3aff"
+        colors="primary:#0d0d3e,secondary:#ff6b35"
         style={{ width: '40px', height: '40px' }}
       ></lord-icon>
     ),

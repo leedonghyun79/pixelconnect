@@ -30,7 +30,11 @@ function StatItem({ stat, index }: { stat: typeof strengths[0], index: number })
   }, []);
 
   return (
-    <div ref={ref} className={`${styles.statItem} fade-up fade-delay-${4 + index}`}>
+    <div
+      ref={ref}
+      className={`${styles.statItem} fade-up`}
+      style={{ transitionDelay: `${0.9 + index * 0.13}s` }}
+    >
       <span className={styles.statNum}>{stat.highlight}</span>
       <span className={styles.statLabel}>{stat.label}</span>
     </div>
@@ -66,15 +70,18 @@ export default function Hero() {
           <div className={styles.textSide}>
             <h1
               ref={el => { itemRefs.current[1] = el; }}
-              className={`${styles.headline} fade-up fade-delay-2`}
+              className={styles.headline}
             >
-              내 비즈니스처럼 진심으로 고민하고<br />
-              책임질 <strong className={styles.navyText}>진짜 파트너</strong>를 찾으셨나요?
+              <span className={styles.line}>내 비즈니스처럼 진심으로 고민하고</span>
+              <span className={styles.line}>
+                책임질 <strong className={styles.navyText}>진짜 파트너</strong>를 찾으셨나요?
+              </span>
             </h1>
 
             <p
               ref={el => { itemRefs.current[2] = el; }}
-              className={`${styles.sub} fade-up fade-delay-3`}
+              className={`${styles.sub} fade-up`}
+              style={{ transitionDelay: '0.42s' }}
             >
               제작으로 끝나는 것이 아닌, 비즈니스의 진짜 성장을 만듭니다.<br />
               최신 기술과 트렌드로 당신의 브랜드에 맞는 홈페이지를,<br />
@@ -83,7 +90,8 @@ export default function Hero() {
 
             <div
               ref={el => { itemRefs.current[3] = el; }}
-              className={`${styles.ctaRow} fade-up fade-delay-4`}
+              className={`${styles.ctaRow} fade-up`}
+              style={{ transitionDelay: '0.62s' }}
             >
               <a href="/contact" className={styles.btnPrimary}>
                 프로젝트 문의

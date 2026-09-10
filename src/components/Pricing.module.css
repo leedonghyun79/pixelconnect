@@ -1,11 +1,5 @@
 .section {
-  background: var(--navy-deep);
-  background-image: 
-    linear-gradient(rgba(7, 7, 31, 0.7), rgba(7, 7, 31, 0.85)),
-    url('/images/pricing_bg.png');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  background: var(--navy-pale);
   padding: 120px 0;
   position: relative;
   overflow: hidden;
@@ -55,14 +49,14 @@
   box-shadow: var(--shadow-lg);
 }
 
-/* Recommended card — red border style (ref image) */
+/* Recommended card — 단일 액센트 강조 */
 .cardPop {
-  border: 2px solid var(--navy);
-  box-shadow: 0 0 0 0 transparent;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
 }
 
 .cardPop:hover {
-  box-shadow: 0 8px 32px rgba(13, 13, 62, 0.12);
+  box-shadow: 0 8px 32px rgba(255, 107, 53, 0.18);
 }
 
 /* ── Recommended Badge ────────────────────────────────────── */
@@ -71,7 +65,7 @@
   top: -14px;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--navy);
+  background: var(--accent);
   color: #fff;
   font-family: var(--font-display);
   font-size: 0.68rem;
@@ -168,12 +162,12 @@
 }
 
 .checkPop {
-  color: var(--navy);
+  color: var(--accent);
 }
 
 .featureHighlight {
   font-weight: 600;
-  color: var(--navy);
+  color: var(--accent);
 }
 
 /* ── Meta ─────────────────────────────────────────────────── */
@@ -225,16 +219,16 @@
   color: var(--navy);
 }
 
-/* Popular CTA — filled navy (ref image: filled red → navy) */
+/* Popular CTA — 액센트 채움 */
 .planCtaPop {
-  background: var(--navy);
+  background: var(--accent);
   color: #fff;
-  border-color: var(--navy);
+  border-color: var(--accent);
 }
 
 .planCtaPop:hover {
-  background: var(--navy-light);
-  border-color: var(--navy-light);
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
 }
 
 /* ── Bottom Note ──────────────────────────────────────────── */

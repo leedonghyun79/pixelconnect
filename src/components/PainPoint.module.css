@@ -39,10 +39,9 @@
   margin-top: 80px;
 }
 
-/* 카드 스타일링 (Glassmorphism & Interactive) */
+/* 카드 스타일링 (Interactive) */
 .card {
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(20px);
+  background: var(--white);
   border: 1px solid rgba(13, 13, 62, 0.06);
   border-radius: 24px;
   padding: 56px 48px;
@@ -107,7 +106,7 @@
 }
 
 .card:hover .cardIconWrap {
-  background: rgba(74, 58, 255, 0.1);
+  background: rgba(255, 107, 53, 0.1);
   transform: scale(1.1) rotate(-5deg);
 }
 
@@ -163,7 +162,7 @@
   margin: 0 2px;
   position: relative;
   display: inline-block;
-  background: linear-gradient(135deg, #0D0D3E 0%, #4A3AFF 100%);
+  background: linear-gradient(135deg, #0D0D3E 0%, var(--accent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -176,7 +175,7 @@
   bottom: 0px;
   width: 100%;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #4A3AFF, transparent);
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
   opacity: 0.6;
 }
 

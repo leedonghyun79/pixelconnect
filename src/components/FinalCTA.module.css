@@ -1,6 +1,6 @@
 .section {
   position: relative;
-  background: var(--navy-deep);
+  background: var(--navy);
   /* CTA + 푸터가 마지막 화면을 꽉 채우도록 (푸터 높이만큼 뺀 뷰포트 높이) */
   min-height: calc(100vh - 232px);
   display: flex;
@@ -35,7 +35,7 @@
   z-index: 1;
   pointer-events: none;
   background:
-    linear-gradient(to bottom, var(--navy-deep) 0%, transparent 25%, transparent 75%, var(--navy-deep) 100%);
+    linear-gradient(to bottom, var(--navy) 0%, transparent 25%, transparent 75%, var(--navy) 100%);
 }
 
 /* ── 콘텐츠 ─────────────────────────────────────────────── */

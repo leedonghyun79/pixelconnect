@@ -60,8 +60,8 @@ export default function Process() {
 
     const mm = gsap.matchMedia();
 
-    // 데스크톱: 섹션을 화면 중앙에 고정(pin)하고, 스크롤에 따라 01 → 05 로 채운 뒤 고정 해제
-    // (바로 위 Portfolio 섹션과 동일한 tween+scrub+pin 방식)
+    // 데스크톱: 섹션이 화면에 꽉 차게 고정(pin)된 "다음"부터 01 → 05 채우고 고정 해제.
+    // start를 'top top'으로 두면 고정 시작 = 진행률 0 지점이 정확히 일치한다.
     mm.add('(min-width: 981px)', () => {
       const proxy = { p: 0 };
       const tween = gsap.to(proxy, {
@@ -69,19 +69,17 @@ export default function Process() {
         ease: 'none',
         scrollTrigger: {
           trigger: section,
-          start: 'center center',
-          end: '+=820',
+          start: 'top top',
+          end: '+=1000',
           pin: true,
-          scrub: 0.5,
+          scrub: 0.4,
           invalidateOnRefresh: true,
           onUpdate: () => setScrollProgress(proxy.p),
+          onLeaveBack: () => setScrollProgress(0),
         },
       });
-      // 아래 섹션의 이미지·동적 캔버스가 늦게 로드되며 위치가 밀리는 것 보정
-      const onLoad = () => ScrollTrigger.refresh();
-      window.addEventListener('load', onLoad);
       return () => {
-        window.removeEventListener('load', onLoad);
+        tween.scrollTrigger?.kill();
         tween.kill();
       };
     });
@@ -105,10 +103,14 @@ export default function Process() {
     return () => mm.revert();
   }, []);
 
+  // scrub 지연이 있어도 고정 해제 전에 05까지 확실히 채워지도록,
+  // 고정 구간의 앞 82%에서 타임라인이 100% 차게 리매핑 (뒤 18%는 버퍼)
+  const fill = Math.min(1, scrollProgress / 0.82);
+
   // 현재 활성화된 스텝 (타임라인 dot 점등 로직과 동일 기준)
   let activeIndex = 0;
   steps.forEach((_, i) => {
-    if (scrollProgress >= i / (steps.length - 1) - 0.02) activeIndex = i;
+    if (fill >= i / (steps.length - 1) - 0.02) activeIndex = i;
   });
   const activeStep = steps[activeIndex];
 
@@ -128,12 +130,12 @@ export default function Process() {
           {steps.map((step, i) => {
             const start = i / (steps.length - 1);
             const end = (i + 1) / (steps.length - 1);
-            
-            let lineProgress = (scrollProgress - start) / (end - start);
+
+            let lineProgress = (fill - start) / (end - start);
             if (lineProgress < 0) lineProgress = 0;
             if (lineProgress > 1) lineProgress = 1;
-            
-            const isActive = scrollProgress >= start - 0.02;
+
+            const isActive = fill >= start - 0.02;
 
             return (
               <div

@@ -57,7 +57,7 @@ export default function FinalCTA({ hide3D = false }: FinalCTAProps) {
         </p>
 
         <div className={styles.ctaRow}>
-          <a href="/contact" className="btn btn-white">
+          <a href="/contact" className="btn btn-accent">
             무료 상담 신청하기 →
           </a>
           <a href="#" className="btn btn-ghost-white">

@@ -5,14 +5,14 @@
   z-index: 1;
 }
 
-/* 동적 다크 네온 배경 (Floating Blobs) */
+/* 아주 미세한 단일 액센트 글로우 하나만 (메쉬/보라 제거) */
 .bgBlob {
   position: absolute;
-  top: 10%;
-  left: -10%;
+  top: 6%;
+  left: -12%;
   width: 60vw;
   height: 60vw;
-  background: radial-gradient(circle, rgba(64, 112, 244, 0.08) 0%, rgba(13, 13, 62, 0) 70%);
+  background: radial-gradient(circle, rgba(255, 107, 53, 0.06) 0%, rgba(13, 13, 62, 0) 70%);
   border-radius: 50%;
   animation: floatBlob 20s ease-in-out infinite alternate;
   z-index: 0;
@@ -20,16 +20,7 @@
 }
 
 .bgBlob2 {
-  position: absolute;
-  bottom: -20%;
-  right: -10%;
-  width: 50vw;
-  height: 50vw;
-  background: radial-gradient(circle, rgba(140, 64, 244, 0.06) 0%, rgba(13, 13, 62, 0) 70%);
-  border-radius: 50%;
-  animation: floatBlob2 18s ease-in-out infinite alternate;
-  z-index: 0;
-  pointer-events: none;
+  display: none;
 }
 
 @keyframes floatBlob {
@@ -52,9 +43,9 @@
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: center;
+  grid-template-columns: 0.95fr 1.15fr;
+  gap: 64px;
+  align-items: start;
 }
 
 /* Left */
@@ -98,130 +89,87 @@
   top: 0;
   width: 4px;
   height: 100%;
-  background: linear-gradient(to bottom, #4070F4, #8C40F4);
+  background: var(--accent);
   border-radius: 4px;
-  box-shadow: 0 0 15px rgba(64, 112, 244, 0.4);
+  box-shadow: 0 0 15px rgba(255, 107, 53, 0.45);
 }
 
-/* Right */
+/* Right — 2×2 카드 그리드 */
 .right {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
 }
 
-/* 인터랙티브 글래스모피즘 카드 */
+/* 카드 — 딥네이비 톤, 은은한 보더, 호버 시 한 단계 밝게 */
 .item {
-  display: flex;
-  gap: 24px;
-  padding: 32px 36px;
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 20px;
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  position: relative;
-  overflow: hidden;
-  opacity: 0; /* 초기 숨김 상태 */
-  transform: translateY(40px);
+  padding: 26px 24px;
+  background: #171753;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 12px;
+  transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+  opacity: 0; /* 초기 숨김 */
+  transform: translateY(24px);
 }
 
 .item.visible {
-  /* 등장 시 호버와 동일한 액션을 보여준 뒤 자리잡음 */
-  animation: popEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: itemRise 0.6s var(--ease-out, cubic-bezier(0.25, 0.46, 0.45, 0.94)) forwards;
+  animation-delay: inherit; /* WhyUs.tsx 의 staggered delay 상속 */
 }
 
-@keyframes popEntrance {
-  0% {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  40% {
+@keyframes itemRise {
+  to {
     opacity: 1;
-    transform: translateX(-16px); /* 호버 액션처럼 튀어나옴 */
-    background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(255, 255, 255, 0.15);
-    box-shadow: -10px 15px 40px rgba(0, 0, 0, 0.25);
+    transform: translateY(0);
   }
-  100% {
-    opacity: 1;
-    transform: translateX(0); /* 제자리로 */
-    background: rgba(255, 255, 255, 0.03);
-    border-color: rgba(255, 255, 255, 0.06);
-    box-shadow: none;
-  }
-}
-
-.item::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0) 100%);
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  pointer-events: none;
 }
 
 .item:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.15);
-  transform: translateX(-16px); /* 역동적으로 좌측 텍스트를 향해 나옴 */
-  box-shadow: -10px 15px 40px rgba(0, 0, 0, 0.25);
+  border-color: rgba(255, 255, 255, 0.16);
+  background: #1E1E63;
+  transform: translateY(-4px);
 }
 
-.item:hover::before {
-  opacity: 1;
-}
-
+/* 체크 아이콘 — 라운드 사각 + 액센트 소프트 배경 + 오렌지 체크 */
 .checkIcon {
-  flex-shrink: 0;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.04);
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: var(--accent-soft);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(255, 255, 255, 0.5);
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  color: var(--accent);
+  margin-bottom: 18px;
 }
 
-.item.visible .checkIcon {
-  animation: iconPop 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  /* 부모 item의 animationDelay를 상속받도록 처리 */
-  animation-delay: inherit;
-}
-
-@keyframes iconPop {
-  0% { transform: scale(1); background: rgba(255, 255, 255, 0.04); color: rgba(255, 255, 255, 0.5); }
-  40% { 
-    background: rgba(64, 112, 244, 0.2);
-    color: #4070F4;
-    transform: scale(1.15);
-    box-shadow: 0 0 20px rgba(64, 112, 244, 0.3);
-  }
-  100% { transform: scale(1); background: rgba(255, 255, 255, 0.04); color: rgba(255, 255, 255, 0.5); }
-}
-
-.item:hover .checkIcon {
-  background: rgba(64, 112, 244, 0.2);
-  color: #4070F4;
-  transform: scale(1.1);
-  box-shadow: 0 0 20px rgba(64, 112, 244, 0.3);
+.checkIcon svg {
+  width: 17px;
+  height: 17px;
 }
 
 .itemTitle {
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 8px;
-  letter-spacing: -0.02em;
+  font-size: 16px;
+  font-weight: 600;
+  color: #F6F7FF;
+  margin-bottom: 9px;
+  letter-spacing: -0.01em;
 }
 
 .itemDesc {
-  font-size: 1.05rem;
-  color: rgba(255, 255, 255, 0.65);
-  line-height: 1.6;
+  font-size: 14px;
+  color: #B9BCE0;
+  line-height: 1.65;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item {
+    opacity: 1;
+    transform: none;
+  }
+  .item.visible {
+    animation: none;
+  }
 }
 
 @media (max-width: 900px) {
@@ -229,9 +177,12 @@
   .container { padding: 0 24px; }
   .grid {
     grid-template-columns: 1fr;
-    gap: 64px;
+    gap: 40px;
   }
-  .item:hover {
-    transform: translateY(-8px); /* 모바일에서는 위로 올라오게 수정 */
+}
+
+@media (max-width: 560px) {
+  .right {
+    grid-template-columns: 1fr;
   }
 }

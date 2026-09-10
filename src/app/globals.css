@@ -15,6 +15,15 @@
   --white: #FFFFFF;
   --white-off: #FAFAFA;
 
+  /* Accent — 단일 액센트(웜 오렌지). CTA·강조에만 사용 */
+  --accent: #FF6B35;
+  --accent-hover: #E85520;
+  --accent-soft: rgba(255, 107, 53, 0.12);
+
+  /* 다크 섹션(#0D0D3E) 위 카드면 — 배경보다 한 단계 밝게 */
+  --surface-dark: #191947;
+  --surface-dark-border: rgba(255, 255, 255, 0.09);
+
   /* Text Colors */
   --text-primary: #0D0D3E;
   --text-secondary: #5A5A7A;
@@ -260,6 +269,18 @@ h1, h2, h3, h4, h5, h6 {
 .btn-white:hover {
   background: rgba(255, 255, 255, 0.9);
   transform: translateY(-1px);
+}
+
+.btn-accent {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 10px 30px -8px rgba(255, 107, 53, 0.55);
+}
+
+.btn-accent:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 16px 40px -8px rgba(255, 107, 53, 0.7);
 }
 
 .btn-ghost-white {

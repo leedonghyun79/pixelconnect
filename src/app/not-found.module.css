@@ -6,7 +6,7 @@
   justify-content: center;
   overflow: hidden;
   padding: calc(var(--nav-height) + 80px) 24px 100px;
-  background: var(--navy-deep);
+  background: var(--navy);
   color: #fff;
   isolation: isolate;
 }
@@ -31,7 +31,7 @@
   aspect-ratio: 1;
   transform: translateX(-50%);
   z-index: -2;
-  background: radial-gradient(circle, rgba(74, 58, 255, 0.28) 0%, transparent 62%);
+  background: radial-gradient(circle, rgba(255, 107, 53, 0.28) 0%, transparent 62%);
   filter: blur(20px);
 }
 
@@ -91,8 +91,8 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #4a3aff;
-  box-shadow: 0 0 12px 2px rgba(74, 58, 255, 0.8);
+  background: var(--accent);
+  box-shadow: 0 0 12px 2px rgba(255, 107, 53, 0.8);
   animation: pulse 1.8s ease-in-out infinite;
 }
 
@@ -110,19 +110,19 @@
 }
 
 .numbers > span:not(.ring) {
-  background: linear-gradient(180deg, #ffffff 0%, #b9b7ff 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #FFD0BD 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  text-shadow: 0 20px 60px rgba(74, 58, 255, 0.25);
+  text-shadow: 0 20px 60px rgba(255, 107, 53, 0.25);
 }
 
 .ring {
   display: inline-flex;
   width: clamp(96px, 21vw, 180px);
   height: clamp(96px, 21vw, 180px);
-  color: #4a3aff;
-  filter: drop-shadow(0 0 20px rgba(74, 58, 255, 0.55));
+  color: var(--accent);
+  filter: drop-shadow(0 0 20px rgba(255, 107, 53, 0.55));
 }
 
 .ringSvg {
@@ -170,13 +170,13 @@
 }
 
 .primary {
-  background: #4a3aff;
+  background: var(--accent);
   color: #fff;
-  box-shadow: 0 10px 30px -8px rgba(74, 58, 255, 0.65);
+  box-shadow: 0 10px 30px -8px rgba(255, 107, 53, 0.65);
 }
 .primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 16px 40px -8px rgba(74, 58, 255, 0.8);
+  box-shadow: 0 16px 40px -8px rgba(255, 107, 53, 0.8);
 }
 
 .secondary {
@@ -213,7 +213,7 @@
   bottom: -4px;
   width: 0;
   height: 1px;
-  background: #4a3aff;
+  background: var(--accent);
   transition: width 0.25s var(--ease-out, ease);
 }
 .quickLink:hover {

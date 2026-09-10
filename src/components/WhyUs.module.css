@@ -1,20 +1,19 @@
 .section {
-  background: var(--navy-deep);
-  background-image: 
-    linear-gradient(rgba(7, 7, 31, 0.7), rgba(7, 7, 31, 0.85)),
-    url('/images/why_us_bg.png');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  background-color: var(--navy);
   color: #fff;
   padding: 150px 0 100px;
   position: relative;
   border-radius: 48px 48px 0 0;
   margin-top: -48px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
   z-index: 2;
 }
 
+
 .container {
+  position: relative;
+  z-index: 2;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 48px;
@@ -26,7 +25,7 @@
 
 .sub {
   font-size: 15px;
-  color: var(--navy-muted);
+  color: rgba(255, 255, 255, 0.6);
   line-height: 1.7;
   margin-top: 8px;
 }
@@ -37,34 +36,43 @@
   gap: 20px;
 }
 
+/* 등장(fade-up) 전용 래퍼 — 호버 트랜지션과 분리 */
+.cardReveal {
+  display: flex;
+}
+
+/* 다크 배경 위 카드 — 배경보다 한 단계 밝은 면 + 살짝 뜬 느낌 */
 .card {
-  background: var(--white);
-  border: 1px solid var(--border-default);
+  flex: 1;
+  background: var(--surface-dark);
+  border: 1px solid var(--surface-dark-border);
   border-radius: var(--radius-lg);
   padding: 36px 28px;
   position: relative;
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.55);
+  /* 호버만 담당 — 지연 없이 즉시 반응 */
+  transition: transform 0.18s ease, border-color 0.18s ease;
+  will-change: transform;
 }
 
 .card:hover {
-  transform: translateY(-2px);
-  border-color: var(--navy-light);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+  border-color: var(--accent);
 }
 
-/* Highlighted card (Maintenance) */
+/* Highlighted card (Maintenance) — 유일한 액센트 포인트 */
 .cardHighlight {
-  background: var(--navy);
-  border-color: var(--navy);
+  background: var(--accent);
+  border-color: var(--accent);
 }
 
 .cardHighlight:hover {
-  border-color: var(--navy-light);
-  box-shadow: 0 8px 32px rgba(13, 13, 62, 0.2);
+  border-color: var(--accent);
+  box-shadow: 0 32px 60px -20px rgba(255, 107, 53, 0.5);
 }
 
 .cardHighlight .num {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .cardHighlight .cardTitle {
@@ -72,15 +80,15 @@
 }
 
 .cardHighlight .cardDesc {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .num {
   font-family: var(--font-display);
   font-size: 0.72rem;
   font-weight: 600;
-  color: var(--navy-muted);
-  letter-spacing: 0.06em;
+  color: var(--accent);
+  letter-spacing: 0.08em;
   display: block;
   margin-bottom: 24px;
 }
@@ -88,14 +96,14 @@
 .cardTitle {
   font-size: 18px;
   font-weight: 700;
-  color: var(--text-primary);
+  color: #fff;
   margin-bottom: 12px;
   line-height: 1.4;
 }
 
 .cardDesc {
   font-size: 14px;
-  color: var(--navy-muted);
+  color: rgba(255, 255, 255, 0.62);
   line-height: 1.75;
 }
 

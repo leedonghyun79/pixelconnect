@@ -1,0 +1,21 @@
+.bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 한 귀퉁이만 은은한 웜 글로우 (액센트 톤) */
+.glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 80% at 88% -10%, var(--accent-soft), transparent 45%);
+}

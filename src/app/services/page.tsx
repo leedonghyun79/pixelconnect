@@ -79,7 +79,7 @@ function ServiceDetail() {
                 src={`https://cdn.lordicon.com/${s.icon}.json`}
                 trigger="loop"
                 delay={`${1000 + i * 500}`}
-                colors="primary:#0d0d3e,secondary:#4a3aff"
+                colors="primary:#0d0d3e,secondary:#ff6b35"
                 style={{ width: 48, height: 48, display: 'block', marginBottom: 16 }}
               ></lord-icon>
               <h3 style={{ fontSize: 18, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 10 }}>{s.title}</h3>

@@ -45,6 +45,8 @@ export default function Portfolio({ hideHeader = false }: PortfolioProps) {
       const getDistance = () =>
         Math.max(0, track.scrollWidth - window.innerWidth + 48);
 
+      // 카드 폭·비율이 CSS로 고정돼 트랙 너비는 결정적이다 → 이미지 로드 후 refresh 불필요.
+      // (스크롤 중 refresh 가 걸리면 pin 이 풀렸다 다시 잡히며 튐)
       const tween = gsap.to(track, {
         x: () => -getDistance(),
         ease: 'none',
@@ -59,17 +61,8 @@ export default function Portfolio({ hideHeader = false }: PortfolioProps) {
         },
       });
 
-      // next/image 는 비동기로 로드돼서 레이아웃이 나중에 바뀜 → 측정값 갱신
-      const refresh = () => ScrollTrigger.refresh();
-      window.addEventListener('load', refresh);
-      const imgs = Array.from(track.querySelectorAll('img'));
-      imgs.forEach(img => {
-        if (!img.complete) img.addEventListener('load', refresh, { once: true });
-      });
-
       return () => {
-        window.removeEventListener('load', refresh);
-        imgs.forEach(img => img.removeEventListener('load', refresh));
+        tween.scrollTrigger?.kill();
         tween.kill();
       };
     }

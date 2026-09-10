@@ -7,6 +7,20 @@
   z-index: 4;
 }
 
+/* 데스크톱: 고정(pin)되는 동안 섹션이 뷰포트에 꽉 맞고 내용이 세로 중앙 정렬 */
+@media (min-width: 981px) {
+  .section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 56px 0;
+  }
+  .header {
+    margin-bottom: 36px;
+  }
+}
+
 
 .container {
   max-width: 1200px;

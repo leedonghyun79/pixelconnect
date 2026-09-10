@@ -2,6 +2,7 @@
 import { useEffect, useRef } from 'react';
 import styles from './WhyUs.module.css';
 import mStyles from './Maintenance.module.css';
+import SectionGridBg from './SectionGridBg';
 
 const diffs = [
   {
@@ -64,9 +65,8 @@ export default function WhyUs() {
 
   return (
     <section ref={sectionRef} className={styles.section} id="services">
-      {/* Maintenance Blobs */}
-      <div className={mStyles.bgBlob} />
-      <div className={mStyles.bgBlob2} />
+      {/* 원근 와이어 그리드 배경 (코드 생성) */}
+      <SectionGridBg />
 
       <div className={styles.container}>
         <div className={styles.header}>
@@ -81,15 +81,17 @@ export default function WhyUs() {
             <div
               key={i}
               ref={el => { itemRefs.current[i] = el; }}
-              className={`${styles.card} ${d.highlight ? styles.cardHighlight : ''} fade-up`}
+              className={`${styles.cardReveal} fade-up`}
               style={{ transitionDelay: `${i * 0.12}s` }}
             >
-              <span className={styles.num}>{d.num}</span>
-              <h3 className={styles.cardTitle}>{d.title}</h3>
-              <p className={styles.cardDesc}>{d.desc}</p>
-              {d.highlight && (
-                <span className={styles.star}>⭐</span>
-              )}
+              <div className={`${styles.card} ${d.highlight ? styles.cardHighlight : ''}`}>
+                <span className={styles.num}>{d.num}</span>
+                <h3 className={styles.cardTitle}>{d.title}</h3>
+                <p className={styles.cardDesc}>{d.desc}</p>
+                {d.highlight && (
+                  <span className={styles.star}>⭐</span>
+                )}
+              </div>
             </div>
           ))}
         </div>
@@ -120,8 +122,8 @@ export default function WhyUs() {
                   style={{ animationDelay: `${i * 0.15}s` }}
                 >
                   <div className={mStyles.checkIcon}>
-                    <svg width="24" height="24" viewBox="0 0 20 20" fill="none">
-                      <path d="M6 10l3 3 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M20 6 9 17l-5-5" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </div>
                   <div>
