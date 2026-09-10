@@ -33,10 +33,20 @@ export default function Navbar() {
     setMenuOpen(false);
   }, [pathname]);
 
+  // 로고 클릭 → 이미 홈이면 맨 위로 부드럽게 스크롤
+  const handleLogoClick = (e: React.MouseEvent) => {
+    setMenuOpen(false);
+    if (pathname === '/') {
+      e.preventDefault();
+      if (window.__lenis) window.__lenis.scrollTo(0, { duration: 1.2 });
+      else window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   return (
     <nav className={`${styles.nav} ${scrolled ? styles.navScrolled : ''}`}>
       <div className={styles.inner}>
-        <Link href="/" className={styles.logo}>
+        <Link href="/" className={styles.logo} onClick={handleLogoClick} aria-label="픽셀커넥트 홈">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/images/logo.png" alt="" className={styles.logoImage} />
           PIXEL CONNECT

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import PageHero from '@/components/PageHero';
+import FinalCTA from '@/components/FinalCTA';
 
 export const metadata: Metadata = {
   title: '서비스 | 픽셀커넥트',
@@ -18,6 +19,9 @@ export default function ServicesPage() {
 
       {/* 서비스 상세 항목 */}
       <ServiceDetail />
+
+      {/* 하단 전환 CTA */}
+      <FinalCTA />
 
     </main>
   );
@@ -53,7 +57,7 @@ function ServiceDetail() {
   ];
 
   return (
-    <section style={{ background: '#fff', padding: '0 0 160px' }}>
+    <section style={{ background: '#fff', padding: '0 0 72px' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 48px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 20 }}>
           {services.map((s, i) => (

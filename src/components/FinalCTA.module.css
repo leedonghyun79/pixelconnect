@@ -1,7 +1,12 @@
 .section {
   position: relative;
   background: var(--navy-deep);
-  padding: 120px 0 180px; /* 푸터와 여유 공간 확보 */
+  /* CTA + 푸터가 마지막 화면을 꽉 채우도록 (푸터 높이만큼 뺀 뷰포트 높이) */
+  min-height: calc(100vh - 232px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px 0;
   border-radius: 48px 48px 0 0;
   margin-top: -48px;
   z-index: 7;
@@ -67,7 +72,7 @@
 }
 
 @media (max-width: 768px) {
-  .section    { padding: 80px 0 120px; }
+  .section    { min-height: 0; padding: 80px 0 100px; }
   .container  { padding: 0 24px; }
   .ctaRow     { flex-direction: column; align-items: center; }
 }
