@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import PageHero from '@/components/PageHero';
+import Stats from '@/components/Stats';
 import FinalCTA from '@/components/FinalCTA';
 
 export const metadata: Metadata = {
@@ -19,6 +20,9 @@ export default function ServicesPage() {
 
       {/* 서비스 상세 항목 */}
       <ServiceDetail />
+
+      {/* 신뢰 지표 */}
+      <Stats />
 
       {/* 하단 전환 CTA */}
       <FinalCTA />
