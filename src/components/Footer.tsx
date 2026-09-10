@@ -24,9 +24,10 @@ export default function Footer() {
               PIXEL CONNECT
             </Link>
             <div className={styles.bizInfo}>
-              <p>대표: 이동현</p>
-              <p>사업자등록번호: 000-00-00000</p>
-              <p>경기도 부천시</p>
+              <p>PIXEL CONNECT(픽셀 커넥트)</p>
+              <p>사업자등록번호: 516-73-00625</p>
+              <p>주소: 경기도 부천시 원미구 상동로 79, 4층 404-39호(상동, 부천상동수석프라자)</p>
+              <p>이메일 : ceo@pixelconnect.co.kr</p>
             </div>
           </div>
 
@@ -41,7 +42,7 @@ export default function Footer() {
           {/* Contact */}
           <div className={styles.contactCol}>
             <span className={styles.menuTitle}>Contact</span>
-            <span className={styles.contactItem}>hello@pixelconnect.co.kr</span>
+            <span className={styles.contactItem}>ceo@pixelconnect.co.kr</span>
             <span className={styles.contactItem}>010-0000-0000</span>
             <div className={styles.social}>
               <Link href="#" className={styles.socialLink}>Instagram</Link>

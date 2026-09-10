@@ -1,50 +1,18 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
+import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './Portfolio.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const filters = ['전체', '쇼핑몰', '기업 홈페이지', '병원·클리닉', '교육', '기타'];
-
 const projects = [
-  {
-    cat: '쇼핑몰',
-    title: '비자르테 쇼핑몰',
-    tags: ['인테리어', '쇼핑몰'],
-    result: '제작 후 문의 3배 증가',
-  },
-  {
-    cat: '기업 홈페이지',
-    title: 'B2B SaaS 기업 사이트',
-    tags: ['기업', 'B2B'],
-    result: '브랜드 인지도 향상',
-  },
-  {
-    cat: '병원·클리닉',
-    title: '강남 피부과 클리닉',
-    tags: ['병원', '클리닉'],
-    result: '온라인 예약 200% 증가',
-  },
-  {
-    cat: '교육',
-    title: '교육 플랫폼 랜딩',
-    tags: ['교육', '랜딩페이지'],
-    result: '광고 전환율 3배',
-  },
-  {
-    cat: '쇼핑몰',
-    title: '뷰티 브랜드 LUMI',
-    tags: ['뷰티', '쇼핑몰'],
-    result: '전환율 3.2%→8.1%',
-  },
-  {
-    cat: '기업 홈페이지',
-    title: '법률 사무소 웹사이트',
-    tags: ['법률', '기업'],
-    result: '월 문의 3배 증가',
-  },
+  { title: 'NOVAINT 인테리어', img: '/portfolio_img/NOVAINT.png' },
+  { title: 'LINEO 기업 사이트', img: '/portfolio_img/기업사이트.png' },
+  { title: '리엔오 자산관리', img: '/portfolio_img/리엔오.png' },
+  { title: '드림다이브 스쿠버다이빙', img: '/portfolio_img/드림다이브.png' },
+  { title: 'PROTEX 특수화물 운송', img: '/portfolio_img/화물.png' },
 ];
 
 interface PortfolioProps {
@@ -52,7 +20,6 @@ interface PortfolioProps {
 }
 
 export default function Portfolio({ hideHeader = false }: PortfolioProps) {
-  const [active, setActive] = useState('전체');
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -74,25 +41,35 @@ export default function Portfolio({ hideHeader = false }: PortfolioProps) {
       const track = trackRef.current;
       if (!section || !track) return;
 
-      const getScrollAmount = () => {
-        const trackWidth = track.scrollWidth;
-        return -(trackWidth - window.innerWidth + 48);
-      };
+      // 트랙이 실제로 가로로 이동해야 하는 거리(양수). 0이면 pin 안 함.
+      const getDistance = () =>
+        Math.max(0, track.scrollWidth - window.innerWidth + 48);
 
       const tween = gsap.to(track, {
-        x: getScrollAmount,
+        x: () => -getDistance(),
         ease: 'none',
         scrollTrigger: {
           trigger: section,
           start: 'center center',
-          end: () => `+=${track.scrollWidth}`,
+          // pin 구간을 실제 이동 거리에 맞춰 헛스크롤 제거
+          end: () => `+=${getDistance()}`,
           pin: true,
           scrub: 1,
           invalidateOnRefresh: true,
-        }
+        },
+      });
+
+      // next/image 는 비동기로 로드돼서 레이아웃이 나중에 바뀜 → 측정값 갱신
+      const refresh = () => ScrollTrigger.refresh();
+      window.addEventListener('load', refresh);
+      const imgs = Array.from(track.querySelectorAll('img'));
+      imgs.forEach(img => {
+        if (!img.complete) img.addEventListener('load', refresh, { once: true });
       });
 
       return () => {
+        window.removeEventListener('load', refresh);
+        imgs.forEach(img => img.removeEventListener('load', refresh));
         tween.kill();
       };
     }
@@ -125,7 +102,13 @@ export default function Portfolio({ hideHeader = false }: PortfolioProps) {
               >
                 <div className={styles.thumb}>
                   <div className={styles.thumbInner}>
-                    <span className={styles.thumbPlaceholder}>🖥️</span>
+                    <Image
+                      src={p.img}
+                      alt={p.title}
+                      fill
+                      sizes="400px"
+                      className={styles.thumbImg}
+                    />
                   </div>
                   <div className={styles.thumbOverlay}>
                     <a href="#contact" className={styles.thumbCta}>자세히 보기 →</a>
@@ -133,15 +116,7 @@ export default function Portfolio({ hideHeader = false }: PortfolioProps) {
                 </div>
 
                 <div className={styles.cardBody}>
-                  <div className={styles.tags}>
-                    {p.tags.map((t, ti) => (
-                      <span key={ti} className={styles.tag}>{t}</span>
-                    ))}
-                  </div>
                   <h3 className={styles.cardTitle}>{p.title}</h3>
-                  {p.result && (
-                    <p className={styles.cardResult}>{p.result}</p>
-                  )}
                 </div>
               </div>
             ))}
@@ -154,7 +129,13 @@ export default function Portfolio({ hideHeader = false }: PortfolioProps) {
               <div key={`${p.title}-${i}`} className={styles.card}>
                 <div className={styles.thumb}>
                   <div className={styles.thumbInner}>
-                    <span className={styles.thumbPlaceholder}>🖥️</span>
+                    <Image
+                      src={p.img}
+                      alt={p.title}
+                      fill
+                      sizes="400px"
+                      className={styles.thumbImg}
+                    />
                   </div>
                   <div className={styles.thumbOverlay}>
                     <a href="#contact" className={styles.thumbCta}>자세히 보기 →</a>
@@ -162,15 +143,7 @@ export default function Portfolio({ hideHeader = false }: PortfolioProps) {
                 </div>
 
                 <div className={styles.cardBody}>
-                  <div className={styles.tags}>
-                    {p.tags.map((t, ti) => (
-                      <span key={ti} className={styles.tag}>{t}</span>
-                    ))}
-                  </div>
                   <h3 className={styles.cardTitle}>{p.title}</h3>
-                  {p.result && (
-                    <p className={styles.cardResult}>{p.result}</p>
-                  )}
                 </div>
               </div>
             ))}

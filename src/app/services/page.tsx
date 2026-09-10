@@ -27,25 +27,25 @@ export default function ServicesPage() {
 function ServiceDetail() {
   const services = [
     {
-      icon: '🌐',
+      icon: 'gqzfzudq',
       title: '웹사이트 제작',
       desc: '브랜드 아이덴티티를 반영한 맞춤형 웹사이트를 제작합니다. 반응형 디자인으로 PC·모바일 어디서든 최적의 경험을 제공합니다.',
       features: ['맞춤형 디자인', '반응형 레이아웃', 'SEO 최적화', '빠른 로딩 속도'],
     },
     {
-      icon: '🛒',
+      icon: 'slkvcfos',
       title: '쇼핑몰 구축',
       desc: '아임웹 기반의 쇼핑몰을 구축합니다. 상품 관리, 결제 시스템, 재고 관리까지 운영에 필요한 모든 기능을 설정합니다.',
       features: ['상품 관리 시스템', '결제 연동', '재고/주문 관리', '프로모션 설정'],
     },
     {
-      icon: '📄',
+      icon: 'nocovwne',
       title: '랜딩페이지',
       desc: '광고와 연계된 고전환 랜딩페이지를 제작합니다. 명확한 CTA와 설득 구조로 문의 전환율을 높입니다.',
       features: ['전환 최적화 구조', '광고 연계 설계', 'A/B 테스트 지원', '빠른 제작 (1주)'],
     },
     {
-      icon: '⚙️',
+      icon: 'sbiheqdr',
       title: '유지보수·운영',
       desc: '런칭 후에도 사이트 수정, 오류 처리, 콘텐츠 업데이트를 지속적으로 지원합니다. 홈페이지가 살아있는 동안 함께합니다.',
       features: ['텍스트·이미지 수정', '기능 오류 처리', '정기 점검', '운영 컨설팅'],
@@ -67,7 +67,13 @@ function ServiceDetail() {
                 transition: 'transform 0.3s ease, box-shadow 0.3s ease',
               }}
             >
-              <span style={{ fontSize: '1.8rem', display: 'block', marginBottom: 16 }}>{s.icon}</span>
+              <lord-icon
+                src={`https://cdn.lordicon.com/${s.icon}.json`}
+                trigger="loop"
+                delay={`${1000 + i * 500}`}
+                colors="primary:#0d0d3e,secondary:#4a3aff"
+                style={{ width: 48, height: 48, display: 'block', marginBottom: 16 }}
+              ></lord-icon>
               <h3 style={{ fontSize: 18, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 10 }}>{s.title}</h3>
               <p style={{ fontSize: 14, color: 'var(--text-secondary)', lineHeight: 1.75, marginBottom: 20 }}>{s.desc}</p>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>

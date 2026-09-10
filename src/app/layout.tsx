@@ -20,14 +20,19 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: '픽셀커넥트 | 만들고 끝나는 홈페이지는 없습니다',
-  description: '제작부터 운영까지, 브랜드의 성장을 함께 책임집니다. 합리적 가격과 제작 후 유지보수·관리까지 책임지는 웹 에이전시.',
+  title: '홈페이지 제작·운영 웹에이전시 | 픽셀커넥트',
+  description: '부천 웹 에이전시 픽셀커넥트. 제작부터 운영까지, 브랜드의 성장을 함께 책임집니다. 합리적 가격과 제작 후 유지보수·관리까지 책임지는 홈페이지 제작 파트너.',
   metadataBase: new URL('https://pixelconnect.co.kr'),
-  alternates: { canonical: '/' },
+  alternates: {
+    canonical: '/',
+    types: {
+      'application/rss+xml': [{ url: '/feed.xml', title: '픽셀커넥트 칼럼' }],
+    },
+  },
   openGraph: {
     type: 'website',
     siteName: '픽셀커넥트',
-    title: '픽셀커넥트 | 만들고 끝나는 홈페이지는 없습니다',
+    title: '홈페이지 제작·운영 웹에이전시 | 픽셀커넥트',
     description: '제작부터 운영까지, 브랜드의 성장을 함께 책임집니다.',
     url: 'https://pixelconnect.co.kr',
     locale: 'ko_KR',
@@ -42,7 +47,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: '픽셀커넥트 | 만들고 끝나는 홈페이지는 없습니다',
+    title: '홈페이지 제작·운영 웹에이전시 | 픽셀커넥트',
     description: '제작부터 운영까지, 브랜드의 성장을 함께 책임집니다.',
     images: ['/og-image.png'],
   },

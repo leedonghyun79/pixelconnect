@@ -116,6 +116,7 @@
 }
 
 .thumbInner {
+  position: relative;
   width: 100%;
   height: 100%;
   display: flex;
@@ -127,6 +128,11 @@
 
 .card:hover .thumbInner {
   transform: scale(1.05);
+}
+
+.thumbImg {
+  object-fit: cover;
+  object-position: top;
 }
 
 .thumbPlaceholder {
@@ -163,6 +169,7 @@
 /* Card Body */
 .cardBody {
   padding: 20px 24px;
+  border-top: 1px solid #dddddd;
 }
 
 .tags {
