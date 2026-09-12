@@ -39,14 +39,6 @@ const steps = [
       '시안을 확정할 때까지 수정 횟수에 제한을 두지 않습니다. 최종 확정 후 실제 도메인에 배포하고 잔금 50%를 결제합니다. 반응형(모바일)과 기본 SEO 세팅이 포함됩니다.',
     highlight: false,
   },
-  {
-    num: '05',
-    title: '유지보수',
-    desc: '런칭 후에도 수정·오류·업데이트를 지속적으로 지원합니다.',
-    detail:
-      '오픈이 끝이 아닙니다. 텍스트·이미지 수정, 오류 처리, 콘텐츠 업데이트를 지속적으로 지원하고, 주기적으로 속도·보안·링크 상태를 점검합니다.',
-    highlight: false,
-  },
 ];
 
 export default function Process() {
@@ -60,7 +52,7 @@ export default function Process() {
 
     const mm = gsap.matchMedia();
 
-    // 데스크톱: 섹션이 화면에 꽉 차게 고정(pin)된 "다음"부터 01 → 05 채우고 고정 해제.
+    // 데스크톱: 섹션이 화면에 꽉 차게 고정(pin)된 "다음"부터 01 → 04 채우고 고정 해제.
     // start를 'top top'으로 두면 고정 시작 = 진행률 0 지점이 정확히 일치한다.
     mm.add('(min-width: 981px)', () => {
       const proxy = { p: 0 };

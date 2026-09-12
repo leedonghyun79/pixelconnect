@@ -1,0 +1,39 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node scroll-test.js)",
+      "Bash(npm init *)",
+      "Bash(node scroll-test.mjs)",
+      "Bash(node scroll-test2.mjs)",
+      "Bash(node inspect.mjs)",
+      "Bash(node check-transform.mjs)",
+      "Bash(node inspect2.mjs)",
+      "Bash(curl -sf http://localhost:3000)",
+      "Bash(rm -f step-*.png)",
+      "Bash(node inspect3.mjs)",
+      "Bash(node check-height.mjs)",
+      "Bash(rm -f wheel-*.png)",
+      "Bash(node wheel-test.mjs)",
+      "Bash(node wheel-jump-test.mjs)",
+      "Bash(node debug-log.mjs)",
+      "Bash(node verify-fix.mjs)",
+      "Bash(rm -f wheel2-*.png)",
+      "Bash(node wheel-test2.mjs)",
+      "Bash(node fast-scroll-test.mjs)",
+      "Bash(node -e ' *)",
+      "Bash(lsof -ti:3000 -sTCP:LISTEN)",
+      "Bash(xargs -r kill)",
+      "Bash(mkdir -p /d/tmp/pwtest2)",
+      "Bash(node watch.mjs)",
+      "Bash(rm -f real-*.png)",
+      "Bash(node wheel-real.mjs)",
+      "Bash(sleep 2 && rm -f real-*.png && node wheel-real.mjs 2>&1)",
+      "Bash(node precise-check.mjs)"
+    ],
+    "additionalDirectories": [
+      "\\tmp\\pwtest",
+      "d:\\tmp\\pwtest",
+      "D:\\tmp\\pwtest2"
+    ]
+  }
+}

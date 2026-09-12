@@ -20,7 +20,7 @@ const diffs = [
   {
     num: '03 · Care',
     title: '밀착 소통, 빠른 피드백',
-    desc: '진행 중 궁금한 점은 언제든 물어보세요. 당일 피드백을 원칙으로, 답답함 없는 진행을 보장합니다.',
+    desc: '진행 중 궁금한 점은 언제든 물어보세요. 1시간 이내 피드백을 원칙으로, 답답함 없는 진행을 보장합니다.',
     highlight: false,
   },
 ];
@@ -88,9 +88,6 @@ export default function WhyUs() {
                 <span className={styles.num}>{d.num}</span>
                 <h3 className={styles.cardTitle}>{d.title}</h3>
                 <p className={styles.cardDesc}>{d.desc}</p>
-                {d.highlight && (
-                  <span className={styles.star}>⭐</span>
-                )}
               </div>
             </div>
           ))}

@@ -53,7 +53,7 @@ export default function FinalCTA({ hide3D = false }: FinalCTAProps) {
 
         <p className={styles.sub}>
           부담 없이 먼저 물어보세요.<br />
-          견적만 확인해도 괜찮습니다.
+          견적만 확인하셔도 괜찮습니다.
         </p>
 
         <div className={styles.ctaRow}>

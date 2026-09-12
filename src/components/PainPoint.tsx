@@ -134,7 +134,7 @@ export default function PainPoint() {
             그래서 <span className={styles.bridgeAccent}>픽셀커넥트</span>는, 만드는 데서 끝내지 않기로 했습니다.
           </p>
           <p className={styles.bridgeSubEm}>
-            대표님께 필요한 건 예쁜 결과물에서 멈추지 않고, 성과로 이어지는 사이트일 테니까요.
+            대표님께 필요한 건, 보기 좋은 사이트가 아니라 문의로 이어지는 사이트일 테니까요.
           </p>
         </div>
       </div>

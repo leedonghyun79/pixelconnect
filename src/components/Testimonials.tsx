@@ -59,7 +59,7 @@ export default function Testimonials() {
         <div className={styles.header}>
           <div className="section-eyebrow">REVIEWS</div>
           <h2 className="section-title">함께한 대표님들의 이야기</h2>
-          <p className={styles.sub}>결과물보다 관계가 먼저입니다.</p>
+          <p className={styles.sub}>끝까지 곁을 지킨 이유, 대표님들이 증명합니다.</p>
         </div>
 
         <div className={styles.grid}>

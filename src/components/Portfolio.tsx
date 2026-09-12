@@ -56,7 +56,11 @@ export default function Portfolio({ hideHeader = false }: PortfolioProps) {
           // pin 구간을 실제 이동 거리에 맞춰 헛스크롤 제거
           end: () => `+=${getDistance()}`,
           pin: true,
-          scrub: 1,
+          // scrub에 지연(smoothing)을 주면 빠르게 스크롤할 때 트랙 이동 애니메이션이
+          // 못 따라잡은 채로 pin이 풀려 다음 섹션으로 넘어가는 순간 카드가 덜 밀린
+          // 상태로 "튀는" 현상이 생긴다. Lenis가 이미 스크롤 자체를 부드럽게 하고
+          // 있으므로 scrub은 스크롤 위치와 항상 정확히 일치시킨다.
+          scrub: true,
           invalidateOnRefresh: true,
         },
       });
@@ -74,7 +78,7 @@ export default function Portfolio({ hideHeader = false }: PortfolioProps) {
         {!hideHeader && (
           <div className={styles.header}>
             <div className="section-eyebrow">OUR WORK</div>
-            <h2 className="section-title">결과물로 말합니다</h2>
+            <h2 className="section-title">함께 만든 브랜드들</h2>
             <p className={styles.sub}>
               다양한 업종의 브랜드와 함께 만든 홈페이지입니다.
             </p>

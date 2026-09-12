@@ -18,7 +18,7 @@
 }
 
 .sub {
-  font-size: 15px;
+  font-size: 18px;
   color: var(--navy-muted);
   line-height: 1.7;
   margin-top: 8px;
@@ -72,14 +72,14 @@
 
 /* Quote */
 .highlight {
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 600;
   color: var(--text-primary);
   line-height: 1.5;
 }
 
 .body {
-  font-size: 13px;
+  font-size: 15px;
   color: var(--navy-muted);
   line-height: 1.7;
 }

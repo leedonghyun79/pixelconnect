@@ -47,7 +47,7 @@
 }
 
 .questionText {
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 500;
   color: var(--navy);
   line-height: 1.5;
@@ -84,7 +84,7 @@
 
 .answerContent {
   padding: 0 8px 24px;
-  font-size: 15px;
+  font-size: 18px;
   color: var(--navy-muted);
   line-height: 1.75;
 }
