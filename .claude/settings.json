@@ -28,12 +28,26 @@
       "Bash(rm -f real-*.png)",
       "Bash(node wheel-real.mjs)",
       "Bash(sleep 2 && rm -f real-*.png && node wheel-real.mjs 2>&1)",
-      "Bash(node precise-check.mjs)"
+      "Bash(node precise-check.mjs)",
+      "Bash(grep -n \"\\\\\"@/\\\\*\\\\\"\\\\|paths\" -A2 \"D:/작업실/study/projects/pixelconnect/tsconfig.json\")",
+      "Bash(mkdir -p \"D:/작업실/study/projects/pixelconnect/src/app/portfolio/[slug]\")",
+      "Bash(curl -sf http://localhost:3000/portfolio/novaint)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/portfolio/novaint)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/portfolio/not-a-real-slug)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/portfolio)",
+      "Bash(mkdir -p /d/tmp/pwtest3)",
+      "Bash(node shot.mjs)",
+      "Bash(mkdir -p /d/tmp/pwtest4)",
+      "Bash(mkdir -p /d/tmp/pwtest5)",
+      "Bash(node check.mjs)",
+      "Bash(mkdir -p /d/tmp/pwtest6)",
+      "Bash(mkdir -p /d/tmp/pwtest7)"
     ],
     "additionalDirectories": [
       "\\tmp\\pwtest",
       "d:\\tmp\\pwtest",
-      "D:\\tmp\\pwtest2"
+      "D:\\tmp\\pwtest2",
+      "D:\\작업실\\study\\projects\\pixelconnect\\src\\app\\portfolio"
     ]
   }
 }

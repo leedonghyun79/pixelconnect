@@ -1,19 +1,13 @@
 'use client';
 import { useEffect, useRef } from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './Portfolio.module.css';
+import { portfolioProjects as projects } from '@/data/portfolio';
 
 gsap.registerPlugin(ScrollTrigger);
-
-const projects = [
-  { title: 'NOVAINT 인테리어', img: '/portfolio_img/NOVAINT.png' },
-  { title: 'LINEO 기업 사이트', img: '/portfolio_img/기업사이트.png' },
-  { title: '리엔오 자산관리', img: '/portfolio_img/리엔오.png' },
-  { title: '드림다이브 스쿠버다이빙', img: '/portfolio_img/드림다이브.png' },
-  { title: 'PROTEX 특수화물 운송', img: '/portfolio_img/화물.png' },
-];
 
 interface PortfolioProps {
   hideHeader?: boolean;
@@ -22,7 +16,7 @@ interface PortfolioProps {
 export default function Portfolio({ hideHeader = false }: PortfolioProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const itemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
   const filtered = projects;
 
@@ -91,8 +85,9 @@ export default function Portfolio({ hideHeader = false }: PortfolioProps) {
         <div className={styles.container}>
           <div className={styles.grid}>
             {filtered.map((p, i) => (
-              <div 
-                key={`${p.title}-${i}`} 
+              <Link
+                href={`/portfolio/${p.slug}`}
+                key={`${p.title}-${i}`}
                 ref={el => { itemRefs.current[i] = el; }}
                 className={`${styles.card} fade-up`}
                 style={{ transitionDelay: `${i * 0.08}s` }}
@@ -108,14 +103,14 @@ export default function Portfolio({ hideHeader = false }: PortfolioProps) {
                     />
                   </div>
                   <div className={styles.thumbOverlay}>
-                    <a href="#contact" className={styles.thumbCta}>자세히 보기 →</a>
+                    <span className={styles.thumbCta} aria-hidden="true">+</span>
                   </div>
                 </div>
 
                 <div className={styles.cardBody}>
                   <h3 className={styles.cardTitle}>{p.title}</h3>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -123,7 +118,7 @@ export default function Portfolio({ hideHeader = false }: PortfolioProps) {
         <div className={styles.trackWrap}>
           <div ref={trackRef} className={styles.track}>
             {projects.map((p, i) => (
-              <div key={`${p.title}-${i}`} className={styles.card}>
+              <Link href={`/portfolio/${p.slug}`} key={`${p.title}-${i}`} className={styles.card}>
                 <div className={styles.thumb}>
                   <div className={styles.thumbInner}>
                     <Image
@@ -135,14 +130,14 @@ export default function Portfolio({ hideHeader = false }: PortfolioProps) {
                     />
                   </div>
                   <div className={styles.thumbOverlay}>
-                    <a href="#contact" className={styles.thumbCta}>자세히 보기 →</a>
+                    <span className={styles.thumbCta} aria-hidden="true">+</span>
                   </div>
                 </div>
 
                 <div className={styles.cardBody}>
                   <h3 className={styles.cardTitle}>{p.title}</h3>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
