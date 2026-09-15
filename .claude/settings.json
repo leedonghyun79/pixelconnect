@@ -52,7 +52,14 @@
       "Bash(node -e \"require.resolve\\('sharp'\\)\")",
       "Bash(python3 -c \"import PIL; print\\('PIL ok'\\)\")",
       "Bash(node -e \"const s=require\\('sharp'\\); console.log\\('sharp version', s.versions\\)\")",
-      "Bash(git restore *)"
+      "Bash(git restore *)",
+      "Bash(curl -sI \"https://pixelconnect.co.kr/_next/image?url=%2Fportfolio_img%2FNOVAINT.webp&w=3840&q=75\")",
+      "Bash(curl -sIL https://pixelconnect.co.kr)",
+      "Bash(curl -sL https://pixelconnect.co.kr/robots.txt)",
+      "Bash(curl -sL https://pixelconnect.co.kr/sitemap.xml)",
+      "Bash(curl -s -o /dev/null -w '%{http_code}\\\\n' https://pixelconnect.co.kr/llms.txt)",
+      "Bash(curl -s -o /dev/null -w '%{http_code}\\\\n' https://pixelconnect.co.kr/이런페이지는없음)",
+      "Bash(curl -sL https://pixelconnect.co.kr/feed.xml)"
     ],
     "additionalDirectories": [
       "\\tmp\\pwtest",
