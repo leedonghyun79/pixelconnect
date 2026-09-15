@@ -63,7 +63,8 @@
       "Bash(curl -sL -A \"Mozilla/5.0 \\(compatible; Yeti/1.1; +http://naver.me/spd\\)\" -o /dev/null -w \"HTTP Status: %{http_code}\\\\n\" https://pixelconnect.co.kr)",
       "Bash(curl -sIL -A \"Mozilla/5.0 \\(compatible; Yeti/1.1; +http://naver.me/spd\\)\" https://pixelconnect.co.kr)",
       "Bash(curl -s https://pixelconnect.co.kr)",
-      "Bash(git fetch *)"
+      "Bash(git fetch *)",
+      "Bash(curl -s \"https://pixelconnect.co.kr/column/cmtqaqlxr0000630wbfv8qeio\")"
     ],
     "additionalDirectories": [
       "\\tmp\\pwtest",
