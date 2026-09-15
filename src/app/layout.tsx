@@ -52,6 +52,11 @@ export const metadata: Metadata = {
     description: '제작부터 운영까지, 브랜드의 성장을 함께 책임집니다.',
     images: ['/og-image.png'],
   },
+  verification: {
+    other: {
+      'naver-site-verification': '4aec36a49a14f996100ec68ee68c4a61d70e7168',
+    },
+  },
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
