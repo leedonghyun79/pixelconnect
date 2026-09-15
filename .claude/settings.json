@@ -44,7 +44,15 @@
       "Bash(mkdir -p /d/tmp/pwtest7)",
       "Read(//d/작業실/study/projects/pixelconnect/src/app/**)",
       "Bash(netstat -ano)",
-      "PowerShell(Add-Type -AssemblyName System.Drawing; $img = [System.Drawing.Image]::FromFile\\(\"D:\\\\작업실\\\\study\\\\projects\\\\pixelconnect\\\\public\\\\images\\\\logo.png\"\\); \"$\\($img.Width\\)x$\\($img.Height\\)\")"
+      "PowerShell(Add-Type -AssemblyName System.Drawing; $img = [System.Drawing.Image]::FromFile\\(\"D:\\\\작업실\\\\study\\\\projects\\\\pixelconnect\\\\public\\\\images\\\\logo.png\"\\); \"$\\($img.Width\\)x$\\($img.Height\\)\")",
+      "Bash(xargs -I{} sh -c 'grep -l \"trimStart\\\\|flatMap\" \"{}\" 2>/dev/null')",
+      "WebFetch(domain:twinh.co.kr)",
+      "Bash(xargs grep -l -i \"image\")",
+      "Bash(xargs -I{} du -h {})",
+      "Bash(node -e \"require.resolve\\('sharp'\\)\")",
+      "Bash(python3 -c \"import PIL; print\\('PIL ok'\\)\")",
+      "Bash(node -e \"const s=require\\('sharp'\\); console.log\\('sharp version', s.versions\\)\")",
+      "Bash(git restore *)"
     ],
     "additionalDirectories": [
       "\\tmp\\pwtest",
