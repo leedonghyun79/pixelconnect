@@ -93,8 +93,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ko" className={`${poppins.variable} ${playfair.variable}`}>
       <head>
-        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="" />
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
