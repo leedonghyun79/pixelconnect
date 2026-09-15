@@ -60,7 +60,7 @@ export default function FinalCTA({ hide3D = false }: FinalCTAProps) {
           <a href="/contact" className="btn btn-accent">
             무료 상담 신청하기 →
           </a>
-          <a href="#" className="btn btn-ghost-white">
+          <a href="https://pf.kakao.com/_xoDxkuX/friend" target="_blank" rel="noopener noreferrer" className="btn btn-ghost-white">
             카카오 채널 문의
           </a>
         </div>

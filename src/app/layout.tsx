@@ -70,15 +70,36 @@ export const metadata: Metadata = {
   },
 }
 
+const siteDescription =
+  '부천 웹 에이전시 픽셀커넥트. 제작부터 운영까지, 브랜드의 성장을 함께 책임집니다. 합리적 가격과 제작 후 유지보수·관리까지 책임지는 홈페이지 제작 파트너.'
+
 const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
-    { '@type': 'WebSite', name: '픽셀커넥트', url: 'https://pixelconnect.co.kr' },
     {
-      '@type': 'Organization',
+      '@type': 'WebSite',
+      '@id': 'https://pixelconnect.co.kr/#website',
       name: '픽셀커넥트',
       url: 'https://pixelconnect.co.kr',
+      description: siteDescription,
+      inLanguage: 'ko-KR',
+      publisher: { '@id': 'https://pixelconnect.co.kr/#organization' },
+    },
+    {
+      '@type': 'Organization',
+      '@id': 'https://pixelconnect.co.kr/#organization',
+      name: '픽셀커넥트',
+      url: 'https://pixelconnect.co.kr',
+      description: siteDescription,
       logo: 'https://pixelconnect.co.kr/images/logo.png',
+      sameAs: ['https://pf.kakao.com/_xoDxkuX/friend'],
+      contactPoint: {
+        '@type': 'ContactPoint',
+        email: 'ceo@pixelconnect.co.kr',
+        contactType: 'customer service',
+        areaServed: 'KR',
+        availableLanguage: ['Korean'],
+      },
       address: {
         '@type': 'PostalAddress',
         addressLocality: '부천',

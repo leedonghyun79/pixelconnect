@@ -85,7 +85,7 @@ export default function ContactForm() {
               </div>
               <div className={styles.method}>
                 <span className={styles.methodLabel}>카카오톡</span>
-                <a href="#" className={styles.methodValue}>
+                <a href="https://pf.kakao.com/_xoDxkuX/friend" target="_blank" rel="noopener noreferrer" className={styles.methodValue}>
                   카카오 채널 문의하기 →
                 </a>
               </div>
