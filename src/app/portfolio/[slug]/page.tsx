@@ -16,10 +16,23 @@ export async function generateMetadata({
   const { slug } = await params;
   const project = getPortfolioProject(slug);
   if (!project) return { title: '프로젝트를 찾을 수 없습니다 | 픽셀커넥트' };
+  const title = `${project.title} | 픽셀커넥트 포트폴리오`;
   return {
-    title: `${project.title} | 픽셀커넥트 포트폴리오`,
+    title,
     description: project.summary,
-    openGraph: { images: [{ url: project.img }] },
+    alternates: { canonical: `https://pixelconnect.co.kr/portfolio/${project.slug}` },
+    openGraph: {
+      type: 'article',
+      title,
+      description: project.summary,
+      images: [{ url: project.img }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description: project.summary,
+      images: [project.img],
+    },
   };
 }
 
