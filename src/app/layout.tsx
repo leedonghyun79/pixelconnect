@@ -95,6 +95,7 @@ const jsonLd = {
       sameAs: ['https://pf.kakao.com/_xoDxkuX/friend'],
       contactPoint: {
         '@type': 'ContactPoint',
+        telephone: '+82-10-7920-8157',
         email: 'ceo@pixelconnect.co.kr',
         contactType: 'customer service',
         areaServed: 'KR',

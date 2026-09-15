@@ -81,7 +81,7 @@ export default function ContactForm() {
               </div>
               <div className={styles.method}>
                 <span className={styles.methodLabel}>전화</span>
-                <span className={styles.methodValue}>010-0000-0000</span>
+                <span className={styles.methodValue}>010-7920-8157</span>
               </div>
               <div className={styles.method}>
                 <span className={styles.methodLabel}>카카오톡</span>
