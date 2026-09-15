@@ -70,7 +70,7 @@
 
 .cardHighlight:hover {
   border-color: var(--accent);
-  box-shadow: 0 32px 60px -20px rgba(255, 101, 63, 0.5);
+  box-shadow: 0 32px 60px -20px rgba(255, 200, 92, 0.5);
 }
 
 .cardHighlight .num {
