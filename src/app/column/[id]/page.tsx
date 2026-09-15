@@ -10,6 +10,16 @@ function fmtDate(iso: string) {
   return `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
 }
 
+// 본문 HTML에서 태그를 걷어내고 요약문(메타 description용)을 뽑는다.
+function excerpt(html: string, max = 150): string {
+  const text = html
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  if (text.length <= max) return text;
+  return `${text.slice(0, max).trim()}...`;
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -18,10 +28,18 @@ export async function generateMetadata({
   const { id } = await params;
   const col = await fetchColumn(id);
   if (!col) return { title: '칼럼을 찾을 수 없습니다 | 픽셀커넥트' };
+  const description = excerpt(col.contentHtml) || `${col.category} · 픽셀커넥트 칼럼`;
   return {
     title: `${col.title} | 픽셀커넥트`,
-    description: `${col.category} · 픽셀커넥트 칼럼`,
-    openGraph: col.thumbnail ? { images: [{ url: col.thumbnail }] } : undefined,
+    description,
+    alternates: { canonical: `https://pixelconnect.co.kr/column/${col.id}` },
+    openGraph: {
+      type: 'article',
+      title: col.title,
+      description,
+      publishedTime: col.publishedAt,
+      images: col.thumbnail ? [{ url: col.thumbnail }] : undefined,
+    },
   };
 }
 
@@ -34,8 +52,30 @@ export default async function ColumnDetailPage({
   const col = await fetchColumn(id);
   if (!col) notFound();
 
+  const url = `https://pixelconnect.co.kr/column/${col.id}`;
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: col.title,
+    description: excerpt(col.contentHtml),
+    url,
+    datePublished: col.publishedAt,
+    dateModified: col.publishedAt,
+    ...(col.thumbnail ? { image: col.thumbnail } : {}),
+    articleSection: col.category,
+    inLanguage: 'ko-KR',
+    isPartOf: { '@id': 'https://pixelconnect.co.kr/#website' },
+    publisher: { '@id': 'https://pixelconnect.co.kr/#organization' },
+    author: { '@id': 'https://pixelconnect.co.kr/#organization' },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+  };
+
   return (
     <main className={styles.main}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <article className={styles.article}>
         <header className={styles.header}>
           <div className={styles.meta}>
@@ -48,7 +88,7 @@ export default async function ColumnDetailPage({
         {col.thumbnail && (
           <div className={styles.thumb}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={col.thumbnail} alt={col.title} className={styles.thumbImg} />
+            <img src={col.thumbnail} alt={col.title} width={1200} height={675} className={styles.thumbImg} />
           </div>
         )}
 
