@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useRef } from 'react';
+import Script from 'next/script';
 import styles from './PainPoint.module.css';
 
 declare global {
@@ -94,7 +95,9 @@ export default function PainPoint() {
   }, []);
 
   return (
-    <section className={styles.section} id="pain">
+    <>
+      <Script src="https://cdn.lordicon.com/lordicon.js" strategy="lazyOnload" />
+      <section className={styles.section} id="pain">
       <div className={styles.container}>
         <div className={styles.header}>
           <h2 className="section-title">혹시, 이런 경험 있으신가요?</h2>
@@ -138,6 +141,7 @@ export default function PainPoint() {
           </p>
         </div>
       </div>
-    </section>
+      </section>
+    </>
   );
 }

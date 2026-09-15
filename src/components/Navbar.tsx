@@ -48,7 +48,7 @@ export default function Navbar() {
       <div className={styles.inner}>
         <Link href="/" className={styles.logo} onClick={handleLogoClick} aria-label="픽셀커넥트 홈">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/logo.png" alt="" className={styles.logoImage} />
+          <img src="/images/logo.png" alt="" width={196} height={196} className={styles.logoImage} />
           PIXEL CONNECT
         </Link>
 

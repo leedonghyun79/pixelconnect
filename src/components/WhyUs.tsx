@@ -124,7 +124,7 @@ export default function WhyUs() {
                     </svg>
                   </div>
                   <div>
-                    <h4 className={mStyles.itemTitle}>{item.title}</h4>
+                    <h3 className={mStyles.itemTitle}>{item.title}</h3>
                     <p className={mStyles.itemDesc}>{item.desc}</p>
                   </div>
                 </div>

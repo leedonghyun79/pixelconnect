@@ -41,7 +41,10 @@
       "Bash(mkdir -p /d/tmp/pwtest5)",
       "Bash(node check.mjs)",
       "Bash(mkdir -p /d/tmp/pwtest6)",
-      "Bash(mkdir -p /d/tmp/pwtest7)"
+      "Bash(mkdir -p /d/tmp/pwtest7)",
+      "Read(//d/작業실/study/projects/pixelconnect/src/app/**)",
+      "Bash(netstat -ano)",
+      "PowerShell(Add-Type -AssemblyName System.Drawing; $img = [System.Drawing.Image]::FromFile\\(\"D:\\\\작업실\\\\study\\\\projects\\\\pixelconnect\\\\public\\\\images\\\\logo.png\"\\); \"$\\($img.Width\\)x$\\($img.Height\\)\")"
     ],
     "additionalDirectories": [
       "\\tmp\\pwtest",

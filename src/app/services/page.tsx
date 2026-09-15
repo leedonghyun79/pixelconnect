@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import PageHero from '@/components/PageHero';
 import Stats from '@/components/Stats';
 import FinalCTA from '@/components/FinalCTA';
@@ -61,7 +62,9 @@ function ServiceDetail() {
   ];
 
   return (
-    <section style={{ background: '#fff', padding: '0 0 72px' }}>
+    <>
+      <Script src="https://cdn.lordicon.com/lordicon.js" strategy="lazyOnload" />
+      <section style={{ background: '#fff', padding: '0 0 72px' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 48px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 20 }}>
           {services.map((s, i) => (
@@ -82,7 +85,7 @@ function ServiceDetail() {
                 colors="primary:#0d0d3e,secondary:#ff6b35"
                 style={{ width: 48, height: 48, display: 'block', marginBottom: 16 }}
               ></lord-icon>
-              <h3 style={{ fontSize: 18, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 10 }}>{s.title}</h3>
+              <h2 style={{ fontSize: 18, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 10 }}>{s.title}</h2>
               <p style={{ fontSize: 14, color: 'var(--text-secondary)', lineHeight: 1.75, marginBottom: 20 }}>{s.desc}</p>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
                 {s.features.map((f, fi) => (
@@ -105,6 +108,7 @@ function ServiceDetail() {
           ))}
         </div>
       </div>
-    </section>
+      </section>
+    </>
   );
 }

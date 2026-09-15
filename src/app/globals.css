@@ -3,7 +3,7 @@
    Navy-White Professional Brand Theme
    ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Pretendard+Variable&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 /*
   컬러 팔레트 참조: https://colorhunt.co/palette/1e104e452e5aff653fffc85c
@@ -34,7 +34,7 @@
   /* Text Colors */
   --text-primary: #0D0D3E;
   --text-secondary: #5A5A7A;
-  --text-muted: #8E8EA8;
+  --text-muted: #676785;
   --text-white: #FFFFFF;
   --text-white-65: rgba(255, 255, 255, 0.65);
   --text-white-35: rgba(255, 255, 255, 0.35);
