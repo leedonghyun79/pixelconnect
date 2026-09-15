@@ -26,6 +26,8 @@
   --accent: #FF653F;
   --accent-hover: #E85433;
   --accent-soft: rgba(255, 101, 63, 0.12);
+  /* 액센트 배경 위 텍스트 — 흰색은 대비 2.92:1로 WCAG AA 미달, 이 색은 7.0:1 */
+  --accent-text: #020212;
 
   /* 다크 섹션(#0D0D3E) 위 카드면 — 배경보다 한 단계 밝게 */
   --surface-dark: #191947;
@@ -267,7 +269,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn-accent {
   background: var(--accent);
-  color: #fff;
+  color: var(--accent-text);
 }
 
 .btn-accent:hover {

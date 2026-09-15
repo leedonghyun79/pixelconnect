@@ -34,7 +34,7 @@
 
 .bizInfo p {
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.55);
   line-height: 1.65;
 }
 
@@ -47,7 +47,7 @@
 
 .copyright {
   font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.55);
 }
 
 /* Right */
@@ -90,7 +90,7 @@
 
 .legalLink {
   font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.55);
   text-decoration: none;
   transition: color 0.2s ease;
 }
