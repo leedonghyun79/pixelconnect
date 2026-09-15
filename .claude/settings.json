@@ -59,7 +59,11 @@
       "Bash(curl -sL https://pixelconnect.co.kr/sitemap.xml)",
       "Bash(curl -s -o /dev/null -w '%{http_code}\\\\n' https://pixelconnect.co.kr/llms.txt)",
       "Bash(curl -s -o /dev/null -w '%{http_code}\\\\n' https://pixelconnect.co.kr/이런페이지는없음)",
-      "Bash(curl -sL https://pixelconnect.co.kr/feed.xml)"
+      "Bash(curl -sL https://pixelconnect.co.kr/feed.xml)",
+      "Bash(curl -sL -A \"Mozilla/5.0 \\(compatible; Yeti/1.1; +http://naver.me/spd\\)\" -o /dev/null -w \"HTTP Status: %{http_code}\\\\n\" https://pixelconnect.co.kr)",
+      "Bash(curl -sIL -A \"Mozilla/5.0 \\(compatible; Yeti/1.1; +http://naver.me/spd\\)\" https://pixelconnect.co.kr)",
+      "Bash(curl -s https://pixelconnect.co.kr)",
+      "Bash(git fetch *)"
     ],
     "additionalDirectories": [
       "\\tmp\\pwtest",
