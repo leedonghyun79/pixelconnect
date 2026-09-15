@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { fetchColumns } from '@/lib/columns';
+import { portfolioProjects } from '@/data/portfolio';
 
 const SITE = 'https://pixelconnect.co.kr';
 
@@ -23,6 +24,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: r.priority,
   }));
 
+  const portfolioPages: MetadataRoute.Sitemap = portfolioProjects.map((p) => ({
+    url: `${SITE}/portfolio/${p.slug}`,
+    lastModified: now,
+    changeFrequency: 'monthly',
+    priority: 0.7,
+  }));
+
   // connectivity API 에서 발행된 칼럼. API 가 죽어도 fetchColumns 가 [] 를 돌려주므로
   // 최소한 정적 라우트만이라도 담긴 sitemap 이 나간다.
   const columns = await fetchColumns();
@@ -33,5 +41,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  return [...pages, ...columnPages];
+  return [...pages, ...portfolioPages, ...columnPages];
 }
