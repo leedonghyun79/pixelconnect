@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { fetchColumn } from '@/lib/columns';
+import { fetchColumn } from '@/lib/api/columns';
 import HighlightCode from './_components/HighlightCode/HighlightCode';
 import styles from './page.module.css';
 

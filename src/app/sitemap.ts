@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { fetchColumns } from '@/lib/columns';
+import { fetchColumns } from '@/lib/api/columns';
 import { portfolioProjects } from '@/data/portfolio';
 
 const SITE = 'https://pixelconnect.co.kr';

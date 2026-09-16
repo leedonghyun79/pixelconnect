@@ -1,4 +1,4 @@
-import { fetchColumns } from '@/lib/columns';
+import { fetchColumns } from '@/lib/api/columns';
 
 const SITE = 'https://pixelconnect.co.kr';
 

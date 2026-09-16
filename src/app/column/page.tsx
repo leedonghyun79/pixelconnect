@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import PageTitleBanner from '@/components/PageTitleBanner/PageTitleBanner';
-import { fetchColumns } from '@/lib/columns';
+import { fetchColumns } from '@/lib/api/columns';
 import ColumnList, { type ColumnCard } from './_components/ColumnList/ColumnList';
 import FinalCTA from '@/components/FinalCTA/FinalCTA';
 
