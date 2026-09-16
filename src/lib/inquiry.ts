@@ -1,6 +1,7 @@
 // 상담 폼 제출을 connectivity 공개 API 로 보낸다. (클라이언트에서 호출)
 
 import { apiFetch } from './client';
+import { ENDPOINTS } from './constants/endpoints';
 
 export interface InquiryPayload {
   name: string;
@@ -16,7 +17,7 @@ export async function submitInquiry(
   payload: InquiryPayload,
 ): Promise<{ ok: boolean; error?: string }> {
   try {
-    const res = await apiFetch('/api/public/inquiries', {
+    const res = await apiFetch(ENDPOINTS.inquiries, {
       method: 'POST',
       body: JSON.stringify(payload),
     });

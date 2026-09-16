@@ -2,6 +2,7 @@
 // pixelconnect는 DB를 두지 않고 표시만 담당.
 
 import { apiFetch } from './client';
+import { ENDPOINTS } from './constants/endpoints';
 
 export interface ColumnListItem {
   id: string;
@@ -20,7 +21,7 @@ const revalidate = { next: { revalidate: 60 } } as const;
 
 export async function fetchColumns(): Promise<ColumnListItem[]> {
   try {
-    const res = await apiFetch('/api/public/columns', revalidate);
+    const res = await apiFetch(ENDPOINTS.columns, revalidate);
     if (!res.ok) return [];
     return (await res.json()) as ColumnListItem[];
   } catch {
@@ -30,10 +31,7 @@ export async function fetchColumns(): Promise<ColumnListItem[]> {
 
 export async function fetchColumn(id: string): Promise<ColumnDetail | null> {
   try {
-    const res = await apiFetch(
-      `/api/public/columns/${encodeURIComponent(id)}`,
-      revalidate
-    );
+    const res = await apiFetch(ENDPOINTS.column(id), revalidate);
     if (!res.ok) return null;
     return (await res.json()) as ColumnDetail;
   } catch {
