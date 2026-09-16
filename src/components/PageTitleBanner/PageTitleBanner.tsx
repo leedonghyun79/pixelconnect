@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import styles from './PageHero.module.css';
+import styles from './PageTitleBanner.module.css';
 
-interface PageHeroProps {
+interface PageTitleBannerProps {
   eyebrow: string;
   title: string;
   sub: React.ReactNode;
@@ -9,7 +9,7 @@ interface PageHeroProps {
   variant?: 'white' | 'pale' | 'navy';
 }
 
-export default function PageHero({ eyebrow, title, sub, breadcrumb, variant = 'white' }: PageHeroProps) {
+export default function PageTitleBanner({ eyebrow, title, sub, breadcrumb, variant = 'white' }: PageTitleBannerProps) {
   const bgClass = variant === 'pale' ? styles.heroPale : variant === 'navy' ? styles.heroNavy : '';
 
   return (

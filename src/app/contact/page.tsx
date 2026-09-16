@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import PageHero from '@/components/PageHero/PageHero';
+import PageTitleBanner from '@/components/PageTitleBanner/PageTitleBanner';
 import ContactForm from './_components/ContactForm/ContactForm';
 
 export const metadata: Metadata = {
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <main>
-      <PageHero
+      <PageTitleBanner
         eyebrow="CONTACT"
         title="지금 어떤 고민이 있으신가요?"
         sub="부담 없이 먼저 물어보세요. 견적만 확인해도 괜찮습니다. 평균 1시간 이내 응답합니다."

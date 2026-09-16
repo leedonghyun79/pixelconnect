@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import PageHero from '@/components/PageHero/PageHero';
+import PageTitleBanner from '@/components/PageTitleBanner/PageTitleBanner';
 import ReviewList from './_components/ReviewList/ReviewList';
 import Stats from '@/components/Stats/Stats';
 import FinalCTA from '@/components/FinalCTA/FinalCTA';
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function ReviewsPage() {
   return (
     <main>
-      <PageHero
+      <PageTitleBanner
         eyebrow="REVIEWS"
         title="함께한 대표님들의 이야기"
         sub={

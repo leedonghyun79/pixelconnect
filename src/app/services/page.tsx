@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import PageHero from '@/components/PageHero/PageHero';
+import PageTitleBanner from '@/components/PageTitleBanner/PageTitleBanner';
 import Stats from '@/components/Stats/Stats';
 import FinalCTA from '@/components/FinalCTA/FinalCTA';
 import ServiceDetail from './_components/ServiceDetail/ServiceDetail';
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <main>
-      <PageHero
+      <PageTitleBanner
         eyebrow="SERVICES"
         title="브랜드의 성장을 함께 만드는 서비스"
         sub={<>기획부터 디자인, 개발, 유지보수까지 홈페이지가<br />필요한 순간부터 운영이 안정될 때까지 책임집니다.</>}

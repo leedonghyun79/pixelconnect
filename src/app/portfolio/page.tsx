@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import PageHero from '@/components/PageHero/PageHero';
+import PageTitleBanner from '@/components/PageTitleBanner/PageTitleBanner';
 import Portfolio from '@/components/Portfolio/Portfolio';
 import Stats from '@/components/Stats/Stats';
 import FinalCTA from '@/components/FinalCTA/FinalCTA';
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function PortfolioPage() {
   return (
     <main>
-      <PageHero
+      <PageTitleBanner
         eyebrow="OUR WORK"
         title="포트폴리오"
         sub={

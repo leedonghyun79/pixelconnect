@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import PageHero from '@/components/PageHero/PageHero';
+import PageTitleBanner from '@/components/PageTitleBanner/PageTitleBanner';
 import { fetchColumns } from '@/lib/columns';
 import ColumnList, { type ColumnCard } from './_components/ColumnList/ColumnList';
 import FinalCTA from '@/components/FinalCTA/FinalCTA';
@@ -21,7 +21,7 @@ export default async function ColumnPage() {
 
   return (
     <main>
-      <PageHero
+      <PageTitleBanner
         eyebrow="COLUMN"
         title="인사이트 & 전략"
         sub={
