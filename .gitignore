@@ -50,3 +50,6 @@ next-env.d.ts
 
 # npm lockfile — Cloudflare cross-platform optional deps 버그 회피 (npm install 사용)
 /package-lock.json
+
+# Claude Code 로컬 권한 설정 (커밋할 때마다 permissions.allow가 계속 늘어나서 로컬 전용으로 뺌)
+/.claude/settings.json
