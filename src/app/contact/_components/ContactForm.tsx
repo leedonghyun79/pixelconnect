@@ -1,6 +1,6 @@
 'use client';
 import { useCallback, useState } from 'react';
-import styles from './contact.module.css';
+import styles from '../page.module.css';
 import TurnstileWidget from '@/components/TurnstileWidget';
 import { submitInquiry } from '@/lib/inquiry';
 

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import PageHero from '@/components/PageHero';
 import Stats from '@/components/Stats';
 import FinalCTA from '@/components/FinalCTA';
-import ServiceDetail from './ServiceDetail';
+import ServiceDetail from './_components/ServiceDetail';
 
 export const metadata: Metadata = {
   title: '서비스 | 픽셀커넥트',

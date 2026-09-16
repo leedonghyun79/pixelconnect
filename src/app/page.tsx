@@ -1,11 +1,11 @@
-import Hero from '@/components/Hero';
-import PainPoint from '@/components/PainPoint';
-import WhyUs from '@/components/WhyUs';
+import Hero from './_components/Hero';
+import PainPoint from './_components/PainPoint';
+import WhyUs from './_components/WhyUs';
 import Portfolio from '@/components/Portfolio';
-import Process from '@/components/Process';
-import Testimonials from '@/components/Testimonials';
-import Pricing from '@/components/Pricing';
-import FAQ from '@/components/FAQ';
+import Process from './_components/Process';
+import Testimonials from './_components/Testimonials';
+import Pricing from './_components/Pricing';
+import FAQ from './_components/FAQ';
 import FinalCTA from '@/components/FinalCTA';
 
 export default function Home() {

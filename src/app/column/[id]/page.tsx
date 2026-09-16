@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { fetchColumn } from '@/lib/columns';
-import HighlightCode from './HighlightCode';
-import styles from './detail.module.css';
+import HighlightCode from './_components/HighlightCode';
+import styles from './page.module.css';
 
 function fmtDate(iso: string) {
   const d = new Date(iso);

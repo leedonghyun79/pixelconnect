@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { portfolioProjects, getPortfolioProject } from '@/data/portfolio';
-import styles from './detail.module.css';
+import styles from './page.module.css';
 
 export function generateStaticParams() {
   return portfolioProjects.map(p => ({ slug: p.slug }));

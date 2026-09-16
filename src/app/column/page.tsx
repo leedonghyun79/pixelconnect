@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import PageHero from '@/components/PageHero';
 import { fetchColumns } from '@/lib/columns';
-import ColumnList, { type ColumnCard } from './ColumnList';
+import ColumnList, { type ColumnCard } from './_components/ColumnList';
 import FinalCTA from '@/components/FinalCTA';
 
 export const metadata: Metadata = {

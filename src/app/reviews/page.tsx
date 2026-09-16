@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import PageHero from '@/components/PageHero';
-import ReviewList from './ReviewList';
+import ReviewList from './_components/ReviewList';
 import Stats from '@/components/Stats';
 import FinalCTA from '@/components/FinalCTA';
 
