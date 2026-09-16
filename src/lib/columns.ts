@@ -1,9 +1,7 @@
 // connectivity 어드민의 공개 API에서 발행된 칼럼을 가져온다.
 // pixelconnect는 DB를 두지 않고 표시만 담당.
 
-const BASE = (
-  process.env.CONNECTIVITY_API_URL || 'http://localhost:3001'
-).replace(/\/$/, '');
+import { apiFetch } from './client';
 
 export interface ColumnListItem {
   id: string;
@@ -22,7 +20,7 @@ const revalidate = { next: { revalidate: 60 } } as const;
 
 export async function fetchColumns(): Promise<ColumnListItem[]> {
   try {
-    const res = await fetch(`${BASE}/api/public/columns`, revalidate);
+    const res = await apiFetch('/api/public/columns', revalidate);
     if (!res.ok) return [];
     return (await res.json()) as ColumnListItem[];
   } catch {
@@ -32,8 +30,8 @@ export async function fetchColumns(): Promise<ColumnListItem[]> {
 
 export async function fetchColumn(id: string): Promise<ColumnDetail | null> {
   try {
-    const res = await fetch(
-      `${BASE}/api/public/columns/${encodeURIComponent(id)}`,
+    const res = await apiFetch(
+      `/api/public/columns/${encodeURIComponent(id)}`,
       revalidate
     );
     if (!res.ok) return null;
