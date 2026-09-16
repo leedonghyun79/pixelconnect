@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import { formatDate } from '@/utils/formatDate';
 import styles from '../../page.module.css';
 
 const categories = ['전체', '홈페이지 기획', '전환율 최적화', '유지보수', '디자인 트렌드', '마케팅'];
@@ -10,11 +11,6 @@ export interface ColumnCard {
   category: string;
   thumbnail: string | null;
   publishedAt: string; // ISO
-}
-
-function fmtDate(iso: string) {
-  const d = new Date(iso);
-  return `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
 }
 
 export default function ColumnList({ articles }: { articles: ColumnCard[] }) {
@@ -57,7 +53,7 @@ export default function ColumnList({ articles }: { articles: ColumnCard[] }) {
                   <h3 className={styles.cardTitle}>{article.title}</h3>
                   <div className={styles.cardMeta}>
                     <span className={styles.cat}>{article.category}</span>
-                    <span className={styles.date}>{fmtDate(article.publishedAt)}</span>
+                    <span className={styles.date}>{formatDate(article.publishedAt)}</span>
                   </div>
                 </div>
               </article>

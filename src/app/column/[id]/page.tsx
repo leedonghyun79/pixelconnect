@@ -2,13 +2,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { fetchColumn } from '@/lib/api/columns';
+import { formatDate } from '@/utils/formatDate';
 import HighlightCode from './_components/HighlightCode/HighlightCode';
 import styles from './page.module.css';
-
-function fmtDate(iso: string) {
-  const d = new Date(iso);
-  return `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
-}
 
 // 본문 HTML에서 태그를 걷어내고 요약문(메타 description용)을 뽑는다.
 function excerpt(html: string, max = 150): string {
@@ -86,7 +82,7 @@ export default async function ColumnDetailPage({
         <header className={styles.header}>
           <div className={styles.meta}>
             <span className={styles.cat}>{col.category}</span>
-            <span className={styles.date}>{fmtDate(col.publishedAt)}</span>
+            <span className={styles.date}>{formatDate(col.publishedAt)}</span>
           </div>
           <h1 className={styles.title}>{col.title}</h1>
         </header>
