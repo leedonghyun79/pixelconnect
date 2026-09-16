@@ -64,7 +64,9 @@
       "Bash(curl -sIL -A \"Mozilla/5.0 \\(compatible; Yeti/1.1; +http://naver.me/spd\\)\" https://pixelconnect.co.kr)",
       "Bash(curl -s https://pixelconnect.co.kr)",
       "Bash(git fetch *)",
-      "Bash(curl -s \"https://pixelconnect.co.kr/column/cmtqaqlxr0000630wbfv8qeio\")"
+      "Bash(curl -s \"https://pixelconnect.co.kr/column/cmtqaqlxr0000630wbfv8qeio\")",
+      "Bash(mkdir -p src/app/column/_components src/app/column/\\\\[id\\\\]/_components src/app/contact/_components src/app/reviews/_components src/app/services/_components)",
+      "Bash(git mv *)"
     ],
     "additionalDirectories": [
       "\\tmp\\pwtest",
