@@ -117,7 +117,8 @@ export default function Hero() {
               className={`${styles.sub} fade-up`}
               style={{ transitionDelay: '0.42s' }}
             >
-              예쁜 홈페이지는 많습니다. 끝까지 책임지는 곳은 드뭅니다.<br />
+              예쁜 홈페이지는 많습니다.<br />
+              끝까지 책임지는 곳은 드뭅니다.<br />
               제작으로 끝내지 않고, 오픈 후에도 끝까지 함께합니다.<br />
               기획부터 개발, 관리까지 대표가 직접 책임집니다.
             </p>

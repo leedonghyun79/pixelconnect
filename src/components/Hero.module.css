@@ -280,16 +280,53 @@
 }
 
 @media (max-width: 768px) {
+  /* 세로 중앙 정렬 시, 콘텐츠 높이가 100vh보다 짧으면 위로 쏠려
+     padding-top으로 확보한 헤더 여백을 뚫고 문구가 올라간다.
+     모바일에서는 위 정렬로 바꿔 padding-top이 그대로 유효하게 한다. */
+  .section {
+    align-items: flex-start;
+  }
+
   .container {
     padding: calc(var(--nav-height, 64px) + 20px) 24px 60px;
   }
 
   .headline {
-    font-size: clamp(1.8rem, 7vw, 2.5rem);
+    font-size: 24px;
   }
 
   .sub {
-    font-size: 0.95rem;
+    font-size: 15px;
+  }
+
+  .ctaRow {
+    flex-wrap: nowrap;
+    gap: 10px;
+  }
+
+  .btnPrimary,
+  .btnSecondary {
+    flex: 1 1 0;
+    padding: 13px 12px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  .heroStats {
+    flex-wrap: nowrap;
+    gap: 14px;
+    margin-top: 24px;
+    padding-top: 18px;
+  }
+
+  .statNum {
+    font-size: 1rem;
+    white-space: nowrap;
+  }
+
+  .statLabel {
+    font-size: 0.68rem;
+    white-space: nowrap;
   }
 
   .scrollDown {

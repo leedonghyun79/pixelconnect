@@ -52,6 +52,15 @@
   max-width: 560px;
 }
 
+@media (max-width: 768px) {
+  .title {
+    font-size: 24px;
+  }
+  .sub {
+    font-size: 15px;
+  }
+}
+
 .heroNavy .sub {
   color: rgba(255, 255, 255, 0.6);
 }

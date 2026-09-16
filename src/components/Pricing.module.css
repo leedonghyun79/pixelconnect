@@ -16,6 +16,19 @@
   margin-bottom: 56px;
 }
 
+.eyebrowCenter {
+  justify-content: center;
+}
+
+.titleCenter {
+  text-align: center;
+}
+
+.subCenter {
+  text-align: center;
+  margin: 8px auto 0;
+}
+
 .sub {
   font-size: 18px;
   color: var(--navy-muted);
@@ -249,11 +262,20 @@
 }
 
 @media (max-width: 900px) {
-  .section { padding: 72px 0; }
+  .section { padding: 72px 0 100px; }
   .container { padding: 0 24px; }
+  .header { text-align: left; }
+  .eyebrowCenter { justify-content: flex-start; }
+  .titleCenter { text-align: left; }
+  .subCenter { text-align: left; margin: 8px 0 0; }
+  .sub { font-size: 17px; max-width: none; }
+  .noteBreak { display: block; }
   .grid {
     grid-template-columns: 1fr;
     max-width: 480px;
     margin: 0 auto;
+  }
+  .cardPop {
+    margin-top: 16px;
   }
 }

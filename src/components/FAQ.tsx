@@ -64,8 +64,8 @@ export default function FAQ() {
     <section id="faq" className={styles.section}>
       <div ref={containerRef} className={`${styles.container} fade-up`}>
         <div className={styles.header}>
-          <div className="section-eyebrow" style={{ justifyContent: 'center' }}>FAQ</div>
-          <h2 className="section-title" style={{ textAlign: 'center' }}>자주 묻는 질문</h2>
+          <div className={`section-eyebrow ${styles.eyebrowCenter}`}>FAQ</div>
+          <h2 className={`section-title ${styles.titleCenter}`}>자주 묻는 질문</h2>
         </div>
 
         <div className={styles.list}>

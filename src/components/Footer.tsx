@@ -16,7 +16,7 @@ const legalLinks = [
 
 export default function Footer() {
   return (
-    <footer className={styles.footer}>
+    <footer id="site-footer" className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.inner}>
           {/* Left: 사업자 정보 + 저작권 */}

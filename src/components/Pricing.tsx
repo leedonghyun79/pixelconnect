@@ -75,9 +75,9 @@ export default function Pricing() {
     <section className={styles.section} id="pricing">
       <div className={styles.container}>
         <div className={styles.header}>
-          <div className="section-eyebrow" style={{ justifyContent: 'center' }}>PRICING</div>
-          <h2 className="section-title" style={{ textAlign: 'center' }}>어떤 서비스가 필요하신가요?</h2>
-          <p className={styles.sub} style={{ textAlign: 'center', margin: '8px auto 0' }}>
+          <div className={`section-eyebrow ${styles.eyebrowCenter}`}>PRICING</div>
+          <h2 className={`section-title ${styles.titleCenter}`}>어떤 서비스가 필요하신가요?</h2>
+          <p className={`${styles.sub} ${styles.subCenter}`}>
             합리적인 비용으로 브랜드에 꼭 맞는 홈페이지를 만듭니다.
           </p>
         </div>
@@ -151,7 +151,8 @@ export default function Pricing() {
 
         {/* Bottom note */}
         <p className={styles.note}>
-          * 모든 플랜은 무료 상담 후 정확한 견적을 안내드립니다. 추가 비용 없이 처음 견적이 최종 금액입니다.
+          * 모든 플랜은 무료 상담 후 정확한 견적을 안내드립니다.{' '}
+          <span className={styles.noteBreak}>추가 비용 없이 처음 견적이 최종 금액입니다.</span>
         </p>
       </div>
     </section>

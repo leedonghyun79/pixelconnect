@@ -1,8 +1,9 @@
 .section {
   position: relative;
   background: var(--navy);
-  /* CTA + 푸터가 마지막 화면을 꽉 채우도록 (푸터 높이만큼 뺀 뷰포트 높이) */
-  min-height: calc(100vh - 232px);
+  /* CTA + 푸터가 마지막 화면을 꽉 채우도록 (실제 푸터 높이만큼 뺀 뷰포트 높이,
+     JS에서 --footer-height를 측정해 채워줌) */
+  min-height: calc(100dvh - var(--footer-height, 232px));
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -72,7 +73,24 @@
 }
 
 @media (max-width: 768px) {
-  .section    { min-height: 0; padding: 80px 0 100px; }
+  .section {
+    /* 고정 헤더가 항상 화면 맨 위 64px를 덮기 때문에, 콘텐츠를 세로
+       중앙이 아니라 바닥(=푸터 바로 위)에 붙여야 제목이 헤더에 가려지지 않음 */
+    justify-content: flex-end;
+    padding: 80px 0 60px;
+  }
   .container  { padding: 0 24px; }
-  .ctaRow     { flex-direction: column; align-items: center; }
+  .title      { font-size: 24px; margin-top: 24px; }
+  .sub        { font-size: 17px; }
+  .ctaRow     {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 10px;
+  }
+  .ctaRow :global(.btn) {
+    flex: 1 1 0;
+    padding: 13px 12px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
 }

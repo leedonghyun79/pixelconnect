@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type TouchEvent } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './Process.module.css';
@@ -45,6 +45,8 @@ export default function Process() {
   const sectionRef = useRef<HTMLElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [manualIndex, setManualIndex] = useState<number | null>(null);
+  const touchStartX = useRef(0);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -76,20 +78,29 @@ export default function Process() {
       };
     });
 
-    // 모바일/좁은 화면: 고정 없이 기존 스크롤 진행률 방식
+    // 모바일/좁은 화면: 스크롤마다 값을 재계산하는 방식은 버벅임을 유발하므로
+    // 점진적으로 "채워지는" 연출 없이, 각 스텝이 화면에 들어오면 그 즉시 활성화만 시킴
     mm.add('(max-width: 980px)', () => {
-      const handleScroll = () => {
-        if (!timelineRef.current) return;
-        const rect = timelineRef.current.getBoundingClientRect();
-        const scrolled = window.innerHeight * 0.55 - rect.top;
-        let p = scrolled / rect.height;
-        if (p < 0) p = 0;
-        if (p > 1) p = 1;
-        setScrollProgress(p);
-      };
-      window.addEventListener('scroll', handleScroll, { passive: true });
-      handleScroll();
-      return () => window.removeEventListener('scroll', handleScroll);
+      const track = timelineRef.current;
+      if (!track) return;
+      const stepEls = Array.from(track.children) as HTMLElement[];
+      const visible = new Set<number>();
+
+      const observer = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            const idx = stepEls.indexOf(entry.target as HTMLElement);
+            if (idx === -1) return;
+            if (entry.isIntersecting) visible.add(idx);
+            else visible.delete(idx);
+          });
+          const maxIdx = visible.size ? Math.max(...visible) : 0;
+          setScrollProgress((maxIdx / (steps.length - 1)) * 0.82);
+        },
+        { rootMargin: '-45% 0px -45% 0px', threshold: 0 }
+      );
+      stepEls.forEach(el => observer.observe(el));
+      return () => observer.disconnect();
     });
 
     return () => mm.revert();
@@ -100,11 +111,32 @@ export default function Process() {
   const fill = Math.min(1, scrollProgress / 0.82);
 
   // 현재 활성화된 스텝 (타임라인 dot 점등 로직과 동일 기준)
-  let activeIndex = 0;
+  let scrollIndex = 0;
   steps.forEach((_, i) => {
-    if (fill >= i / (steps.length - 1) - 0.02) activeIndex = i;
+    if (fill >= i / (steps.length - 1) - 0.02) scrollIndex = i;
   });
+
+  // 모바일: 카드를 좌우로 스와이프해서 스크롤과 무관하게 빠르게 넘길 수 있음
+  const activeIndex = manualIndex !== null ? manualIndex : scrollIndex;
   const activeStep = steps[activeIndex];
+
+  useEffect(() => {
+    setManualIndex(null);
+  }, [scrollIndex]);
+
+  const handleTouchStart = (e: TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: TouchEvent) => {
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+    if (Math.abs(deltaX) < 40) return;
+    if (deltaX < 0) {
+      setManualIndex(Math.min(activeIndex + 1, steps.length - 1));
+    } else {
+      setManualIndex(Math.max(activeIndex - 1, 0));
+    }
+  };
 
   return (
     <section ref={sectionRef} className={styles.section} id="process">
@@ -156,7 +188,11 @@ export default function Process() {
         </div>
 
           <aside className={styles.aside}>
-            <div className={styles.asideCard}>
+            <div
+              className={styles.asideCard}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+            >
               <div className={styles.asideStepHead}>
                 <span className={styles.asideStepNum}>STEP {activeStep.num}</span>
                 <span className={styles.asideDivider} />

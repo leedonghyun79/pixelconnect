@@ -69,6 +69,7 @@
   color: rgba(255, 255, 255, 0.7);
   line-height: 1.7;
   margin-bottom: 48px;
+  word-break: keep-all;
 }
 
 /* 입체적인 Quote 블록 */
@@ -173,11 +174,17 @@
 }
 
 @media (max-width: 900px) {
-  .maintenanceBlock { padding-top: 150px; }
+  .maintenanceBlock { padding-top: 150px; padding-bottom: 100px; }
   .container { padding: 0 24px; }
   .grid {
     grid-template-columns: 1fr;
     gap: 40px;
+  }
+  .title {
+    font-size: 24px;
+  }
+  .sub {
+    font-size: 17px;
   }
 }
 

@@ -38,6 +38,7 @@
   color: var(--navy-muted);
   line-height: 1.7;
   margin-top: 8px;
+  word-break: keep-all;
 }
 
 /* Filter Tabs */
@@ -227,21 +228,35 @@
   opacity: 0.7;
 }
 
-@media (max-width: 900px) {
-  .section { padding: 72px 0; }
-  .container { padding: 0 24px; }
-  .track {
-    padding-left: max(24px, calc((100vw - 1200px) / 2 + 24px));
-    padding-right: 24px;
-  }
-  .card {
-    width: 320px;
-  }
+.cardFade {
+  opacity: 1;
+  transform: none;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 900px) {
+  .section { padding: 72px 0 100px; }
+  .sub { font-size: 17px; }
+  .container { padding: 0 24px; }
+  .trackWrap {
+    overflow: visible;
+  }
+  .track {
+    flex-direction: column;
+    width: 100%;
+    padding: 0 24px;
+    gap: 24px;
+  }
   .card {
-    width: 280px;
+    width: 100%;
+  }
+  .cardFade {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s var(--ease-out, ease), transform 0.8s var(--ease-out, ease);
+  }
+  .cardFade.cardVisible {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

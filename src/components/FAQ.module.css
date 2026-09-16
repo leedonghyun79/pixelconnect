@@ -18,6 +18,14 @@
   margin-bottom: 48px;
 }
 
+.eyebrowCenter {
+  justify-content: center;
+}
+
+.titleCenter {
+  text-align: center;
+}
+
 /* Accordion */
 .list {
   display: flex;
@@ -110,6 +118,9 @@
 }
 
 @media (max-width: 768px) {
-  .section { padding: 72px 0; }
+  .section { padding: 72px 0 100px; }
   .container { padding: 0 24px; }
+  .header { text-align: left; }
+  .eyebrowCenter { justify-content: flex-start; }
+  .titleCenter { text-align: left; }
 }

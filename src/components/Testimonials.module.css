@@ -22,6 +22,7 @@
   color: var(--navy-muted);
   line-height: 1.7;
   margin-top: 8px;
+  word-break: keep-all;
 }
 
 .grid {
@@ -148,7 +149,10 @@
 }
 
 @media (max-width: 900px) {
-  .section { padding: 72px 0; }
+  .section { padding: 72px 0 100px; }
   .container { padding: 0 24px; }
+  .sub { font-size: 17px; }
   .grid { grid-template-columns: 1fr; }
+  .highlight { font-size: 17px; }
+  .body { font-size: 14px; }
 }

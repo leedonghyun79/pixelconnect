@@ -254,6 +254,9 @@
   .wrap {
     padding: calc(var(--nav-height) + 56px) 20px 80px;
   }
+  .title {
+    font-size: 24px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

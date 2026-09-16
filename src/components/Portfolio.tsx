@@ -17,6 +17,7 @@ export default function Portfolio({ hideHeader = false }: PortfolioProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const trackItemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
   const filtered = projects;
 
@@ -35,34 +36,53 @@ export default function Portfolio({ hideHeader = false }: PortfolioProps) {
       const track = trackRef.current;
       if (!section || !track) return;
 
-      // 트랙이 실제로 가로로 이동해야 하는 거리(양수). 0이면 pin 안 함.
-      const getDistance = () =>
-        Math.max(0, track.scrollWidth - window.innerWidth + 48);
+      const mm = gsap.matchMedia();
 
-      // 카드 폭·비율이 CSS로 고정돼 트랙 너비는 결정적이다 → 이미지 로드 후 refresh 불필요.
-      // (스크롤 중 refresh 가 걸리면 pin 이 풀렸다 다시 잡히며 튐)
-      const tween = gsap.to(track, {
-        x: () => -getDistance(),
-        ease: 'none',
-        scrollTrigger: {
-          trigger: section,
-          start: 'center center',
-          // pin 구간을 실제 이동 거리에 맞춰 헛스크롤 제거
-          end: () => `+=${getDistance()}`,
-          pin: true,
-          // scrub에 지연(smoothing)을 주면 빠르게 스크롤할 때 트랙 이동 애니메이션이
-          // 못 따라잡은 채로 pin이 풀려 다음 섹션으로 넘어가는 순간 카드가 덜 밀린
-          // 상태로 "튀는" 현상이 생긴다. Lenis가 이미 스크롤 자체를 부드럽게 하고
-          // 있으므로 scrub은 스크롤 위치와 항상 정확히 일치시킨다.
-          scrub: true,
-          invalidateOnRefresh: true,
-        },
+      // 데스크톱: 기존 가로 스크롤(pin) 방식
+      mm.add('(min-width: 901px)', () => {
+        // 트랙이 실제로 가로로 이동해야 하는 거리(양수). 0이면 pin 안 함.
+        const getDistance = () =>
+          Math.max(0, track.scrollWidth - window.innerWidth + 48);
+
+        // 카드 폭·비율이 CSS로 고정돼 트랙 너비는 결정적이다 → 이미지 로드 후 refresh 불필요.
+        // (스크롤 중 refresh 가 걸리면 pin 이 풀렸다 다시 잡히며 튐)
+        const tween = gsap.to(track, {
+          x: () => -getDistance(),
+          ease: 'none',
+          scrollTrigger: {
+            trigger: section,
+            start: 'center center',
+            // pin 구간을 실제 이동 거리에 맞춰 헛스크롤 제거
+            end: () => `+=${getDistance()}`,
+            pin: true,
+            // scrub에 지연(smoothing)을 주면 빠르게 스크롤할 때 트랙 이동 애니메이션이
+            // 못 따라잡은 채로 pin이 풀려 다음 섹션으로 넘어가는 순간 카드가 덜 밀린
+            // 상태로 "튀는" 현상이 생긴다. Lenis가 이미 스크롤 자체를 부드럽게 하고
+            // 있으므로 scrub은 스크롤 위치와 항상 정확히 일치시킨다.
+            scrub: true,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        return () => {
+          tween.scrollTrigger?.kill();
+          tween.kill();
+        };
       });
 
-      return () => {
-        tween.scrollTrigger?.kill();
-        tween.kill();
-      };
+      // 모바일: 스크롤 잭킹 없이 카드가 하나씩 순서대로 나타남
+      mm.add('(max-width: 900px)', () => {
+        gsap.set(track, { x: 0, clearProps: 'transform' });
+
+        const observer = new IntersectionObserver(
+          entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add(styles.cardVisible); }),
+          { threshold: 0.15 }
+        );
+        trackItemRefs.current.forEach(el => { if (el) observer.observe(el); });
+        return () => observer.disconnect();
+      });
+
+      return () => mm.revert();
     }
   }, [hideHeader, filtered]);
 
@@ -118,7 +138,13 @@ export default function Portfolio({ hideHeader = false }: PortfolioProps) {
         <div className={styles.trackWrap}>
           <div ref={trackRef} className={styles.track}>
             {projects.map((p, i) => (
-              <Link href={`/portfolio/${p.slug}`} key={`${p.title}-${i}`} className={styles.card}>
+              <Link
+                href={`/portfolio/${p.slug}`}
+                key={`${p.title}-${i}`}
+                ref={el => { trackItemRefs.current[i] = el; }}
+                className={`${styles.card} ${styles.cardFade}`}
+                style={{ transitionDelay: `${i * 0.08}s` }}
+              >
                 <div className={styles.thumb}>
                   <div className={styles.thumbInner}>
                     <Image

@@ -105,13 +105,18 @@
 }
 
 @media (max-width: 768px) {
+  .footer {
+    /* 하단 고정 "제작 중" 안내 배지에 마지막 줄이 가리지 않도록 여유 확보 */
+    padding-top: 0px;
+    padding-bottom: 64px;
+  }
   .container {
     padding: 0 24px;
   }
   .inner {
     flex-direction: column;
     align-items: flex-start;
-    gap: 28px;
+    gap: 8px;
   }
   .right {
     align-items: flex-start;
