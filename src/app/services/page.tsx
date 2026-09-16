@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
-import PageHero from '@/components/PageHero';
-import Stats from '@/components/Stats';
-import FinalCTA from '@/components/FinalCTA';
-import ServiceDetail from './_components/ServiceDetail';
+import PageHero from '@/components/PageHero/PageHero';
+import Stats from '@/components/Stats/Stats';
+import FinalCTA from '@/components/FinalCTA/FinalCTA';
+import ServiceDetail from './_components/ServiceDetail/ServiceDetail';
 
 export const metadata: Metadata = {
   title: '서비스 | 픽셀커넥트',

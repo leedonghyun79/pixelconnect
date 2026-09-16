@@ -7,7 +7,7 @@ import styles from './Hero.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const GridWaveCanvas = dynamic(() => import('./GridWaveCanvas'), { ssr: false });
+const GridWaveCanvas = dynamic(() => import('../GridWaveCanvas/GridWaveCanvas'), { ssr: false });
 
 const strengths = [
   { highlight: 'All-in-One', label: '기획부터 개발까지 한 번에' },

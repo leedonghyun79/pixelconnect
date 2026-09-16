@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
-import PageHero from '@/components/PageHero';
+import PageHero from '@/components/PageHero/PageHero';
 import { fetchColumns } from '@/lib/columns';
-import ColumnList, { type ColumnCard } from './_components/ColumnList';
-import FinalCTA from '@/components/FinalCTA';
+import ColumnList, { type ColumnCard } from './_components/ColumnList/ColumnList';
+import FinalCTA from '@/components/FinalCTA/FinalCTA';
 
 export const metadata: Metadata = {
   title: '칼럼 | 픽셀커넥트',

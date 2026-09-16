@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
-import PageHero from '@/components/PageHero';
-import ReviewList from './_components/ReviewList';
-import Stats from '@/components/Stats';
-import FinalCTA from '@/components/FinalCTA';
+import PageHero from '@/components/PageHero/PageHero';
+import ReviewList from './_components/ReviewList/ReviewList';
+import Stats from '@/components/Stats/Stats';
+import FinalCTA from '@/components/FinalCTA/FinalCTA';
 
 export const metadata: Metadata = {
   title: '고객후기 | 픽셀커넥트',

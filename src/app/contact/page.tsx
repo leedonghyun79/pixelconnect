@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import PageHero from '@/components/PageHero';
-import ContactForm from './_components/ContactForm';
+import PageHero from '@/components/PageHero/PageHero';
+import ContactForm from './_components/ContactForm/ContactForm';
 
 export const metadata: Metadata = {
   title: '문의하기 | 픽셀커넥트',

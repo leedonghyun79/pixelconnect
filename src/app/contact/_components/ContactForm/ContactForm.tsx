@@ -1,7 +1,7 @@
 'use client';
 import { useCallback, useState } from 'react';
-import styles from '../page.module.css';
-import TurnstileWidget from '@/components/TurnstileWidget';
+import styles from '../../page.module.css';
+import TurnstileWidget from '@/components/TurnstileWidget/TurnstileWidget';
 import { submitInquiry } from '@/lib/inquiry';
 
 type Status = 'idle' | 'sending' | 'ok' | 'error';

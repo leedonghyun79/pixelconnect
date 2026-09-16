@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import styles from './FinalCTA.module.css';
 
-const FlowWave3D = dynamic(() => import('./FlowWave3D'), { ssr: false });
+const FlowWave3D = dynamic(() => import('../FlowWave3D/FlowWave3D'), { ssr: false });
 
 interface FinalCTAProps {
   hide3D?: boolean;

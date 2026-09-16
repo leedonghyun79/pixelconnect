@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useRef } from 'react';
-import styles from '../page.module.css';
+import styles from '../../page.module.css';
 
 const reviews = [
   {

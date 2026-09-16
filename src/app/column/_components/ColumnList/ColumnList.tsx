@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import styles from '../page.module.css';
+import styles from '../../page.module.css';
 
 const categories = ['전체', '홈페이지 기획', '전환율 최적화', '유지보수', '디자인 트렌드', '마케팅'];
 

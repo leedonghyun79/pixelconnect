@@ -2,10 +2,10 @@ import type { Metadata } from 'next'
 import { Poppins, Playfair_Display } from 'next/font/google'
 import './globals.css'
 import 'highlight.js/styles/atom-one-dark.css' // 칼럼 코드 블록 문법 색상
-import SmoothScroll from '@/components/SmoothScroll'
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
-import DevNotice from '@/components/DevNotice'
+import SmoothScroll from '@/components/SmoothScroll/SmoothScroll'
+import Navbar from '@/components/Navbar/Navbar'
+import Footer from '@/components/Footer/Footer'
+import DevNotice from '@/components/DevNotice/DevNotice'
 
 const poppins = Poppins({
   subsets: ['latin'],

@@ -1,8 +1,8 @@
 'use client';
 import { useEffect, useRef } from 'react';
 import styles from './WhyUs.module.css';
-import mStyles from './Maintenance.module.css';
-import SectionGridBg from './SectionGridBg';
+import mStyles from '../Maintenance/Maintenance.module.css';
+import SectionGridBg from '../SectionGridBg/SectionGridBg';
 
 const diffs = [
   {
