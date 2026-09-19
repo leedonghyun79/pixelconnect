@@ -102,7 +102,7 @@ export default async function ColumnDetailPage({
 
         <div className={styles.footer}>
           <div className={styles.footerInner}>
-            <h3>이 글이 도움이 되셨나요?</h3>
+            <p className={styles.footerTitle}>이 글이 도움이 되셨나요?</p>
             <p>픽셀커넥트와 함께 성공적인 비즈니스를 시작해보세요.</p>
             <div className={styles.actions}>
               <Link href="/contact" className={styles.contactBtn}>프로젝트 문의하기</Link>
