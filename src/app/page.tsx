@@ -7,6 +7,16 @@ import Testimonials from './_components/Testimonials/Testimonials';
 import Pricing from './_components/Pricing/Pricing';
 import FAQ from './_components/FAQ/FAQ';
 import FinalCTA from '@/components/FinalCTA/FinalCTA';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: 'https://pixelconnect.co.kr',
+    types: {
+      'application/rss+xml': [{ url: '/feed.xml', title: '픽셀커넥트 칼럼' }],
+    },
+  },
+};
 
 export default function Home() {
   return (

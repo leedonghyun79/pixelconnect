@@ -25,7 +25,6 @@ export const metadata: Metadata = {
   description: '부천 웹 에이전시 픽셀커넥트. 제작부터 운영까지, 브랜드의 성장을 함께 책임집니다. 합리적 가격과 제작 후 유지보수·관리까지 책임지는 홈페이지 제작 파트너.',
   metadataBase: new URL('https://pixelconnect.co.kr'),
   alternates: {
-    canonical: '/',
     types: {
       'application/rss+xml': [{ url: '/feed.xml', title: '픽셀커넥트 칼럼' }],
     },
