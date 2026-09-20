@@ -7,6 +7,7 @@ import FinalCTA from '@/components/FinalCTA/FinalCTA';
 export const metadata: Metadata = {
   title: '고객후기 | 픽셀커넥트',
   description: '픽셀커넥트와 함께한 대표님들의 생생한 후기. 결과물보다 관계를 먼저 생각합니다.',
+  alternates: { canonical: 'https://pixelconnect.co.kr/reviews' },
 };
 
 export default function ReviewsPage() {

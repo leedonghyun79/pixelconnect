@@ -7,6 +7,7 @@ import ServiceDetail from './_components/ServiceDetail/ServiceDetail';
 export const metadata: Metadata = {
   title: '서비스 | 픽셀커넥트',
   description: '브랜드 맞춤형 디자인, 합리적 견적, 납품 후에도 끊기지 않는 유지보수까지. 픽셀커넥트의 웹사이트 제작 서비스를 확인하세요.',
+  alternates: { canonical: 'https://pixelconnect.co.kr/services' },
 };
 
 export default function ServicesPage() {

@@ -7,6 +7,7 @@ import FinalCTA from '@/components/FinalCTA/FinalCTA';
 export const metadata: Metadata = {
   title: '칼럼 | 픽셀커넥트',
   description: '홈페이지 제작, 전환율 최적화, 유지보수 운영 노하우를 담은 픽셀커넥트의 칼럼입니다.',
+  alternates: { canonical: 'https://pixelconnect.co.kr/column' },
 };
 
 export default async function ColumnPage() {
