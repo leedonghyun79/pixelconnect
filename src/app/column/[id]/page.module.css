@@ -13,13 +13,13 @@
 /* Header */
 .header {
   margin-bottom: 40px;
-  text-align: center;
+  text-align: left;
 }
 
 .meta {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 12px;
   margin-bottom: 16px;
 }

@@ -5,7 +5,7 @@ import 'highlight.js/styles/atom-one-dark.css' // 칼럼 코드 블록 문법 �
 import SmoothScroll from '@/components/common/SmoothScroll/SmoothScroll'
 import Navbar from '@/components/common/Navbar/Navbar'
 import Footer from '@/components/common/Footer/Footer'
-import DevNotice from '@/components/common/DevNotice/DevNotice'
+// import DevNotice from '@/components/common/DevNotice/DevNotice'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -141,7 +141,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
           <Footer />
         </SmoothScroll>
-        <DevNotice />
+        {/* <DevNotice /> */}
       </body>
     </html>
   )
