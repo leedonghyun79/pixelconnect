@@ -8,6 +8,7 @@ export interface ColumnListItem {
   id: string;
   title: string;
   category: string;
+  description: string; // SEO meta description. connectivity가 직접입력/본문자동요약 둘 다 처리해서 내려줌
   thumbnail: string | null;
   publishedAt: string; // ISO
 }

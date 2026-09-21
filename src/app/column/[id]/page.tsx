@@ -7,6 +7,7 @@ import HighlightCode from './_components/HighlightCode/HighlightCode';
 import styles from './page.module.css';
 
 // 본문 HTML에서 태그를 걷어내고 요약문(메타 description용)을 뽑는다.
+// connectivity API가 description을 못 내려주는 구버전일 때 대비한 fallback으로만 사용.
 function excerpt(html: string, max = 150): string {
   const text = html
     .replace(/<[^>]+>/g, ' ')
@@ -24,7 +25,7 @@ export async function generateMetadata({
   const { id } = await params;
   const col = await fetchColumn(id);
   if (!col) return { title: '칼럼을 찾을 수 없습니다 | 픽셀커넥트' };
-  const description = excerpt(col.contentHtml) || `${col.category} · 픽셀커넥트 칼럼`;
+  const description = col.description || excerpt(col.contentHtml) || `${col.category} · 픽셀커넥트 칼럼`;
   return {
     title: `${col.title} | 픽셀커넥트`,
     description,
@@ -59,7 +60,7 @@ export default async function ColumnDetailPage({
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: col.title,
-    description: excerpt(col.contentHtml),
+    description: col.description || excerpt(col.contentHtml),
     url,
     datePublished: col.publishedAt,
     dateModified: col.publishedAt,
