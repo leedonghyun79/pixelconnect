@@ -21,7 +21,7 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: '홈페이지 제작·운영 웹에이전시 | 픽셀커넥트',
+  title: '홈페이지 제작 업체 | 맞춤형 개발 솔루션 픽셀커넥트',
   description: '부천 웹 에이전시 픽셀커넥트. 제작부터 운영까지, 브랜드의 성장을 함께 책임집니다. 합리적 가격과 제작 후 유지보수·관리까지 책임지는 홈페이지 제작 파트너.',
   metadataBase: new URL('https://pixelconnect.co.kr'),
   alternates: {
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     siteName: '픽셀커넥트',
-    title: '홈페이지 제작·운영 웹에이전시 | 픽셀커넥트',
+    title: '홈페이지 제작 업체 | 맞춤형 개발 솔루션 픽셀커넥트',
     description: '제작부터 운영까지, 브랜드의 성장을 함께 책임집니다.',
     url: 'https://pixelconnect.co.kr',
     locale: 'ko_KR',
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: '홈페이지 제작·운영 웹에이전시 | 픽셀커넥트',
+    title: '홈페이지 제작 업체 | 맞춤형 개발 솔루션 픽셀커넥트',
     description: '제작부터 운영까지, 브랜드의 성장을 함께 책임집니다.',
     images: ['/og-image.png'],
   },
