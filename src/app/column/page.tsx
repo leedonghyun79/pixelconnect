@@ -20,8 +20,30 @@ export default async function ColumnPage() {
     publishedAt: r.publishedAt,
   }));
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: '픽셀커넥트 칼럼',
+    itemListElement: rows.map((r, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      item: {
+        '@type': 'Article',
+        url: `https://pixelconnect.co.kr/column/${r.id}`,
+        headline: r.title,
+        ...(r.thumbnail ? { image: r.thumbnail } : {}),
+        datePublished: r.publishedAt,
+        description: r.description,
+      },
+    })),
+  };
+
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <PageTitleBanner
         eyebrow="COLUMN"
         title="인사이트 & 전략"
