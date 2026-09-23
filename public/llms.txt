@@ -1,0 +1,33 @@
+# 픽셀커넥트 (pixelconnect.co.kr)
+
+> 부천 소재 웹 에이전시. 홈페이지 제작부터 운영·유지보수까지 함께 책임지는 것을 원칙으로 한다.
+> 브랜드 맞춤형 디자인과 합리적인 견적, 제작 이후 끊기지 않는 유지보수를 지향한다.
+
+## 원칙
+- 모든 요금제는 무료 상담 후 정확한 견적을 안내하며, 추가 비용 없이 처음 견적이 최종 금액이다.
+- 제작으로 끝나지 않고, 제작 이후 운영·유지보수까지 함께 책임진다.
+- 칼럼은 픽셀커넥트가 실제 제작·운영 과정에서 겪은 사례와 노하우를 원출처로 작성한다.
+
+## 서비스 (요금제)
+- 스타터 (단일 페이지 최적화, 시작가 1,000,000원~): 랜딩페이지 1p, 반응형, 템플릿 기반 커스텀, 기본 SEO 세팅. 작업일 1~2주.
+- 스탠다드 (기업 홈페이지 최적화, 시작가 2,000,000원~): 멀티페이지(3~5p), 반응형 + 관리자 문의함, GSAP 애니메이션, GA4 연동, 알림톡/카톡 연동 옵션. 작업일 2~3주.
+- 커스텀 (맞춤형 솔루션 구축, 문의 후 견적): 맞춤 풀스택 개발, DB/API 연동, 커스텀 관리자페이지, 유지보수 별도 협의, 전담 대응. 기간 별도 협의.
+자세한 서비스 범위: https://pixelconnect.co.kr/services
+
+## 주요 페이지
+- 홈: https://pixelconnect.co.kr
+- 서비스: https://pixelconnect.co.kr/services
+- 포트폴리오: https://pixelconnect.co.kr/portfolio
+- 고객 후기: https://pixelconnect.co.kr/reviews
+- 칼럼(홈페이지 제작·운영 인사이트): https://pixelconnect.co.kr/column
+- 문의: https://pixelconnect.co.kr/contact
+
+## 회사 정보
+- 상호: 픽셀커넥트
+- 위치: 경기도 부천
+- 이메일: ceo@pixelconnect.co.kr
+- 카카오 채널: https://pf.kakao.com/_xoDxkuX/friend
+
+## 색인
+- 사이트맵: https://pixelconnect.co.kr/sitemap.xml
+- RSS(칼럼): https://pixelconnect.co.kr/feed.xml
