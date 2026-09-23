@@ -139,7 +139,7 @@ export default function ContactForm() {
                   >
                     <option value="">선택해주세요</option>
                     <option value="web">웹사이트 제작</option>
-                    <option value="shop">쇼핑몰 구축</option>
+                    <option value="custom">맞춤형 개발</option>
                     <option value="landing">랜딩페이지</option>
                     <option value="maintain">유지보수·운영</option>
                     <option value="etc">기타</option>
