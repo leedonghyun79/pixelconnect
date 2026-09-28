@@ -8,7 +8,7 @@ import ServiceDetail from './_components/ServiceDetail/ServiceDetail';
 
 export const metadata: Metadata = {
   title: '홈페이지 제작 서비스·비용 안내 | 픽셀커넥트',
-  description: '홈페이지 제작 비용과 서비스 범위 안내. 랜딩페이지 100만원~, 기업 홈페이지 200만원~, 맞춤형 개발은 상담 후 견적. 제작 후 유지보수까지 책임지는 부천 픽셀커넥트.',
+  description: '홈페이지 제작 비용과 서비스 범위 안내. 랜딩페이지 100만원~, 기업 홈페이지 200만원~, 맞춤형 개발은 상담 후 견적. 제작 후 유지보수까지 책임지며 전국 비대면으로 진행합니다.',
   alternates: { canonical: 'https://pixelconnect.co.kr/services' },
 };
 

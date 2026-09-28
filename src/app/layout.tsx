@@ -21,8 +21,8 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: '홈페이지 제작 업체 | 부천 웹 에이전시 픽셀커넥트',
-  description: '홈페이지 제작 업체 픽셀커넥트 — 부천 웹 에이전시. 기획부터 개발, 오픈 후 유지보수까지 대표가 직접 책임집니다. 랜딩페이지 100만원~, 기업 홈페이지 200만원~.',
+  title: '홈페이지 제작 업체 | 기획부터 유지보수까지 픽셀커넥트',
+  description: '홈페이지 제작 업체 픽셀커넥트. 기획부터 개발, 오픈 후 유지보수까지 대표가 직접 책임집니다. 전국 비대면 진행, 랜딩페이지 100만원~, 기업 홈페이지 200만원~.',
   metadataBase: new URL('https://pixelconnect.co.kr'),
   alternates: {
     types: {
@@ -32,8 +32,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     siteName: '픽셀커넥트',
-    title: '홈페이지 제작 업체 | 부천 웹 에이전시 픽셀커넥트',
-    description: '부천 홈페이지 제작 업체 픽셀커넥트. 기획부터 개발, 오픈 후 유지보수까지 대표가 직접 책임집니다.',
+    title: '홈페이지 제작 업체 | 기획부터 유지보수까지 픽셀커넥트',
+    description: '홈페이지 제작 업체 픽셀커넥트. 기획부터 개발, 오픈 후 유지보수까지 대표가 직접 책임집니다. 전국 비대면 진행.',
     url: 'https://pixelconnect.co.kr',
     locale: 'ko_KR',
     images: [
@@ -47,8 +47,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: '홈페이지 제작 업체 | 부천 웹 에이전시 픽셀커넥트',
-    description: '부천 홈페이지 제작 업체 픽셀커넥트. 기획부터 개발, 오픈 후 유지보수까지 대표가 직접 책임집니다.',
+    title: '홈페이지 제작 업체 | 기획부터 유지보수까지 픽셀커넥트',
+    description: '홈페이지 제작 업체 픽셀커넥트. 기획부터 개발, 오픈 후 유지보수까지 대표가 직접 책임집니다. 전국 비대면 진행.',
     images: ['/og-image.png'],
   },
   verification: {
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
 }
 
 const siteDescription =
-  '홈페이지 제작 업체 픽셀커넥트 — 부천 웹 에이전시. 기획부터 개발, 오픈 후 유지보수까지 대표가 직접 책임집니다. 랜딩페이지 100만원~, 기업 홈페이지 200만원~.'
+  '홈페이지 제작 업체 픽셀커넥트. 기획부터 개발, 오픈 후 유지보수까지 대표가 직접 책임집니다. 전국 비대면 진행, 랜딩페이지 100만원~, 기업 홈페이지 200만원~.'
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -91,7 +91,7 @@ const jsonLd = {
       publisher: { '@id': 'https://pixelconnect.co.kr/#organization' },
     },
     {
-      // ProfessionalService = LocalBusiness 하위 타입 → 지역 검색("부천 홈페이지 제작") 신호.
+      // ProfessionalService = LocalBusiness 하위 타입. 실제 사업장 주소는 신뢰 신호, 서비스 지역은 전국.
       // 주소·전화는 푸터 표기와 반드시 일치시킬 것 (NAP 일관성)
       '@type': 'ProfessionalService',
       '@id': 'https://pixelconnect.co.kr/#organization',
