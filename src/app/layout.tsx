@@ -121,6 +121,7 @@ const jsonLd = {
         streetAddress: '상동로 79, 4층 404-39호 (상동, 부천상동수석프라자)',
         addressLocality: '부천시 원미구',
         addressRegion: '경기도',
+        postalCode: '14544',
         addressCountry: 'KR',
       },
     },
