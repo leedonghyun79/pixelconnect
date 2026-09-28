@@ -7,6 +7,7 @@ const categories = ['전체', '홈페이지 기획', '전환율 최적화', '유
 
 export interface ColumnCard {
   id: string;
+  slug: string;
   title: string;
   category: string;
   thumbnail: string | null;
@@ -35,7 +36,7 @@ export default function ColumnList({ articles }: { articles: ColumnCard[] }) {
 
         <div className={styles.grid}>
           {filtered.map((article) => (
-            <a key={article.id} href={`/column/${article.id}`} style={{ textDecoration: 'none' }}>
+            <a key={article.id} href={`/column/${article.slug}`} style={{ textDecoration: 'none' }}>
               <article className={styles.card}>
                 <div className={styles.thumb}>
                   {article.thumbnail ? (

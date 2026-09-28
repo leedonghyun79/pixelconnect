@@ -39,7 +39,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 최소한 정적 라우트만이라도 담긴 sitemap 이 나간다.
   const columns = await fetchColumns();
   const columnPages: MetadataRoute.Sitemap = columns.map((c) => ({
-    url: `${SITE}/column/${c.id}`,
+    url: `${SITE}/column/${c.slug}`,
     lastModified: c.publishedAt ? new Date(c.publishedAt) : undefined,
     changeFrequency: 'monthly',
     priority: 0.6,

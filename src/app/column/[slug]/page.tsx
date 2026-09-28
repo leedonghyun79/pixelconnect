@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
 import { fetchColumn } from '@/lib/api/columns';
 import { formatDate } from '@/utils/formatDate';
 import HighlightCode from './_components/HighlightCode/HighlightCode';
@@ -20,16 +20,16 @@ function excerpt(html: string, max = 150): string {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const { id } = await params;
-  const col = await fetchColumn(id);
+  const { slug } = await params;
+  const col = await fetchColumn(slug);
   if (!col) return { title: '칼럼을 찾을 수 없습니다 | 픽셀커넥트' };
   const description = col.description || excerpt(col.contentHtml) || `${col.category} · 픽셀커넥트 칼럼`;
   return {
     title: `${col.title} | 픽셀커넥트`,
     description,
-    alternates: { canonical: `https://pixelconnect.co.kr/column/${col.id}` },
+    alternates: { canonical: `https://pixelconnect.co.kr/column/${col.slug}` },
     openGraph: {
       type: 'article',
       title: col.title,
@@ -49,13 +49,18 @@ export async function generateMetadata({
 export default async function ColumnDetailPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ slug: string }>;
 }) {
-  const { id } = await params;
-  const col = await fetchColumn(id);
+  const { slug } = await params;
+  const col = await fetchColumn(slug);
   if (!col) notFound();
 
-  const url = `https://pixelconnect.co.kr/column/${col.id}`;
+  // 구 cuid URL(/column/cmtq...)로 들어온 요청은 새 slug URL로 301 리다이렉트
+  if (col.slug && col.slug !== slug) {
+    permanentRedirect(`/column/${col.slug}`);
+  }
+
+  const url = `https://pixelconnect.co.kr/column/${col.slug}`;
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',

@@ -23,7 +23,7 @@ export async function GET() {
 
   const items = columns
     .map((c) => {
-      const url = `${SITE}/column/${c.id}`;
+      const url = `${SITE}/column/${c.slug}`;
       return `    <item>
       <title>${esc(c.title)}</title>
       <link>${url}</link>

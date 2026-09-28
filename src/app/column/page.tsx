@@ -14,6 +14,7 @@ export default async function ColumnPage() {
   const rows = await fetchColumns();
   const articles: ColumnCard[] = rows.map((r) => ({
     id: r.id,
+    slug: r.slug,
     title: r.title,
     category: r.category,
     thumbnail: r.thumbnail,
@@ -29,7 +30,7 @@ export default async function ColumnPage() {
       position: i + 1,
       item: {
         '@type': 'Article',
-        url: `https://pixelconnect.co.kr/column/${r.id}`,
+        url: `https://pixelconnect.co.kr/column/${r.slug}`,
         headline: r.title,
         ...(r.thumbnail ? { image: r.thumbnail } : {}),
         datePublished: r.publishedAt,
