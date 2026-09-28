@@ -106,6 +106,7 @@ export default function Hero() {
               ref={el => { itemRefs.current[1] = el; }}
               className={styles.headline}
             >
+              <span className={`${styles.line} ${styles.kicker}`}>부천 홈페이지 제작 업체 픽셀커넥트</span>
               <span className={styles.line}>내 비즈니스처럼 진심으로 고민하고</span>
               <span className={styles.line}>
                 책임질 <strong className={styles.navyText}>진짜 파트너</strong>를 찾으셨나요?

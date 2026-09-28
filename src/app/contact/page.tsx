@@ -3,7 +3,7 @@ import PageTitleBanner from '@/components/PageTitleBanner/PageTitleBanner';
 import ContactForm from './_components/ContactForm/ContactForm';
 
 export const metadata: Metadata = {
-  title: '문의하기 | 픽셀커넥트',
+  title: '홈페이지 제작 상담·견적 문의 | 픽셀커넥트',
   description: '홈페이지 제작, 유지보수에 대해 궁금한 점이 있으신가요? 부담 없이 무료 상담을 신청해보세요.',
   alternates: { canonical: 'https://pixelconnect.co.kr/contact' },
 };

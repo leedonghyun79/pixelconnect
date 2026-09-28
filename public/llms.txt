@@ -23,8 +23,10 @@
 - 문의: https://pixelconnect.co.kr/contact
 
 ## 회사 정보
-- 상호: 픽셀커넥트
-- 위치: 경기도 부천
+- 상호: 픽셀커넥트 (PIXEL CONNECT)
+- 사업자등록번호: 516-73-00625
+- 주소: 경기도 부천시 원미구 상동로 79, 4층 404-39호 (상동, 부천상동수석프라자)
+- 전화: 010-7920-8157
 - 이메일: ceo@pixelconnect.co.kr
 - 카카오 채널: https://pf.kakao.com/_xoDxkuX/friend
 

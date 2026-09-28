@@ -2,26 +2,35 @@ import type { Metadata } from 'next';
 import PageTitleBanner from '@/components/PageTitleBanner/PageTitleBanner';
 import Stats from '@/components/Stats/Stats';
 import FinalCTA from '@/components/FinalCTA/FinalCTA';
+import Pricing from '@/app/_components/Pricing/Pricing';
+import { serviceJsonLd } from '@/data/pricing';
 import ServiceDetail from './_components/ServiceDetail/ServiceDetail';
 
 export const metadata: Metadata = {
-  title: '서비스 | 픽셀커넥트',
-  description: '브랜드 맞춤형 디자인, 합리적 견적, 납품 후에도 끊기지 않는 유지보수까지. 픽셀커넥트의 웹사이트 제작 서비스를 확인하세요.',
+  title: '홈페이지 제작 서비스·비용 안내 | 픽셀커넥트',
+  description: '홈페이지 제작 비용과 서비스 범위 안내. 랜딩페이지 100만원~, 기업 홈페이지 200만원~, 맞춤형 개발은 상담 후 견적. 제작 후 유지보수까지 책임지는 부천 픽셀커넥트.',
   alternates: { canonical: 'https://pixelconnect.co.kr/services' },
 };
 
 export default function ServicesPage() {
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+      />
       <PageTitleBanner
         eyebrow="SERVICES"
-        title="브랜드의 성장을 함께 만드는 서비스"
+        title="홈페이지 제작 서비스와 비용"
         sub={<>기획부터 디자인, 개발, 유지보수까지 홈페이지가<br />필요한 순간부터 운영이 안정될 때까지 책임집니다.</>}
         breadcrumb="서비스"
       />
 
       {/* 서비스 상세 항목 */}
       <ServiceDetail />
+
+      {/* 요금제 */}
+      <Pricing />
 
       {/* 신뢰 지표 */}
       <Stats />

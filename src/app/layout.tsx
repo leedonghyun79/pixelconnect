@@ -21,8 +21,8 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: '홈페이지 제작 업체 | 맞춤형 개발 솔루션 픽셀커넥트',
-  description: '부천 웹 에이전시 픽셀커넥트. 제작부터 운영까지, 브랜드의 성장을 함께 책임집니다. 합리적 가격과 제작 후 유지보수·관리까지 책임지는 홈페이지 제작 파트너.',
+  title: '홈페이지 제작 업체 | 부천 웹 에이전시 픽셀커넥트',
+  description: '홈페이지 제작 업체 픽셀커넥트 — 부천 웹 에이전시. 기획부터 개발, 오픈 후 유지보수까지 대표가 직접 책임집니다. 랜딩페이지 100만원~, 기업 홈페이지 200만원~.',
   metadataBase: new URL('https://pixelconnect.co.kr'),
   alternates: {
     types: {
@@ -32,8 +32,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     siteName: '픽셀커넥트',
-    title: '홈페이지 제작 업체 | 맞춤형 개발 솔루션 픽셀커넥트',
-    description: '제작부터 운영까지, 브랜드의 성장을 함께 책임집니다.',
+    title: '홈페이지 제작 업체 | 부천 웹 에이전시 픽셀커넥트',
+    description: '부천 홈페이지 제작 업체 픽셀커넥트. 기획부터 개발, 오픈 후 유지보수까지 대표가 직접 책임집니다.',
     url: 'https://pixelconnect.co.kr',
     locale: 'ko_KR',
     images: [
@@ -47,8 +47,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: '홈페이지 제작 업체 | 맞춤형 개발 솔루션 픽셀커넥트',
-    description: '제작부터 운영까지, 브랜드의 성장을 함께 책임집니다.',
+    title: '홈페이지 제작 업체 | 부천 웹 에이전시 픽셀커넥트',
+    description: '부천 홈페이지 제작 업체 픽셀커넥트. 기획부터 개발, 오픈 후 유지보수까지 대표가 직접 책임집니다.',
     images: ['/og-image.png'],
   },
   verification: {
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
 }
 
 const siteDescription =
-  '부천 웹 에이전시 픽셀커넥트. 제작부터 운영까지, 브랜드의 성장을 함께 책임집니다. 합리적 가격과 제작 후 유지보수·관리까지 책임지는 홈페이지 제작 파트너.'
+  '홈페이지 제작 업체 픽셀커넥트 — 부천 웹 에이전시. 기획부터 개발, 오픈 후 유지보수까지 대표가 직접 책임집니다. 랜딩페이지 100만원~, 기업 홈페이지 200만원~.'
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -91,12 +91,22 @@ const jsonLd = {
       publisher: { '@id': 'https://pixelconnect.co.kr/#organization' },
     },
     {
-      '@type': 'Organization',
+      // ProfessionalService = LocalBusiness 하위 타입 → 지역 검색("부천 홈페이지 제작") 신호.
+      // 주소·전화는 푸터 표기와 반드시 일치시킬 것 (NAP 일관성)
+      '@type': 'ProfessionalService',
       '@id': 'https://pixelconnect.co.kr/#organization',
       name: '픽셀커넥트',
+      alternateName: 'PIXEL CONNECT',
       url: 'https://pixelconnect.co.kr',
       description: siteDescription,
       logo: 'https://pixelconnect.co.kr/images/logo.png',
+      image: 'https://pixelconnect.co.kr/og-image.png',
+      telephone: '+82-10-7920-8157',
+      email: 'ceo@pixelconnect.co.kr',
+      vatID: '516-73-00625',
+      priceRange: '₩1,000,000~',
+      areaServed: { '@type': 'Country', name: '대한민국' },
+      knowsAbout: ['홈페이지 제작', '반응형 웹사이트', '랜딩페이지 제작', '맞춤형 웹 개발', '홈페이지 유지보수'],
       sameAs: ['https://pf.kakao.com/_xoDxkuX/friend'],
       contactPoint: {
         '@type': 'ContactPoint',
@@ -108,7 +118,8 @@ const jsonLd = {
       },
       address: {
         '@type': 'PostalAddress',
-        addressLocality: '부천',
+        streetAddress: '상동로 79, 4층 404-39호 (상동, 부천상동수석프라자)',
+        addressLocality: '부천시 원미구',
         addressRegion: '경기도',
         addressCountry: 'KR',
       },

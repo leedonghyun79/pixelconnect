@@ -8,6 +8,7 @@ import Pricing from './_components/Pricing/Pricing';
 import FAQ from './_components/FAQ/FAQ';
 import FinalCTA from '@/components/FinalCTA/FinalCTA';
 import type { Metadata } from 'next';
+import { faqJsonLd } from '@/data/faq';
 
 export const metadata: Metadata = {
   alternates: {
@@ -21,6 +22,10 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       {/* S01 - Hero */}
       <Hero />
       

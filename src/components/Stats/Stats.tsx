@@ -8,14 +8,17 @@ const stats = [
   { target: 98, suffix: '%', label: '고객 만족도', desc: '결과물에 대한 자신감' },
 ];
 
+// SSR·크롤러에는 최종값이 보이도록 target 으로 시작하고, 클라이언트 마운트 후에만 0부터 카운트업
 function useCounter(target: number, duration: number) {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(target);
   const ref = useRef<HTMLDivElement>(null);
   const started = useRef(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    setCount(0);
     const observer = new IntersectionObserver(
       entries => {
         if (entries[0].isIntersecting && !started.current) {

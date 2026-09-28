@@ -1,57 +1,7 @@
 'use client';
 import { useEffect, useRef } from 'react';
+import { plans } from '@/data/pricing';
 import styles from './Pricing.module.css';
-
-const plans = [
-  {
-    label: '단일 페이지 최적화',
-    tier: 'STARTER',
-    name: '스타터',
-    price: '1,000,000',
-    popular: false,
-    features: [
-      { text: '랜딩페이지 1p', highlight: false },
-      { text: '반응형', highlight: false },
-      { text: '템플릿 기반 커스텀', highlight: false },
-      { text: '기본 SEO 세팅', highlight: false },
-    ],
-    duration: '작업일 1~2주',
-    cta: '문의하기',
-  },
-  {
-    label: '기업 홈페이지 최적화',
-    tier: 'STANDARD',
-    name: '스탠다드',
-    price: '2,000,000',
-    popular: true,
-    popLabel: 'RECOMMENDED',
-    features: [
-      { text: '멀티페이지(3~5p)', highlight: false },
-      { text: '반응형 + 관리자 문의함', highlight: false },
-      { text: 'GSAP 애니메이션', highlight: true },
-      { text: 'GA4 연동', highlight: false },
-      { text: '알림톡/카톡 연동 옵션', highlight: false },
-    ],
-    duration: '작업일 2~3주',
-    cta: '문의하기',
-  },
-  {
-    label: '맞춤형 솔루션 구축',
-    tier: 'CUSTOM',
-    name: '커스텀',
-    price: '문의 후 견적',
-    popular: false,
-    features: [
-      { text: '맞춤 풀스택 개발', highlight: true },
-      { text: 'DB/API 연동', highlight: false },
-      { text: '커스텀 관리자페이지', highlight: false },
-      { text: '유지보수 별도 협의', highlight: false },
-      { text: '전담 대응', highlight: false },
-    ],
-    duration: '별도 협의',
-    cta: '문의하기',
-  },
-];
 
 export default function Pricing() {
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -102,12 +52,12 @@ export default function Pricing() {
 
               {/* Price */}
               <div className={styles.priceRow}>
-                {plan.price === '문의 후 견적' ? (
-                  <span className={styles.price} style={{ fontSize: '1.5rem', lineHeight: '1.5' }}>{plan.price}</span>
+                {plan.price === null ? (
+                  <span className={styles.price} style={{ fontSize: '1.5rem', lineHeight: '1.5' }}>문의 후 견적</span>
                 ) : (
                   <>
                     <span className={styles.pricePrefix}>시작가</span>
-                    <span className={styles.price}>{plan.price}</span>
+                    <span className={styles.price}>{String(plan.price).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span>
                     <span className={styles.priceUnit}>원 ~</span>
                   </>
                 )}

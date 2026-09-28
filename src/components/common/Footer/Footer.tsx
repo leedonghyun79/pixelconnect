@@ -23,6 +23,7 @@ export default function Footer() {
               <p className={styles.company}>PIXEL CONNECT(픽셀 커넥트)</p>
               <p>사업자등록번호: 516-73-00625</p>
               <p>주소: 경기도 부천시 원미구 상동로 79, 4층 404-39호(상동, 부천상동수석프라자)</p>
+              <p>전화 : <a href="tel:010-7920-8157" className={styles.telLink}>010-7920-8157</a></p>
               <p>이메일 : ceo@pixelconnect.co.kr</p>
             </div>
             <p className={styles.copyright}>Copyright ⓒ 2025 픽셀커넥트 All rights reserved.</p>
