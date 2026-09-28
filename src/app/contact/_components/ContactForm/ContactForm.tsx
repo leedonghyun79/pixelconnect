@@ -3,6 +3,7 @@ import { useCallback, useState } from 'react';
 import styles from '../../page.module.css';
 import TurnstileWidget from '@/components/TurnstileWidget/TurnstileWidget';
 import { submitInquiry } from '@/lib/api/inquiry';
+import LegalModalLink from '@/components/LegalDocument/LegalModalLink';
 
 type Status = 'idle' | 'sending' | 'ok' | 'error';
 
@@ -13,6 +14,7 @@ export default function ContactForm() {
   const [service, setService] = useState('');
   const [message, setMessage] = useState('');
   const [company, setCompany] = useState(''); // 허니팟
+  const [agreed, setAgreed] = useState(false); // 개인정보 수집·이용 동의
   const [token, setToken] = useState('');
   const [status, setStatus] = useState<Status>('idle');
   const [errorMsg, setErrorMsg] = useState('');
@@ -28,6 +30,11 @@ export default function ContactForm() {
       setErrorMsg('이름, 이메일, 프로젝트 설명을 입력해주세요.');
       return;
     }
+    if (!agreed) {
+      setStatus('error');
+      setErrorMsg('개인정보 수집·이용에 동의해주세요.');
+      return;
+    }
     if (!token) {
       setStatus('error');
       setErrorMsg('잠시 후 다시 시도해주세요. (봇 확인 로딩 중)');
@@ -41,7 +48,7 @@ export default function ContactForm() {
 
     if (res.ok) {
       setStatus('ok');
-      setName(''); setEmail(''); setPhone(''); setService(''); setMessage('');
+      setName(''); setEmail(''); setPhone(''); setService(''); setMessage(''); setAgreed(false);
       setToken('');
     } else {
       setStatus('error');
@@ -154,6 +161,26 @@ export default function ContactForm() {
                   rows={6}
                   value={message} onChange={(e) => setMessage(e.target.value)}
                 />
+              </div>
+
+              {/* 개인정보 수집·이용 동의 (개인정보 보호법 제15조) */}
+              <div className={styles.consent}>
+                <ul className={styles.consentSummary}>
+                  <li>수집 항목 : 이름, 이메일, 문의 내용 (선택: 연락처, 필요한 서비스)</li>
+                  <li>이용 목적 : 상담 문의 접수 및 회신</li>
+                  <li>보유 기간 : 상담 종료 후 1년</li>
+                  <li>동의를 거부할 수 있으나, 거부 시 문의 접수가 제한됩니다.</li>
+                </ul>
+                <div className={styles.consentRow}>
+                  <label className={styles.consentLabel}>
+                    <input
+                      type="checkbox" className={styles.consentCheck}
+                      checked={agreed} onChange={(e) => setAgreed(e.target.checked)}
+                    />
+                    [필수] 개인정보 수집·이용에 동의합니다.
+                  </label>
+                  <LegalModalLink doc="privacy" className={styles.consentLink}>전문 보기</LegalModalLink>
+                </div>
               </div>
 
               <TurnstileWidget onToken={onToken} />

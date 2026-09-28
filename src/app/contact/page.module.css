@@ -179,6 +179,59 @@
   transform: translateY(-1px);
 }
 
+.consent {
+  padding: 16px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  background: var(--navy-pale);
+}
+
+.consentSummary {
+  margin: 0 0 12px;
+  padding-left: 1.1em;
+  list-style: disc;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  word-break: keep-all;
+}
+
+.consentRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.consentLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.consentCheck {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  accent-color: var(--navy);
+  cursor: pointer;
+}
+
+.consentLink {
+  flex-shrink: 0;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-decoration: underline;
+}
+
+.consentLink:hover {
+  color: var(--navy);
+}
+
 .note {
   font-size: 12px;
   color: var(--text-muted);

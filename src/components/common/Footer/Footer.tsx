@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import LegalModalLink from '@/components/LegalDocument/LegalModalLink';
 import styles from './Footer.module.css';
 
 const menuLinks = [
@@ -9,10 +10,7 @@ const menuLinks = [
   { href: '/contact', label: '문의' },
 ];
 
-const legalLinks = [
-  { href: '/terms', label: '이용약관' },
-  { href: '/privacy', label: '개인정보처리방침' },
-];
+const legalDocs = ['terms', 'privacy'] as const;
 
 export default function Footer() {
   return (
@@ -40,10 +38,10 @@ export default function Footer() {
               ))}
             </nav>
             <div className={styles.legal}>
-              {legalLinks.map((item, i) => (
-                <span key={item.href} className={styles.legalItem}>
+              {legalDocs.map((doc, i) => (
+                <span key={doc} className={styles.legalItem}>
                   {i > 0 && <span className={styles.divider}>|</span>}
-                  <Link href={item.href} className={styles.legalLink}>{item.label}</Link>
+                  <LegalModalLink doc={doc} className={styles.legalLink} />
                 </span>
               ))}
             </div>

@@ -1,0 +1,94 @@
+/* ── 페이지 레이아웃 ─────────────────────── */
+.section {
+  background: var(--white);
+  padding: 0 0 120px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.doc {
+  max-width: 800px;
+  border-top: 1px solid var(--border-default);
+  padding-top: 48px;
+}
+
+/* ── 본문 타이포 (페이지·모달 공용) ─────────────────────── */
+.body {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  word-break: keep-all;
+}
+
+.body h2 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 48px 0 12px;
+}
+
+.body > :first-child {
+  margin-top: 0;
+}
+
+.body h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 20px 0 6px;
+}
+
+.body p {
+  margin: 0 0 8px;
+}
+
+.body ul {
+  margin: 0 0 8px;
+  padding-left: 1.2em;
+  list-style: disc;
+}
+
+.body li {
+  margin-bottom: 4px;
+}
+
+.body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 8px 0 16px;
+  font-size: 14px;
+}
+
+.body th,
+.body td {
+  border: 1px solid var(--border-default);
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.body th {
+  background: var(--navy-pale);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.body a {
+  color: var(--navy);
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .section { padding-bottom: 80px; }
+  .container { padding: 0 24px; }
+  .doc { padding-top: 32px; }
+  .body { font-size: 14px; }
+  .body h2 { margin-top: 36px; }
+  .body table { font-size: 13px; }
+  .body th,
+  .body td { padding: 8px; }
+}
