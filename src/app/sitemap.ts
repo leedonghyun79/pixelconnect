@@ -12,7 +12,6 @@ const staticRoutes: { path: string; lastModified: string; priority: number; chan
   { path: '/services', lastModified: '2026-09-28', priority: 0.9, changeFrequency: 'monthly' },
   { path: '/portfolio', lastModified: '2026-09-28', priority: 0.9, changeFrequency: 'weekly' },
   { path: '/column', lastModified: '2026-09-28', priority: 0.8, changeFrequency: 'daily' },
-  { path: '/reviews', lastModified: '2026-09-28', priority: 0.7, changeFrequency: 'weekly' },
   { path: '/contact', lastModified: '2026-09-28', priority: 0.6, changeFrequency: 'monthly' },
   { path: '/privacy', lastModified: '2026-09-28', priority: 0.2, changeFrequency: 'yearly' },
   { path: '/terms', lastModified: '2026-09-28', priority: 0.2, changeFrequency: 'yearly' },

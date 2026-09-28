@@ -11,7 +11,6 @@ const quickLinks = [
   { href: '/services', label: '서비스' },
   { href: '/portfolio', label: '포트폴리오' },
   { href: '/column', label: '칼럼' },
-  { href: '/reviews', label: '고객후기' },
   { href: '/contact', label: '문의' },
 ];
 

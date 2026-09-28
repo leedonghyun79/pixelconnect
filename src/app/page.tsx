@@ -3,7 +3,6 @@ import PainPoint from './_components/PainPoint/PainPoint';
 import WhyUs from './_components/WhyUs/WhyUs';
 import Portfolio from '@/components/Portfolio/Portfolio';
 import Process from './_components/Process/Process';
-import Testimonials from './_components/Testimonials/Testimonials';
 import Pricing from './_components/Pricing/Pricing';
 import FAQ from './_components/FAQ/FAQ';
 import FinalCTA from '@/components/FinalCTA/FinalCTA';
@@ -52,8 +51,6 @@ export default function Home() {
         <Portfolio />
         {/* S07 - Process */}
         <Process />
-        {/* S08 - Testimonials */}
-        <Testimonials />
         {/* S09 - Pricing */}
         <Pricing />
         {/* S10 - FAQ */}
