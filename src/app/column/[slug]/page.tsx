@@ -17,12 +17,21 @@ function excerpt(html: string, max = 150): string {
   return `${text.slice(0, max).trim()}...`;
 }
 
+// Next가 한글 등 non-ASCII 세그먼트를 퍼센트 인코딩된 채로 params에 넘기므로 원문으로 복원
+function decodeSlug(raw: string): string {
+  try {
+    return decodeURIComponent(raw);
+  } catch {
+    return raw;
+  }
+}
+
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const slug = decodeSlug((await params).slug);
   const col = await fetchColumn(slug);
   if (!col) return { title: '칼럼을 찾을 수 없습니다 | 픽셀커넥트' };
   const description = col.description || excerpt(col.contentHtml) || `${col.category} · 픽셀커넥트 칼럼`;
@@ -51,13 +60,13 @@ export default async function ColumnDetailPage({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await params;
+  const slug = decodeSlug((await params).slug);
   const col = await fetchColumn(slug);
   if (!col) notFound();
 
   // 구 cuid URL(/column/cmtq...)로 들어온 요청은 새 slug URL로 301 리다이렉트
   if (col.slug && col.slug !== slug) {
-    permanentRedirect(`/column/${col.slug}`);
+    permanentRedirect(`/column/${encodeURIComponent(col.slug)}`);
   }
 
   const url = `https://pixelconnect.co.kr/column/${col.slug}`;
