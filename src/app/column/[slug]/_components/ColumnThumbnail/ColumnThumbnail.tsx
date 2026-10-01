@@ -22,6 +22,7 @@ export default function ColumnThumbnail({ src, alt }: ColumnThumbnailProps) {
         height={675}
         className={styles.image}
         priority
+        unoptimized
         onLoadingComplete={() => setIsLoading(false)}
       />
     </div>
