@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import { notFound, permanentRedirect } from 'next/navigation';
 import { fetchColumn } from '@/lib/api/columns';
 import { formatDate } from '@/utils/formatDate';
+import ColumnThumbnail from './_components/ColumnThumbnail/ColumnThumbnail';
 import HighlightCode from './_components/HighlightCode/HighlightCode';
 import styles from './page.module.css';
 
@@ -105,7 +105,7 @@ export default async function ColumnDetailPage({
 
         {col.thumbnail && (
           <div className={styles.thumb}>
-            <Image src={col.thumbnail} alt={col.title} width={1200} height={675} className={styles.thumbImg} priority />
+            <ColumnThumbnail src={col.thumbnail} alt={col.title} />
           </div>
         )}
 

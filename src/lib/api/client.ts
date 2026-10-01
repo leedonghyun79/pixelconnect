@@ -13,7 +13,7 @@ function resolveBaseUrl(): string {
 export async function apiFetch(path: string, options: RequestInit = {}): Promise<Response> {
   const base = resolveBaseUrl();
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 8000); // 8초 타임아웃
+  const timeout = setTimeout(() => controller.abort(), 15000); // 15초 타임아웃
 
   try {
     return await fetch(`${base}${path}`, {
