@@ -18,8 +18,8 @@ export interface ColumnDetail extends ColumnListItem {
   contentHtml: string;
 }
 
-// 60초 ISR 캐시. connectivity가 잠깐 죽어도 캐시된 응답으로 버틴다.
-const revalidate = { next: { revalidate: 60 } } as const;
+// 1시간 ISR 캐시. connectivity가 잠깐 죽어도 캐시된 응답으로 버틴다.
+const revalidate = { next: { revalidate: 3600 } } as const;
 
 export async function fetchColumns(): Promise<ColumnListItem[]> {
   try {

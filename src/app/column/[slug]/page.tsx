@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { notFound, permanentRedirect } from 'next/navigation';
 import { fetchColumn } from '@/lib/api/columns';
@@ -104,8 +105,7 @@ export default async function ColumnDetailPage({
 
         {col.thumbnail && (
           <div className={styles.thumb}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={col.thumbnail} alt={col.title} width={1200} height={675} className={styles.thumbImg} />
+            <Image src={col.thumbnail} alt={col.title} width={1200} height={675} className={styles.thumbImg} priority />
           </div>
         )}
 

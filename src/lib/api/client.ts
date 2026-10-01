@@ -12,11 +12,19 @@ function resolveBaseUrl(): string {
 
 export async function apiFetch(path: string, options: RequestInit = {}): Promise<Response> {
   const base = resolveBaseUrl();
-  return fetch(`${base}${path}`, {
-    ...options,
-    headers: {
-      'Content-Type': 'application/json',
-      ...options.headers,
-    },
-  });
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 8000); // 8초 타임아웃
+
+  try {
+    return await fetch(`${base}${path}`, {
+      ...options,
+      signal: controller.signal,
+      headers: {
+        'Content-Type': 'application/json',
+        ...options.headers,
+      },
+    });
+  } finally {
+    clearTimeout(timeout);
+  }
 }
