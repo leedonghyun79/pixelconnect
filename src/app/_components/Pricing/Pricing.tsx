@@ -35,75 +35,80 @@ export default function Pricing() {
         </div>
 
         <div className={styles.grid}>
-          {plans.map((plan, i) => (
-            <div
-              key={i}
-              ref={el => { itemRefs.current[i] = el; }}
-              className={`${styles.cardReveal} fade-up`}
-              style={{ transitionDelay: `${0.2 + i * 0.2}s` }}
-            >
-              <div className={`${styles.card} ${plan.popular ? styles.cardPop : ''}`}>
-                {plan.popular && plan.popLabel && (
-                  <div className={styles.popBadge}>{plan.popLabel}</div>
-                )}
+          {plans.map((plan, i) => {
+            const isEntry = plan.tier === 'STANDARD'; // 가장 저렴한 첫 플랜만 테두리 버튼
+            return (
+              <div
+                key={i}
+                ref={el => { itemRefs.current[i] = el; }}
+                className={`${styles.cardReveal} fade-up`}
+                style={{ transitionDelay: `${0.2 + i * 0.2}s` }}
+              >
+                <div className={`${styles.card} ${plan.popular ? styles.cardPop : ''}`}>
+                  {/* 이름 → 가격 → 한 줄 설명 → 문의하기 → 상세 */}
+                  <h3 className={styles.planName}>{plan.name}</h3>
 
-                {/* 이름 → 가격 → 한 줄 설명 → 문의하기 → 상세 */}
-                <h3 className={styles.planName}>{plan.name}</h3>
+                  {/* Price */}
+                  <div className={styles.priceRow}>
+                    {plan.price === null ? (
+                      <span className={styles.price}>문의 후 견적</span>
+                    ) : (
+                      <>
+                        <span className={styles.price}>{String(plan.price).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span>
+                        <span className={styles.priceUnit}>원</span>
+                      </>
+                    )}
+                  </div>
 
-                {/* Price */}
-                <div className={styles.priceRow}>
-                  {plan.price === null ? (
-                    <span className={styles.price} style={{ fontSize: '1.5rem', lineHeight: '1.5' }}>문의 후 견적</span>
-                  ) : (
-                    <>
-                      <span className={styles.pricePrefix}>시작가</span>
-                      <span className={styles.price}>{String(plan.price).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span>
-                      <span className={styles.priceUnit}>원 ~</span>
-                    </>
-                  )}
+                  <span className={styles.planLabel}>{plan.label}</span>
+
+                  {/* CTA */}
+                  <a
+                    href="/contact"
+                    className={`${styles.planCta} ${plan.popular ? styles.planCtaPop : ''} ${isEntry ? styles.planCtaOutline : ''}`}
+                  >
+                    {plan.cta}
+                  </a>
+
+                  {/* 페이지 구성 · 제작 기간 */}
+                  <dl className={styles.specs}>
+                    <div className={styles.specRow}>
+                      <dt className={styles.specLabel}>페이지 구성</dt>
+                      <dd className={styles.specVal}>{plan.pages}</dd>
+                    </div>
+                    <div className={styles.specRow}>
+                      <dt className={styles.specLabel}>제작 기간</dt>
+                      <dd className={`${styles.specVal} ${styles.specValDuration}`}>{plan.duration}</dd>
+                    </div>
+                    <div className={styles.specRow}>
+                      <dt className={styles.specLabel}>수정 횟수</dt>
+                      <dd className={`${styles.specVal} ${styles.specValDuration}`}>{plan.revisions}</dd>
+                    </div>
+                  </dl>
+
+                  {/* 제공 범위 */}
+                  <span className={styles.scopeLabel}>제공 범위</span>
+                  <ul className={styles.features}>
+                    {plan.includes && (
+                      <li className={styles.feature}>
+                        <span className={`${styles.check} ${plan.popular ? styles.checkPop : ''}`}>✓</span>
+                        <span>{plan.includes} 포함</span>
+                      </li>
+                    )}
+                    {plan.features.map((f, fi) => (
+                      <li key={fi} className={styles.feature}>
+                        <span className={`${styles.check} ${plan.popular ? styles.checkPop : ''}`}>✓</span>
+                        <span className={f.highlight ? styles.featureHighlight : ''}>
+                          {f.text}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+
                 </div>
-
-                <span className={styles.planLabel}>{plan.label}</span>
-
-                {/* CTA */}
-                <a
-                  href="/contact"
-                  className={`${styles.planCta} ${plan.popular ? styles.planCtaPop : ''}`}
-                >
-                  {plan.cta}
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </a>
-
-                {/* 페이지 구성 · 제작 기간 */}
-                <dl className={styles.specs}>
-                  <div className={styles.specRow}>
-                    <dt className={styles.specLabel}>페이지 구성</dt>
-                    <dd className={styles.specVal}>{plan.pages}</dd>
-                  </div>
-                  <div className={styles.specRow}>
-                    <dt className={styles.specLabel}>제작 기간</dt>
-                    <dd className={`${styles.specVal} ${styles.specValDuration}`}>{plan.duration}</dd>
-                  </div>
-                </dl>
-
-                {/* 제공 범위 */}
-                <span className={styles.scopeLabel}>제공 범위</span>
-                <ul className={styles.features}>
-                  {plan.features.map((f, fi) => (
-                    <li key={fi} className={styles.feature}>
-                      <span className={`${styles.check} ${plan.popular ? styles.checkPop : ''}`}>✓</span>
-                      <span className={f.highlight ? styles.featureHighlight : ''}>
-                        {f.text}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Bottom note */}

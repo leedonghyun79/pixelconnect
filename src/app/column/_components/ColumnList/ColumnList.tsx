@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { formatDate } from '@/utils/formatDate';
 import styles from '../../page.module.css';
+import Reveal from '@/components/common/Reveal/Reveal';
 
 const categories = ['전체', '홈페이지 기획', '전환율 최적화', '유지보수', '디자인 트렌드', '마케팅'];
 
@@ -35,30 +36,32 @@ export default function ColumnList({ articles }: { articles: ColumnCard[] }) {
         </div>
 
         <div className={styles.grid}>
-          {filtered.map((article) => (
-            <a key={article.id} href={`/column/${article.slug}`} style={{ textDecoration: 'none' }}>
-              <article className={styles.card}>
-                <div className={styles.thumb}>
-                  {article.thumbnail ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={article.thumbnail}
-                      alt={article.title}
-                      className={styles.thumbImg}
-                    />
-                  ) : (
-                    <div className={styles.thumbInner} />
-                  )}
-                </div>
-                <div className={styles.cardBody}>
-                  <h3 className={styles.cardTitle}>{article.title}</h3>
-                  <div className={styles.cardMeta}>
-                    <span className={styles.cat}>{article.category}</span>
-                    <span className={styles.date}>{formatDate(article.publishedAt)}</span>
+          {filtered.map((article, i) => (
+            <Reveal key={article.id} delay={(i % 2) * 0.18}>
+              <a href={`/column/${article.slug}`} style={{ display: 'block', textDecoration: 'none' }}>
+                <article className={styles.card}>
+                  <div className={styles.thumb}>
+                    {article.thumbnail ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={article.thumbnail}
+                        alt={article.title}
+                        className={styles.thumbImg}
+                      />
+                    ) : (
+                      <div className={styles.thumbInner} />
+                    )}
                   </div>
-                </div>
-              </article>
-            </a>
+                  <div className={styles.cardBody}>
+                    <h3 className={styles.cardTitle}>{article.title}</h3>
+                    <div className={styles.cardMeta}>
+                      <span className={styles.cat}>{article.category}</span>
+                      <span className={styles.date}>{formatDate(article.publishedAt)}</span>
+                    </div>
+                  </div>
+                </article>
+              </a>
+            </Reveal>
           ))}
         </div>
 

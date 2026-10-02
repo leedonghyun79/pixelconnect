@@ -7,6 +7,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './Portfolio.module.css';
 import { portfolioProjects as projects } from '@/data/portfolio';
 import WaveText from '@/components/common/WaveText/WaveText';
+import Reveal from '@/components/common/Reveal/Reveal';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,21 +18,14 @@ interface PortfolioProps {
 export default function Portfolio({ hideHeader = false }: PortfolioProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-  const itemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const trackItemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
   const filtered = projects;
 
   useEffect(() => {
     if (hideHeader) {
-      const observer = new IntersectionObserver(
-        entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
-        { threshold: 0.1 }
-      );
-      // Trim refs array to current filtered length and observe valid elements
-      itemRefs.current = itemRefs.current.slice(0, filtered.length);
-      itemRefs.current.forEach(el => { if (el) observer.observe(el); });
-      return () => observer.disconnect();
+      // 포트폴리오 페이지(그리드)는 <Reveal> 래퍼가 등장을 맡는다
+      return;
     } else {
       const section = sectionRef.current;
       const track = trackRef.current;
@@ -106,32 +100,31 @@ export default function Portfolio({ hideHeader = false }: PortfolioProps) {
         <div className={styles.container}>
           <div className={styles.grid}>
             {filtered.map((p, i) => (
-              <Link
-                href={`/portfolio/${p.slug}`}
-                key={`${p.title}-${i}`}
-                ref={el => { itemRefs.current[i] = el; }}
-                className={`${styles.card} fade-up`}
-                style={{ transitionDelay: `${i * 0.08}s` }}
-              >
-                <div className={styles.thumb}>
-                  <div className={styles.thumbInner}>
-                    <Image
-                      src={p.img}
-                      alt={p.title}
-                      fill
-                      sizes="400px"
-                      className={styles.thumbImg}
-                    />
+              <Reveal key={`${p.title}-${i}`} delay={(i % 2) * 0.18}>
+                <Link
+                  href={`/portfolio/${p.slug}`}
+                  className={styles.card}
+                >
+                  <div className={styles.thumb}>
+                    <div className={styles.thumbInner}>
+                      <Image
+                        src={p.img}
+                        alt={p.title}
+                        fill
+                        sizes="400px"
+                        className={styles.thumbImg}
+                      />
+                    </div>
+                    <div className={styles.thumbOverlay}>
+                      <span className={styles.thumbCta} aria-hidden="true">+</span>
+                    </div>
                   </div>
-                  <div className={styles.thumbOverlay}>
-                    <span className={styles.thumbCta} aria-hidden="true">+</span>
-                  </div>
-                </div>
 
-                <div className={styles.cardBody}>
-                  <h3 className={styles.cardTitle}>{p.title}</h3>
-                </div>
-              </Link>
+                  <div className={styles.cardBody}>
+                    <h3 className={styles.cardTitle}>{p.title}</h3>
+                  </div>
+                </Link>
+              </Reveal>
             ))}
           </div>
         </div>

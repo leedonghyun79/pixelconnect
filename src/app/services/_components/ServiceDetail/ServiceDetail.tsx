@@ -1,7 +1,7 @@
 'use client';
-import { useEffect, useRef } from 'react';
 import Script from 'next/script';
 import styles from './ServiceDetail.module.css';
+import Reveal from '@/components/common/Reveal/Reveal';
 
 declare global {
   namespace JSX {
@@ -39,19 +39,6 @@ const services = [
 ];
 
 export default function ServiceDetail() {
-  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => entries.forEach(e => {
-        if (e.isIntersecting) e.target.classList.add('visible');
-      }),
-      { threshold: 0.1 }
-    );
-    itemRefs.current.forEach(el => { if (el) observer.observe(el); });
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <>
       <Script src="https://cdn.lordicon.com/lordicon.js" strategy="lazyOnload" />
@@ -59,27 +46,24 @@ export default function ServiceDetail() {
         <div className={styles.container}>
           <div className={styles.grid}>
             {services.map((s, i) => (
-              <div
-                key={i}
-                ref={el => { itemRefs.current[i] = el; }}
-                className={`${styles.card} fade-up`}
-                style={{ transitionDelay: `${i * 0.1}s` }}
-              >
-                <lord-icon
-                  src={`https://cdn.lordicon.com/${s.icon}.json`}
-                  trigger="loop"
-                  delay={`${1000 + i * 500}`}
-                  colors="primary:#0d0d3e,secondary:#ffc85c"
-                  className={styles.icon}
-                ></lord-icon>
-                <h2 className={styles.title}>{s.title}</h2>
-                <p className={styles.desc}>{s.desc}</p>
-                <div className={styles.features}>
-                  {s.features.map((f, fi) => (
-                    <span key={fi} className={styles.feature}>{f}</span>
-                  ))}
+              <Reveal key={i} delay={(i % 2) * 0.18} className={styles.cardReveal}>
+                <div className={styles.card}>
+                  <lord-icon
+                    src={`https://cdn.lordicon.com/${s.icon}.json`}
+                    trigger="loop"
+                    delay={`${1000 + i * 500}`}
+                    colors="primary:#0d0d3e,secondary:#ffc85c"
+                    className={styles.icon}
+                  ></lord-icon>
+                  <h2 className={styles.title}>{s.title}</h2>
+                  <p className={styles.desc}>{s.desc}</p>
+                  <div className={styles.features}>
+                    {s.features.map((f, fi) => (
+                      <span key={fi} className={styles.feature}>{f}</span>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>

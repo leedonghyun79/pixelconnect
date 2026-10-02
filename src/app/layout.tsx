@@ -22,7 +22,7 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: '홈페이지 제작 업체 | 기획부터 유지보수까지 픽셀커넥트',
-  description: '홈페이지 제작 업체 픽셀커넥트. 기획부터 개발, 오픈 후 유지보수까지 대표가 직접 책임집니다. 전국 비대면 진행, 랜딩페이지 100만원~, 기업 홈페이지 200만원~.',
+  description: '홈페이지 제작 업체 픽셀커넥트. 기획부터 개발, 오픈 후 유지보수까지 대표가 직접 책임집니다. 전국 비대면 진행, 랜딩페이지 70만원~, 기업 홈페이지 150만원~.',
   metadataBase: new URL('https://pixelconnect.co.kr'),
   alternates: {
     types: {
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
 }
 
 const siteDescription =
-  '홈페이지 제작 업체 픽셀커넥트. 기획부터 개발, 오픈 후 유지보수까지 대표가 직접 책임집니다. 전국 비대면 진행, 랜딩페이지 100만원~, 기업 홈페이지 200만원~.'
+  '홈페이지 제작 업체 픽셀커넥트. 기획부터 개발, 오픈 후 유지보수까지 대표가 직접 책임집니다. 전국 비대면 진행, 랜딩페이지 70만원~, 기업 홈페이지 150만원~.'
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -104,7 +104,7 @@ const jsonLd = {
       telephone: '+82-10-7920-8157',
       email: 'ceo@pixelconnect.co.kr',
       vatID: '516-73-00625',
-      priceRange: '₩1,000,000~',
+      priceRange: '₩700,000~',
       areaServed: { '@type': 'Country', name: '대한민국' },
       knowsAbout: ['홈페이지 제작', '반응형 웹사이트', '랜딩페이지 제작', '맞춤형 웹 개발', '홈페이지 유지보수'],
       sameAs: ['https://pf.kakao.com/_xoDxkuX/friend'],

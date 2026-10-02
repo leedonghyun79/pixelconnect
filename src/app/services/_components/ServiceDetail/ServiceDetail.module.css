@@ -4,7 +4,7 @@
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1360px;
   margin: 0 auto;
   padding: 0 48px;
 }
@@ -15,7 +15,12 @@
   gap: 20px;
 }
 
+.cardReveal {
+  display: flex;
+}
+
 .card {
+  flex: 1;
   background: #fff;
   border-radius: 24px;
   padding: 36px 28px;

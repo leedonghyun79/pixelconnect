@@ -22,7 +22,7 @@
 
 .container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1360px;
   margin: 0 auto;
   padding: 0 48px;
 }
@@ -79,7 +79,7 @@
   width: 100%;
   overflow: hidden;
   /* 컨테이너의 왼쪽 여백과 동일한 시작점을 갖도록 설정 */
-  /* max-width: 1200px 기준 좌우 여백 */
+  /* max-width: 1360px 기준 좌우 여백 */
 }
 
 .track {
@@ -87,7 +87,7 @@
   width: max-content;
   gap: 32px;
   padding: 0 48px;
-  padding-left: max(48px, calc((100vw - 1200px) / 2 + 48px));
+  padding-left: max(48px, calc((100vw - 1360px) / 2 + 48px));
   margin-bottom: 60px;
 }
 
