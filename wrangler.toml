@@ -11,3 +11,20 @@ CONNECTIVITY_API_URL = "https://admin.pixelconnect.co.kr"
 [assets]
 directory = ".open-next/assets"
 binding = "ASSETS"
+
+# ── 캐시 (open-next.config.ts) ──
+# 생성: npx wrangler r2 bucket create pixelconnect-cache
+[[r2_buckets]]
+binding = "NEXT_INC_CACHE_R2_BUCKET"
+bucket_name = "pixelconnect-cache"
+
+# 생성: npx wrangler d1 create pixelconnect-tag-cache  → 출력된 database_id를 아래에 넣기
+[[d1_databases]]
+binding = "NEXT_TAG_CACHE_D1"
+database_name = "pixelconnect-tag-cache"
+database_id = "f9b1b5ad-a21d-49fc-93c8-bdc1da29166e"
+
+# memory-queue가 시간 기반 재검증 때 자기 자신을 호출하는 데 필요
+[[services]]
+binding = "WORKER_SELF_REFERENCE"
+service = "pixelconnect"
