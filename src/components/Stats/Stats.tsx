@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import styles from './Stats.module.css';
+import WaveText from '@/components/common/WaveText/WaveText';
 
 const stats = [
   { target: 50, suffix: '+', label: '누적 프로젝트', desc: '다양한 업종 경험' },
@@ -48,7 +49,11 @@ function StatItem({ stat }: { stat: typeof stats[0] }) {
 
   return (
     <div ref={ref} className={styles.statItem}>
-      <span className={styles.num}>{count}{stat.suffix}</span>
+      <span className={styles.num}>
+        {/* 화면용 카운트업 값(0부터 올라감)은 보조기기·크롤러가 읽지 않게 숨기고, 최종 수치는 항상 텍스트로 남긴다 */}
+        <span aria-hidden="true">{count}{stat.suffix}</span>
+        <span className={styles.srOnly}>{stat.target}{stat.suffix}</span>
+      </span>
       <span className={styles.label}>{stat.label}</span>
       <span className={styles.desc}>{stat.desc}</span>
     </div>
@@ -79,7 +84,7 @@ export default function Stats() {
     <section className={styles.section} id="stats">
       <div className={styles.container}>
         <div ref={headerRef} className={`${styles.header} fade-up`}>
-          <h2 className="section-title" style={{ textAlign: 'center' }}>숫자로 증명합니다</h2>
+          <WaveText className="section-title" style={{ textAlign: 'center' }}>숫자로 증명합니다</WaveText>
         </div>
 
         <div className={styles.grid}>

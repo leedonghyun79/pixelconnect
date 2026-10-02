@@ -2,6 +2,7 @@
 import { useEffect, useRef } from 'react';
 import { plans } from '@/data/pricing';
 import styles from './Pricing.module.css';
+import WaveText from '@/components/common/WaveText/WaveText';
 
 export default function Pricing() {
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -26,7 +27,7 @@ export default function Pricing() {
       <div className={styles.container}>
         <div className={styles.header}>
           <div className={`section-eyebrow ${styles.eyebrowCenter}`}>PRICING</div>
-          <h2 className={`section-title ${styles.titleCenter}`}>어떤 서비스가 필요하신가요?</h2>
+          <WaveText className={`section-title ${styles.titleCenter}`}>어떤 서비스가 필요하신가요?</WaveText>
           <p className={`${styles.sub} ${styles.subCenter}`}>
             합리적인 비용으로 브랜드에 꼭 맞는 홈페이지를 만듭니다.
           </p>

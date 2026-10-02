@@ -161,7 +161,7 @@
 .feature {
   display: flex;
   gap: 10px;
-  font-size: 15px;
+  font-size: 16px;
   color: var(--text-secondary);
   line-height: 1.55;
   align-items: flex-start;
@@ -218,7 +218,7 @@
   justify-content: space-between;
   padding: 13px 20px;
   border-radius: var(--radius-md);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   text-decoration: none;
   transition: all 0.25s ease;

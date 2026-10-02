@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { faqs } from '@/data/faq';
 import styles from './FAQ.module.css';
+import WaveText from '@/components/common/WaveText/WaveText';
 
 export default function FAQ() {
   const [openItems, setOpenItems] = useState<number[]>([]);
@@ -35,7 +36,7 @@ export default function FAQ() {
       <div ref={containerRef} className={`${styles.container} fade-up`}>
         <div className={styles.header}>
           <div className={`section-eyebrow ${styles.eyebrowCenter}`}>FAQ</div>
-          <h2 className={`section-title ${styles.titleCenter}`}>자주 묻는 질문</h2>
+          <WaveText className={`section-title ${styles.titleCenter}`}>자주 묻는 질문</WaveText>
         </div>
 
         <div className={styles.list}>

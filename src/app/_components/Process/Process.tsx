@@ -3,6 +3,7 @@ import { useEffect, useRef, useState, type TouchEvent } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './Process.module.css';
+import WaveText from '@/components/common/WaveText/WaveText';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -47,6 +48,10 @@ export default function Process() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [manualIndex, setManualIndex] = useState<number | null>(null);
   const touchStartX = useRef(0);
+  // 모바일(≤980px): 스크롤 고정 대신 카드가 자동으로 넘어가고, 스와이프로도 넘길 수 있다
+  const [isMobile, setIsMobile] = useState(false);
+  const [mobileIndex, setMobileIndex] = useState(0);
+  const lastInteraction = useRef(0);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -78,37 +83,47 @@ export default function Process() {
       };
     });
 
-    // 모바일/좁은 화면: 스크롤마다 값을 재계산하는 방식은 버벅임을 유발하므로
-    // 점진적으로 "채워지는" 연출 없이, 각 스텝이 화면에 들어오면 그 즉시 활성화만 시킴
-    mm.add('(max-width: 980px)', () => {
-      const track = timelineRef.current;
-      if (!track) return;
-      const stepEls = Array.from(track.children) as HTMLElement[];
-      const visible = new Set<number>();
-
-      const observer = new IntersectionObserver(
-        entries => {
-          entries.forEach(entry => {
-            const idx = stepEls.indexOf(entry.target as HTMLElement);
-            if (idx === -1) return;
-            if (entry.isIntersecting) visible.add(idx);
-            else visible.delete(idx);
-          });
-          const maxIdx = visible.size ? Math.max(...visible) : 0;
-          setScrollProgress((maxIdx / (steps.length - 1)) * 0.82);
-        },
-        { rootMargin: '-45% 0px -45% 0px', threshold: 0 }
-      );
-      stepEls.forEach(el => observer.observe(el));
-      return () => observer.disconnect();
-    });
-
     return () => mm.revert();
   }, []);
 
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 980px)');
+    const sync = () => setIsMobile(mq.matches);
+    sync();
+    mq.addEventListener('change', sync);
+    return () => mq.removeEventListener('change', sync);
+  }, []);
+
+  // 모바일 자동 넘김: 섹션이 화면에 보이는 동안만, 사용자가 직접 넘긴 직후엔 잠시 멈춤
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!isMobile || !section) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    let inView = false;
+    const observer = new IntersectionObserver(
+      entries => { inView = entries[0].isIntersecting; },
+      { threshold: 0.4 }
+    );
+    observer.observe(section);
+
+    const timer = window.setInterval(() => {
+      if (!inView) return;
+      if (Date.now() - lastInteraction.current < 6000) return;
+      setMobileIndex(i => (i + 1) % steps.length);
+    }, 4500);
+
+    return () => {
+      observer.disconnect();
+      window.clearInterval(timer);
+    };
+  }, [isMobile]);
+
   // scrub 지연이 있어도 고정 해제 전에 05까지 확실히 채워지도록,
   // 고정 구간의 앞 82%에서 타임라인이 100% 차게 리매핑 (뒤 18%는 버퍼)
-  const fill = Math.min(1, scrollProgress / 0.82);
+  const fill = isMobile
+    ? mobileIndex / (steps.length - 1)
+    : Math.min(1, scrollProgress / 0.82);
 
   // 현재 활성화된 스텝 (타임라인 dot 점등 로직과 동일 기준)
   let scrollIndex = 0;
@@ -126,16 +141,16 @@ export default function Process() {
 
   const handleTouchStart = (e: TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
+    lastInteraction.current = Date.now();
   };
 
   const handleTouchEnd = (e: TouchEvent) => {
     const deltaX = e.changedTouches[0].clientX - touchStartX.current;
     if (Math.abs(deltaX) < 40) return;
-    if (deltaX < 0) {
-      setManualIndex(Math.min(activeIndex + 1, steps.length - 1));
-    } else {
-      setManualIndex(Math.max(activeIndex - 1, 0));
-    }
+    lastInteraction.current = Date.now();
+    const next = deltaX < 0 ? Math.min(activeIndex + 1, steps.length - 1) : Math.max(activeIndex - 1, 0);
+    if (isMobile) setMobileIndex(next);
+    else setManualIndex(next);
   };
 
   return (
@@ -143,7 +158,7 @@ export default function Process() {
       <div className={styles.container}>
         <div className={styles.header}>
           <div className="section-eyebrow">PROCESS</div>
-          <h2 className="section-title">어떻게 진행되나요?</h2>
+          <WaveText className="section-title">어떻게 진행되나요?</WaveText>
           <p className={styles.sub}>
             처음부터 끝까지 명확한 과정으로 진행합니다.
           </p>

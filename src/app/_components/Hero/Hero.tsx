@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './Hero.module.css';
+import { splitIntoChars, waveOffset, WAVE_DESKTOP_QUERY } from '@/components/common/WaveText/WaveText';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,6 +13,7 @@ const GridWaveCanvas = dynamic(() => import('../GridWaveCanvas/GridWaveCanvas'),
 export default function Hero() {
   const itemRefs = useRef<(HTMLElement | null)[]>([]);
   const sectionRef = useRef<HTMLElement>(null);
+  const headlineRef = useRef<HTMLHeadingElement | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -53,6 +55,49 @@ export default function Hero() {
     };
   }, []);
 
+  // 히어로 헤드라인: 로드 시 글자가 물결치며 등장 + 스크롤 내리면 물결 모양으로 흩어졌다가 올리면 원상태 (데스크톱 전용)
+  useEffect(() => {
+    const headline = headlineRef.current;
+    if (!headline) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const mm = gsap.matchMedia();
+    mm.add(WAVE_DESKTOP_QUERY, () => {
+      const { chars, restore } = splitIntoChars(headline);
+
+      const intro = gsap.from(chars, {
+        y: (i: number) => waveOffset(i, 18, 22),
+        opacity: 0,
+        duration: 0.9,
+        ease: 'power3.out',
+        stagger: 0.03,
+        delay: 0.15,
+      });
+
+      // 스크롤 아웃: 등장 애니메이션과 겹치지 않게 yPercent 로만 움직인다
+      const scrollOut = gsap.to(chars, {
+        yPercent: (i: number) => 45 + Math.sin(i * 0.9) * 30,
+        ease: 'sine.inOut',
+        stagger: { each: 0.03 },
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top top',
+          end: '+=900',
+          scrub: 1.4,
+        },
+      });
+
+      return () => {
+        intro.kill();
+        scrollOut.scrollTrigger?.kill();
+        scrollOut.kill();
+        restore();
+      };
+    });
+
+    return () => mm.revert();
+  }, []);
+
   return (
     <section ref={sectionRef} className={styles.section} id="hero">
 
@@ -67,7 +112,7 @@ export default function Hero() {
 
           <div className={styles.textSide}>
             <h1
-              ref={el => { itemRefs.current[1] = el; }}
+              ref={el => { itemRefs.current[1] = el; headlineRef.current = el; }}
               className={styles.headline}
             >
               <span className={`${styles.line} ${styles.kicker}`}>홈페이지 제작 업체 픽셀커넥트</span>

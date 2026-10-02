@@ -1,6 +1,6 @@
 .maintenanceBlock {
-  padding-top: 250px;
-  padding-bottom: 80px;
+  padding-top: 140px;
+  padding-bottom: 100px;
   position: relative;
   z-index: 1;
 }
@@ -59,14 +59,14 @@
   font-weight: 700;
   line-height: 1.25;
   letter-spacing: -0.04em;
-  color: #fff;
+  color: var(--navy);
   margin-bottom: 24px;
 }
 
 .sub {
   font-family: 'Pretendard', sans-serif;
   font-size: 1.15rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(13, 13, 62, 0.65);
   line-height: 1.7;
   margin-bottom: 48px;
   word-break: keep-all;
@@ -95,22 +95,32 @@
   box-shadow: 0 0 15px rgba(255, 200, 92, 0.45);
 }
 
-/* Right — 2×2 카드 그리드 */
+/* Right — 하나의 패널 안에서 구분선으로 나뉜 리스트 */
 .right {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border: 1px solid rgba(13, 13, 62, 0.07);
+  border-radius: 20px;
+  padding: 8px 36px;
 }
 
-/* 카드 — 딥네이비 톤, 은은한 보더, 호버 시 한 단계 밝게 */
+.accentText {
+  background: linear-gradient(transparent 62%, rgba(255, 200, 92, 0.65) 62%);
+}
+
 .item {
-  padding: 26px 24px;
-  background: #171753;
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 12px;
-  transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 28px 0;
+  border-bottom: 1px solid rgba(13, 13, 62, 0.08);
   opacity: 0; /* 초기 숨김 */
   transform: translateY(24px);
+}
+
+.item:last-child {
+  border-bottom: none;
 }
 
 .item.visible {
@@ -125,12 +135,6 @@
   }
 }
 
-.item:hover {
-  border-color: rgba(255, 255, 255, 0.16);
-  background: #1E1E63;
-  transform: translateY(-4px);
-}
-
 /* 체크 아이콘 — 라운드 사각 + 액센트 소프트 배경 + 오렌지 체크 */
 .checkIcon {
   width: 34px;
@@ -140,8 +144,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--accent);
-  margin-bottom: 18px;
+  color: #D99A1F;
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
 .checkIcon svg {
@@ -150,16 +155,16 @@
 }
 
 .itemTitle {
-  font-size: 16px;
-  font-weight: 600;
-  color: #F6F7FF;
-  margin-bottom: 9px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 8px;
   letter-spacing: -0.01em;
 }
 
 .itemDesc {
-  font-size: 14px;
-  color: #B9BCE0;
+  font-size: 15px;
+  color: rgba(13, 13, 62, 0.65);
   line-height: 1.65;
 }
 
@@ -189,7 +194,6 @@
 }
 
 @media (max-width: 560px) {
-  .right {
-    grid-template-columns: 1fr;
-  }
+  .right { padding: 4px 22px; }
+  .item { padding: 22px 0; gap: 16px; }
 }

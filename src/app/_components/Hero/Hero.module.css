@@ -276,7 +276,7 @@
   }
 
   .container {
-    padding: calc(var(--nav-height, 64px) + 20px) 24px 60px;
+    padding: 135px 24px 60px;
   }
 
   .headline {

@@ -1,11 +1,8 @@
 .section {
-  background-color: var(--navy);
-  color: #fff;
-  padding: 150px 0 100px;
+  background-color: var(--navy-pale);
+  color: var(--navy);
+  padding: 150px 0 160px;
   position: relative;
-  border-radius: 48px 48px 0 0;
-  margin-top: -48px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
   overflow: hidden;
   z-index: 2;
 }
@@ -25,7 +22,7 @@
 
 .sub {
   font-size: 18px;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(13, 13, 62, 0.65);
   line-height: 1.7;
   margin-top: 8px;
   word-break: keep-all;
@@ -42,83 +39,77 @@
   display: flex;
 }
 
-/* 다크 배경 위 카드 — 배경보다 한 단계 밝은 면 + 살짝 뜬 느낌 */
+/* 라이트 배경 위 흰 카드 */
 .card {
   flex: 1;
-  background: var(--surface-dark);
-  border: 1px solid var(--surface-dark-border);
+  background: var(--white);
+  border: 1px solid rgba(13, 13, 62, 0.07);
   border-radius: var(--radius-lg);
-  padding: 36px 28px;
+  padding: 40px 32px;
   position: relative;
-  box-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 10px 40px rgba(13, 13, 62, 0.04);
   /* 호버만 담당 — 지연 없이 즉시 반응 */
-  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   will-change: transform;
 }
 
-/* 호버 = 살짝 뜨고 표면이 한 단계 밝아짐 (오렌지 보더 X) */
+/* 호버 = 살짝 뜨고 그림자가 깊어짐 */
 .card:hover {
   transform: translateY(-4px);
-  background: #1E1E63;
-  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(13, 13, 62, 0.14);
 }
 
-/* Highlighted card (Maintenance) — 유일한 액센트 포인트 */
-.cardHighlight {
-  background: var(--accent);
-  border-color: var(--accent);
+.iconWrap {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(13, 13, 62, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28px;
 }
 
-.cardHighlight:hover {
-  border-color: var(--accent);
-  box-shadow: 0 32px 60px -20px rgba(255, 200, 92, 0.5);
-}
-
-.cardHighlight .num {
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.cardHighlight .cardTitle {
-  color: #fff;
-}
-
-.cardHighlight .cardDesc {
-  color: rgba(255, 255, 255, 0.85);
-}
-
-.num {
-  font-family: var(--font-display);
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: var(--accent);
-  letter-spacing: 0.08em;
-  display: block;
-  margin-bottom: 24px;
+.pain {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(13, 13, 62, 0.72);
+  line-height: 1.4;
+  word-break: keep-all;
 }
 
 .cardTitle {
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 700;
-  color: #fff;
-  margin-bottom: 12px;
+  color: var(--navy);
+  margin-bottom: 14px;
   line-height: 1.4;
 }
 
 .cardDesc {
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.62);
+  font-size: 16px;
+  color: rgba(13, 13, 62, 0.65);
   line-height: 1.75;
+  word-break: keep-all;
 }
 
-.star {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  font-size: 1.2rem;
+/* 관리 섹션 — 위 섹션과 톤을 달리해 분리 */
+.maintSection {
+  background-color: var(--white-off);
+  color: var(--navy);
+  position: relative;
+  overflow: hidden;
+  z-index: 3;
 }
 
 @media (max-width: 900px) {
-  .section { padding: 100px 0 100px; }
+  .section { padding: 100px 0 120px; }
   .container { padding: 0 24px; }
   .sub { font-size: 17px; }
   .cards { grid-template-columns: 1fr; }

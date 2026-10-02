@@ -2,26 +2,35 @@
 import { useEffect, useRef } from 'react';
 import styles from './WhyUs.module.css';
 import mStyles from '../Maintenance/Maintenance.module.css';
-import SectionGridBg from '../SectionGridBg/SectionGridBg';
+import Script from 'next/script';
+import WaveText from '@/components/common/WaveText/WaveText';
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'lord-icon': any;
+    }
+  }
+}
 
 const diffs = [
   {
-    num: '01 · Design',
-    title: '브랜드 맞춤형 디자인',
-    desc: '기획부터 카피라이팅, 디자인까지 브랜드의 가치를 담은 홈페이지를 만듭니다. 양산형 템플릿은 없습니다.',
-    highlight: false,
+    pain: '납품 후 연락이 끊겼어요',
+    icon: 'zpxybbhl',
+    title: '밀착 소통, 빠른 피드백',
+    desc: '진행 중에도, 오픈 후에도 궁금한 점은 언제든 물어보세요. 1시간 이내 피드백을 원칙으로 합니다.',
   },
   {
-    num: '02 · Price',
+    pain: '수정할 때마다 추가 비용이 나와요',
+    icon: 'qhviklyi',
     title: '합리적이고 투명한 견적',
     desc: '처음 안내한 견적이 곧 최종 금액입니다. 진행 중 추가 비용은 발생하지 않습니다.',
-    highlight: false,
   },
   {
-    num: '03 · Care',
-    title: '밀착 소통, 빠른 피드백',
-    desc: '진행 중 궁금한 점은 언제든 물어보세요. 1시간 이내 피드백을 원칙으로, 답답함 없는 진행을 보장합니다.',
-    highlight: false,
+    pain: '결과물이 기대와 너무 달랐어요',
+    icon: 'fikcyfpp',
+    title: '브랜드 맞춤형 디자인',
+    desc: '기획부터 카피라이팅, 디자인까지 브랜드의 가치를 담습니다. 양산형 템플릿은 없습니다.',
   },
 ];
 
@@ -34,7 +43,7 @@ const maintenanceItems = [
 
 export default function WhyUs() {
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const sectionRef = useRef<HTMLElement>(null);
+  const maintRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -51,12 +60,12 @@ export default function WhyUs() {
           }
         }
       }),
-      { threshold: 0.1 }
+      { threshold: 0.1, rootMargin: '0px 0px -15% 0px' }
     );
     itemRefs.current.forEach(el => { if (el) observer.observe(el); });
 
-    if (sectionRef.current) {
-       const mItems = sectionRef.current.querySelectorAll(`.${mStyles.item}`);
+    if (maintRef.current) {
+       const mItems = maintRef.current.querySelectorAll(`.${mStyles.item}`);
        mItems.forEach(item => observer.observe(item));
     }
 
@@ -64,15 +73,14 @@ export default function WhyUs() {
   }, []);
 
   return (
-    <section ref={sectionRef} className={styles.section} id="services">
-      {/* 원근 와이어 그리드 배경 (코드 생성) */}
-      <SectionGridBg />
-
+    <>
+      <Script src="https://cdn.lordicon.com/lordicon.js" strategy="lazyOnload" />
+      <section className={styles.section} id="services">
       <div className={styles.container}>
         <div className={styles.header}>
-          <h2 className="section-title" style={{ color: '#fff' }}>픽셀커넥트가 다른 이유</h2>
+          <WaveText className="section-title">픽셀커넥트가 다른 이유</WaveText>
           <p className={styles.sub}>
-            세심한 접근과 책임감으로 기대 이상의 결과를 만듭니다.
+            앞서 말씀하신 고민, 픽셀커넥트는 이렇게 해결합니다.
           </p>
         </div>
 
@@ -82,10 +90,20 @@ export default function WhyUs() {
               key={i}
               ref={el => { itemRefs.current[i] = el; }}
               className={`${styles.cardReveal} fade-up`}
-              style={{ transitionDelay: `${i * 0.12}s` }}
+              style={{ transitionDelay: `${0.2 + i * 0.2}s` }}
             >
-              <div className={`${styles.card} ${d.highlight ? styles.cardHighlight : ''}`}>
-                <span className={styles.num}>{d.num}</span>
+              <div className={styles.card}>
+                <div className={styles.iconWrap}>
+                  <lord-icon
+                    aria-hidden="true"
+                    src={`https://cdn.lordicon.com/${d.icon}.json`}
+                    trigger="loop"
+                    delay={1500 + i * 500}
+                    colors="primary:#0d0d3e,secondary:#ffc85c"
+                    style={{ width: '40px', height: '40px' }}
+                  ></lord-icon>
+                </div>
+                <p className={styles.pain}>“{d.pain}”</p>
                 <h3 className={styles.cardTitle}>{d.title}</h3>
                 <p className={styles.cardDesc}>{d.desc}</p>
               </div>
@@ -93,17 +111,17 @@ export default function WhyUs() {
           ))}
         </div>
       </div>
+      </section>
 
-      {/* Maintenance Block appended directly */}
+      {/* Maintenance — 별도 섹션 */}
+      <section ref={maintRef} className={styles.maintSection} id="maintenance">
       <div className={mStyles.maintenanceBlock}>
         <div className={mStyles.container}>
           <div className={mStyles.grid}>
             {/* Left: Text */}
             <div className={mStyles.left}>
-              <div className={`section-eyebrow section-eyebrow-white`}>MAINTENANCE</div>
-              <h2 className={mStyles.title}>
-                제작은 시작,<br />관리가 본질입니다
-              </h2>
+              <div className={`section-eyebrow`}>MAINTENANCE</div>
+              <WaveText as="h2" className={mStyles.title} highlight="관리" highlightClassName={mStyles.accentText}>{'제작은 시작,\n관리가 본질입니다'}</WaveText>
               <p className={mStyles.sub}>
                 대부분의 업체는 납품과 함께 관계가 끝납니다.<br />
                 저희는 그때부터 진짜 파트너십이 시작된다고 생각합니다.
@@ -116,7 +134,7 @@ export default function WhyUs() {
                 <div
                   key={i}
                   className={mStyles.item}
-                  style={{ animationDelay: `${i * 0.15}s` }}
+                  style={{ animationDelay: `${0.2 + i * 0.2}s` }}
                 >
                   <div className={mStyles.checkIcon}>
                     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -133,6 +151,7 @@ export default function WhyUs() {
           </div>
         </div>
       </div>
-    </section>
+      </section>
+    </>
   );
 }

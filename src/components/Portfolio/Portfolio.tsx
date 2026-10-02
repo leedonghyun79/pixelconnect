@@ -6,6 +6,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './Portfolio.module.css';
 import { portfolioProjects as projects } from '@/data/portfolio';
+import WaveText from '@/components/common/WaveText/WaveText';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -92,7 +93,7 @@ export default function Portfolio({ hideHeader = false }: PortfolioProps) {
         {!hideHeader && (
           <div className={styles.header}>
             <div className="section-eyebrow">OUR WORK</div>
-            <h2 className="section-title">함께 만든 브랜드들</h2>
+            <WaveText className="section-title">함께 만든 브랜드들</WaveText>
             <p className={styles.sub}>
               다양한 업종의 브랜드와 함께 만든 홈페이지입니다.
             </p>

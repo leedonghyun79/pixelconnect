@@ -1,74 +1,22 @@
 'use client';
 import { useEffect, useRef } from 'react';
-import Script from 'next/script';
 import styles from './PainPoint.module.css';
-
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      'lord-icon': any;
-    }
-  }
-}
+import WaveText from '@/components/common/WaveText/WaveText';
 
 const pains = [
   {
-    num: '01',
-    icon: (
-      <lord-icon
-        key="icon-01"
-        src="https://cdn.lordicon.com/zpxybbhl.json"
-        trigger="loop"
-        delay="1000"
-        colors="primary:#0d0d3e,secondary:#ffc85c"
-        style={{ width: '40px', height: '40px' }}
-      ></lord-icon>
-    ),
     title: '납품 후 연락이 끊겼어요',
     desc: '완성됐다고 했는데 수정 요청하니 답장이 없어요.',
   },
   {
-    num: '02',
-    icon: (
-      <lord-icon
-        key="icon-02"
-        src="https://cdn.lordicon.com/qhviklyi.json"
-        trigger="loop"
-        delay="1500"
-        colors="primary:#0d0d3e,secondary:#ffc85c"
-        style={{ width: '40px', height: '40px' }}
-      ></lord-icon>
-    ),
     title: '수정할 때마다 추가 비용이',
     desc: '처음엔 괜찮다더니 조금만 바꿔도 견적이 나와요.',
   },
   {
-    num: '03',
-    icon: (
-      <lord-icon
-        key="icon-03"
-        src="https://cdn.lordicon.com/msoeawqm.json"
-        trigger="loop"
-        delay="2000"
-        colors="primary:#0d0d3e,secondary:#ffc85c"
-        style={{ width: '40px', height: '40px' }}
-      ></lord-icon>
-    ),
     title: '자료 준비부터 막막해요',
     desc: '어디서부터 시작해야 할지 모르겠어요.',
   },
   {
-    num: '04',
-    icon: (
-      <lord-icon
-        key="icon-04"
-        src="https://cdn.lordicon.com/usownftb.json"
-        trigger="loop"
-        delay="2500"
-        colors="primary:#0d0d3e,secondary:#ffc85c"
-        style={{ width: '40px', height: '40px' }}
-      ></lord-icon>
-    ),
     title: '결과물이 기대와 너무 달랐어요',
     desc: '예쁘다고 했는데 오픈하고 보니 아니었어요.',
   },
@@ -87,7 +35,8 @@ export default function PainPoint() {
           e.target.classList.remove('visible');
         }
       }),
-      { threshold: 0.1 }
+      // 화면 하단 15%는 제외하고 감지 → 카드가 충분히 올라온 뒤에 순서대로 등장
+      { threshold: 0.1, rootMargin: '0px 0px -15% 0px' }
     );
     itemRefs.current.forEach(el => { if (el) observer.observe(el); });
     if (bridgeRef.current) observer.observe(bridgeRef.current);
@@ -96,11 +45,10 @@ export default function PainPoint() {
 
   return (
     <>
-      <Script src="https://cdn.lordicon.com/lordicon.js" strategy="lazyOnload" />
       <section className={styles.section} id="pain">
       <div className={styles.container}>
         <div className={styles.header}>
-          <h2 className="section-title">혹시, 이런 경험 있으신가요?</h2>
+          <WaveText className="section-title">혹시, 이런 경험 있으신가요?</WaveText>
           <p className={styles.sub}>
             웹사이트 외주, 한 번쯤은 데어보셨을 겁니다.
           </p>
@@ -111,17 +59,15 @@ export default function PainPoint() {
             <div
               key={i}
               ref={el => { itemRefs.current[i] = el; }}
-              className={`${styles.card} fade-up`}
-              style={{ transitionDelay: `${i * 0.1}s` }}
+              className={`${styles.cardReveal} fade-up`}
+              // 제목 물결 효과 뒤에 이어지도록 기본 딜레이 + 행 → 열 순으로 순차 등장
+              style={{ transitionDelay: `${0.2 + Math.floor(i / 2) * 0.2 + (i % 2) * 0.18}s` }}
             >
-              <div className={styles.cardHeader}>
-                <div className={styles.cardNum}>{p.num}</div>
-                <div className={styles.cardIconWrap}>
-                  <div className={styles.cardIcon}>{p.icon}</div>
-                </div>
+              <div className={styles.card}>
+                <span className={styles.quoteMark} aria-hidden="true">“</span>
+                <h3 className={styles.cardTitle}>{p.title}</h3>
+                <p className={styles.cardDesc}>{p.desc}</p>
               </div>
-              <h3 className={styles.cardTitle}>{p.title}</h3>
-              <p className={styles.cardDesc}>{p.desc}</p>
             </div>
           ))}
         </div>
