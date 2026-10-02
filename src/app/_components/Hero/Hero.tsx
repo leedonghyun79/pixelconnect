@@ -9,42 +9,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 const GridWaveCanvas = dynamic(() => import('../GridWaveCanvas/GridWaveCanvas'), { ssr: false });
 
-const strengths = [
-  { highlight: 'All-in-One', label: '기획부터 개발까지 한 번에' },
-  { highlight: '1:1 전담', label: '대표가 직접 디렉팅' },
-  { highlight: '맞춤형', label: '플랫폼 무관 최적 제안' },
-];
-
-function StatItem({ stat, index }: { stat: typeof strengths[0], index: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      entries => {
-        if (entries[0].isIntersecting) {
-          entries[0].target.classList.add('visible');
-        }
-      },
-      { threshold: 0.1 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <div
-      ref={ref}
-      className={`${styles.statItem} fade-up`}
-      style={{ transitionDelay: `${0.9 + index * 0.13}s` }}
-    >
-      <span className={styles.statNum}>{stat.highlight}</span>
-      <span className={styles.statLabel}>{stat.label}</span>
-    </div>
-  );
-}
-
 export default function Hero() {
   const itemRefs = useRef<(HTMLElement | null)[]>([]);
   const sectionRef = useRef<HTMLElement>(null);
@@ -119,9 +83,7 @@ export default function Hero() {
               style={{ transitionDelay: '0.42s' }}
             >
               예쁜 홈페이지는 많습니다.<br />
-              끝까지 책임지는 곳은 드뭅니다.<br />
-              제작으로 끝내지 않고, 오픈 후에도 끝까지 함께합니다.<br />
-              기획부터 개발, 관리까지 대표가 직접 책임집니다.
+              끝까지 책임지는 곳은 드뭅니다.
             </p>
 
             <div
@@ -135,12 +97,6 @@ export default function Hero() {
               <a href="/portfolio" className={styles.btnSecondary}>
                 작업물 둘러보기
               </a>
-            </div>
-
-            <div className={styles.heroStats}>
-              {strengths.map((s, i) => (
-                <StatItem key={i} stat={s} index={i} />
-              ))}
             </div>
           </div>
 

@@ -29,6 +29,10 @@
   z-index: 0;
   pointer-events: none;
   /* 클릭 방해 방지 */
+  opacity: 0.55;
+  /* 배경 모션을 살짝 연하게 + 하단으로 갈수록 페이드 */
+  -webkit-mask-image: linear-gradient(to bottom, #000 40%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 40%, transparent 100%);
 }
 
 .waveCanvas {
@@ -252,35 +256,6 @@
   }
 }
 
-/* ── Hero Stats ─────────────────────────────────────────────── */
-.heroStats {
-  display: flex;
-  gap: 32px;
-  margin-top: 32px;
-  padding-top: 24px;
-  flex-wrap: wrap;
-}
-
-.statItem {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.statNum {
-  font-family: 'Pretendard', sans-serif;
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--navy);
-  letter-spacing: -0.02em;
-}
-
-.statLabel {
-  font-size: 0.8rem;
-  color: rgba(13, 13, 62, 0.6);
-  font-weight: 500;
-}
-
 /* ── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 1024px) {
   .container {
@@ -327,23 +302,6 @@
     flex: 1 1 0;
     padding: 13px 12px;
     font-size: 0.85rem;
-    white-space: nowrap;
-  }
-
-  .heroStats {
-    flex-wrap: nowrap;
-    gap: 14px;
-    margin-top: 24px;
-    padding-top: 18px;
-  }
-
-  .statNum {
-    font-size: 1rem;
-    white-space: nowrap;
-  }
-
-  .statLabel {
-    font-size: 0.68rem;
     white-space: nowrap;
   }
 
