@@ -24,7 +24,13 @@ export default function Navbar() {
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
+    // iOS 사파리는 body overflow 만으로 배경 스크롤이 안 막혀서 Lenis 도 같이 멈춘다
+    if (menuOpen) window.__lenis?.stop();
+    else window.__lenis?.start();
+    return () => {
+      document.body.style.overflow = '';
+      window.__lenis?.start();
+    };
   }, [menuOpen]);
 
   // Close menu on route change
@@ -43,6 +49,7 @@ export default function Navbar() {
   };
 
   return (
+    <>
     <nav className={`${styles.nav} ${scrolled ? styles.navScrolled : ''}`}>
       <div className={styles.inner}>
         <Link href="/" className={styles.logo} onClick={handleLogoClick} aria-label="픽셀커넥트 홈">
@@ -83,8 +90,10 @@ export default function Navbar() {
           <span /><span /><span />
         </button>
       </div>
+    </nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu — nav 의 backdrop-filter 가 position:fixed 의 기준(containing block)을 nav 로 바꿔
+          사파리(iOS)에서 높이가 0으로 접히므로 nav 밖 형제 요소로 둔다 */}
       <div className={`${styles.mobileMenu} ${menuOpen ? styles.mobileMenuOpen : ''}`}>
         {navLinks.filter(l => !l.disabled).map(link => (
           <Link key={link.href} href={link.href} onClick={() => setMenuOpen(false)}>
@@ -95,6 +104,6 @@ export default function Navbar() {
           문의하기
         </Link>
       </div>
-    </nav>
+    </>
   );
 }

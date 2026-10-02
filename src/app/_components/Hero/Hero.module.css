@@ -279,6 +279,13 @@
     padding: 135px 24px 60px;
   }
 
+  /* 모바일은 배경 모션을 원래 농도로 (데스크톱만 연하게 처리) */
+  .canvasWrap {
+    opacity: 1;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
   .headline {
     font-size: 24px;
   }
