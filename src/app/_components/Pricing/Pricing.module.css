@@ -46,7 +46,13 @@
 }
 
 /* ── Card ─────────────────────────────────────────────────── */
+/* 등장(fade-up) 전용 래퍼 — 호버 트랜지션과 분리 (다른 섹션 카드와 동일 구조) */
+.cardReveal {
+  display: flex;
+}
+
 .card {
+  flex: 1;
   background: var(--white);
   border: 1px solid var(--border-default);
   border-radius: var(--radius-lg);
@@ -155,8 +161,8 @@
 .feature {
   display: flex;
   gap: 10px;
-  font-size: 16px;
-  color: #3D3D5C;
+  font-size: 15px;
+  color: #26264A;
   line-height: 1.55;
   align-items: flex-start;
 }
@@ -176,15 +182,16 @@
 
 .featureHighlight {
   font-weight: 400;
-  color: #3D3D5C;
+  color: #26264A;
 }
 
 /* ── Specs (페이지 구성 · 제작 기간) ──────────────────────── */
+/* 핵심 스펙 — 값은 크고 진하게 (제공 범위 리스트와 위계 분리) */
 .specs {
   display: flex;
   flex-direction: column;
   gap: 18px;
-  margin: 0 0 32px;
+  margin: 0 0 18px;
 }
 
 .specRow {
@@ -195,16 +202,25 @@
 }
 
 .specLabel {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
   color: var(--text-muted);
 }
 
 .specVal {
   margin: 0;
-  color: #3D3D5C;
-  font-size: 16px;
-  font-weight: 500;
+  color: var(--navy);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* 제작 기간 값은 제공 범위 목록과 같은 크기·굵기·색 */
+.specValDuration {
+  font-size: 15px;
+  font-weight: 400;
+  color: #26264A;
+  letter-spacing: 0;
 }
 
 .scopeLabel {

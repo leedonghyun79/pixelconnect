@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styles from './PageTitleBanner.module.css';
+import WaveHeading from '@/components/common/WaveText/WaveHeading';
 
 interface PageTitleBannerProps {
   eyebrow: string;
@@ -21,7 +22,7 @@ export default function PageTitleBanner({ eyebrow, title, sub, breadcrumb, varia
           <span>{breadcrumb}</span>
         </div>
         <div className={styles.eyebrow}>{eyebrow}</div>
-        <h1 className={styles.title}>{title}</h1>
+        <WaveHeading className={styles.title}>{title}</WaveHeading>
         <p className={styles.sub}>{sub}</p>
       </div>
     </section>
