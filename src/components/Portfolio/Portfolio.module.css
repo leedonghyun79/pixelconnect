@@ -34,7 +34,7 @@
 .sub {
   font-size: 18px;
   color: var(--navy-muted);
-  line-height: 1.7;
+  line-height: 1.5;
   margin-top: 8px;
   word-break: keep-all;
 }

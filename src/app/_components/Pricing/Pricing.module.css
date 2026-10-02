@@ -32,7 +32,7 @@
 .sub {
   font-size: 18px;
   color: var(--navy-muted);
-  line-height: 1.7;
+  line-height: 1.5;
   margin-top: 8px;
   max-width: 480px;
 }
@@ -91,7 +91,7 @@
   font-size: 14px;
   font-weight: 400;
   color: var(--text-muted);
-  line-height: 1.6;
+  line-height: 1.5;
   margin-bottom: 24px;
   display: block;
   word-break: keep-all;
@@ -141,7 +141,7 @@
   gap: 10px;
   font-size: 15px;
   color: #26264A;
-  line-height: 1.55;
+  line-height: 1.5;
   align-items: flex-start;
 }
 
@@ -260,7 +260,7 @@
   font-size: 14px;
   color: var(--text-muted);
   margin-top: 32px;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 /* ── Responsive ───────────────────────────────────────────── */

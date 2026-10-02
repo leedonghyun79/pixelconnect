@@ -45,7 +45,7 @@
 .desc {
   font-size: 14px;
   color: var(--text-secondary);
-  line-height: 1.75;
+  line-height: 1.5;
   margin-bottom: 20px;
   word-break: keep-all;
 }

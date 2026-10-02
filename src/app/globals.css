@@ -91,7 +91,7 @@ html {
 body {
   font-family: var(--font-body);
   font-size: 15px;
-  line-height: 1.7;
+  line-height: 1.5;
   color: var(--text-primary);
   background-color: var(--white);
   -webkit-font-smoothing: antialiased;
@@ -196,7 +196,7 @@ h1, h2, h3, h4, h5, h6 {
 .section-sub {
   font-size: 15px;
   color: var(--text-secondary);
-  line-height: 1.7;
+  line-height: 1.5;
   max-width: 480px;
 }
 

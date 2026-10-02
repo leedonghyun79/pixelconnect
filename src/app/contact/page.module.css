@@ -60,7 +60,7 @@
 .stepDesc {
   font-size: 13px;
   color: var(--navy-muted);
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 .contactMethods {
@@ -191,7 +191,7 @@
   padding-left: 1.1em;
   list-style: disc;
   font-size: 12px;
-  line-height: 1.7;
+  line-height: 1.5;
   color: var(--text-secondary);
   word-break: keep-all;
 }

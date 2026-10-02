@@ -129,7 +129,7 @@
 /* Overview */
 .overview {
   font-size: 17px;
-  line-height: 1.8;
+  line-height: 1.5;
   color: var(--text-secondary);
   word-break: keep-all;
   margin-bottom: 56px;

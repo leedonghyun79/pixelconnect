@@ -33,7 +33,7 @@
 .sub {
   font-size: 18px;
   color: var(--navy-muted);
-  line-height: 1.7;
+  line-height: 1.5;
   margin-top: 8px;
   word-break: keep-all;
 }
@@ -103,7 +103,7 @@
 
 .asideStepDetail {
   font-size: 16px;
-  line-height: 1.8;
+  line-height: 1.5;
   color: var(--navy-muted);
   min-height: 122px;
   word-break: keep-all;
@@ -154,7 +154,7 @@
 
 .asideCtaText {
   font-size: 13.5px;
-  line-height: 1.6;
+  line-height: 1.5;
   color: rgba(255, 255, 255, 0.7);
   margin-bottom: 14px;
   word-break: keep-all;
@@ -309,7 +309,7 @@
 .stepDesc {
   font-size: 19px;
   color: var(--navy-muted);
-  line-height: 1.7;
+  line-height: 1.5;
   word-break: keep-all;
 }
 
