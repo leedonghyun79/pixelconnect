@@ -98,6 +98,11 @@
   margin-bottom: 0;
 }
 
+/* 어드민에서 엔터로 만든 빈 줄(<p></p>)은 높이 0 + 마진 병합으로 사라지므로 한 줄 높이를 강제 */
+.content p:empty::before {
+  content: '\00a0';
+}
+
 .content ul,
 .content ol {
   margin: 0 0 24px;
