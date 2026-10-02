@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { notFound, permanentRedirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import { fetchColumn } from '@/lib/api/columns';
 import { formatDate } from '@/utils/formatDate';
 import ColumnThumbnail from './_components/ColumnThumbnail/ColumnThumbnail';
@@ -64,11 +64,6 @@ export default async function ColumnDetailPage({
   const slug = decodeSlug((await params).slug);
   const col = await fetchColumn(slug);
   if (!col) notFound();
-
-  // 구 cuid URL(/column/cmtq...)로 들어온 요청은 새 slug URL로 301 리다이렉트
-  if (col.slug && col.slug !== slug) {
-    permanentRedirect(`/column/${encodeURIComponent(col.slug)}`);
-  }
 
   const url = `https://pixelconnect.co.kr/column/${col.slug}`;
   const jsonLd = {
