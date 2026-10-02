@@ -57,7 +57,7 @@
 .title {
   font-size: clamp(2.5rem, 4vw, 3.5rem);
   font-weight: 700;
-  line-height: 1.25;
+  line-height: 1.5;
   letter-spacing: -0.04em;
   color: var(--navy);
   margin-bottom: 24px;

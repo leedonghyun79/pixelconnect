@@ -93,16 +93,14 @@ export default function WhyUs() {
               style={{ transitionDelay: `${0.2 + i * 0.2}s` }}
             >
               <div className={styles.card}>
-                <div className={styles.iconWrap}>
-                  <lord-icon
-                    aria-hidden="true"
-                    src={`https://cdn.lordicon.com/${d.icon}.json`}
-                    trigger="loop"
-                    delay={1500 + i * 500}
-                    colors="primary:#0d0d3e,secondary:#ffc85c"
-                    style={{ width: '40px', height: '40px' }}
-                  ></lord-icon>
-                </div>
+                <lord-icon
+                  aria-hidden="true"
+                  src={`https://cdn.lordicon.com/${d.icon}.json`}
+                  trigger="loop"
+                  delay={1500 + i * 500}
+                  colors="primary:#0d0d3e,secondary:#ffc85c"
+                  className={styles.icon}
+                ></lord-icon>
                 <p className={styles.pain}>“{d.pain}”</p>
                 <h3 className={styles.cardTitle}>{d.title}</h3>
                 <p className={styles.cardDesc}>{d.desc}</p>
