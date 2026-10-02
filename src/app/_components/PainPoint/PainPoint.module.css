@@ -48,7 +48,6 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 10px 40px rgba(13, 13, 62, 0.02);
   will-change: transform;
 }
 

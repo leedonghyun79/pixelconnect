@@ -45,11 +45,9 @@ export default function Pricing() {
                 <div className={styles.popBadge}>{plan.popLabel}</div>
               )}
 
-              {/* Plan label */}
-              <span className={styles.planLabel}>{plan.label}</span>
-
-              {/* Plan name */}
+              {/* Plan name → 한 줄 설명 */}
               <h3 className={styles.planName}>{plan.name}</h3>
+              <span className={styles.planLabel}>{plan.label}</span>
 
               {/* Price */}
               <div className={styles.priceRow}>
@@ -64,9 +62,20 @@ export default function Pricing() {
                 )}
               </div>
 
-              <div className={styles.divider} />
+              {/* 페이지 구성 · 제작 기간 */}
+              <dl className={styles.specs}>
+                <div className={styles.specRow}>
+                  <dt className={styles.specLabel}>페이지 구성</dt>
+                  <dd className={styles.specVal}>{plan.pages}</dd>
+                </div>
+                <div className={styles.specRow}>
+                  <dt className={styles.specLabel}>제작 기간</dt>
+                  <dd className={styles.specVal}>{plan.duration}</dd>
+                </div>
+              </dl>
 
-              {/* Features */}
+              {/* 제공 범위 */}
+              <span className={styles.scopeLabel}>제공 범위</span>
               <ul className={styles.features}>
                 {plan.features.map((f, fi) => (
                   <li key={fi} className={styles.feature}>
@@ -77,14 +86,6 @@ export default function Pricing() {
                   </li>
                 ))}
               </ul>
-
-              {/* Meta */}
-              <div className={styles.meta}>
-                <div className={styles.metaItem}>
-                  <span className={styles.metaLabel}>제작 기간</span>
-                  <span className={styles.metaVal}>{plan.duration}</span>
-                </div>
-              </div>
 
               {/* CTA */}
               <a

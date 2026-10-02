@@ -93,21 +93,19 @@
 
 /* ── Plan Label (안심 환불 보장 적용 등) ─────────────────── */
 .planLabel {
-  font-family: var(--font-display);
-  font-size: 0.72rem;
-  font-weight: 500;
-  color: var(--navy-muted);
-  letter-spacing: 0.04em;
-  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-bottom: 28px;
   display: block;
 }
 
 /* ── Plan Name ────────────────────────────────────────────── */
 .planName {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 20px;
+  margin-bottom: 6px;
   line-height: 1.35;
   letter-spacing: -0.02em;
 }
@@ -117,7 +115,7 @@
   display: flex;
   align-items: baseline;
   gap: 6px;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
 }
 
 .pricePrefix {
@@ -142,27 +140,23 @@
   font-weight: 400;
 }
 
-/* ── Divider ──────────────────────────────────────────────── */
-.divider {
-  height: 1px;
-  background: var(--border-default);
-  margin-bottom: 20px;
-}
-
 /* ── Features ─────────────────────────────────────────────── */
 .features {
   display: flex;
   flex-direction: column;
   gap: 11px;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
+  padding-bottom: 24px;
   flex: 1;
+  /* 선은 문의하기 바로 위 한 줄만 */
+  border-bottom: 1px solid var(--border-default);
 }
 
 .feature {
   display: flex;
   gap: 10px;
   font-size: 16px;
-  color: var(--text-secondary);
+  color: #3D3D5C;
   line-height: 1.55;
   align-items: flex-start;
 }
@@ -182,33 +176,43 @@
 
 .featureHighlight {
   font-weight: 400;
-  color: var(--text-secondary);
+  color: #3D3D5C;
 }
 
-/* ── Meta ─────────────────────────────────────────────────── */
-.meta {
+/* ── Specs (페이지 구성 · 제작 기간) ──────────────────────── */
+.specs {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 14px 0;
-  margin-bottom: 20px;
-  border-top: 1px solid var(--border-default);
-  border-bottom: 1px solid var(--border-default);
+  gap: 18px;
+  margin: 0 0 32px;
 }
 
-.metaItem {
+.specRow {
+  /* 라벨 위, 값 아래로 쌓는다 */
   display: flex;
-  justify-content: space-between;
-  font-size: 12px;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.metaLabel {
+.specLabel {
+  font-size: 13px;
+  font-weight: 500;
   color: var(--text-muted);
 }
 
-.metaVal {
-  color: var(--text-primary);
-  font-weight: 600;
+.specVal {
+  margin: 0;
+  color: #3D3D5C;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.scopeLabel {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-bottom: 14px;
 }
 
 /* ── CTA Button ───────────────────────────────────────────── */
@@ -222,15 +226,14 @@
   font-weight: 600;
   text-decoration: none;
   transition: all 0.25s ease;
-  border: 1.5px solid var(--border-hover);
-  color: var(--text-primary);
-  background: transparent;
+  border: 1.5px solid transparent;
+  color: var(--navy);
+  background: var(--navy-pale);
   gap: 8px;
 }
 
 .planCta:hover {
-  background: var(--navy-pale);
-  border-color: var(--navy);
+  background: #E8E8F4;
   color: var(--navy);
 }
 

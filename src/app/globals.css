@@ -61,7 +61,7 @@
   --font-body: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
 
   /* Sizing */
-  --nav-height: 64px;
+  --nav-height: 80px;
   --container-max: 1200px;
   --radius-sm: 8px;
   --radius-md: 16px;
@@ -152,6 +152,10 @@ h1, h2, h3, h4, h5, h6 {
   max-width: var(--container-max);
   margin: 0 auto;
   padding: 0 48px;
+}
+
+@media (max-width: 900px) {
+  :root { --nav-height: 64px; } /* 모바일 헤더는 기존 높이 유지 */
 }
 
 @media (max-width: 768px) {

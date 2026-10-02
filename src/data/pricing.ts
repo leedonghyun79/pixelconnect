@@ -8,6 +8,9 @@ export interface PricingPlan {
   price: number | null;
   popular: boolean;
   popLabel?: string;
+  /** 페이지 구성 */
+  pages: string;
+  /** 제공 범위 */
   features: { text: string; highlight: boolean }[];
   duration: string;
   cta: string;
@@ -20,8 +23,8 @@ export const plans: PricingPlan[] = [
     name: '스타터',
     price: 1000000,
     popular: false,
+    pages: '메인 1p (최대 6섹션)',
     features: [
-      { text: '랜딩페이지 1p', highlight: false },
       { text: '반응형', highlight: false },
       { text: '템플릿 기반 커스텀', highlight: false },
       { text: '기본 SEO 세팅', highlight: false },
@@ -36,8 +39,8 @@ export const plans: PricingPlan[] = [
     price: 2000000,
     popular: true,
     popLabel: 'RECOMMENDED',
+    pages: '멀티페이지 (3~5p)',
     features: [
-      { text: '멀티페이지(3~5p)', highlight: false },
       { text: '반응형 + 관리자 문의함', highlight: false },
       { text: 'GSAP 애니메이션', highlight: true },
       { text: 'GA4 연동', highlight: false },
@@ -52,8 +55,8 @@ export const plans: PricingPlan[] = [
     name: '커스텀',
     price: null,
     popular: false,
+    pages: '맞춤 풀스택 개발',
     features: [
-      { text: '맞춤 풀스택 개발', highlight: true },
       { text: 'DB/API 연동', highlight: false },
       { text: '커스텀 관리자페이지', highlight: false },
       { text: '유지보수 별도 협의', highlight: false },
@@ -78,7 +81,7 @@ export const serviceJsonLd = {
     itemListElement: plans.map(p => ({
       '@type': 'Offer',
       name: `${p.name} — ${p.label}`,
-      description: p.features.map(f => f.text).join(', '),
+      description: [p.pages, ...p.features.map(f => f.text)].join(', '),
       ...(p.price !== null && {
         priceSpecification: {
           '@type': 'PriceSpecification',
