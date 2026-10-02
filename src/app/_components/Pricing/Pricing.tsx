@@ -47,9 +47,8 @@ export default function Pricing() {
                   <div className={styles.popBadge}>{plan.popLabel}</div>
                 )}
 
-                {/* Plan name → 한 줄 설명 */}
+                {/* 이름 → 가격 → 한 줄 설명 → 문의하기 → 상세 */}
                 <h3 className={styles.planName}>{plan.name}</h3>
-                <span className={styles.planLabel}>{plan.label}</span>
 
                 {/* Price */}
                 <div className={styles.priceRow}>
@@ -63,6 +62,19 @@ export default function Pricing() {
                     </>
                   )}
                 </div>
+
+                <span className={styles.planLabel}>{plan.label}</span>
+
+                {/* CTA */}
+                <a
+                  href="/contact"
+                  className={`${styles.planCta} ${plan.popular ? styles.planCtaPop : ''}`}
+                >
+                  {plan.cta}
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </a>
 
                 {/* 페이지 구성 · 제작 기간 */}
                 <dl className={styles.specs}>
@@ -89,16 +101,6 @@ export default function Pricing() {
                   ))}
                 </ul>
 
-                {/* CTA */}
-                <a
-                  href="/contact"
-                  className={`${styles.planCta} ${plan.popular ? styles.planCtaPop : ''}`}
-                >
-                  {plan.cta}
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </a>
               </div>
             </div>
           ))}
