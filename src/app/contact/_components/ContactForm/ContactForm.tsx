@@ -82,8 +82,8 @@ export default function ContactForm() {
             <div className={styles.contactMethods}>
               <div className={styles.method}>
                 <span className={styles.methodLabel}>이메일</span>
-                <a href="mailto:hello@pixelconnect.co.kr" className={styles.methodValue}>
-                  hello@pixelconnect.co.kr
+                <a href="mailto:ceo@pixelconnect.co.kr" className={styles.methodValue}>
+                  ceo@pixelconnect.co.kr
                 </a>
               </div>
               <div className={styles.method}>
@@ -191,7 +191,7 @@ export default function ContactForm() {
 
               {status === 'ok' && (
                 <p className={styles.note} style={{ color: '#1a7f37' }}>
-                  문의가 접수되었습니다. 영업일 기준 24시간 이내 회신드립니다.
+                  문의가 접수되었습니다. 평균 1시간 이내 회신드립니다.
                 </p>
               )}
               {status === 'error' && (
@@ -199,7 +199,7 @@ export default function ContactForm() {
               )}
               {status !== 'ok' && status !== 'error' && (
                 <p className={styles.note}>
-                  * 상담은 무료이며, 영업일 기준 24시간 이내 회신드립니다.
+                  * 상담은 무료이며, 평균 1시간 이내 회신드립니다.
                 </p>
               )}
             </form>

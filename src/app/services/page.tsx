@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import PageTitleBanner from '@/components/PageTitleBanner/PageTitleBanner';
-import Stats from '@/components/Stats/Stats';
 import FinalCTA from '@/components/FinalCTA/FinalCTA';
 import Pricing from '@/app/_components/Pricing/Pricing';
 import { serviceJsonLd } from '@/data/pricing';
@@ -31,9 +30,6 @@ export default function ServicesPage() {
 
       {/* 요금제 */}
       <Pricing />
-
-      {/* 신뢰 지표 */}
-      <Stats />
 
       {/* 하단 전환 CTA */}
       <FinalCTA />

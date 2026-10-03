@@ -5,21 +5,6 @@
   z-index: 4;
 }
 
-/* 데스크톱: 고정(pin)되는 동안 섹션이 뷰포트에 꽉 맞고 내용이 세로 중앙 정렬 */
-@media (min-width: 981px) {
-  .section {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 56px 0;
-  }
-  .header {
-    margin-bottom: 36px;
-  }
-}
-
-
 .container {
   max-width: 1360px;
   margin: 0 auto;
@@ -43,7 +28,7 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) 340px;
   gap: 72px;
-  align-items: stretch;
+  align-items: start;
 }
 
 /* Timeline */
@@ -53,97 +38,11 @@
   gap: 0;
 }
 
-/* Aside — 왼쪽 타임라인과 같은 높이. 흰 카드가 남는 세로 공간을 채움 */
+/* Aside — 타임라인을 따라 내려오는 CTA */
 .aside {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-
-.asideCard {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  background: var(--white);
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-md);
-  padding: 34px 26px;
-  touch-action: pan-y;
-}
-
-.asideStepHead {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 22px;
-}
-
-.asideStepNum {
-  font-family: var(--font-display);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  color: var(--navy);
-  white-space: nowrap;
-}
-
-.asideDivider {
-  flex: 1;
-  height: 1px;
-  background: var(--border-default);
-}
-
-.asideStepTitle {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--text-primary);
-  white-space: nowrap;
-  word-break: keep-all;
-}
-
-.asideStepDetail {
-  font-size: 16px;
-  line-height: 1.5;
-  color: var(--navy-muted);
-  min-height: 122px;
-  word-break: keep-all;
-  animation: asideSwap 0.45s var(--ease-out, ease);
-}
-
-@keyframes asideSwap {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.asideProgress {
-  display: flex;
-  gap: 6px;
-  margin-top: auto;
-  padding-top: 24px;
-}
-
-.asideTick {
-  width: 100%;
-  height: 3px;
-  border-radius: 2px;
-  background: var(--border-hover);
-  transition: background 0.35s ease;
-}
-
-.asideTickOn {
-  background: var(--navy);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .asideStepDetail {
-    animation: none;
-  }
+  position: sticky;
+  top: 120px;
+  align-self: start;
 }
 
 .asideCta {
@@ -181,6 +80,14 @@
   gap: 16px;
   align-items: stretch;
   padding: 0 0 48px 0;
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s var(--ease-out, ease), transform 0.8s var(--ease-out, ease);
+}
+
+.step.active {
+  opacity: 1;
+  transform: none;
 }
 
 .step:last-child {
@@ -278,7 +185,7 @@
   height: 100%;
   background: var(--navy);
   transform-origin: top;
-  will-change: transform;
+  transform: scaleY(0);
 }
 
 /* Step Content */
@@ -294,6 +201,15 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  word-break: keep-all;
+}
+
+.stepDetail {
+  font-size: 16px;
+  color: var(--navy-muted);
+  line-height: 1.6;
+  margin-top: 10px;
+  opacity: 0.85;
   word-break: keep-all;
 }
 
@@ -318,12 +234,8 @@
     grid-template-columns: 1fr;
     gap: 40px;
   }
-  .timeline {
-    display: none;
-  }
   .aside {
     position: static;
-    order: -1;
   }
 }
 
@@ -344,9 +256,13 @@
     font-size: 18px;
   }
   .stepDesc {
-    display: none;
-  }
-  .asideStepDetail {
     font-size: 16px;
   }
+  .stepDetail {
+    font-size: 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step { transition: none; }
 }

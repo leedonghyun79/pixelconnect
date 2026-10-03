@@ -14,7 +14,7 @@ export default function ContactPage() {
       <PageTitleBanner
         eyebrow="CONTACT"
         title="지금 어떤 고민이 있으신가요?"
-        sub="부담 없이 먼저 물어보세요. 견적만 확인해도 괜찮습니다. 평균 1시간 이내 응답합니다."
+        sub="부담 없이 먼저 물어보세요. 견적만 확인해도 괜찮습니다. 평균 1시간 이내 회신드립니다."
         breadcrumb="문의하기"
       />
 

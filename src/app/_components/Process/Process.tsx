@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef, useState, type TouchEvent } from 'react';
+import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './Process.module.css';
@@ -14,7 +14,6 @@ const steps = [
     desc: '요구사항과 목표를 파악하고 메뉴·페이지 수에 따라 비용을 확정합니다.',
     detail:
       '간단한 문의만으로 시작할 수 있습니다. 참고 사이트, 필수 기능, 오픈 희망일을 알려주시면 페이지 구성과 예상 비용을 정리해 드립니다. 이 단계까지는 비용이 발생하지 않습니다.',
-    highlight: false,
   },
   {
     num: '02',
@@ -22,7 +21,6 @@ const steps = [
     desc: '계약 후 사이트맵과 자료를 정리합니다. 착수금 50% 결제.',
     detail:
       '확정된 견적으로 계약서를 작성하고 착수금 50%를 결제합니다. 이후 전체 메뉴 구조와 페이지별로 필요한 텍스트·이미지 자료를 함께 정리합니다. 자료 준비가 막막하시면 체크리스트를 드립니다.',
-    highlight: false,
   },
   {
     num: '03',
@@ -30,7 +28,6 @@ const steps = [
     desc: '전달받은 자료를 바탕으로 1차 시안을 제작합니다. (영업일 기준)',
     detail:
       '메인 페이지 1차 시안을 먼저 보여드립니다. 브랜드 톤과 방향을 맞춘 뒤 나머지 페이지로 확장하기 때문에, 초반에 방향이 어긋나 크게 되돌아가는 일이 없습니다.',
-    highlight: false,
   },
   {
     num: '04',
@@ -38,123 +35,50 @@ const steps = [
     desc: '플랜별 수정 횟수 안에서 피드백을 반영해 최종 확정·오픈합니다. 잔금 결제.',
     detail:
       '수정 횟수는 STANDARD·DELUXE 3회, PREMIUM·CUSTOM 무제한입니다. 최종 확정 후 실제 도메인에 배포하고 잔금 50%를 결제합니다. 반응형(모바일)과 기본 SEO 세팅이 포함됩니다.',
-    highlight: false,
   },
 ];
 
 export default function Process() {
-  const sectionRef = useRef<HTMLElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [manualIndex, setManualIndex] = useState<number | null>(null);
-  const touchStartX = useRef(0);
-  // 모바일(≤980px): 스크롤 고정 대신 카드가 자동으로 넘어가고, 스와이프로도 넘길 수 있다
-  const [isMobile, setIsMobile] = useState(false);
-  const [mobileIndex, setMobileIndex] = useState(0);
-  const lastInteraction = useRef(0);
+  const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const fillRefs = useRef<(HTMLDivElement | null)[]>([]);
 
+  // 고정(pin) 없이, 타임라인이 화면을 지나가는 만큼 01 → 04 가 하나씩 채워진다.
+  // 스크롤을 올리면 다시 비워진다 (scrub).
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
+    const timeline = timelineRef.current;
+    if (!timeline) return;
 
-    const mm = gsap.matchMedia();
-
-    // 데스크톱: 섹션이 화면에 꽉 차게 고정(pin)된 "다음"부터 01 → 04 채우고 고정 해제.
-    // start를 'top top'으로 두면 고정 시작 = 진행률 0 지점이 정확히 일치한다.
-    mm.add('(min-width: 981px)', () => {
-      const proxy = { p: 0 };
-      const tween = gsap.to(proxy, {
-        p: 1,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: section,
-          start: 'top top',
-          end: '+=1000',
-          pin: true,
-          scrub: 0.4,
-          invalidateOnRefresh: true,
-          onUpdate: () => setScrollProgress(proxy.p),
-          onLeaveBack: () => setScrollProgress(0),
-        },
+    const last = steps.length - 1;
+    const render = (p: number) => {
+      // 끝까지 확실히 채워지도록 진행률의 앞 90%에서 100%가 되게 리매핑
+      const t = Math.min(1, p / 0.9) * last;
+      stepRefs.current.forEach((el, i) => {
+        el?.classList.toggle(styles.active, t >= i - 0.02);
       });
-      return () => {
-        tween.scrollTrigger?.kill();
-        tween.kill();
-      };
-    });
-
-    return () => mm.revert();
-  }, []);
-
-  useEffect(() => {
-    const mq = window.matchMedia('(max-width: 980px)');
-    const sync = () => setIsMobile(mq.matches);
-    sync();
-    mq.addEventListener('change', sync);
-    return () => mq.removeEventListener('change', sync);
-  }, []);
-
-  // 모바일 자동 넘김: 섹션이 화면에 보이는 동안만, 사용자가 직접 넘긴 직후엔 잠시 멈춤
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!isMobile || !section) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    let inView = false;
-    const observer = new IntersectionObserver(
-      entries => { inView = entries[0].isIntersecting; },
-      { threshold: 0.4 }
-    );
-    observer.observe(section);
-
-    const timer = window.setInterval(() => {
-      if (!inView) return;
-      if (Date.now() - lastInteraction.current < 6000) return;
-      setMobileIndex(i => (i + 1) % steps.length);
-    }, 4500);
-
-    return () => {
-      observer.disconnect();
-      window.clearInterval(timer);
+      fillRefs.current.forEach((el, i) => {
+        if (el) el.style.transform = `scaleY(${Math.min(1, Math.max(0, t - i))})`;
+      });
     };
-  }, [isMobile]);
 
-  // scrub 지연이 있어도 고정 해제 전에 05까지 확실히 채워지도록,
-  // 고정 구간의 앞 82%에서 타임라인이 100% 차게 리매핑 (뒤 18%는 버퍼)
-  const fill = isMobile
-    ? mobileIndex / (steps.length - 1)
-    : Math.min(1, scrollProgress / 0.82);
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      render(1);
+      return;
+    }
 
-  // 현재 활성화된 스텝 (타임라인 dot 점등 로직과 동일 기준)
-  let scrollIndex = 0;
-  steps.forEach((_, i) => {
-    if (fill >= i / (steps.length - 1) - 0.02) scrollIndex = i;
-  });
-
-  // 모바일: 카드를 좌우로 스와이프해서 스크롤과 무관하게 빠르게 넘길 수 있음
-  const activeIndex = manualIndex !== null ? manualIndex : scrollIndex;
-  const activeStep = steps[activeIndex];
-
-  useEffect(() => {
-    setManualIndex(null);
-  }, [scrollIndex]);
-
-  const handleTouchStart = (e: TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-    lastInteraction.current = Date.now();
-  };
-
-  const handleTouchEnd = (e: TouchEvent) => {
-    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
-    if (Math.abs(deltaX) < 40) return;
-    lastInteraction.current = Date.now();
-    const next = deltaX < 0 ? Math.min(activeIndex + 1, steps.length - 1) : Math.max(activeIndex - 1, 0);
-    if (isMobile) setMobileIndex(next);
-    else setManualIndex(next);
-  };
+    render(0);
+    const trigger = ScrollTrigger.create({
+      trigger: timeline,
+      start: 'top 70%',
+      end: 'bottom 70%',
+      scrub: true,
+      onUpdate: self => render(self.progress),
+    });
+    return () => trigger.kill();
+  }, []);
 
   return (
-    <section ref={sectionRef} className={styles.section} id="process">
+    <section className={styles.section} id="process">
       <div className={styles.container}>
         <div className={styles.header}>
           <div className="section-eyebrow">PROCESS</div>
@@ -165,67 +89,33 @@ export default function Process() {
         </div>
 
         <div className={styles.body}>
-        <div className={styles.timeline} ref={timelineRef}>
-          {steps.map((step, i) => {
-            const start = i / (steps.length - 1);
-            const end = (i + 1) / (steps.length - 1);
-
-            let lineProgress = (fill - start) / (end - start);
-            if (lineProgress < 0) lineProgress = 0;
-            if (lineProgress > 1) lineProgress = 1;
-
-            const isActive = fill >= start - 0.02;
-
-            return (
+          <div className={styles.timeline} ref={timelineRef}>
+            {steps.map((step, i) => (
               <div
-                key={i}
-                className={`${styles.step} ${isActive ? styles.active : ''} ${step.highlight ? styles.stepHighlight : ''}`}
+                key={step.num}
+                ref={el => { stepRefs.current[i] = el; }}
+                data-idx={i}
+                className={styles.step}
               >
                 <div className={styles.stepNum}>{step.num}</div>
                 <div className={styles.connector}>
                   <div className={styles.dot} />
                   {i < steps.length - 1 && (
                     <div className={styles.line}>
-                      <div className={styles.lineFill} style={{ transform: `scaleY(${lineProgress})` }} />
+                      <div className={styles.lineFill} ref={el => { fillRefs.current[i] = el; }} />
                     </div>
                   )}
                 </div>
                 <div className={styles.stepContent}>
-                  <h3 className={styles.stepTitle}>
-                    {step.title}
-                    {step.highlight && <span className={styles.highlightBadge}>⭐ 차별점</span>}
-                  </h3>
+                  <h3 className={styles.stepTitle}>{step.title}</h3>
                   <p className={styles.stepDesc}>{step.desc}</p>
+                  <p className={styles.stepDetail}>{step.detail}</p>
                 </div>
               </div>
-            );
-          })}
-        </div>
+            ))}
+          </div>
 
           <aside className={styles.aside}>
-            <div
-              className={styles.asideCard}
-              onTouchStart={handleTouchStart}
-              onTouchEnd={handleTouchEnd}
-            >
-              <div className={styles.asideStepHead}>
-                <span className={styles.asideStepNum}>STEP {activeStep.num}</span>
-                <span className={styles.asideDivider} />
-                <span className={styles.asideStepTitle}>{activeStep.title}</span>
-              </div>
-              <p key={activeIndex} className={styles.asideStepDetail}>
-                {activeStep.detail}
-              </p>
-              <div className={styles.asideProgress} aria-hidden="true">
-                {steps.map((_, i) => (
-                  <span
-                    key={i}
-                    className={`${styles.asideTick} ${i === activeIndex ? styles.asideTickOn : ''}`}
-                  />
-                ))}
-              </div>
-            </div>
-
             <div className={styles.asideCta}>
               <p className={styles.asideCtaText}>프로젝트 일정이나 견적이 궁금하세요?</p>
               <a href="#contact" className={styles.asideCtaBtn}>

@@ -1,14 +1,39 @@
 'use client';
 import { useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
+import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './Hero.module.css';
+import { getPortfolioProject } from '@/data/portfolio';
 import { splitIntoChars, waveOffset, WAVE_DESKTOP_QUERY } from '@/components/common/WaveText/WaveText';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const GridWaveCanvas = dynamic(() => import('../GridWaveCanvas/GridWaveCanvas'), { ssr: false });
+
+// 히어로 목업: 앞 → 뒤 순서 (앞에 있는 카드가 가장 크게 보인다)
+const MOCKUP_SLUGS = ['novaint', 'dreamdive', 'rieneo'] as const;
+
+// 고해상도로 새로 캡처한 이미지(NOVAINT_hero)는 여백이 없어 크롭이 필요 없다.
+// 기존 썸네일은 사방에 흰 여백이 있어서, 사이트 본문이 프레임을 꽉 채우도록 확대·이동한다.
+// scale = 1 / (본문 너비 비율), x·y = 본문이 시작하는 왼쪽·위쪽 여백(%)
+// 포트폴리오 썸네일 대신 히어로 전용 이미지를 쓰는 작업물
+const MOCK_IMG: Record<string, string> = {
+  novaint: '/portfolio_img/NOVAINT_hero.webp',
+};
+
+const MOCK_CROP: Record<string, { scale: number; x: number; y: number }> = {
+  protex: { scale: 1.46, x: 15.7, y: 15.2 },
+  lineo: { scale: 1.46, x: 15.7, y: 15.2 },
+  rieneo: { scale: 1.41, x: 14.5, y: 15.5 },
+  dreamdive: { scale: 1.29, x: 11.3, y: 14.4 },
+};
+const MOCKUPS = MOCKUP_SLUGS.map(slug => getPortfolioProject(slug)).filter(
+  (p): p is NonNullable<typeof p> => !!p
+);
+const MOCK_CLASSES = ['mockFront', 'mockMid', 'mockBack'] as const;
 
 export default function Hero() {
   const itemRefs = useRef<(HTMLElement | null)[]>([]);
@@ -137,7 +162,7 @@ export default function Hero() {
               style={{ transitionDelay: '0.62s' }}
             >
               <a href="/contact" className={styles.btnPrimary}>
-                프로젝트 문의
+                무료 상담 신청하기
               </a>
               <a href="/portfolio" className={styles.btnSecondary}>
                 작업물 둘러보기
@@ -146,6 +171,34 @@ export default function Hero() {
           </div>
 
         </div>
+      </div>
+
+      {/* ── 포트폴리오 목업 (오른쪽 화면 끝으로 살짝 흘러나감) ─────────── */}
+      <div className={styles.mockups}>
+        {MOCKUPS.map((p, i) => (
+          <Link
+            key={p.slug}
+            href={`/portfolio/${p.slug}`}
+            className={`${styles.mock} ${styles[MOCK_CLASSES[i]]}`}
+            aria-label={`${p.title} 작업물 보기`}
+          >
+            <span className={styles.mockBar} aria-hidden="true"><i /><i /><i /></span>
+            <span className={styles.mockShot}>
+              <Image
+                src={MOCK_IMG[p.slug] ?? p.img}
+                alt={p.title}
+                fill
+                priority={i === 0}
+                sizes="(max-width: 1100px) 1px, 32vw"
+                className={styles.mockImg}
+                style={(() => {
+                  const c = MOCK_CROP[p.slug];
+                  return c ? { transformOrigin: '0 0', transform: `scale(${c.scale}) translate(-${c.x}%, -${c.y}%)` } : undefined;
+                })()}
+              />
+            </span>
+          </Link>
+        ))}
       </div>
 
       {/* ── 스크롤 다운 인디케이터 ─────────────────────────────────── */}

@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import PageTitleBanner from '@/components/PageTitleBanner/PageTitleBanner';
 import Portfolio from '@/components/Portfolio/Portfolio';
-import Stats from '@/components/Stats/Stats';
 import FinalCTA from '@/components/FinalCTA/FinalCTA';
 
 export const metadata: Metadata = {
@@ -27,9 +26,6 @@ export default function PortfolioPage() {
 
       {/* 포트폴리오 그리드 */}
       <Portfolio hideHeader={true} />
-
-      {/* Stats */}
-      <Stats />
 
       {/* 하단 전환 CTA */}
       <FinalCTA />

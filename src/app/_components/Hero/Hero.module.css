@@ -317,3 +317,82 @@
     /* 모바일에서는 공간 확보를 위해 숨김 */
   }
 }
+/* ── 포트폴리오 목업 (브라우저 프레임 3장 겹침) ─────────────── */
+.mockups {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  right: 5vw;
+  width: clamp(340px, 36vw, 560px);
+  aspect-ratio: 1 / 1;
+  transform: translateY(-46%);
+}
+
+.mock {
+  position: absolute;
+  width: 80%;
+  display: block;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgba(13, 13, 62, 0.1);
+  box-shadow: 0 24px 60px rgba(13, 13, 62, 0.16);
+  color: inherit;
+  animation: mockIn 0.9s var(--ease-out, ease) both;
+  animation-delay: var(--d, 0s);
+  /* 등장은 transform, 호버는 translate 로 나눠 서로 덮어쓰지 않게 한다 */
+  transition: translate 0.35s var(--ease-out, ease), box-shadow 0.35s ease;
+}
+
+.mock:hover {
+  translate: 0 -8px;
+  box-shadow: 0 32px 70px rgba(13, 13, 62, 0.22);
+}
+
+/* 앞 장은 왼쪽 아래에 온전히, 뒤 장들은 오른쪽 위로 갈수록 작아지며 화면 끝에서 잘린다 */
+.mockFront { left: 0; top: 38%; width: 82%; z-index: 3; --d: 0.25s; box-shadow: 0 30px 70px rgba(13, 13, 62, 0.26); }
+.mockMid { left: 16%; top: 19%; width: 74%; z-index: 2; --d: 0.4s; box-shadow: 0 22px 54px rgba(13, 13, 62, 0.2); }
+.mockBack { left: 32%; top: 0; width: 70%; z-index: 1; --d: 0.55s; }
+
+.mockBar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 22px;
+  padding: 0 10px;
+  background: #F1F1F6;
+  border-bottom: 1px solid rgba(13, 13, 62, 0.08);
+}
+
+.mockBar i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #D5D5E0;
+}
+
+.mockShot {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 750 / 534;
+}
+
+.mockImg {
+  object-fit: cover;
+  object-position: top;
+}
+
+@keyframes mockIn {
+  from { opacity: 0; transform: translateX(48px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@media (max-width: 1100px) {
+  .mockups { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mock { animation: none; }
+}
+

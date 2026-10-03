@@ -3,21 +3,12 @@
   padding: 100px 0;
   position: relative;
   z-index: 3;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   overflow: hidden;
 }
 
-.overlap {
-}
-
 .noPin {
-  min-height: auto;
   padding-top: 0;
   padding-bottom: 80px;
-  justify-content: flex-start;
 }
 
 .container {
@@ -74,27 +65,9 @@
   color: #fff;
 }
 
-/* Portfolio Track */
-.trackWrap {
-  width: 100%;
-  overflow: hidden;
-  /* 컨테이너의 왼쪽 여백과 동일한 시작점을 갖도록 설정 */
-  /* max-width: 1360px 기준 좌우 여백 */
-}
-
-.track {
-  display: flex;
-  width: max-content;
-  gap: 32px;
-  padding: 0 48px;
-  padding-left: max(48px, calc((100vw - 1360px) / 2 + 48px));
-  margin-bottom: 60px;
-}
-
 .card {
   display: block;
-  width: 400px;
-  flex-shrink: 0;
+  width: 100%;
   border-radius: var(--radius-md);
   overflow: hidden;
   background: var(--white);
@@ -212,6 +185,7 @@
 /* View All */
 .viewAll {
   text-align: center;
+  margin-top: 48px;
 }
 
 .viewAllLink {
@@ -226,47 +200,17 @@
   opacity: 0.7;
 }
 
-.cardFade {
-  opacity: 1;
-  transform: none;
-}
-
 @media (max-width: 900px) {
   .section { padding: 72px 0 100px; }
   .sub { font-size: 17px; }
   .container { padding: 0 24px; }
-  .trackWrap {
-    overflow: visible;
-  }
-  .track {
-    flex-direction: column;
-    width: 100%;
-    padding: 0 24px;
-    gap: 24px;
-  }
-  .card {
-    width: 100%;
-  }
-  .cardFade {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.7s var(--ease-out, ease), transform 0.8s var(--ease-out, ease);
-  }
-  .cardFade.cardVisible {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
-/* Grid Layout for Portfolio Page */
+/* 2열 그리드 (홈 · 포트폴리오 페이지 공통) */
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 40px;
-}
-
-.grid .card {
-  width: 100%;
 }
 
 @media (max-width: 1024px) {
