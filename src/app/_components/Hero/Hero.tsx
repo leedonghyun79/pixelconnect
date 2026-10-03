@@ -202,12 +202,6 @@ export default function Hero() {
         ))}
       </div>
 
-      {/* ── 스크롤 다운 인디케이터 ─────────────────────────────────── */}
-      <div className={styles.scrollDown} aria-hidden="true">
-        <span className={styles.scrollText}>SCROLL</span>
-        <span className={styles.scrollLine} />
-      </div>
-
     </section>
   );
 }
