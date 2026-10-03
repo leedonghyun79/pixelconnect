@@ -25,7 +25,7 @@ export default function Footer() {
               <p>전화 : <a href="tel:010-7920-8157" className={styles.telLink}>010-7920-8157</a></p>
               <p>이메일 : ceo@pixelconnect.co.kr</p>
             </div>
-            <p className={styles.copyright}>Copyright ⓒ 2026 픽셀커넥트 All rights reserved.</p>
+            <p className={styles.copyright}>Copyright ⓒ 2025 픽셀커넥트 All rights reserved.</p>
           </div>
 
           {/* Right: 메뉴(나란히) + 약관 */}
