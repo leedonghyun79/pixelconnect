@@ -106,7 +106,7 @@
 }
 
 .accentText {
-  background: linear-gradient(transparent 62%, rgba(255, 200, 92, 0.65) 62%);
+  background: linear-gradient(transparent 58%, rgba(255, 200, 92, 0.65) 58%, rgba(255, 200, 92, 0.65) 86%, transparent 86%);
 }
 
 .item {

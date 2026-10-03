@@ -94,6 +94,9 @@ body {
   line-height: 1.5;
   color: var(--text-primary);
   background-color: var(--white);
+  /* 한글이 단어 중간에서 끊기지 않게("안내합니/다." 방지). 긴 영문·URL 은 넘치지 않게 따로 끊는다 */
+  word-break: keep-all;
+  overflow-wrap: break-word;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-width: 375px;
