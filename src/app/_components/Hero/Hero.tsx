@@ -27,8 +27,9 @@ const MOCK_IMG: Record<string, string> = {
 const MOCK_CROP: Record<string, { scale: number; x: number; y: number }> = {
   protex: { scale: 1.46, x: 15.7, y: 15.2 },
   lineo: { scale: 1.46, x: 15.7, y: 15.2 },
-  rieneo: { scale: 1.41, x: 14.5, y: 15.5 },
-  dreamdive: { scale: 1.29, x: 11.3, y: 14.4 },
+  // 뒤 두 장은 아래쪽 흰 본문 영역까지 안 보이도록, 상단 히어로 이미지만 프레임에 꽉 차게 확대
+  rieneo: { scale: 1.9, x: 23.7, y: 15.5 },
+  dreamdive: { scale: 1.94, x: 24.3, y: 14.4 },
 };
 const MOCKUPS = MOCKUP_SLUGS.map(slug => getPortfolioProject(slug)).filter(
   (p): p is NonNullable<typeof p> => !!p
