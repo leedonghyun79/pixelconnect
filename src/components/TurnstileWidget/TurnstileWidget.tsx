@@ -31,6 +31,8 @@ export default function TurnstileWidget({ onToken }: Props) {
       if (cancelled || !boxRef.current || !window.turnstile || idRef.current) return;
       idRef.current = window.turnstile.render(boxRef.current, {
         sitekey: SITE_KEY,
+        // 기본값(auto)은 OS 다크 모드를 따라가 밝은 사이트에서 혼자 어둡게 튄다
+        theme: 'light',
         callback: (token: string) => onToken(token),
         'expired-callback': () => onToken(''),
         'error-callback': () => onToken(''),
