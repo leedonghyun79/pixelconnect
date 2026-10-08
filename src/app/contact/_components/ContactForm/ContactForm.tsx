@@ -4,6 +4,7 @@ import styles from '../../page.module.css';
 import TurnstileWidget from '@/components/TurnstileWidget/TurnstileWidget';
 import { submitInquiry } from '@/lib/api/inquiry';
 import LegalModalLink from '@/components/LegalDocument/LegalModalLink';
+import Toast from '@/components/Toast/Toast';
 
 type Status = 'idle' | 'sending' | 'ok' | 'error';
 
@@ -20,6 +21,7 @@ export default function ContactForm() {
   const [errorMsg, setErrorMsg] = useState('');
 
   const onToken = useCallback((t: string) => setToken(t), []);
+  const closeToast = useCallback(() => setStatus('idle'), []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -189,15 +191,9 @@ export default function ContactForm() {
                 {status === 'sending' ? '전송 중...' : '무료 상담 신청하기 →'}
               </button>
 
-              {status === 'ok' && (
-                <p className={styles.note} style={{ color: '#1a7f37' }}>
-                  문의가 접수되었습니다. 평균 1시간 이내 회신드립니다.
-                </p>
-              )}
-              {status === 'error' && (
+              {status === 'error' ? (
                 <p className={styles.note} style={{ color: '#c0392b' }}>{errorMsg}</p>
-              )}
-              {status !== 'ok' && status !== 'error' && (
+              ) : (
                 <p className={styles.note}>
                   * 상담은 무료이며, 평균 1시간 이내 회신드립니다.
                 </p>
@@ -206,6 +202,13 @@ export default function ContactForm() {
           </div>
         </div>
       </div>
+
+      {status === 'ok' && (
+        <Toast
+          message="문의가 접수되었습니다. 평균 1시간 이내 회신드립니다."
+          onClose={closeToast}
+        />
+      )}
     </section>
   );
 }
