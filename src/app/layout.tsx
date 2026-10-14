@@ -104,7 +104,7 @@ const jsonLd = {
       telephone: '+82-10-7920-8157',
       email: 'ceo@pixelconnect.co.kr',
       vatID: '516-73-00625',
-      priceRange: '₩700,000~',
+      priceRange: '₩250,000~',
       areaServed: { '@type': 'Country', name: '대한민국' },
       knowsAbout: ['홈페이지 제작', '반응형 웹사이트', '랜딩페이지 제작', '맞춤형 웹 개발', '홈페이지 유지보수'],
       sameAs: ['https://pf.kakao.com/_xoDxkuX/friend'],
