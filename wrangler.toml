@@ -12,6 +12,21 @@ CONNECTIVITY_API_URL = "https://admin.pixelconnect.co.kr"
 directory = ".open-next/assets"
 binding = "ASSETS"
 
+# 런타임 로그 (대시보드 Observability 설정과 동기화)
+[observability.logs]
+enabled = true
+head_sampling_rate = 1
+invocation_logs = true
+persist = true
+
+[observability.traces]
+enabled = false
+head_sampling_rate = 1
+persist = true
+
+[observability.issue_detection]
+enabled = false
+
 # ── 캐시 (open-next.config.ts) ──
 # 생성: npx wrangler r2 bucket create pixelconnect-cache
 [[r2_buckets]]
