@@ -8,8 +8,8 @@ import Navbar from '@/components/common/Navbar/Navbar'
 import Footer from '@/components/common/Footer/Footer'
 // import DevNotice from '@/components/common/DevNotice/DevNotice'
 
-// GA4 측정 ID (공개 값) — 픽셀커넥트 홈페이지 스트림
-const GA_ID = 'G-9X8REDWSGW'
+// GA4 측정 ID — NEXT_PUBLIC_GA_ID 환경 변수 (빌드 시점에 인라인됨, 미설정이면 GA 스크립트 미삽입)
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -158,13 +158,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
         </SmoothScroll>
         {/* <DevNotice /> */}
-        <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
-        <Script id="ga4-init" strategy="afterInteractive">
-          {`window.dataLayer = window.dataLayer || [];
+        {GA_ID && (
+          <>
+            <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
+            <Script id="ga4-init" strategy="afterInteractive">
+              {`window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', '${GA_ID}');`}
-        </Script>
+            </Script>
+          </>
+        )}
       </body>
     </html>
   )
