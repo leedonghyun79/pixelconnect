@@ -21,6 +21,8 @@ export async function apiFetch(path: string, options: RequestInit = {}): Promise
       signal: controller.signal,
       headers: {
         'Content-Type': 'application/json',
+        // Brotli 응답을 받지 않도록 제한 (Node 내장 Brotli 디코더 CVE-2026-111497 노출면 축소)
+        'Accept-Encoding': 'gzip, deflate',
         ...options.headers,
       },
     });
