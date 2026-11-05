@@ -105,7 +105,7 @@ export default function GridWaveCanvas({ className }: { className?: string }) {
           const mouseWaveOffset = Math.sin(worldX * 0.002 + activeX) * Math.cos(worldZ * 0.002 + activeY) * 30;
           
           // 최종 파동 높이 계산
-          const worldY = Math.sin(wavePhase) * 40 + Math.cos(distFromCenter * 0.002 - time * 0.01) * 30 + mouseWaveOffset;
+          const worldY = Math.sin(wavePhase) * 22 + Math.cos(distFromCenter * 0.002 - time * 0.01) * 16 + mouseWaveOffset * 0.6;
 
           // 원근 투영 (Perspective Projection)
           const zPos = rotatedZ + cameraZ;
