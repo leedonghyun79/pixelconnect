@@ -6,6 +6,7 @@ import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './Hero.module.css';
+import KeywordMorph from '../KeywordMorph/KeywordMorph';
 import { getPortfolioProject } from '@/data/portfolio';
 import { splitIntoChars, waveOffset, WAVE_DESKTOP_QUERY } from '@/components/common/WaveText/WaveText';
 
@@ -14,7 +15,7 @@ gsap.registerPlugin(ScrollTrigger);
 const GridWaveCanvas = dynamic(() => import('../GridWaveCanvas/GridWaveCanvas'), { ssr: false });
 
 // 히어로 목업: 앞 → 뒤 순서 (앞에 있는 카드가 가장 크게 보인다)
-const MOCKUP_SLUGS = ['novaint', 'dreamdive', 'rieneo'] as const;
+const MOCKUP_SLUGS = ['protex', 'novaint', 'rieneo'] as const;
 
 // 고해상도로 새로 캡처한 이미지(NOVAINT_hero)는 여백이 없어 크롭이 필요 없다.
 // 기존 썸네일은 사방에 흰 여백이 있어서, 사이트 본문이 프레임을 꽉 채우도록 확대·이동한다.
@@ -24,8 +25,9 @@ const MOCK_IMG: Record<string, string> = {
   novaint: '/portfolio_img/NOVAINT_hero.webp',
 };
 
-const MOCK_CROP: Record<string, { scale: number; x: number; y: number }> = {
-  protex: { scale: 1.46, x: 15.7, y: 15.2 },
+const MOCK_CROP: Record<string, { scale: number; x: number; y: number; pos?: string; contain?: boolean }> = {
+  // 운송 썸네일(16:10)은 프레임(약 1.4:1)보다 넓어서, 잘리지 않게 전체를 맞추고 남는 위아래는 사진 톤의 어두운 배경으로 채움
+  protex: { scale: 1, x: 0, y: 0, contain: true },
   lineo: { scale: 1.46, x: 15.7, y: 15.2 },
   // 뒤 두 장은 아래쪽 흰 본문 영역까지 안 보이도록, 상단 히어로 이미지만 프레임에 꽉 차게 확대
   rieneo: { scale: 1.9, x: 23.7, y: 15.5 },
@@ -141,7 +143,6 @@ export default function Hero() {
               ref={el => { itemRefs.current[1] = el; headlineRef.current = el; }}
               className={styles.headline}
             >
-              <span className={`${styles.line} ${styles.kicker}`}>홈페이지 제작 업체 픽셀커넥트</span>
               <span className={styles.line}>내 비즈니스처럼 진심으로 고민하고</span>
               <span className={styles.line}>
                 책임질 <strong className={styles.navyText}>진짜 파트너</strong>를 찾으셨나요?
@@ -153,7 +154,7 @@ export default function Hero() {
               className={`${styles.sub} fade-up`}
               style={{ transitionDelay: '0.42s' }}
             >
-              예쁜 홈페이지는 많습니다.<br />
+              예쁜 홈페이지는 많아도,<br />
               끝까지 책임지는 곳은 드뭅니다.
             </p>
 
@@ -174,33 +175,11 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* ── 포트폴리오 목업 (오른쪽 화면 끝으로 살짝 흘러나감) ─────────── */}
-      <div className={styles.mockups}>
-        {MOCKUPS.map((p, i) => (
-          <Link
-            key={p.slug}
-            href={`/portfolio/${p.slug}`}
-            className={`${styles.mock} ${styles[MOCK_CLASSES[i]]}`}
-            aria-label={`${p.title} 작업물 보기`}
-          >
-            <span className={styles.mockBar} aria-hidden="true"><i /><i /><i /></span>
-            <span className={styles.mockShot}>
-              <Image
-                src={MOCK_IMG[p.slug] ?? p.img}
-                alt={p.title}
-                fill
-                priority={i === 0}
-                sizes="(max-width: 1100px) 1px, 32vw"
-                className={styles.mockImg}
-                style={(() => {
-                  const c = MOCK_CROP[p.slug];
-                  return c ? { transformOrigin: '0 0', transform: `scale(${c.scale}) translate(-${c.x}%, -${c.y}%)` } : undefined;
-                })()}
-              />
-            </span>
-          </Link>
-        ))}
+      {/* ── 키워드 모핑 (오른쪽 영역) ─────────── */}
+      <div className={styles.morphSide}>
+        <KeywordMorph />
       </div>
+
 
     </section>
   );

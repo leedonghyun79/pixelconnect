@@ -1,0 +1,278 @@
+.wrap {
+  margin-bottom: 48px;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: center;
+  margin: 100px 0 32px;
+}
+
+.toggle {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  background: var(--navy-pale);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-pill);
+}
+
+.toggleBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: background 0.2s var(--ease-out), color 0.2s var(--ease-out);
+}
+
+.toggleBtn:hover:not(:disabled) {
+  color: var(--navy);
+}
+
+.toggleBtn[aria-pressed='true'] {
+  background: var(--white);
+  color: var(--navy);
+  box-shadow: var(--shadow-md);
+}
+
+.toggleBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.toggleBtn:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 2px;
+}
+
+/* 썸네일 옆에 메타 정보를 나란히 배치 (모바일에서는 세로로 쌓임) */
+.thumbRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 240px;
+  gap: 40px;
+  align-items: start;
+  margin-bottom: 40px;
+}
+
+.thumbMeta {
+  padding-top: 8px;
+}
+
+/* 썸네일 테두리: 밝은 배경과 겹쳐도 경계가 보이도록 옅은 보더 */
+.cover {
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--navy-pale);
+  border: 1px solid var(--border-hover);
+}
+
+.coverImg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.phoneStage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  background: transparent;
+}
+
+/* 전환 영역: PC(모니터)와 Mobile(폰)의 높이·최대 너비를 함께 애니메이션 */
+.stage {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  transition:
+    height 0.5s var(--ease-out),
+    max-width 0.5s var(--ease-out);
+}
+
+.stagePc {
+  height: 680px;
+  max-width: 1120px;
+}
+
+.stageMobile {
+  height: 830px;
+  max-width: 393px;
+}
+
+/* PC/Mobile 화면은 같은 자리에 겹쳐 두고 크로스페이드 (활성 화면만 보임) */
+.view {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  transition:
+    opacity 0.45s var(--ease-out),
+    transform 0.45s var(--ease-out),
+    visibility 0s linear 0s;
+}
+
+.viewActive {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.viewHidden {
+  opacity: 0;
+  transform: translateY(8px);
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.3s var(--ease-out),
+    transform 0.3s var(--ease-out),
+    visibility 0s linear 0.3s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage,
+  .view,
+  .viewHidden {
+    transition: none;
+  }
+}
+
+/* PC: 데스크탑 모니터 목업 (베젤 + 화면 + 받침대 + 받침). 화면은 고정 높이, 긴 캡처는 안에서 스크롤 */
+.monitor {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.monitorBezel {
+  padding: 12px 12px 14px;
+  background: linear-gradient(180deg, #2a2a33 0%, #17171d 100%);
+  border-radius: 14px;
+  box-shadow: var(--shadow-lg);
+}
+
+.monitorScreen {
+  position: relative;
+  height: 600px;
+  overflow: hidden;
+  border-radius: 4px;
+  background: var(--white);
+}
+
+/* 마우스를 따라다니는 "스크롤" 말풍선 (터치 기기에서는 숨김) */
+.hintBubble {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--navy);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: var(--shadow-md);
+}
+
+@media (hover: none) {
+  .hintBubble { display: none; }
+}
+
+/* 받침대(목): 위가 좁고 아래가 넓은 사다리꼴 */
+.monitorNeck {
+  width: 120px;
+  height: 36px;
+  margin: 0 auto;
+  background: linear-gradient(180deg, #d4d4dc 0%, #a9a9b6 100%);
+  clip-path: polygon(18% 0, 82% 0, 100% 100%, 0 100%);
+}
+
+/* 받침판 */
+.monitorBase {
+  width: 260px;
+  height: 12px;
+  margin: 0 auto;
+  background: linear-gradient(180deg, #c9c9d3 0%, #9d9daa 100%);
+  border-radius: 8px 8px 4px 4px;
+}
+
+/* 스크롤바는 숨기고 스크롤 동작은 유지. 커서는 아래 화살표로 바꿔 내릴 수 있음을 알려줌 */
+.pcScreen {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  cursor: none;
+}
+
+.pcScreen::-webkit-scrollbar {
+  display: none;
+}
+
+/* 실제 모바일 비율(약 9:19)에 맞춘 고정 높이 프레임. 긴 캡처는 프레임 안에서 스크롤 */
+/* 화면 폭 375px(모바일 원본 이미지 폭)에 베젤 9px씩을 더한 프레임 */
+.phone {
+  position: relative;
+  flex: 0 0 auto;
+  width: 393px;
+  max-width: 100%;
+  height: 830px;
+  padding: 9px;
+  background: var(--navy-deep);
+  border-radius: 36px;
+  box-shadow: var(--shadow-lg);
+}
+
+.phoneScreen {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-radius: 28px;
+  background: var(--white);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  cursor: none;
+}
+
+.phoneScreen::-webkit-scrollbar {
+  display: none;
+}
+
+.phoneImg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .toolbar { justify-content: center; }
+  .thumbRow { grid-template-columns: 1fr; gap: 24px; }
+  .monitorBezel { padding: 8px 8px 10px; border-radius: 10px; }
+  .monitorScreen { height: 420px; }
+  .monitorNeck { width: 90px; height: 24px; }
+  .monitorBase { width: 200px; }
+  .stagePc { height: 480px; max-width: 100%; }
+  .stageMobile { max-width: 100%; }
+}

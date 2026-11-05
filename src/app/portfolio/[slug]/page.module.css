@@ -5,7 +5,7 @@
 }
 
 .article {
-  max-width: 1040px;
+  max-width: 1360px;
   margin: 0 auto;
   padding: 0 48px;
 }
@@ -39,7 +39,7 @@
 }
 
 .category {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.06em;
   color: var(--navy);
@@ -48,9 +48,9 @@
 }
 
 .title {
-  font-size: clamp(28px, 4vw, 42px);
+  font-size: 36px;
   font-weight: 700;
-  line-height: 1.5;
+  line-height: 1.4;
   color: var(--text-primary);
   word-break: keep-all;
   margin-bottom: 24px;
@@ -58,35 +58,42 @@
 
 .metaRow {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 32px;
-  padding-top: 24px;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 16px;
+  padding: 24px 15px 0;
   border-top: 1px solid var(--border-default);
 }
 
+/* 라벨·값 모두 왼쪽 정렬 */
 .metaItem {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  align-items: baseline;
+  justify-content: flex-start;
+  gap: 12px;
+  width: 100%;
 }
 
 .metaLabel {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-muted);
 }
 
 .metaValue {
-  font-size: 15px;
+  min-width: 0;
+  font-size: 18px;
   font-weight: 600;
   color: var(--text-primary);
+  text-align: left;
+  word-break: keep-all;
 }
 
 .visitBtn {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  margin-left: auto;
+  align-self: flex-start;
+  margin-top: 8px;
   padding: 12px 24px;
   background: var(--navy);
   color: #fff;
@@ -126,13 +133,24 @@
   height: auto;
 }
 
+/* 공통 안내 문구 (디자인 수정 가능성 고지) */
+.notice {
+  margin: 24px 0 0;
+  font-size: 18px;
+  line-height: 1.4;
+  color: var(--text-muted);
+  word-break: keep-all;
+}
+
 /* Overview */
 .overview {
-  font-size: 17px;
-  line-height: 1.5;
+  font-size: 18px;
+  line-height: 1.4;
   color: var(--text-secondary);
   word-break: keep-all;
-  margin-bottom: 56px;
+  /* 썸네일 열 너비(메타 열 240px + 간격 40px만큼 제외)에 맞춤 */
+  padding-right: 280px;
+  margin-bottom: 100px;
 }
 
 /* Additional gallery images (2번째 이미지부터) */
@@ -165,14 +183,14 @@
 }
 
 .footerInner h3 {
-  font-size: 22px;
+  font-size: 36px;
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 12px;
 }
 
 .footerInner p {
-  font-size: 15px;
+  font-size: 18px;
   color: var(--text-muted);
   margin-bottom: 32px;
 }
@@ -220,7 +238,7 @@
 @media (max-width: 768px) {
   .main { padding: 120px 0 80px; }
   .article { padding: 0 24px; }
-  .title { font-size: 24px; }
+  .overview { padding-right: 0; }
   .metaRow { gap: 20px; }
   .footerInner { padding: 32px 24px; }
   .actions { flex-direction: column; width: 100%; }

@@ -11,9 +11,13 @@ interface PortfolioProps {
 
 // 홈에서는 2열 × 2줄만 보여주고 나머지는 "전체 프로젝트 보기"로 넘긴다
 const HOME_LIMIT = 4;
+// 홈에서 빼는 프로젝트 (드림다이브는 홈 목록에서 제외, 전체 목록에는 그대로 있음)
+const HOME_EXCLUDE = ['dreamdive'];
 
 export default function Portfolio({ hideHeader = false }: PortfolioProps) {
-  const list = hideHeader ? projects : projects.slice(0, HOME_LIMIT);
+  const list = hideHeader
+    ? projects
+    : projects.filter(p => !HOME_EXCLUDE.includes(p.slug)).slice(0, HOME_LIMIT);
 
   return (
     <section id="portfolio" className={`${styles.section} ${hideHeader ? styles.noPin : ''}`}>
