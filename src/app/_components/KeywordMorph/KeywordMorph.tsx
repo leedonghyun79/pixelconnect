@@ -4,7 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import styles from './KeywordMorph.module.css';
 
 // 키워드별 모양을 점(파티클)으로 만들어 서로 모핑한다. 외부 이미지 없이 캔버스로 직접 그림.
-const KEYWORDS = ['개발', '기획', '디자인', '설계'] as const;
+// 작업 순서: 기획 → 설계 → 개발 → 테스트
+const KEYWORDS = ['기획', '설계', '개발', '테스트'] as const;
 // 기준 크기(320×150)로 모양을 그리고, 캔버스는 SC배로 키워서 선명하게 표시
 const BW = 320;
 const BH = 150;
@@ -76,33 +77,61 @@ function drawShape(ctx: CanvasRenderingContext2D, key: string) {
       ctx.stroke();
       break;
     }
-    case '디자인': {
-      // 페인트 팔레트: 타원 판 + 색 구멍 4개 + 엄지 구멍
-      ctx.beginPath();
-      ctx.ellipse(160, 75, 124, 66, 0, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.globalCompositeOperation = 'destination-out';
-      [[96, 58], [150, 38], [212, 50], [238, 98]].forEach(([x, y]) => {
-        ctx.beginPath();
-        ctx.arc(x, y, 14, 0, Math.PI * 2);
-        ctx.fill();
+    case '테스트': {
+      // 체크리스트 + 연필: 클립보드 틀, 체크박스 3개와 줄, 대각선 연필
+      ctx.lineWidth = 7;
+      ctx.strokeRect(44, 14, 150, 122);
+      ctx.fillRect(92, 8, 56, 14); // 클립
+      [[68, 48], [68, 84], [68, 120]].forEach(([x, y]) => {
+        ctx.fillRect(x, y, 22, 22); // 체크박스
       });
+      ctx.lineWidth = 9;
+      ctx.lineCap = 'round';
       ctx.beginPath();
-      ctx.arc(118, 106, 18, 0, Math.PI * 2);
+      ctx.moveTo(104, 59); ctx.lineTo(164, 59);
+      ctx.moveTo(104, 95); ctx.lineTo(164, 95);
+      ctx.moveTo(104, 131); ctx.lineTo(142, 131);
+      ctx.stroke();
+      // 연필(오른쪽 위 → 왼쪽 아래 대각선)
+      ctx.lineWidth = 20;
+      ctx.beginPath();
+      ctx.moveTo(194, 124); ctx.lineTo(268, 34);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(186, 134); ctx.lineTo(200, 120); ctx.lineTo(192, 146); ctx.closePath();
       ctx.fill();
-      ctx.globalCompositeOperation = 'source-over';
       break;
     }
     case '설계': {
-      // 집 도면: 지붕 + 외벽 + 문 + 창문 2개
-      ctx.lineWidth = 5;
+      // 삼각자(왼쪽 아래): 직각삼각형 + 안쪽 구멍
       ctx.beginPath();
-      ctx.moveTo(56, 74); ctx.lineTo(160, 18); ctx.lineTo(264, 74);
+      ctx.moveTo(30, 132);
+      ctx.lineTo(30, 24);
+      ctx.lineTo(146, 132);
+      ctx.closePath();
+      ctx.fill();
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.beginPath();
+      ctx.moveTo(56, 116);
+      ctx.lineTo(56, 60);
+      ctx.lineTo(106, 116);
+      ctx.closePath();
+      ctx.fill();
+      ctx.globalCompositeOperation = 'source-over';
+      // 컴퍼스(오른쪽 위): 힌지 + 두 다리 + 바닥 호
+      ctx.lineWidth = 10;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(252, 26); ctx.lineTo(206, 132);
+      ctx.moveTo(252, 26); ctx.lineTo(298, 132);
       ctx.stroke();
-      ctx.strokeRect(84, 74, 152, 62);
-      ctx.fillRect(146, 96, 28, 40);
-      ctx.strokeRect(100, 88, 30, 26);
-      ctx.strokeRect(190, 88, 30, 26);
+      ctx.beginPath();
+      ctx.arc(252, 26, 11, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.lineWidth = 6;
+      ctx.beginPath();
+      ctx.arc(252, 26, 92, Math.PI * 0.62, Math.PI * 0.82);
+      ctx.stroke();
       break;
     }
   }
