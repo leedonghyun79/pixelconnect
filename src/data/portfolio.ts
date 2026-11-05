@@ -59,7 +59,7 @@ export const portfolioProjects: PortfolioProject[] = [
     slug: 'dreamdive',
     title: '드림다이브 스쿠버다이빙',
     category: '레저 · 스포츠',
-    img: '/portfolio_img/드림다이브_썸네일_캡처.png',
+    img: '/portfolio_img/드림다이브_썸네일_목업.png',
     images: ['/portfolio_img/드림다이브_pc_캡처.png'],
     url: 'https://dreamdiving.netlify.app/',
     summary: '체험의 설렘을 그대로 전달하는 스쿠버다이빙 스쿨 홈페이지.',

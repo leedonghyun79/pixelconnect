@@ -136,7 +136,7 @@
 
 .viewHidden {
   opacity: 0;
-  transform: translateY(8px);
+  transform: scale(0.8);
   visibility: hidden;
   pointer-events: none;
   transition:
